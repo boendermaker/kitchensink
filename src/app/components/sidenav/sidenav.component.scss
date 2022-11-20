@@ -1,3 +1,5 @@
+@import 'src/assets/themes/_colors.scss';
+
 .mat-sidenav {
   width: 250px;
   margin:0;
@@ -43,7 +45,7 @@ mat-sidenav-container {
 
   &--active {
     color: #FFF;
-    background: #336699;
+    background: $accent;
   }
 
 }
