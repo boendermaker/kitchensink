@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+import { ISideNavItem } from './components/sidenav/sidenav.interface';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Kitchensink';
+
+  isExpanded: boolean = true;
+  navDataArray: ISideNavItem[] = [
+    {title: 'Start', path: '/index'},
+    {title: 'TableForm', path: '/tableform'},
+  ];
+
+  constructor() {
+
+  }
+
 }

@@ -1,0 +1,24 @@
+<mat-sidenav-container>
+
+  <mat-sidenav [mode]="mode" [opened]="opened">
+
+    <mat-nav-list>
+      <div class="mainmenu">
+        <div
+        [ngClass]="navItem.path === router.url ? 'menuitem menuitem--active' : 'menuitem'"
+        *ngFor="let navItem of data"
+        (click)="navigate(navItem.path)">
+          {{navItem?.title}}
+        </div>
+      </div>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="content">
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
