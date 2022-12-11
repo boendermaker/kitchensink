@@ -1,0 +1,52 @@
+1. Strebe nach Konsistenz
+Dein UI soll so bedient und verstanden werden, wie deine Nutzer es aufgrund ihrer Erfahrung erwarten. Dies bezeichnet man als externe Konsistenz.
+
+Interne Konsistenz gilt für Elemente mit derselben Aufgabe oder Funktion. Diese sollen in Bezeichnung, Aussehen und Verhalten gleich sein.
+
+Konsistenz hilft deinen Nutzern, Wissen von einem Klick zum Nächsten anzuwenden. Dadurch wird die Bedienung leichter vorhersagbar.
+
+
+
+2. Strebe nach universeller Bedienbarkeit
+Sorge dafür, dass Bedürfnisse und Anforderungen unterschiedlicher Nutzer bedient werden. Dies können Unterschiede zwischen Experten und Anfängern aber auch Altersgruppen, körperliche Einschränkungen oder unterschiedliche Sprachen sein.
+
+Versuche, dem Spektrum der Bedürfnisse mit einer möglichst universellen Lösung zu begegnen. Beispielsweise Erklärungen für Anfänger; Oder durch das Einhalten von Richtlinien zur Barrierefreiheit.
+
+
+
+3. Biete informatives Feedback an
+Der Benutzer sollte zu jeder Zeit wissen, wo er sich befindet und was vor sich geht. Für jede Aktion sollte es innerhalb einer kurzen Zeitspanne eine angemessene Rückmeldung geben.
+
+Bei häufigen und kleinen Aktionen kann die Rückmeldung kleiner ausfallen. Bei größeren Aktion sollte auch das Feedback entsprechend umfangreicher sein.
+
+
+
+4. Gestalten Sie Dialoge so, dass sie zu einem Abschluss führen
+Abfolgen von Aktionen sollten in Gruppen mit einem Anfang, einer Mitte und einem Ende organisiert werden. Sorge dafür, dass der Nutzer weiß wo er sich befindet und was als nächstes kommt.
+
+Beispielsweise führen Shops den Nutzer von der Produktauswahl zur Kasse und enden mit einer klaren Bestätigungsseite, die die Transaktion abschließt.
+
+
+
+5. Verhindere Fehler
+Gestalte die Oberfläche so, dass Nutzer keine Fehler machen können. Zumindest soweit dies möglich ist. Beispiel Produkt-Filter: Deaktivieren (ausgrauen) von Optionen, die nicht verfügbar sind oder zu keinem Ergebnis führen.
+
+Bei Fehlern gib deinen Nutzern frühes, einfaches und konkretes Feedback. Wenn möglich, biete direkt Lösungsvorschläge an.
+
+
+
+6. Erlaube die Umkehrung von Aktionen
+Aktionen sollten so weit wie möglich umkehrbar sein. Diese Gewissheit nimmt Nutzern die Angst vor Fehlern und ermutigt zum Ausprobieren.
+
+Zum Beispiel sollte ein Formularprozess abgebrochen und wieder aufgenommen werden können, ohne dass bereits getätigte Eingaben verloren gehen.
+
+
+
+7. Gib dem Nutzer das Gefühl der Kontrolle
+Systeme sollen auf Nutzer reagieren und nicht Nutzer auf das System. Das erzeugt ein Gefühl der Kontrolle.
+
+Besonders erfahrene Benutzer reagieren negativ auf Kontrollverlust, wenn es zu Überraschungen oder Änderungen im gewohnten Verhalten kommt.
+
+
+
+8. Reduziere die Belastung für das Kurzzeitgedächtnis
