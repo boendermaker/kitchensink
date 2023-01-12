@@ -13,6 +13,7 @@ export class AppComponent {
   navDataArray: ISideNavItem[] = [
     {title: 'Start', path: '/index'},
     {title: 'TableForm', path: '/tableform'},
+    {title: 'Drawer modal dialog', path: '/drawermodal'},
   ];
 
   constructor() {

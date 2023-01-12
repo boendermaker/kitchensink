@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DrawermodalModule } from './drawermodal/drawermodal.module';
+import { DrawermodaldialogComponent } from './drawermodaldialog.component';
 import { MaterialModule } from '@app/material.module';
 
 
+
 @NgModule({
-  declarations: [],
+  declarations: [
+    DrawermodaldialogComponent
+  ],
   imports: [
     CommonModule,
-    DrawermodalModule,
     MaterialModule
   ]
 })
-export class ViewsModule { }
+export class DrawermodaldialogModule { }
