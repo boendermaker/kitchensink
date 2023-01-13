@@ -1,8 +1,20 @@
-  <div style="height: 80px; border: 1px solid #999;">
+  <div class="dialog-header-container" style="height: 80px; border: 1px solid #999;">
     <h1>Header</h1>
   </div>
 
-  <mat-drawer-container style="height: calc(100% - 80px);">
-    <mat-drawer mode="side" opened style="width: 25%;">Drawer content</mat-drawer>
-    <mat-drawer-content>Main content</mat-drawer-content>
+  <mat-drawer-container class="drawer-container" style="height: calc(100% - 80px);">
+    
+    <mat-drawer #slideout mode="side" opened style="width: 25%; background: #F1F1F1;">
+      Drawer content
+    </mat-drawer>
+    
+    <mat-drawer-content>
+      
+      <div class="slide-toggle" (click)="slideoutState = !slideoutState; slideout.toggle(slideoutState)">
+        <i class="material-icons-outlined">{{slideoutState ? 'arrow_left' : 'arrow_right'}}</i>
+      </div>
+      <div>Main Content</div>
+
+    </mat-drawer-content>
+
   </mat-drawer-container>
