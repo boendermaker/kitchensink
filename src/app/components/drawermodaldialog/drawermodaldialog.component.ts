@@ -12,8 +12,8 @@ export class DrawermodaldialogComponent {
   slideoutState: boolean = true;
 
   constructor(
-    public dialogRef: MatDialogRef<DrawermodaldialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<DrawermodaldialogComponent>,
   ) {
 
   }
