@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@app/material.module';
-import { DrawermodaldialogModule } from './drawermodaldialog/drawermodaldialog.module';
-
+import { DrawermodaldialogModule } from '@app/components/drawermodaldialog/drawermodaldialog.module';
 
 
 @NgModule({
@@ -13,7 +12,7 @@ import { DrawermodaldialogModule } from './drawermodaldialog/drawermodaldialog.m
     DrawermodaldialogModule
   ],
   exports: [
-    DrawermodaldialogModule
+    DrawermodaldialogModule,
   ]
 })
 export class ComponentsModule { }
