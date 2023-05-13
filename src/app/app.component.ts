@@ -14,6 +14,8 @@ export class AppComponent {
     {title: 'Start', path: '/index'},
     {title: 'TableForm', path: '/tableform'},
     {title: 'Drawer modal dialog', path: '/drawermodal'},
+    {title: 'Data Table', path: '/datatable'},
+    {title: 'Virtual Scroll', path: '/virtualscroll'},
   ];
 
   constructor() {

@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DrawermodalModule } from './drawermodal/drawermodal.module';
-import { MaterialModule } from '@app/material.module';
+import { DatatableModule } from './datatable/datatable.module';
+import { MaterialModule } from '../material.module';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -9,7 +11,9 @@ import { MaterialModule } from '@app/material.module';
   imports: [
     CommonModule,
     DrawermodalModule,
-    MaterialModule
+    DatatableModule,
+    MaterialModule,
+    ScrollingModule
   ]
 })
 export class ViewsModule { }
