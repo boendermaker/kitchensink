@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-drawermodaldialog',
@@ -13,7 +13,7 @@ export class DrawermodaldialogComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    @Inject(MatDialogRef) public dialogRef: MatDialogRef<DrawermodaldialogComponent>,
+    public dialogRef: MatDialogRef<DrawermodaldialogComponent>,
   ) {
 
   }

@@ -5,12 +5,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 // Material Navigation
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 // Material Layout
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatDialogModule } from '@angular/material/dialog';
 // Material Buttons & Indicators
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -20,6 +22,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 // Material Data tables
 import { MatSortModule } from '@angular/material/sort';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [],
@@ -38,7 +41,10 @@ import { MatSortModule } from '@angular/material/sort';
     MatIconModule,
     MatRippleModule,
     MatBottomSheetModule,
-    MatSortModule
+    MatSortModule,
+    MatListModule,
+    MatDialogModule,
+    ScrollingModule
   ],
   exports: [
     MatDatepickerModule,
@@ -54,7 +60,10 @@ import { MatSortModule } from '@angular/material/sort';
     MatIconModule,
     MatRippleModule,
     MatBottomSheetModule,
-    MatSortModule
+    MatSortModule,
+    MatListModule,
+    MatDialogModule,
+    ScrollingModule
   ]
 })
 export class MaterialModule { }

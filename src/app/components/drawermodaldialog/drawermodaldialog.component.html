@@ -3,13 +3,13 @@
   </div>
 
   <mat-drawer-container class="drawer-container" style="height: calc(100% - 80px);">
-    
+
     <mat-drawer #slideout mode="side" opened style="width: 25%; background: #F1F1F1;">
       Drawer content
     </mat-drawer>
-    
+
     <mat-drawer-content>
-      
+
       <div class="slide-toggle" (click)="slideoutState = !slideoutState; slideout.toggle(slideoutState)">
         <i class="material-icons-outlined">{{slideoutState ? 'arrow_left' : 'arrow_right'}}</i>
       </div>

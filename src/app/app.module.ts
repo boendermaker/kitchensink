@@ -5,8 +5,8 @@ import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidenavModule } from "./components/sidenav/sidenav.module";
-import { ViewsModule } from './views.module';
-import { ComponentsModule } from './components.module';
+import { ViewsModule } from './views/views.module';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
     declarations: [

@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import {MatLegacyDialog as MatDialog, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef} from '@angular/material/legacy-dialog';
+import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import {DrawermodaldialogComponent} from '../../components/drawermodaldialog/drawermodaldialog.component';
 
 @Component({
@@ -27,7 +27,7 @@ export class DrawermodalComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('The dialog was closed', result);
     });
   }
 

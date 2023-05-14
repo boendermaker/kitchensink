@@ -1,21 +1,20 @@
 <div>
 
-
+  <cdk-virtual-scroll-viewport #viewport itemSize="50" style="height: 400px;">
 
     <table>
       <tr>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th style="position: sticky; top: 0;">A</th>
+        <th style="position: sticky; top: 0;">B</th>
+        <th style="position: sticky; top: 0;">C</th>
       </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
+      <tr *cdkVirtualFor="let item of items">
+        <td>{{item?.id}}</td>
+        <td>{{item?.name}}</td>
+        <td>{{item?.age}}</td>
       </tr>
     </table>
 
-
-
+  </cdk-virtual-scroll-viewport>
 
 </div>
