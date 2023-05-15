@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // Material Form Controls
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
 // Material Navigation
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -44,7 +45,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatSortModule,
     MatListModule,
     MatDialogModule,
-    ScrollingModule
+    ScrollingModule,
+    ReactiveFormsModule
   ],
   exports: [
     MatDatepickerModule,
@@ -63,7 +65,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatSortModule,
     MatListModule,
     MatDialogModule,
-    ScrollingModule
+    ScrollingModule,
+    ReactiveFormsModule
   ]
 })
 export class MaterialModule { }

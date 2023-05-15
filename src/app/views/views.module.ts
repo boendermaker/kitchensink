@@ -5,6 +5,7 @@ import { DrawermodalModule } from './drawermodal/drawermodal.module';
 import { DatatableModule } from './datatable/datatable.module';
 import { VirtualscrollModule } from './virtualscroll/virtualscroll.module';
 import { MaterialModule } from '../material.module';
+import { DynamicformModule } from './dynamicform/dynamicform.module'
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { MaterialModule } from '../material.module';
     DrawermodalModule,
     DatatableModule,
     VirtualscrollModule,
+    DynamicformModule,
     MaterialModule
   ]
 })
