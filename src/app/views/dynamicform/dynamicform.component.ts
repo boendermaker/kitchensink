@@ -8,6 +8,8 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from 
 })
 export class DynamicformComponent implements OnInit {
 
+  testControl: FormControl = new FormControl();
+
   signals: any[] = [
     {id: '2j3h4lk23jhlk2j35hl2', label: 'signalA', value: 50},
     {id: 'nkl32j4ntkl3j4ntklj4', label: 'signalB', value: 100},
@@ -23,7 +25,7 @@ export class DynamicformComponent implements OnInit {
     })
   }
 
-  getSignalsFormGroup() {
+  getSignalsFormGroup(): FormControl[] {
     const controls: FormControl[] = [];
     for(const field of this.signals) {
       controls.push(new FormControl(field.value));
@@ -32,12 +34,7 @@ export class DynamicformComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const formGroups: any[] = [];
-
-    for(let i=1; i<10; i++) {
-      formGroups.push( this.newFormGroupSignals() )
-    }
-
+    const formGroups: FormArray[] = [];
 
     const tester: FormGroup = this.fb.group(formGroups);
 
