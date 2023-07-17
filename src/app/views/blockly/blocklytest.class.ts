@@ -1,9 +1,8 @@
 import * as Blockly from 'blockly/core';
 
-export class testField extends Blockly.Field {
+export class customBlock extends Blockly.Block {
 
-  constructor(value) {
-    super(value);
+  constructor() {
   }
 
 }
