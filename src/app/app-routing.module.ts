@@ -6,6 +6,7 @@ import { DrawermodalComponent } from './views/drawermodal/drawermodal.component'
 import { DatatableComponent } from './views/datatable/datatable.component';
 import { VirtualscrollComponent } from './views/virtualscroll/virtualscroll.component';
 import { DynamicformComponent } from './views/dynamicform/dynamicform.component';
+import { BlocklyComponent } from './views/blockly/blockly.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'drawermodal', component: DrawermodalComponent },
   { path: 'datatable', component: DatatableComponent },
   { path: 'virtualscroll', component: VirtualscrollComponent },
-  { path: 'dynamicform', component: DynamicformComponent }
+  { path: 'dynamicform', component: DynamicformComponent },
+  { path: 'blockly', component: BlocklyComponent }
 ];
 
 @NgModule({
