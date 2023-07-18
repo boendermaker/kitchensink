@@ -17,6 +17,7 @@ export class AppComponent {
     {title: 'Data Table', path: '/datatable'},
     {title: 'Virtual Scroll', path: '/virtualscroll'},
     {title: 'Dynamic Form', path: '/dynamicform'},
+    {title: 'Blockly', path: '/blockly'},
   ];
 
   constructor() {
