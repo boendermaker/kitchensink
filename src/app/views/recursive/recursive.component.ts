@@ -43,9 +43,9 @@ export class RecursiveComponent {
     console.log(value);
   }
 
-  selectItem(item) {
-    this.selectedItem = item;
-    console.log(this.selectedItem)
+  selectItem(item, index, e) {
+    this.selectedItem = item;  
+    console.log(this.selectedItem, index, (<HTMLElement>e.target.nextSibling))
   }
 
 }

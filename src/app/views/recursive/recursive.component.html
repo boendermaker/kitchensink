@@ -5,8 +5,8 @@
         
             <li *ngFor="let item of list; let index=index">
 
-                <a (click)="selectItem(item)" style="">{{selectedItem === item ? '->'+item.label : item.label}}</a>
-
+                <div class="navitem" (click)="selectItem(item, index, $event)">{{selectedItem === item ? '->'+item.label : item.label}}</div>
+                
                 <ul *ngIf="item.children.length > 0">
                     <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.children }"></ng-container>
                 </ul>

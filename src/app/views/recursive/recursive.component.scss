@@ -4,14 +4,16 @@
         list-style-type: none;
     
         li {
-            padding: 5px;
-            margin-bottom: 5px;
-            background: #CCC;
-    
-            a {
-                color: #000;     
+                
+            .navitem {
+                display: inline-block;
+                width: 250px;
+                padding: 10px;
+                color: #000;
+                background: #DDD;
+                margin-bottom: 5px;
             }
-    
+
         }
     
     }
