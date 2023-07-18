@@ -6,6 +6,7 @@ import { DatatableModule } from './datatable/datatable.module';
 import { VirtualscrollModule } from './virtualscroll/virtualscroll.module';
 import { MaterialModule } from '../material.module';
 import { DynamicformModule } from './dynamicform/dynamicform.module'
+import { RecursiveModule } from './recursive/recursive.module'
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { DynamicformModule } from './dynamicform/dynamicform.module'
     DatatableModule,
     VirtualscrollModule,
     DynamicformModule,
+    RecursiveModule,
     MaterialModule
   ]
 })
