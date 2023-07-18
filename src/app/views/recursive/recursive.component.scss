@@ -1,0 +1,21 @@
+.tree {
+
+    ul {
+        list-style-type: none;
+    
+        li {
+                
+            .navitem {
+                display: inline-block;
+                width: 250px;
+                padding: 10px;
+                color: #000;
+                background: #DDD;
+                margin-bottom: 5px;
+            }
+
+        }
+    
+    }
+
+}

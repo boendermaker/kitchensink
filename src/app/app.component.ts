@@ -18,6 +18,7 @@ export class AppComponent {
     {title: 'Virtual Scroll', path: '/virtualscroll'},
     {title: 'Dynamic Form', path: '/dynamicform'},
     {title: 'Blockly', path: '/blockly'},
+    {title: 'Recursive', path: '/recursive'},
   ];
 
   constructor() {

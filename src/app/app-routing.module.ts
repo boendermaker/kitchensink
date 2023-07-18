@@ -7,6 +7,7 @@ import { DatatableComponent } from './views/datatable/datatable.component';
 import { VirtualscrollComponent } from './views/virtualscroll/virtualscroll.component';
 import { DynamicformComponent } from './views/dynamicform/dynamicform.component';
 import { BlocklyComponent } from './views/blockly/blockly.component';
+import { RecursiveComponent } from './views/recursive/recursive.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'datatable', component: DatatableComponent },
   { path: 'virtualscroll', component: VirtualscrollComponent },
   { path: 'dynamicform', component: DynamicformComponent },
-  { path: 'blockly', component: BlocklyComponent }
+  { path: 'blockly', component: BlocklyComponent },
+  { path: 'recursive', component: RecursiveComponent }
 ];
 
 @NgModule({
