@@ -1,20 +1,22 @@
-<ul>
+<div class="tree">
+    <ul>
 
-    <ng-template #recursiveList let-list>
-      
-        <li *ngFor="let item of list">
+        <ng-template #recursiveList let-list>
+        
+            <li *ngFor="let item of list; let index=index">
 
-            <div (click)="selectItem(item)">{{selectedItem === item ? '->'+item.label : item.label}}</div>
+                <a (click)="selectItem(item)" style="">{{selectedItem === item ? '->'+item.label : item.label}}</a>
 
-            <ul *ngIf="item.children.length > 0">
-                <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.children }"></ng-container>
-            </ul>
+                <ul *ngIf="item.children.length > 0">
+                    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.children }"></ng-container>
+                </ul>
 
-        </li>
+            </li>
 
-    </ng-template>
+        </ng-template>
 
-    <!-- this starts the recursion -->
-    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: treeData }"></ng-container>
+        <!-- this starts the recursion -->
+        <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: treeData }"></ng-container>
 
-</ul>
+    </ul>
+</div>

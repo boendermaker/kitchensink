@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ITreeData } from './interface';
 
 @Component({
   selector: 'app-recursive',
@@ -10,7 +11,7 @@ export class RecursiveComponent {
 
   selectedItem: any = null;
 
-  treeData: any = [
+  treeData: ITreeData[] = [
     { label: 'A', 
       children: [
         { label: 'A1', children: []},
