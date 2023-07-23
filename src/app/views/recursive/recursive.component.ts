@@ -53,6 +53,8 @@ export class RecursiveComponent {
   //###################################################
 
   selectItem(item, index, e) {
+    //Only collapse all when clicked on first level items
+    item?.level === 1 ? this.setAllCollapsed(this.treeData, 0) : null;
     this.selectedItem = item;
     item['collapsed'] = !item['collapsed'];
     console.log(item)
@@ -63,7 +65,6 @@ export class RecursiveComponent {
 
   setupTreeData(treeData: ITreeData[], level): void {
 
-    const hasChildren: boolean = false;
     level++;
 
     for(let i=0; i < treeData.length; i++) {
@@ -75,6 +76,21 @@ export class RecursiveComponent {
       }
     }
 
+  }
+
+  //###################################################
+
+  setAllCollapsed(treeData: ITreeData[], level): void {
+
+    level++;
+
+    for(let i=0; i < treeData.length; i++) {
+      level === 1 ? treeData[i].collapsed = false : null;
+      treeData[i].level = level;
+      if(treeData[i].children.length > 0) {
+        this.setupTreeData(treeData[i].children, level);
+      }
+    }
   }
 
   //###################################################
