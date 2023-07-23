@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ITreeData } from './interface';
+import { rndID } from '@app/shared/util/rndid'
 
 @Component({
   selector: 'app-recursive',
@@ -11,26 +12,30 @@ export class RecursiveComponent {
 
   selectedItem: any = null;
 
+  treePath: any[] = [];
+
   treeData: ITreeData[] = [
-    { label: 'A', 
+    { label: 'A',
+      type: 'group',
       children: [
-        { label: 'A1', children: []},
-        { label: 'A2', children: []},
-        { label: 'A3', children: [
+        { label: 'A1', type: 'item', children: []},
+        { label: 'A2', type: 'item', children: []},
+        { label: 'A3', type: 'group', children: [
           { label: 'A3-1', children: []},
           { label: 'A3-2', children: []}
         ]}
       ]
     },
-    { label: 'B', 
+    { label: 'B',
+      type: 'group',
       children: [
-        { label: 'B1', children: []},
-        { label: 'B2', children: [
+        { label: 'B1', type: 'item', children: []},
+        { label: 'B2', type: 'group', children: [
           { label: 'B2-1', children: []},
           { label: 'B2-2', children: []},
           { label: 'B2-3', children: []}
         ]},
-        { label: 'B3', children: []}
+        { label: 'B3', type: 'item', children: []}
       ]
     }
   ]
@@ -39,13 +44,39 @@ export class RecursiveComponent {
     console.log('DATA ', this.treeData);
   }
 
-  log(value) {
-    console.log(value);
+  //###################################################
+
+  ngOnInit(): void {
+    this.setupTreeData(this.treeData, 0);
   }
 
+  //###################################################
+
   selectItem(item, index, e) {
-    this.selectedItem = item;  
+    this.selectedItem = item;
+    item['collapsed'] = !item['collapsed'];
+    console.log(item)
     console.log(this.selectedItem, index, (<HTMLElement>e.target.nextSibling))
   }
+
+  //###################################################
+
+  setupTreeData(treeData: ITreeData[], level): void {
+
+    const hasChildren: boolean = false;
+    level++;
+
+    for(let i=0; i < treeData.length; i++) {
+      treeData[i].id = rndID();
+      treeData[i].collapsed = false;
+      treeData[i].level = level;
+      if(treeData[i].children.length > 0) {
+        this.setupTreeData(treeData[i].children, level);
+      }
+    }
+
+  }
+
+  //###################################################
 
 }

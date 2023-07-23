@@ -2,13 +2,24 @@
     <ul>
 
         <ng-template #recursiveList let-list>
-        
+
             <li *ngFor="let item of list; let index=index">
 
-                <div class="navitem" (click)="selectItem(item, index, $event)">{{selectedItem === item ? '->'+item.label : item.label}}</div>
-                
-                <ul *ngIf="item.children.length > 0">
-                    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.children }"></ng-container>
+                <div class="navitem"
+                (click)="selectItem(item, index, $event)">
+                     {{item?.level}}
+                     {{selectedItem === item ? '->'+item?.label : item?.label}}
+                     {{
+                      item?.children?.length > 0
+                      ? item?.collapsed ? '▲':'▼'
+                      : ''
+                    }}
+
+                </div>
+
+                <ul *ngIf="item?.children?.length > 0 && !!item?.collapsed">
+                  <!--This reruns the loop with different data for children elements-->
+                    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item?.children }"></ng-container>
                 </ul>
 
             </li>
