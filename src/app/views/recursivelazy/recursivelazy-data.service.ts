@@ -24,7 +24,7 @@ export class RecursiveLazyDataService {
 
   constructor() {
     this.createRoot(undefined);
-    console.log(this.treeData)
+    console.log('TREEDATA ', this.treeData)
   }
 
   createRoot(parentid: string) {
@@ -54,14 +54,24 @@ export class RecursiveLazyDataService {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(this.nodeData.filter(f => f.parentid == parentid));
-      }, 3000);
+      }, 1000);
     });
-
   }
 
   async addChildren(id: string) {
     const treeNode: ITreeData = this.deepFind(id, this.treeData);
-    treeNode['children'] = await this.getChildren(id);
+    console.log(treeNode);
+    const children: INodeData[] = await this.getChildren(id);
+
+    if(children && children?.length > 0) {
+      if(treeNode?.hasOwnProperty('children')) {
+        treeNode.children = children;
+      }else {
+        treeNode['children'] = children;
+      }
+      console.log('CHILDREN ', children)
+    }
+
   }
 
 }
