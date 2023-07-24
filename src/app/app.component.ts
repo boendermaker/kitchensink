@@ -19,6 +19,7 @@ export class AppComponent {
     {title: 'Dynamic Form', path: '/dynamicform'},
     {title: 'Blockly', path: '/blockly'},
     {title: 'Recursive', path: '/recursive'},
+    {title: 'Recursive Lazy', path: '/recursivelazy'},
   ];
 
   constructor() {

@@ -1,0 +1,37 @@
+.tree {
+
+    ul {
+        list-style-type: none;
+
+        li {
+
+            .navitem {
+                display: inline-block;
+                width: 250px;
+                padding: 10px;
+                color: #000;
+                background: #DDD;
+                margin-bottom: 5px;
+            }
+
+        }
+
+    }
+
+}
+
+
+.menuitem {
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.5s linear;
+}
+
+a:focus+#list {
+  max-height: initial;
+}
+
+/* only select that link , here using the href attribute */
+a[href="nowhere"]:focus {
+  pointer-events: none;
+}

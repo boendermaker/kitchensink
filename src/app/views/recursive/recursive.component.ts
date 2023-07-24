@@ -11,7 +11,6 @@ import { rndID } from '@app/shared/util/rndid'
 export class RecursiveComponent {
 
   selectedItem: any = null;
-
   treePath: any[] = [];
 
   treeData: ITreeData[] = [
@@ -79,7 +78,7 @@ export class RecursiveComponent {
   }
 
   //###################################################
-
+  //Collapse all items except root level
   setAllCollapsed(treeData: ITreeData[], level): void {
 
     level++;

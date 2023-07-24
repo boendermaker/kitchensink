@@ -8,6 +8,7 @@ import { VirtualscrollComponent } from './views/virtualscroll/virtualscroll.comp
 import { DynamicformComponent } from './views/dynamicform/dynamicform.component';
 import { BlocklyComponent } from './views/blockly/blockly.component';
 import { RecursiveComponent } from './views/recursive/recursive.component';
+import { RecursiveLazyComponent } from './views/recursivelazy/recursivelazy.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'virtualscroll', component: VirtualscrollComponent },
   { path: 'dynamicform', component: DynamicformComponent },
   { path: 'blockly', component: BlocklyComponent },
-  { path: 'recursive', component: RecursiveComponent }
+  { path: 'recursive', component: RecursiveComponent },
+  { path: 'recursivelazy', component: RecursiveLazyComponent }
 ];
 
 @NgModule({

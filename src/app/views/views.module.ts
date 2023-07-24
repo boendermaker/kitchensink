@@ -7,6 +7,7 @@ import { VirtualscrollModule } from './virtualscroll/virtualscroll.module';
 import { MaterialModule } from '../material.module';
 import { DynamicformModule } from './dynamicform/dynamicform.module'
 import { RecursiveModule } from './recursive/recursive.module'
+import { RecursiveLazyModule } from './recursivelazy/recursivelazy.module'
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { RecursiveModule } from './recursive/recursive.module'
     VirtualscrollModule,
     DynamicformModule,
     RecursiveModule,
+    RecursiveLazyModule,
     MaterialModule
   ]
 })
