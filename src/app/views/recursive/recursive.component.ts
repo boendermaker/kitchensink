@@ -78,7 +78,7 @@ export class RecursiveComponent {
   }
 
   //###################################################
-  //Collapse all items except root level
+  //Collapse all items except the one who was clicked
   setAllCollapsed(treeData: ITreeData[], level): void {
 
     level++;
