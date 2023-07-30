@@ -73,6 +73,7 @@ export class RecursiveLazyDataService {
         id: nodeItem?.id,
         type: nodeItem?.type,
         level: 1,
+        loading: false,
         label: nodeItem?.label,
         children: []
       };
@@ -84,10 +85,25 @@ export class RecursiveLazyDataService {
 
 //###########################################################################
 
-  addTreeChildrenNodes(id: string) {
+  /*addTreeChildrenNodes(id: string) {
 
     const treeNode: ITreeData = this.deepFind(id, this.treeData);
     const children: INodeData[] = this.getChildrenNodes(id);
+
+    console.log('TREENODE ', treeNode);
+
+    if(treeNode && children && children?.length > 0) {
+      treeNode['children'] = children;
+    }
+
+  }*/
+
+//###########################################################################
+
+  addTreeChildrenNodes(selectedTreeNode: ITreeData) {
+
+    const treeNode: ITreeData = selectedTreeNode;
+    const children: INodeData[] = this.getChildrenNodes(treeNode?.id);
 
     console.log('TREENODE ', treeNode);
 
@@ -107,11 +123,16 @@ export class RecursiveLazyDataService {
 
   async selectItem(item: ITreeData, index: number, e) {
     //Only collapse all when clicked on first level items
-    item?.level === 1 ? this.setAllCollapsed(0) : null;
+    item['level'] === 1 ? this.setAllCollapsed(0) : null;
     this.selectedItem = item;
     item['collapsed'] = !item['collapsed'];
-    await this.fetchNodes(item['id']);
-    this.addTreeChildrenNodes(item['id'])
+
+    //Only load if current treenode has no children
+    item['loading'] = true;
+    item['children'] === undefined || item['children'].length === 0 ? await this.fetchNodes(item['id']) : null;
+    item['loading'] = false;
+
+    this.addTreeChildrenNodes(item);
     this.updateTreeDataItems(this.treeData, 0);
   }
 
@@ -179,7 +200,6 @@ export class RecursiveLazyDataService {
     this.addTreeRootNodes();
 
     console.log(this.treeData);
-
   }
 
 //###########################################################################
