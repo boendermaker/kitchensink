@@ -7,14 +7,10 @@
 
               <div class="navitem"
               (click)="recursiveLazyDataService.selectItem(item, index, $event)">
-                   {{item?.level}}
-                   {{recursiveLazyDataService.selectedItem === item ? '->'+item?.label : item?.label}}
-                   {{
-                    item?.children?.length > 0
-                    ? item?.collapsed ? '▲':'▼'
-                    : ''
-                  }}
-
+              <div>{{item?.collapsed}} {{item?.loading}}</div>
+                {{item?.level}}
+                {{recursiveLazyDataService.selectedItem === item ? '->'+item?.label : item?.label}}
+                {{item?.children?.length > 0 ? item?.collapsed ? '▲':'▼' : ''}}
               </div>
 
               <ul *ngIf="item?.children?.length > 0 && !!item?.collapsed">
