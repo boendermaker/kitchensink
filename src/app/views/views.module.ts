@@ -8,6 +8,7 @@ import { VirtualscrollModule } from './virtualscroll/virtualscroll.module';
 import { DynamicformModule } from './dynamicform/dynamicform.module'
 import { RecursiveModule } from './recursive/recursive.module'
 import { RecursiveLazyModule } from './recursivelazy/recursivelazy.module'
+import { ChiplistModule } from './chiplist/chiplist.module'
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { RecursiveLazyModule } from './recursivelazy/recursivelazy.module'
     DynamicformModule,
     RecursiveModule,
     RecursiveLazyModule,
+    ChiplistModule,
     AllAngularMaterialMDCModulesModule
   ]
 })

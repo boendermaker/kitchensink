@@ -10,6 +10,14 @@ $primary: mat.define-palette($palette-primary, 500);
 $accent: mat.define-palette($palette-accent, A200, A100, A400);
 $warn: mat.define-palette($palette-warn, A200, A100, A400);
 
+$typoconfig: mat.define-typography-config(
+  $body-1: mat.define-typography-level(14px, 13px, 400, -0.05em),
+  $body-2: mat.define-typography-level(14px, 13px, 400, -0.05em),
+  $caption: mat.define-typography-level(14px, 13px, 400, -0.05em),
+  $button: mat.define-typography-level(14px, 13px, 400, -0.05em),
+  $overline: mat.define-typography-level(14px, 13px, 400, -0.05em)
+);
+
 $theme: mat.define-light-theme((
  color: (
    primary: $primary,
@@ -17,14 +25,16 @@ $theme: mat.define-light-theme((
    warn: $warn
  ),
  density: 0,
+ typography: $typoconfig
 ));
+
+
 
 // Emit theme-dependent styles for common features used across multiple components.
 @include mat.core-theme($theme);
+@include mat.all-component-themes($theme);
 
 $color-config: mat.get-color-config($theme);
-
-@debug map.get($color-config, background);
 
 :root {
   --kitchensink-primary: #{mat.get-color-from-palette($primary, 500)};

@@ -32,10 +32,9 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/assets/fonts/materialicons.css",
-              "src/assets/fonts/materialicons.scss",
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+              "src/assets/fonts/materialicons/materialicons.css"
             ],
+
             "scripts": []
           },
           "configurations": {
