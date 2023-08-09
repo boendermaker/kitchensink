@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
+import { AllAngularMaterialMDCModulesModule } from './shared/modules/allmaterial/allmaterial.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidenavModule } from "./components/sidenav/sidenav.module";
@@ -13,7 +13,7 @@ import { ComponentsModule } from './components/components.module';
         AppComponent
     ],
     exports: [
-        MaterialModule
+        AllAngularMaterialMDCModulesModule
     ],
     providers: [],
     bootstrap: [AppComponent],
@@ -21,7 +21,7 @@ import { ComponentsModule } from './components/components.module';
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        MaterialModule,
+        AllAngularMaterialMDCModulesModule,
         SidenavModule,
         ViewsModule,
         ComponentsModule

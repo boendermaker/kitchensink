@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '@app/material.module';
+import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { DrawermodaldialogModule } from '@app/components/drawermodaldialog/drawermodaldialog.module';
 
 
@@ -8,7 +8,7 @@ import { DrawermodaldialogModule } from '@app/components/drawermodaldialog/drawe
   declarations: [],
   imports: [
     CommonModule,
-    MaterialModule,
+    AllAngularMaterialMDCModulesModule,
     DrawermodaldialogModule
   ],
   exports: [

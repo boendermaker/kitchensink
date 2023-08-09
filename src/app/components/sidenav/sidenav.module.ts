@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidenavComponent } from './sidenav.component';
-import { MaterialModule } from '@app/material.module';
+import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 
 
 @NgModule({
@@ -10,7 +10,7 @@ import { MaterialModule } from '@app/material.module';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    AllAngularMaterialMDCModulesModule
   ],
   exports: [
     SidenavComponent

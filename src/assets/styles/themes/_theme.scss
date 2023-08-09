@@ -1,0 +1,37 @@
+// Import material theming functions
+@use 'sass:map';
+@use '@angular/material' as mat;
+@import './palette';
+//@import './cssvargen';
+//@include generate-material-classes;
+@include mat.core();
+
+$primary: mat.define-palette($palette-primary, 500);
+$accent: mat.define-palette($palette-accent, A200, A100, A400);
+$warn: mat.define-palette($palette-warn, A200, A100, A400);
+
+$theme: mat.define-light-theme((
+ color: (
+   primary: $primary,
+   accent: $accent,
+   warn: $warn
+ ),
+ density: 0,
+));
+
+// Emit theme-dependent styles for common features used across multiple components.
+@include mat.core-theme($theme);
+
+$color-config: mat.get-color-config($theme);
+
+@debug map.get($color-config, background);
+
+:root {
+  --kitchensink-primary: #{mat.get-color-from-palette($primary, 500)};
+  --kitchensink-primary-contrast: #{mat.get-color-from-palette($primary, 500-contrast)};
+  --kitchensink-accent: #{mat.get-color-from-palette($accent, 500)};
+  --kitchensink-warn: #{mat.get-color-from-palette($accent, 500-contrast)};
+  --kitchensink-background: #{map.get(map.get($color-config, background), background)};
+  --kitchensink-hover: #{map.get(map.get($color-config, background), focused-button)};
+  --kitchensink-selected: #{map.get(map.get($color-config, background), focused-button)};
+}

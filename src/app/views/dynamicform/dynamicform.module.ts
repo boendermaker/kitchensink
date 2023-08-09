@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DynamicformComponent } from './dynamicform.component';
-import { MaterialModule } from '../../material.module';
+import { AllAngularMaterialMDCModulesModule } from '../../shared/modules/allmaterial/allmaterial.module';
 
 
 
@@ -11,7 +11,7 @@ import { MaterialModule } from '../../material.module';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    AllAngularMaterialMDCModulesModule
   ]
 })
 export class DynamicformModule { }

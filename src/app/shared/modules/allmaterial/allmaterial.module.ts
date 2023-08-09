@@ -35,6 +35,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTreeModule} from '@angular/material/tree';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   exports: [
@@ -75,6 +76,7 @@ import {MatTreeModule} from '@angular/material/tree';
     MatTooltipModule,
     MatTreeModule,
     MatSnackBarModule,
+    ScrollingModule
   ],
   providers: [
   ],
