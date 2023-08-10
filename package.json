@@ -23,7 +23,6 @@
     "@ngneat/until-destroy": "^10.0.0-beta.0",
     "blockly": "^10.0.0",
     "eslint": "^8.33.0",
-    "monaco-editor": "^0.41.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.5.0",
     "zone.js": "~0.13.0"
