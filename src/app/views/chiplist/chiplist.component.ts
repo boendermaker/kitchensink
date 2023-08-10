@@ -16,6 +16,9 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class ChiplistComponent implements OnInit {
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
+  code: string = '';
+
+  codeViewerControl: FormControl = new FormControl('');
 
   form1 = this.fb.group({
     chipInputTest1: this.fb.control(''),
@@ -33,7 +36,8 @@ export class ChiplistComponent implements OnInit {
   ngOnInit(): void {
     this.form1.valueChanges.pipe(untilDestroyed(this)).subscribe({
       next: (state) => {
-        console.log('FORMCHANGE ', state)
+        this.codeViewerControl.patchValue(JSON.stringify(state));
+
       }
     })
   }
@@ -65,7 +69,7 @@ export class ChiplistComponent implements OnInit {
   }
 
   updateJSONview(): void {
-    
+
   }
 
 }

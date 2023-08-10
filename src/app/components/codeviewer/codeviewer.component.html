@@ -1,0 +1,9 @@
+<label *ngIf="label && label.length > 0">{{ label }}</label>
+<div class="disabled-container" *ngIf="isDisabled"></div>
+<div
+  class="editor-container"
+  [ngStyle]="{border: border}"
+  [ngClass]="isDisabled ? 'editor-container--disabled' : ''"
+  #editorContainer>
+  <div class="loading-container">{{ loading }}</div>
+</div>

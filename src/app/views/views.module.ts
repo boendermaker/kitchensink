@@ -9,10 +9,14 @@ import { DynamicformModule } from './dynamicform/dynamicform.module'
 import { RecursiveModule } from './recursive/recursive.module'
 import { RecursiveLazyModule } from './recursivelazy/recursivelazy.module'
 import { ChiplistModule } from './chiplist/chiplist.module'
+import { CodeviewerModule } from '@app/components/codeviewer/codeviewer.module';
 
 
 @NgModule({
   declarations: [],
+  exports: [
+    CodeviewerModule
+  ],
   imports: [
     CommonModule,
     IndexModule,
@@ -23,7 +27,8 @@ import { ChiplistModule } from './chiplist/chiplist.module'
     RecursiveModule,
     RecursiveLazyModule,
     ChiplistModule,
-    AllAngularMaterialMDCModulesModule
+    AllAngularMaterialMDCModulesModule,
+    CodeviewerModule
   ]
 })
 export class ViewsModule { }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { DrawermodaldialogModule } from '@app/components/drawermodaldialog/drawermodaldialog.module';
+import { CodeviewerModule } from './codeviewer/codeviewer.module';
 
 
 @NgModule({
@@ -9,10 +10,12 @@ import { DrawermodaldialogModule } from '@app/components/drawermodaldialog/drawe
   imports: [
     CommonModule,
     AllAngularMaterialMDCModulesModule,
-    DrawermodaldialogModule
+    DrawermodaldialogModule,
+    CodeviewerModule
   ],
   exports: [
     DrawermodaldialogModule,
+    CodeviewerModule
   ]
 })
 export class ComponentsModule { }

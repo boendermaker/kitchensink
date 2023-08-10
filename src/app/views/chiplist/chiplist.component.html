@@ -5,6 +5,8 @@
         <div class="b-row">
             <div class="b-col">
 
+                <h4>Chiplist Form</h4>
+
                 <form [formGroup]="form1">
 
                     <mat-form-field style="width: 100%;">
@@ -31,7 +33,6 @@
                         <mat-chip-row mat-mini-fab color="primary" extended (click)="addCustom('xxx')">
                             <i class="material-icons-filled">add</i>
                         </mat-chip-row>  
-
                       </mat-chip-grid>
 
                       <input
@@ -43,7 +44,10 @@
                   </form>
 
             </div>
-            <div class="b-col"></div>
+            <div class="b-col">
+                <h4>Form value changes</h4>
+                <app-codeviewer [formControl]="codeViewerControl"></app-codeviewer>
+            </div>
         </div>
     </mat-card-content>
 </mat-card>

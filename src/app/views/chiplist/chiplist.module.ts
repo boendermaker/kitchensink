@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChiplistComponent } from './chiplist.component';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CodeviewerModule } from '@app/components/codeviewer/codeviewer.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AllAngularMaterialMDCModulesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CodeviewerModule
   ]
 })
 export class ChiplistModule { }
