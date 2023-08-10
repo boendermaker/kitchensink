@@ -10,7 +10,12 @@ import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 })
 export class CodeviewerComponent implements OnInit {
 
-  @Input() code: string = '';
+  _code: string = '';
+
+  @Input() height: number = 500;
+  @Input() set code(value) {
+    this._code = value;
+  };
 
   constructor() {
   }

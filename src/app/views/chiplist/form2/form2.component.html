@@ -1,0 +1,54 @@
+<div class="b-row" style="margin-bottom: 24px;">
+  <div class="b-col-12">
+    <h4>Chiplist Form</h4>
+    This Chiplist makes use of a separate Array for the Chiplist and pushes each added ChiplistItem separately to the FormArray in the FormGroup
+  </div>
+</div>
+
+<div class="b-row">
+    <div class="b-col">
+
+        <h4>Chiplist Form</h4>
+
+        <form [formGroup]="form">
+
+            <mat-form-field style="width: 100%;">
+                <mat-label>Demo input with Chiplist</mat-label>
+                <input matInput value="Lorem ipsum" [formControl]="form.controls['chipInputTest1']">
+            </mat-form-field>
+
+            <mat-form-field style="width: 100%;">
+                <mat-label>Demo input with Chiplist</mat-label>
+                <input matInput value="Lorem ipsum" [formControl]="form.controls['chipInputTest2']">
+            </mat-form-field>
+
+            <mat-form-field style="width: 100%;">
+              <mat-label>Favorite Fruits</mat-label>
+
+              <mat-chip-grid #chipGrid1 aria-label="Fruit selection">
+                <mat-chip-row *ngFor="let fruit of fruits; let index=index" (removed)="remove(index)">
+                  {{fruit}}
+                  <button matChipRemove>
+                    <i class="material-icons-filled">cancel</i>
+                  </button>
+                </mat-chip-row>
+
+                <mat-chip-row mat-mini-fab color="primary" extended (click)="addCustom(randomText())">
+                    <i class="material-icons-filled">add</i>
+                </mat-chip-row>  
+              </mat-chip-grid>
+
+              <input
+              [matChipInputFor]="chipGrid1"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="add($event)" />
+
+            </mat-form-field>
+          </form>
+
+    </div>
+    <div class="b-col">
+        <h4>Formstate</h4>
+        <app-codeviewer [code]="code" height="500"></app-codeviewer>
+    </div>
+</div>

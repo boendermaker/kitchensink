@@ -1,54 +1,14 @@
 <h1>Chiplists</h1>
 
-<mat-card>
+<mat-card style="margin-bottom: 24px;">
     <mat-card-content>
-        <div class="b-row">
-            <div class="b-col">
-
-                <h4>Chiplist Form</h4>
-
-                <form [formGroup]="form1">
-
-                    <mat-form-field style="width: 100%;">
-                        <mat-label>Demo input with Chiplist</mat-label>
-                        <input matInput value="Lorem ipsum" [formControl]="form1.controls.chipInputTest1">
-                    </mat-form-field>
-
-                    <mat-form-field style="width: 100%;">
-                        <mat-label>Demo input with Chiplist</mat-label>
-                        <input matInput value="Lorem ipsum" [formControl]="form1.controls.chipInputTest2">
-                    </mat-form-field>
-
-                    <mat-form-field style="width: 100%;">
-                      <mat-label>Favorite Fruits</mat-label>
-
-                      <mat-chip-grid #chipGrid1 aria-label="Fruit selection" formArrayName="chipFruitArrayControl">
-                        <mat-chip-row *ngFor="let fruit of chipFruitArrayControl.value; let index=index" (removed)="remove(index)">
-                          {{fruit}}
-                          <button matChipRemove>
-                            <i class="material-icons-filled">cancel</i>
-                          </button>
-                        </mat-chip-row>
-
-                        <mat-chip-row mat-mini-fab color="primary" extended (click)="addCustom('xxx')">
-                            <i class="material-icons-filled">add</i>
-                        </mat-chip-row>  
-                      </mat-chip-grid>
-
-                      <input
-                      [matChipInputFor]="chipGrid1"
-                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                      (matChipInputTokenEnd)="add($event)" />
-
-                    </mat-form-field>
-                  </form>
-
-            </div>
-            <div class="b-col">
-                <h4>Form value changes</h4>
-                <app-codeviewer [formControl]="codeViewerControl"></app-codeviewer>
-            </div>
-        </div>
+      <app-form1></app-form1>
     </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-content>
+    <app-form2></app-form2>
+  </mat-card-content>
 </mat-card>
 
