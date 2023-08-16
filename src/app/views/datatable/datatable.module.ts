@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DatatableComponent } from './datatable.component';
-import { MaterialModule } from '../../material.module';
+import { AllAngularMaterialMDCModulesModule } from '../../shared/modules/allmaterial/allmaterial.module';
 
 
 @NgModule({
@@ -10,7 +10,7 @@ import { MaterialModule } from '../../material.module';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    AllAngularMaterialMDCModulesModule
   ]
 })
 export class DatatableModule { }
