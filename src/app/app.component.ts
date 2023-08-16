@@ -20,6 +20,7 @@ export class AppComponent {
     {title: 'Blockly', path: '/blockly'},
     {title: 'Recursive', path: '/recursive'},
     {title: 'Recursive Lazy', path: '/recursivelazy'},
+    {title: 'Chiplist', path: '/chiplist'},
   ];
 
   constructor() {

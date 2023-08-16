@@ -1,14 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import './assets/fonts/roboto/roboto';
+@import './assets/styles/index';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+* {
+  box-sizing: border-box;
+}
 
 body, html {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
-  font-family: Arial;
+  font-family: Roboto;
+  width: 100%;
+  height: 100%;
 }

@@ -1,0 +1,27 @@
+@mixin generateColors($title, $prefix, $palette) {
+    $colors-map: ();
+  
+    @each $key, $value in $palette {
+      @if $key != contrast {
+        .#{$title}-#{$prefix}-#{$key} {
+          color: map-get($palette, $key);
+        }
+  
+      $map: ();
+      $map: map-merge($map, ($key: $value));
+      $colors-map: map-merge($colors-map, $map);
+      }
+    }
+
+    :root {
+      @each $key, $value in $colors-map {
+        --#{$title}-#{$prefix}-#{$key}: #{$value};
+      }
+    }
+  }
+  
+  @mixin generate-material-classes {
+     @include generateColors(kitchensink, primary, $palette-primary);
+     @include generateColors(kitchensink, accent, $palette-accent);
+     @include generateColors(kitchensink, warn, $palette-warn);
+  }

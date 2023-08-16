@@ -1,0 +1,72 @@
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes scaleIn {
+    from {
+      height: 0;
+    }
+    to {
+      height: calc(100% - 35px);
+    }
+  }
+  
+  .editor-container {
+    position: relative;
+    width: 100%;
+    height: calc(100% - 35px);
+    padding: 0;
+    margin: 0;
+  
+    // animation-name: scaleIn, fadeIn;
+    // animation-duration: .5s;
+  
+    &--disabled {
+      border: 1px dashed #999;
+    }
+  }
+  
+  .disabled-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #fff;
+    opacity: 0.6;
+    z-index: 999;
+  }
+  
+  .loading-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  label {
+    display: inline-block;
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+    line-height: 0;
+    padding: 0;
+    margin: -3px 0 15px 0;
+    color: #999;
+  }
+  

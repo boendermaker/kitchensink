@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DrawermodaldialogComponent } from './drawermodaldialog.component';
+import { CodeviewerComponent } from './codeviewer.component';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 
 
 
 @NgModule({
   declarations: [
-    DrawermodaldialogComponent
+    CodeviewerComponent
+  ],
+  exports: [
+    CodeviewerComponent
   ],
   imports: [
     CommonModule,
     AllAngularMaterialMDCModulesModule
   ]
 })
-export class DrawermodaldialogModule { }
+export class CodeviewerModule { }
