@@ -1,0 +1,26 @@
+.tablecontainer {
+  width: 100%;
+  overflow: auto;
+  border: 1px solid #CC0000;
+}
+
+
+[class*="mat-column-"] {
+  min-width: 320px !important;
+}
+
+.mat-column-position {
+  width: 80px !important;
+  min-width: 80px !important;
+  max-width: 80px !important;
+}
+
+.mat-column-symbol {
+  text-align: end;
+  justify-content: flex-end;
+}
+
+.mat-mdc-header-cell {
+  text-align: start;
+  justify-content: flex-start;
+}
