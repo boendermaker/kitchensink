@@ -9,6 +9,7 @@ import { DynamicformModule } from './dynamicform/dynamicform.module'
 import { RecursiveModule } from './recursive/recursive.module'
 import { RecursiveLazyModule } from './recursivelazy/recursivelazy.module'
 import { ChiplistModule } from './chiplist/chiplist.module'
+import { WebcomponentModule } from '@app/views/webcomponent/webcomponent.module';
 import { CodeviewerModule } from '@app/components/codeviewer/codeviewer.module';
 
 
@@ -27,8 +28,9 @@ import { CodeviewerModule } from '@app/components/codeviewer/codeviewer.module';
     RecursiveModule,
     RecursiveLazyModule,
     ChiplistModule,
+    CodeviewerModule,
+    WebcomponentModule,
     AllAngularMaterialMDCModulesModule,
-    CodeviewerModule
   ]
 })
 export class ViewsModule { }

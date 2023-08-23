@@ -21,6 +21,7 @@ export class AppComponent {
     {title: 'Recursive', path: '/recursive'},
     {title: 'Recursive Lazy', path: '/recursivelazy'},
     {title: 'Chiplist', path: '/chiplist'},
+    {title: 'Webcomponents', path: '/webcomponent'},
   ];
 
   constructor() {
