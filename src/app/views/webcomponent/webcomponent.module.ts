@@ -1,7 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WebcomponentComponent } from './webcomponent.component';
-import '../../../../node_modules/webcomponents/public/countbutton/countbutton'
+import '../../../../node_modules/webcomponents/public/countbutton/';
+import '../../../../node_modules/webcomponents/public/datatest/';
 
 
 @NgModule({
