@@ -1,5 +1,4 @@
 import { Component  } from '@angular/core';
-import '../../../../node_modules/webcomponents/public/countbutton/countbutton'
 
 @Component({
   selector: 'app-webcomponent',
