@@ -26,7 +26,7 @@
     "rxjs": "~7.5.0",
     "tslib": "^2.5.0",
     "zone.js": "~0.13.0",
-    "webcomponents": "boendermaker/webcomponents#master"
+    "webcomponents": "git@github.com/boendermaker/webcomponents#master"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.0",
