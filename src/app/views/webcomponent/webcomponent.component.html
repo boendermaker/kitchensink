@@ -1,11 +1,105 @@
-<div class="b-row">
+<h1>Webcomponents</h1>
 
-  <div class="b-col-6">
-    <webc-countbutton></webc-countbutton>
-  </div>
+<mat-card style="margin-bottom: 24px;">
+    <mat-card-header>
+      <h3>Webcomponent WebC-Datatest receives data over attributes</h3>
+    </mat-card-header>
 
-  <div class="b-col-6">
-    <webc-datatest data="[{name: 'TEST1'}, {name: 'TEST2'}, {name: 'TEST3'}]"></webc-datatest>
-  </div>
+    <mat-card-content>
 
-</div>
+      <div class="b-row">
+
+        <div class="b-col-6 b-d-flex b-flex-column">
+
+          <p>
+            This Webcomponent comes from an external github repository, which was added to the package.json file in the angular project folder as dependency.
+          </p>
+
+          <pre><code>&quot;webcomponents&quot;: &quot;git@github.com/boendermaker/webcomponents#master&quot;</code></pre>
+
+          <p>
+            The webcomponent takes data over an html attribute and runs its update lifecycle hook after data has changed to run render for diplaying the data as table.
+          </p>
+
+              <pre><code>import &lbrace; NgModule, CUSTOM_ELEMENTS_SCHEMA &rbrace; from '@angular/core';</code></pre>
+
+          <p>
+            Needs to be added to the corresponding component modules, to allow custom elements in angular templates.
+          </p>
+
+          <div class="b-d-flex" style="margin-top: 24px; gap: 24px;">
+            <button mat-flat-button color="primary" (click)="setRandomData()">Load and pass random data to webcomponent</button>
+            <button mat-stroked-button (click)="logWebC()">log WebC</button>
+          </div>
+
+        </div>
+
+        <div class="b-col-6">
+
+          <div style="height: 500px;">
+            <webc-datatest #webcdatatest [datasource]="randomDataString" [isloading]="isLoading"></webc-datatest>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+    </mat-card-content>
+
+</mat-card>
+
+
+<mat-card style="margin-bottom: 24px;">
+  <mat-card-header>
+    <h3>Webcomponent WebC-ThreeTest ThreeJS Example with Angular Material Sliders</h3>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="b-row">
+      <div class="b-col-3">
+        <div>
+          <p>This is a webcomponent with ThreeJS applied to it. The 3D Object will be controlled by angular slider formcontrols, by passing the values over attributes to the webcomponent</p>
+        </div>
+        <form [formGroup]="meshSlideFormGroup" style="display: flex; flex-direction: column; gap: 24px;">
+
+          <div class="b-d-flex b-flex-column">
+            <mat-label>Speed of circular movement</mat-label>
+            <mat-slider
+              [max]="0.1"
+              [min]="0.01"
+              [step]="0.01">
+              <input matSliderThumb #slider formControlName="meshAngleControl">
+            </mat-slider>
+          </div>
+
+          <div class="b-d-flex b-flex-column">
+            <mat-label>Radius of circular movement</mat-label>
+            <mat-slider
+              [max]="20"
+              [min]="1"
+              [step]="0.1">
+              <input matSliderThumb #slider formControlName="meshRadiusControl">
+            </mat-slider>
+          </div>
+
+          <div class="b-d-flex b-flex-column">
+            <mat-label>Speed of rotation</mat-label>
+            <mat-slider
+              [max]="0.1"
+              [min]="0.01"
+              [step]="0.01">
+              <input matSliderThumb #slider formControlName="meshRotationSpeedControl">
+            </mat-slider>
+          </div>
+
+      </form>
+
+      </div>
+      <div class="b-col-9 b-d-flex b-justify-content-center" style="overflow: auto;">
+        <webc-threetest [meshanglespeed]="meshAngleSpeed" [meshrotationspeed]="meshRotationSpeed" [meshradius]="meshRadius"></webc-threetest>
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>
