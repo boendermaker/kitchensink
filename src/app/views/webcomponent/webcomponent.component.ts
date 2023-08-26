@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild  } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, delay } from 'rxjs';
+import { BehaviorSubject, Observable, delay } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 
 export interface IUser {

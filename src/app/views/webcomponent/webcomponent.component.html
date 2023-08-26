@@ -1,4 +1,15 @@
 <h1>Webcomponents</h1>
+<div style="margin-bottom: 48px;">
+  <p>
+    This Webcomponents come from an external github repository, which was added to the package.json file in the angular project folder as dependency.
+  </p>
+  <pre><code>&quot;webcomponents&quot;: &quot;git@github.com/boendermaker/webcomponents#master&quot;</code></pre>
+  <p>
+    This needs to be added to the corresponding component modules, to allow custom elements in angular templates.
+  </p>
+  <pre><code>import &lbrace; NgModule, CUSTOM_ELEMENTS_SCHEMA &rbrace; from '@angular/core';</code></pre>
+</div>
+
 
 <mat-card style="margin-bottom: 24px;">
     <mat-card-header>
@@ -12,20 +23,10 @@
         <div class="b-col-6 b-d-flex b-flex-column">
 
           <p>
-            This Webcomponent comes from an external github repository, which was added to the package.json file in the angular project folder as dependency.
-          </p>
-
-          <pre><code>&quot;webcomponents&quot;: &quot;git@github.com/boendermaker/webcomponents#master&quot;</code></pre>
-
-          <p>
             The webcomponent takes data over an html attribute and runs its update lifecycle hook after data has changed to run render for diplaying the data as table.
           </p>
 
-              <pre><code>import &lbrace; NgModule, CUSTOM_ELEMENTS_SCHEMA &rbrace; from '@angular/core';</code></pre>
 
-          <p>
-            Needs to be added to the corresponding component modules, to allow custom elements in angular templates.
-          </p>
 
           <div class="b-d-flex" style="margin-top: 24px; gap: 24px;">
             <button mat-flat-button color="primary" (click)="setRandomData()">Load and pass random data to webcomponent</button>
@@ -36,7 +37,7 @@
 
         <div class="b-col-6">
 
-          <div style="height: 500px;">
+          <div style="width: 100%; height: 500px;">
             <webc-datatest #webcdatatest [datasource]="randomDataString" [isloading]="isLoading"></webc-datatest>
           </div>
 
@@ -96,7 +97,7 @@
       </form>
 
       </div>
-      <div class="b-col-9 b-d-flex b-justify-content-center" style="overflow: auto;">
+      <div class="b-col-9 b-d-flex b-justify-content-center" style="overflow: auto;" #rendercontainer>
         <webc-threetest [meshanglespeed]="meshAngleSpeed" [meshrotationspeed]="meshRotationSpeed" [meshradius]="meshRadius"></webc-threetest>
       </div>
     </div>
