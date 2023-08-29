@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BehaviorSubject, Observable, delay } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
+import { SelectionModel } from '@angular/cdk/collections';
 
 export interface IUser {
     "id": number,
@@ -55,7 +56,16 @@ export class WebcomponentComponent implements OnInit, AfterViewInit {
   @ViewChild('webcdatatest') webcdatatest: Element;
 
   randomData: any[];
+  randomDataColumns: any[] = [
+    {key: 'index', label: 'Nr'},
+    {key: 'first_name', label: 'First name'},
+    {key: 'last_name', label: 'Last name'},
+    {key: 'username', label: 'Username'},
+    {key: 'password', label: 'Password'}
+  ];
+  randomDataColumnsSelection: SelectionModel<any[]>;
   randomDataString: string;
+  randomDataColumnsString: string;
   isLoading: boolean = false;
   meshAngleSpeed: number = 0.01;
   meshRotationSpeed: number = 0.01;
@@ -67,17 +77,25 @@ export class WebcomponentComponent implements OnInit, AfterViewInit {
   }
   meshSlideFormGroup: FormGroup = new FormGroup(this.meshControls);
 
+
   constructor(private http: HttpClient) {
     this.randomData = []
     this.randomDataString = '';
+    this.randomDataColumnsString = '';
+    this.randomDataColumnsSelection = new SelectionModel<any[]>(
+      true, // <- multi-select
+      [], // <- Initial selections
+      true, // <- emit an event on selection change
+    );
   }
 
   ngOnInit(): void {
     this.handleSlideFormGroup();
+    this.handleColumnSelection();
   }
 
   ngAfterViewInit(): void {
-    console.log(this.webcdatatest)
+    console.log(this.webcdatatest, this.randomDataColumnsSelection)
   }
 
   handleSlideFormGroup(): void {
@@ -95,6 +113,14 @@ export class WebcomponentComponent implements OnInit, AfterViewInit {
     return this.http.get<IUser[]>(url);
   }
 
+  handleColumnSelection(): void {
+    this.randomDataColumnsSelection.changed.pipe(untilDestroyed(this)).subscribe({
+      next: (selection) => {
+        this.randomDataColumnsString = JSON.stringify(this.randomDataColumnsSelection.selected);
+      }
+    })
+  }
+
   setRandomData(): void {
     this.isLoading = true;
     this.fetchUsers(this.randomNumberRange(5,50))
@@ -104,6 +130,7 @@ export class WebcomponentComponent implements OnInit, AfterViewInit {
     ).subscribe({
       next: (userArray) => {
         this.randomDataString = JSON.stringify(userArray);
+        //this.randomDataColumnsString = JSON.stringify(this.randomDataColumns);
         this.isLoading = false;
       }
     })
@@ -116,7 +143,7 @@ export class WebcomponentComponent implements OnInit, AfterViewInit {
   }
 
   logWebC(): void {
-    console.log(this.webcdatatest);
+    console.log(this.webcdatatest, this.randomDataColumnsSelection.selected);
   }
 
 }
