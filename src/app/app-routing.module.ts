@@ -11,6 +11,7 @@ import { RecursiveComponent } from './views/recursive/recursive.component';
 import { RecursiveLazyComponent } from './views/recursivelazy/recursivelazy.component';
 import { ChiplistComponent } from './views/chiplist/chiplist.component';
 import { WebcomponentComponent } from '@app/views/webcomponent/webcomponent.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'recursive', component: RecursiveComponent },
   { path: 'recursivelazy', component: RecursiveLazyComponent },
   { path: 'chiplist', component: ChiplistComponent },
-  { path: 'webcomponent', component: WebcomponentComponent }
+  { path: 'webcomponent', component: WebcomponentComponent },
+  { path: 'dashboard', component: DashboardComponent }
 ];
 
 @NgModule({

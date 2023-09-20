@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { DrawermodaldialogModule } from '@app/components/drawermodaldialog/drawermodaldialog.module';
 import { CodeviewerModule } from './codeviewer/codeviewer.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 @NgModule({
@@ -11,11 +12,13 @@ import { CodeviewerModule } from './codeviewer/codeviewer.module';
     CommonModule,
     AllAngularMaterialMDCModulesModule,
     DrawermodaldialogModule,
-    CodeviewerModule
+    CodeviewerModule,
+    DashboardModule
   ],
   exports: [
     DrawermodaldialogModule,
-    CodeviewerModule
+    CodeviewerModule,
+    DashboardModule
   ]
 })
 export class ComponentsModule { }
