@@ -13,10 +13,15 @@ export class TableformgroupComponent implements OnInit {
   formArrayName: string = 'signals';
   form: UntypedFormGroup;
 
+  get dynamicFormGorup() {
+    return this.form.controls[this.formArrayName] as UntypedFormArray;
+  }
+
   constructor(
     private controlContainer: ControlContainer,
     private fb: FormBuilder
   ) {
+
   }
 
   ngOnInit(): void {
@@ -27,6 +32,16 @@ export class TableformgroupComponent implements OnInit {
     this.form = <UntypedFormGroup>this.controlContainer.control;
     this.form.addControl(this.formArrayName, this.fb.array([]));
     this.dataSource = new MatTableDataSource((this.form.get(this.formArrayName) as UntypedFormArray).controls);
+  }
+
+  
+
+  addRow(): void {
+
+  }
+
+  removeRow(): void {
+
   }
 
 }
