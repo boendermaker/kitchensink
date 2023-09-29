@@ -4,6 +4,7 @@ import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmater
 import { DrawermodaldialogModule } from '@app/components/drawermodaldialog/drawermodaldialog.module';
 import { CodeviewerModule } from './codeviewer/codeviewer.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { TableformgroupModule } from './tableformgroup/tableformgroup.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
   exports: [
     DrawermodaldialogModule,
     CodeviewerModule,
-    DashboardModule
+    DashboardModule,
+    TableformgroupModule
   ]
 })
 export class ComponentsModule { }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormControl, FormGroup, UntypedFormArray, UntypedFormGroup } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormBuilder, FormGroup, UntypedFormArray, UntypedFormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -9,6 +9,12 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class DynamicformComponent implements OnInit {
 
+<<<<<<< HEAD
+=======
+  dataSource: MatTableDataSource<AbstractControl>;
+  form: UntypedFormGroup;
+
+>>>>>>> d3cef95c7dce72cdda8a6026888d413202611349
   constructor() {
   }
 

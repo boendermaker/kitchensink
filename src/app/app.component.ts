@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
 import { ISideNavItem } from './components/sidenav/sidenav.interface';
 
 @Component({
@@ -22,7 +21,11 @@ export class AppComponent {
     {title: 'Recursive Lazy', path: '/recursivelazy'},
     {title: 'Chiplist', path: '/chiplist'},
     {title: 'Webcomponents', path: '/webcomponent'},
+<<<<<<< HEAD
     {title: 'Gridster Dashboard', path: '/dashboard'},
+=======
+    {title: 'Gridster dashboard', path: '/dashboard'},
+>>>>>>> d3cef95c7dce72cdda8a6026888d413202611349
   ];
 
   constructor() {

@@ -4,16 +4,20 @@ import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-tableform',
-  templateUrl: './tableform.component.html',
-  styleUrls: ['./tableform.component.scss']
+  templateUrl: './tableformgroup.component.html',
+  styleUrls: ['./tableformgroup.component.scss']
 })
-export class TableformComponent implements OnInit {
+export class TableformgroupComponent implements OnInit {
 
   dataSource: MatTableDataSource<AbstractControl>;
   formArrayName: string = 'signals';
   form: UntypedFormGroup;
 
+<<<<<<< HEAD:src/app/components/tableform/tableform.component.ts
   get signals() {
+=======
+  get dynamicFormGorup() {
+>>>>>>> d3cef95c7dce72cdda8a6026888d413202611349:src/app/components/tableformgroup/tableformgroup.component.ts
     return this.form.controls[this.formArrayName] as UntypedFormArray;
   }
 
@@ -21,6 +25,7 @@ export class TableformComponent implements OnInit {
     private controlContainer: ControlContainer,
     private fb: FormBuilder
   ) {
+
   }
 
   ngOnInit(): void {
@@ -31,6 +36,16 @@ export class TableformComponent implements OnInit {
     this.form = <UntypedFormGroup>this.controlContainer.control;
     this.form.addControl(this.formArrayName, this.fb.array([]));
     this.dataSource = new MatTableDataSource((this.form.get(this.formArrayName) as UntypedFormArray).controls);
+  }
+
+  
+
+  addRow(): void {
+
+  }
+
+  removeRow(): void {
+
   }
 
 }
