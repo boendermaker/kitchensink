@@ -22,7 +22,7 @@ export class AppComponent {
     {title: 'Recursive Lazy', path: '/recursivelazy'},
     {title: 'Chiplist', path: '/chiplist'},
     {title: 'Webcomponents', path: '/webcomponent'},
-    {title: 'Dashboard', path: '/dashboardcomponent'},
+    {title: 'Gridster Dashboard', path: '/dashboard'},
   ];
 
   constructor() {

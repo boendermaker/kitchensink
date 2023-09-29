@@ -13,6 +13,10 @@ export class TableformComponent implements OnInit {
   formArrayName: string = 'signals';
   form: UntypedFormGroup;
 
+  get signals() {
+    return this.form.controls[this.formArrayName] as UntypedFormArray;
+  }
+
   constructor(
     private controlContainer: ControlContainer,
     private fb: FormBuilder

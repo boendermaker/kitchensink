@@ -9,24 +9,11 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class DynamicformComponent implements OnInit {
 
-  dataSource: MatTableDataSource<AbstractControl>;
-  formArrayName: string = 'signals';
-  form: UntypedFormGroup;
-
-  constructor(
-    private controlContainer: ControlContainer,
-    private fb: FormBuilder
-    ) {
+  constructor() {
   }
 
   ngOnInit(): void {
     console.log();
-  }
-
-  initData(): void {
-    this.form = <UntypedFormGroup>this.controlContainer.control;
-    this.form.addControl(this.formArrayName, this.fb.array([]));
-    this.dataSource = new MatTableDataSource((this.form.get(this.formArrayName) as UntypedFormArray).controls);
   }
 
 }

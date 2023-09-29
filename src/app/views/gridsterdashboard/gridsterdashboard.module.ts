@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard.component';
+import { GridsterdashboardComponent } from './gridsterdashboard.component';
+
 
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    GridsterdashboardComponent
   ],
   imports: [
     CommonModule
   ]
 })
-export class DashboardModule { }
+export class GridsterdashboardModule { }
