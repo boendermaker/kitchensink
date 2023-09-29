@@ -4,10 +4,10 @@ import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-tableform',
-  templateUrl: './tableform.component.html',
-  styleUrls: ['./tableform.component.scss']
+  templateUrl: './tableformgroup.component.html',
+  styleUrls: ['./tableformgroup.component.scss']
 })
-export class TableformComponent implements OnInit {
+export class TableformgroupComponent implements OnInit {
 
   dataSource: MatTableDataSource<AbstractControl>;
   formArrayName: string = 'signals';

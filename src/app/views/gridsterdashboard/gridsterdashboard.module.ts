@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableformComponent } from './tableform.component';
+import { GridsterdashboardComponent } from './gridsterdashboard.component';
 
 
 
 @NgModule({
   declarations: [
-    TableformComponent
+    GridsterdashboardComponent
   ],
   imports: [
     CommonModule
   ]
 })
-export class TableformModule { }
+export class GridsterdashboardModule { }

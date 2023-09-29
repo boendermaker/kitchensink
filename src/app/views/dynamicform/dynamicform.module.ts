@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DynamicformComponent } from './dynamicform.component';
-import { AllAngularMaterialMDCModulesModule } from '../../shared/modules/allmaterial/allmaterial.module';
-
+import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
+import { TableformgroupModule } from '@app/components/tableformgroup/tableformgroup.module';
 
 
 @NgModule({
@@ -11,7 +12,10 @@ import { AllAngularMaterialMDCModulesModule } from '../../shared/modules/allmate
   ],
   imports: [
     CommonModule,
-    AllAngularMaterialMDCModulesModule
+    AllAngularMaterialMDCModulesModule,
+    ReactiveFormsModule,
+    FormsModule,
+    TableformgroupModule
   ]
 })
 export class DynamicformModule { }
