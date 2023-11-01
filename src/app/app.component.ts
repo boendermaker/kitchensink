@@ -22,6 +22,7 @@ export class AppComponent {
     {title: 'Chiplist', path: '/chiplist'},
     {title: 'Webcomponents', path: '/webcomponent'},
     {title: 'Gridster dashboard', path: '/dashboard'},
+    {title: 'Drag and Drop Tabs', path: '/dragdroptabs'},
   ];
 
   constructor() {
