@@ -21,11 +21,7 @@ export class AppComponent {
     {title: 'Recursive Lazy', path: '/recursivelazy'},
     {title: 'Chiplist', path: '/chiplist'},
     {title: 'Webcomponents', path: '/webcomponent'},
-<<<<<<< HEAD
-    {title: 'Gridster Dashboard', path: '/dashboard'},
-=======
     {title: 'Gridster dashboard', path: '/dashboard'},
->>>>>>> d3cef95c7dce72cdda8a6026888d413202611349
   ];
 
   constructor() {
