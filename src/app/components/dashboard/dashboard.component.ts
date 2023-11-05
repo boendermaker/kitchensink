@@ -21,18 +21,22 @@ import {
 export class DashboardComponent implements OnInit {
 
   @Input() dashboardoptions: ICustomDashboardConfig;
-  @Input() dashboardstate: Array<ICustomDashboardItem>;
+  @Input() dashboardstate: ICustomDashboardItem[] = [];
 
   constructor() {
   }
 
   ngOnInit(): void {
     this.dashboardoptions = this.getOptions();
+
+    console.log('DSHBOARDOPTIONS ', this.dashboardoptions);
+    console.log('DSHBOARDSTATE ', this.dashboardstate);
+
   }
 
   getOptions(): ICustomDashboardConfig {
     return <ICustomDashboardConfig>{
-      gridType: GridType.Fit,
+      gridType: GridType.ScrollVertical,
       compactType: CompactType.None,
       margin: 10,
       outerMargin: true,

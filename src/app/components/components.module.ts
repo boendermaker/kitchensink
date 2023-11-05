@@ -13,8 +13,7 @@ import { TableformgroupModule } from './tableformgroup/tableformgroup.module';
     CommonModule,
     AllAngularMaterialMDCModulesModule,
     DrawermodaldialogModule,
-    CodeviewerModule,
-    DashboardModule
+    CodeviewerModule
   ],
   exports: [
     DrawermodaldialogModule,

@@ -11,17 +11,18 @@ import {
   Resizable
 } from 'angular-gridster2';
 
-export interface ICustomDashboardItem extends GridsterItem {
+export interface ICustomDashboardItem {
   componentDefaultPath?: string;
   componentDefaultFile?: string;
   componentDefaultClass?: string;
   componentSettingsPath?: string;
-  componentSettingsFile?: string;
-  componentSettingsClass?: string;
+  componentSettingsfile?: string;
+  componentSettingsclass?: string;
+  widgetSettings: GridsterItem;
 }
 
 export interface ICustomDashboardConfig extends GridsterConfig {
-  draggable: Draggable;
-  resizable: Resizable;
-  pushDirections: PushDirections;
+  draggable?: Draggable;
+  resizable?: Resizable;
+  pushDirections?: PushDirections;
 }

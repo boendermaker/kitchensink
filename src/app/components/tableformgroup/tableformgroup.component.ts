@@ -35,8 +35,6 @@ export class TableformgroupComponent implements OnInit {
     this.dataSource = new MatTableDataSource((this.form.get(this.formArrayName) as UntypedFormArray).controls);
   }
 
-
-
   addRow(): void {
 
   }
