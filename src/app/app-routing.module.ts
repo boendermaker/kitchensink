@@ -12,6 +12,7 @@ import { RecursiveLazyComponent } from './views/recursivelazy/recursivelazy.comp
 import { ChiplistComponent } from './views/chiplist/chiplist.component';
 import { WebcomponentComponent } from '@app/views/webcomponent/webcomponent.component';
 import { GridsterdashboardComponent } from '@app/views/gridsterdashboard/gridsterdashboard.component';
+import { DragdroptabsComponent } from './views/dragdroptabs/dragdroptabs.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'recursivelazy', component: RecursiveLazyComponent },
   { path: 'chiplist', component: ChiplistComponent },
   { path: 'webcomponent', component: WebcomponentComponent },
-  { path: 'dashboard', component: GridsterdashboardComponent }
+  { path: 'dashboard', component: GridsterdashboardComponent },
+  { path: 'dragdroptabs', component: DragdroptabsComponent }
 ];
 
 @NgModule({

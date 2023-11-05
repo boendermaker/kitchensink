@@ -12,7 +12,7 @@ export class TableformgroupComponent implements OnInit {
   dataSource: MatTableDataSource<AbstractControl>;
   formArrayName: string = 'signals';
   form: UntypedFormGroup;
-  displayedColumns: any[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
   get dynamicFormGorup() {
     return this.form.controls[this.formArrayName] as UntypedFormArray;

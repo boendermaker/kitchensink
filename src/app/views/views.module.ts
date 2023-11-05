@@ -11,6 +11,7 @@ import { RecursiveLazyModule } from './recursivelazy/recursivelazy.module'
 import { ChiplistModule } from './chiplist/chiplist.module'
 import { WebcomponentModule } from '@app/views/webcomponent/webcomponent.module';
 import { CodeviewerModule } from '@app/components/codeviewer/codeviewer.module';
+import { DragdroptabsModule } from './dragdroptabs/dragdroptabs.module';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { CodeviewerModule } from '@app/components/codeviewer/codeviewer.module';
     ChiplistModule,
     CodeviewerModule,
     WebcomponentModule,
-    AllAngularMaterialMDCModulesModule,
+    DragdroptabsModule,
+    AllAngularMaterialMDCModulesModule
   ]
 })
 export class ViewsModule { }
