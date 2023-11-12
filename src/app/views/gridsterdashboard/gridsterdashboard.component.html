@@ -1,1 +1,17 @@
-<app-dashboard [dashboardstate]="dashboardOptions" [dashboardstate]="dashboardState"></app-dashboard>
+<div class="b-d-flex">
+  <button mat-icon-button (click)="dashboardService.toggleEditMode()">
+    <i class="material-icons-filled">edit</i>
+  </button>
+  <button mat-icon-button (click)="dashboardService.addEmptyDashboard('Tester')">
+    <i class="material-icons-filled">add</i>
+  </button>
+</div>
+
+
+<div class="b-mt-4">
+  <app-dashboard-tabs></app-dashboard-tabs>
+</div>
+
+<div class="b-mt-4">
+  <app-dashboard></app-dashboard>
+</div>

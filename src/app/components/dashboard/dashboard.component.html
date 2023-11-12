@@ -1,7 +1,7 @@
-<div style="height: 100%; width: 100%;">
-<gridster [options]="dashboardoptions" style="height: 100%; width: 100%;">
-  <gridster-item [item]="item.widgetSettings" *ngFor="let item of dashboardstate">
-    XXX
-  </gridster-item>
-</gridster>
-</div>
+<ng-container *ngIf="this.selectedDashboard">
+  <gridster [options]="this.selectedDashboard.config">
+    <gridster-item [item]="widget" *ngFor="let widget of this.selectedDashboard.widgets">
+      XXX
+    </gridster-item>
+  </gridster>
+</ng-container>

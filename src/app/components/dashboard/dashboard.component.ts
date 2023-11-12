@@ -1,18 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ICustomDashboardConfig, ICustomDashboardItem } from './dashboard.interface';
-import {
-  CompactType,
-  DisplayGrid,
-  Draggable,
-  GridsterComponent,
-  GridsterConfig,
-  GridsterItem,
-  GridsterItemComponent,
-  GridType,
-  PushDirections,
-  Resizable
-} from 'angular-gridster2';
+import { Component, Input, OnInit, Renderer2, inject } from '@angular/core';
+import { IDashboard } from './dashboard.interface';
+import { DashboardService } from './dashboard.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { tap } from 'rxjs/operators';
 
+@UntilDestroy()
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -20,77 +12,27 @@ import {
 })
 export class DashboardComponent implements OnInit {
 
-  @Input() dashboardoptions: ICustomDashboardConfig;
-  @Input() dashboardstate: ICustomDashboardItem[] = [];
+  selectedDashboard: Partial<IDashboard> = {};
 
-  constructor() {
+  constructor(
+    public dashboardService: DashboardService
+  ) {
   }
 
   ngOnInit(): void {
-    this.dashboardoptions = this.getOptions();
-
-    console.log('DSHBOARDOPTIONS ', this.dashboardoptions);
-    console.log('DSHBOARDSTATE ', this.dashboardstate);
-
+    this.handleSelectDashboard();
   }
 
-  getOptions(): ICustomDashboardConfig {
-    return <ICustomDashboardConfig>{
-      gridType: GridType.ScrollVertical,
-      compactType: CompactType.None,
-      margin: 10,
-      outerMargin: true,
-      outerMarginTop: null,
-      outerMarginRight: null,
-      outerMarginBottom: null,
-      outerMarginLeft: null,
-      useTransformPositioning: true,
-      mobileBreakpoint: 640,
-      useBodyForBreakpoint: false,
-      minCols: 1,
-      maxCols: 100,
-      minRows: 1,
-      maxRows: 100,
-      maxItemCols: 100,
-      minItemCols: 1,
-      maxItemRows: 100,
-      minItemRows: 1,
-      maxItemArea: 2500,
-      minItemArea: 1,
-      defaultItemCols: 1,
-      defaultItemRows: 1,
-      fixedColWidth: 105,
-      fixedRowHeight: 105,
-      keepFixedHeightInMobile: false,
-      keepFixedWidthInMobile: false,
-      scrollSensitivity: 10,
-      scrollSpeed: 20,
-      enableEmptyCellClick: false,
-      enableEmptyCellContextMenu: false,
-      enableEmptyCellDrop: false,
-      enableEmptyCellDrag: false,
-      enableOccupiedCellDrop: false,
-      emptyCellDragMaxCols: 50,
-      emptyCellDragMaxRows: 50,
-      ignoreMarginInRow: false,
-      draggable: {
-        enabled: true
-      },
-      resizable: {
-        enabled: true
-      },
-      swap: false,
-      pushItems: true,
-      disablePushOnDrag: false,
-      disablePushOnResize: false,
-      pushDirections: { north: true, east: true, south: true, west: true },
-      pushResizeItems: false,
-      displayGrid: DisplayGrid.Always,
-      disableWindowResize: false,
-      disableWarnings: false,
-      scrollToNewItems: false,
-      ...this.dashboardoptions
-    };
+  handleSelectDashboard(): void {
+    this.dashboardService
+    .selectedDashboard_
+    .pipe(untilDestroyed(this))
+    .subscribe({
+      next: (selectedDashboard) => {
+        console.log('SELECTED DC ', selectedDashboard);
+        this.selectedDashboard = selectedDashboard;
+      }
+    })
   }
 
 
