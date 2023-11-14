@@ -13,6 +13,7 @@ import { ChiplistComponent } from './views/chiplist/chiplist.component';
 import { WebcomponentComponent } from '@app/views/webcomponent/webcomponent.component';
 import { GridsterdashboardComponent } from '@app/views/gridsterdashboard/gridsterdashboard.component';
 import { DragdroptabsComponent } from './views/dragdroptabs/dragdroptabs.component';
+import { StateComponent } from './views/state/state.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'chiplist', component: ChiplistComponent },
   { path: 'webcomponent', component: WebcomponentComponent },
   { path: 'dashboard', component: GridsterdashboardComponent },
-  { path: 'dragdroptabs', component: DragdroptabsComponent }
+  { path: 'dragdroptabs', component: DragdroptabsComponent },
+  { path: 'state', component: StateComponent }
 ];
 
 @NgModule({

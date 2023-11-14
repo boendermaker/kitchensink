@@ -23,6 +23,7 @@ export class AppComponent {
     {title: 'Webcomponents', path: '/webcomponent'},
     {title: 'Gridster dashboard', path: '/dashboard'},
     {title: 'Drag and Drop Tabs', path: '/dragdroptabs'},
+    {title: 'State', path: '/state'},
   ];
 
   constructor() {

@@ -14,6 +14,7 @@ import { CodeviewerModule } from '@app/components/codeviewer/codeviewer.module';
 import { DragdroptabsModule } from './dragdroptabs/dragdroptabs.module';
 import { GridsterdashboardModule } from './gridsterdashboard/gridsterdashboard.module';
 import { DialtimepickerModule } from './dialtimepicker/dialtimepicker.module';
+import { StateModule } from './state/state.module';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { DialtimepickerModule } from './dialtimepicker/dialtimepicker.module';
     DragdroptabsModule,
     GridsterdashboardModule,
     DialtimepickerModule,
+    StateModule,
     AllAngularMaterialMDCModulesModule
   ]
 })

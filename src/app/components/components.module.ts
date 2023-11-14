@@ -5,12 +5,10 @@ import { DrawermodaldialogModule } from '@app/components/drawermodaldialog/drawe
 import { CodeviewerModule } from './codeviewer/codeviewer.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { TableformgroupModule } from './tableformgroup/tableformgroup.module';
-import { ClocktimepickerComponent } from './clocktimepicker/clocktimepicker.component';
 
 
 @NgModule({
   declarations: [
-    ClocktimepickerComponent
   ],
   imports: [
     CommonModule,
