@@ -11,8 +11,10 @@
         </div>
     </div>
     <div class="b-row">
-        <div class="b-col-12 b-d-flex b-justify-content-center">
-            <button mat-flat-button color="primary" (click)="userDataService.getUsers(rndNumber())">Get Users</button>
+        <div class="b-col-12 b-d-flex b-justify-content-center" style="gap: 24px;">
+            <button mat-flat-button color="primary" (click)="userDataService.getUsers(getRandomInt(1,10))">Get new users</button>
+            <button mat-flat-button color="primary" (click)="userDataService.addUser()">Add one User</button>
+            <button mat-flat-button color="primary" (click)="userDataService.removeUser()">Remove one User</button>
         </div>
     </div>
 </div>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { untilDestroyed } from '@ngneat/until-destroy';
+import { Observable, shareReplay } from 'rxjs';
 
 export interface IUser {
   "id": number,
@@ -53,12 +54,12 @@ export class UserRepositoryService {
 
   fetchMultipleUsers(amount: number): Observable<IUser[]> {
     const url = `https://random-data-api.com/api/v2/users?size=${amount}&response_type=json`;
-    return this.http.get<IUser[]>(url);
+    return this.http.get<IUser[]>(url).pipe(shareReplay(1));
   }
 
-  fetchSingleUser(): Observable<IUser[]> {
+  fetchSingleUser(): Observable<IUser> {
     const url = `https://random-data-api.com/api/v2/users?size=1&response_type=json`;
-    return this.http.get<IUser[]>(url);
+    return this.http.get<IUser>(url).pipe(shareReplay(1));
   }
 
 }

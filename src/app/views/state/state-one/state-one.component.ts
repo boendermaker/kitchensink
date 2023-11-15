@@ -16,7 +16,7 @@ import { IUser } from '@app/services/user.repository.service';
 export class StateOneComponent implements OnInit {
 
   userDataService = inject(UserDataService);
-  displayedColumns: string[] = ['firstname', 'lastname', 'city', 'country'];
+  displayedColumns: string[] = ['firstname', 'lastname', 'city', 'country', 'actions'];
   dataSource: IUser[] = [];
 
   constructor() {

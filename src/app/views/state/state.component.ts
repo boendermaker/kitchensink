@@ -20,8 +20,10 @@ export class StateComponent implements OnInit {
 
   }
 
-  rndNumber(): number {
-    return Math.floor(Math.random()*10);
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
   }
 
 }

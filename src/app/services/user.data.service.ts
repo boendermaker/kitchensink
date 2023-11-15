@@ -9,14 +9,14 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class UserDataService {
 
-  repositoryService = inject(UserRepositoryService);
+  userRepositoryService = inject(UserRepositoryService);
 
   private stateChanged$: BehaviorSubject<Boolean> = new BehaviorSubject(false);
   stateChanged_: Observable<Boolean> = this.stateChanged$.asObservable();
 
   private loading$: BehaviorSubject<Boolean> = new BehaviorSubject(false);
   loading_: Observable<Boolean> = this.loading$.asObservable();
-  
+
   private userState$: BehaviorSubject<IUser[]> = new BehaviorSubject([]);
   userState_: Observable<IUser[]> = this.userState$.asObservable();
 
@@ -25,8 +25,10 @@ export class UserDataService {
   //####################################################################
 
   getUsers(amount: number) {
+    amount = amount > 0 ? amount : 1;
+
     this.loading$.next(true);
-    this.repositoryService.fetchMultipleUsers(amount ?? 1)
+    this.userRepositoryService.fetchMultipleUsers(amount)
     .pipe(untilDestroyed(this))
     .subscribe({
       next: (user: IUser[]) => {
@@ -35,13 +37,6 @@ export class UserDataService {
         this.stateChanged$.next(true);
       }
     });
-  }
-
-  //####################################################################
-
-  removeUserById(id: number): void {
-    this.userState$.next(this.userState$.value.filter(r => r.id === id));
-    this.stateChanged$.next(true);
   }
 
   //####################################################################
@@ -65,14 +60,36 @@ export class UserDataService {
 
   //####################################################################
 
-  changeUserValueById(id: number, key: string, value: string|number): void {
-    const changedUsers = this.userState$.value.map((currentUser: IUser) => {
-      if(currentUser.id === id) {
-        currentUser[key] = value;
+  addUser(): void {
+    this.userRepositoryService.fetchSingleUser().pipe(untilDestroyed(this)).subscribe({
+      next: (user: IUser) => {
+        console.log('ADDUSER ', user);
+        this.userState$.next([...this.userState$.value, user]);
       }
-      return currentUser;
-    })
-    this.userState$.next(changedUsers);
+    });
+  }
+
+  //####################################################################
+
+  removeUser(): void {
+    this.userState$.value.pop();
+    this.userState$.next([...this.userState$.value]);
+    this.stateChanged$.next(true);
+  }
+
+  //####################################################################
+
+  changeUserValueById(id: number, key: string, value: any): void {
+    console.log('BLUR ', value);
+    this.userState$.value.find(f => f.id === id)[key] = value?.target?.innerText;
+    this.userState$.next([...this.userState$.value]);
+    this.stateChanged$.next(true);
+  }
+
+  //####################################################################
+
+  removeUserById(id: number): void {
+    this.userState$.next(this.userState$.value.filter(r => r.id !== id));
     this.stateChanged$.next(true);
   }
 
