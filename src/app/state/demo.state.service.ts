@@ -21,7 +21,7 @@ const initialState: IDemoState = {
   providedIn: 'root'
 })
 export class DemoStateService extends StateBaseService<IDemoState>{
-  todos$: Observable<IDemo[]> = this.select(state => state.demos);
+  demos_: Observable<IDemo[]> = this.select(state => state.demos);
 
   selectedTodo$: Observable<IDemo> = this.select((state) => {
     return state.demos.find((item) => item.id === state.selectedDemoId);

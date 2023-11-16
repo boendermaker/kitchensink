@@ -24,6 +24,7 @@ export class AppComponent {
     {title: 'Gridster dashboard', path: '/dashboard'},
     {title: 'Drag and Drop Tabs', path: '/dragdroptabs'},
     {title: 'State', path: '/state'},
+    {title: 'Resize table columns', path: '/resizecolumn'},
   ];
 
   constructor() {
