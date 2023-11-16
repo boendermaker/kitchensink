@@ -2,6 +2,10 @@ import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IUser, UserRepositoryService } from './user.repository.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UserStateService } from './state.service';
+import { names } from 'blockly/core/utils/colour';
+import { deprecation } from 'blockly/core/utils';
+import { setObjectValueByPath } from '@app/shared/util/getSetObjectValueByPath';
 
 @UntilDestroy()
 @Injectable({
@@ -10,6 +14,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class UserDataService {
 
   userRepositoryService = inject(UserRepositoryService);
+  userStateService = inject(UserStateService);
 
   private stateChanged$: BehaviorSubject<Boolean> = new BehaviorSubject(false);
   stateChanged_: Observable<Boolean> = this.stateChanged$.asObservable();
@@ -24,7 +29,14 @@ export class UserDataService {
 
   //####################################################################
 
-  getUsers(amount: number) {
+  getUsersFromState(namespace:string): void {
+    this.userState$.next(this.userStateService.getState(namespace));
+    this.stateChanged$.next(true);
+  }
+
+  //####################################################################
+
+  getRandomUsers(amount: number) {
     amount = amount > 0 ? amount : 1;
 
     this.loading$.next(true);
@@ -80,8 +92,7 @@ export class UserDataService {
   //####################################################################
 
   changeUserValueById(id: number, key: string, value: any): void {
-    console.log('BLUR ', value);
-    this.userState$.value.find(f => f.id === id)[key] = value?.target?.innerText;
+    setObjectValueByPath(this.userState$.value.find(f => f.id === id), key, value?.target?.innerText)
     this.userState$.next([...this.userState$.value]);
     this.stateChanged$.next(true);
   }
@@ -91,6 +102,12 @@ export class UserDataService {
   removeUserById(id: number): void {
     this.userState$.next(this.userState$.value.filter(r => r.id !== id));
     this.stateChanged$.next(true);
+  }
+
+  //####################################################################
+
+  persistUsers(namespace: string): void {
+    this.userStateService.setState(namespace, this.userState$.value);
   }
 
   //####################################################################

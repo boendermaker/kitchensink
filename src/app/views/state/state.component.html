@@ -1,20 +1,4 @@
-<div>
-    <div class="b-row">
-        <div class="b-col-4">
-           <app-state-one></app-state-one>
-        </div>
-        <div class="b-col-4">
-            <app-state-two></app-state-two>
-        </div>
-        <div class="b-col-4">
-            <app-state-three></app-state-three>
-        </div>
-    </div>
-    <div class="b-row">
-        <div class="b-col-12 b-d-flex b-justify-content-center" style="gap: 24px;">
-            <button mat-flat-button color="primary" (click)="userDataService.getUsers(getRandomInt(1,10))">Get new users</button>
-            <button mat-flat-button color="primary" (click)="userDataService.addUser()">Add one User</button>
-            <button mat-flat-button color="primary" (click)="userDataService.removeUser()">Remove one User</button>
-        </div>
-    </div>
+<div class="b-d-flex b-flex-column" style="gap: 24px;">
+<app-state-container namespace="user1"></app-state-container>
+<app-state-container namespace="user2"></app-state-container>
 </div>

@@ -1,0 +1,28 @@
+<mat-card>
+
+    <mat-card-content>
+        <div>
+            <div class="b-row">
+                <div class="b-col-4">
+                <app-state-one></app-state-one>
+                </div>
+                <div class="b-col-4">
+                    <app-state-two></app-state-two>
+                </div>
+                <div class="b-col-4">
+                    <app-state-three></app-state-three>
+                </div>
+            </div>
+            <div class="b-row">
+                <div class="b-col-12 b-d-flex b-justify-content-center" style="gap: 24px;">
+                    <button mat-flat-button color="primary" (click)="userDataService.getRandomUsers(getRandomInt(1,10))">Get new users</button>
+                    <button mat-flat-button color="primary" (click)="userDataService.addUser()">Add one User</button>
+                    <button mat-flat-button color="primary" (click)="userDataService.removeUser()">Remove one User</button>
+                    <button mat-flat-button color="primary" (click)="userDataService.persistUsers(namespace)">Perisist Users</button>
+                    <button mat-flat-button color="primary" (click)="userDataService.getUsersFromState(namespace)">Load Users from state</button>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+
+</mat-card>
