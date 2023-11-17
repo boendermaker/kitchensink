@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ResizabletablecolumnComponent } from './resizabletablecolumn.component';
-import { ResizeDirective } from '@app/directives/resize.directive';
+import { ResizeTableColumnDirective } from '@app/directives/resizetablecolumn.directive';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
-import { ResizeComponent } from '../../directives/resize.component';
+import { ResizeTableColumnComponent } from '../../directives/resizetablecolumn.component';
 
 @NgModule({
   declarations: [
     ResizabletablecolumnComponent,
-    ResizeDirective
+    ResizeTableColumnDirective
   ],
   imports: [
     CommonModule,
     AllAngularMaterialMDCModulesModule,
-    ResizeComponent
+    ResizeTableColumnComponent
   ],
   exports: [
-    ResizabletablecolumnComponent
+    ResizeTableColumnComponent
   ]
 })
 export class ResizabletablecolumnModule { }
