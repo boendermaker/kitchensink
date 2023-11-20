@@ -4,17 +4,17 @@
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
             <ng-container matColumnDef="firstname">
-              <th mat-header-cell *matHeaderCellDef resizetablecolumn="tablecolumn1">Vorname</th>
+              <th mat-header-cell *matHeaderCellDef resizetablecolumn="tablecolumn1"><app-resizetablecolumnhandle>Vorname</app-resizetablecolumnhandle></th>
               <td mat-cell *matCellDef="let element" contenteditable="true" (blur)="userDataService.changeUserValueById(element?.id, 'first_name', $event)"> {{element?.first_name}} </td>
             </ng-container>
 
             <ng-container matColumnDef="lastname">
-              <th mat-header-cell *matHeaderCellDef resizetablecolumn="tablecolumn2"> Nachname </th>
+              <th mat-header-cell *matHeaderCellDef resizetablecolumn="tablecolumn2"><app-resizetablecolumnhandle>Nachname</app-resizetablecolumnhandle></th>
               <td mat-cell *matCellDef="let element" contenteditable="true" (blur)="userDataService.changeUserValueById(element?.id, 'last_name', $event)"> {{element?.last_name}} </td>
             </ng-container>
 
             <ng-container matColumnDef="city">
-              <th mat-header-cell *matHeaderCellDef resizetablecolumn="tablecolumn3"> Stadt </th>
+              <th mat-header-cell *matHeaderCellDef resizetablecolumn="tablecolumn3"><app-resizetablecolumnhandle>Stadt</app-resizetablecolumnhandle></th>
               <td mat-cell *matCellDef="let element" contenteditable="true" (blur)="userDataService.changeUserValueById(element?.id, 'address.city', $event)"> {{element?.address?.city}} </td>
             </ng-container>
 
@@ -37,14 +37,15 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
+
     </mat-card-content>
 </mat-card>
 
 
 <table style="width:100%;">
     <tr style="background: #F1F1F1;">
-        <th resizetablecolumn>Lorem</th>
-        <th resizetablecolumn>Ipsum</th>
+        <th resizetablecolumn><app-resizetablecolumnhandle>Lorem</app-resizetablecolumnhandle></th>
+        <th resizetablecolumn><app-resizetablecolumnhandle>Ipsum</app-resizetablecolumnhandle></th>
         <th>Dolor</th>
     </tr>
     <tr>
@@ -53,3 +54,47 @@
         <td>CCC</td>
     </tr>
 </table>
+
+
+<mat-card>
+  <mat-card-content>
+
+      <mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="firstname">
+            <mat-header-cell *matHeaderCellDef resizeflextablecolumn><app-resizeflextablecolumnhandle>Vorname</app-resizeflextablecolumnhandle></mat-header-cell>
+            <mat-cell *matCellDef="let element" contenteditable="true" (blur)="userDataService.changeUserValueById(element?.id, 'first_name', $event)"> {{element?.first_name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="lastname">
+            <mat-header-cell *matHeaderCellDef resizeflextablecolumn><app-resizeflextablecolumnhandle>Nachname</app-resizeflextablecolumnhandle></mat-header-cell>
+            <mat-cell *matCellDef="let element" contenteditable="true" (blur)="userDataService.changeUserValueById(element?.id, 'last_name', $event)"> {{element?.last_name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="city">
+            <mat-header-cell *matHeaderCellDef resizeflextablecolumn><app-resizeflextablecolumnhandle>Stadt</app-resizeflextablecolumnhandle></mat-header-cell>
+            <mat-cell *matCellDef="let element" contenteditable="true" (blur)="userDataService.changeUserValueById(element?.id, 'address.city', $event)"> {{element?.address?.city}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="country">
+            <mat-header-cell *matHeaderCellDef> Land </mat-header-cell>
+            <mat-cell *matCellDef="let element" contenteditable="true" (blur)="userDataService.changeUserValueById(element?.id, 'address.country', $event)"> {{element?.address?.country}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div>
+                <button mat-icon-button (click)="userDataService.removeUserById(element?.id)">
+                  <i class="material-icons-outlined">delete</i>
+                </button>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <mat-row *matHeaderRowDef="displayedColumns"></mat-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+  </mat-card-content>
+</mat-card>

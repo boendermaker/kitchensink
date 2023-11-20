@@ -21,15 +21,16 @@ export interface IResizableTableColumnDirectiveChangedEvent {
 
 @UntilDestroy()
 @Directive({
-  selector: '[resizetablecolumn]',
+  selector: '[resizeflextablecolumn]',
 })
-export class ResizeTableColumnDirective implements AfterViewInit {
+export class ResizeFlexTableColumnDirective implements AfterViewInit {
   @Output() resizetablecolumnchanged: EventEmitter<IResizableTableColumnDirectiveChangedEvent> = new EventEmitter();
 
   tableColumnElement: HTMLElement;
   tableColumnHandleElement: HTMLElement;
   columnWidth: number = 0;
   columnId: string = '';
+  currentPosition: number = 0;
 
   constructor(
     @Inject(DOCUMENT) private readonly documentRef: Document,
@@ -38,21 +39,23 @@ export class ResizeTableColumnDirective implements AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.columnId = this.elementRef.nativeElement.getAttribute('resizetablecolumn');
-    this.restoreColumnWidth();
+    this.columnId = this.elementRef.nativeElement.getAttribute('resizeflextablecolumn');
+    //this.restoreColumnWidth();
   }
 
   ngAfterViewInit(): void {
 
+    this.currentPosition = this.getCurrentPosition();
+
     this.tableColumnElement = this.elementRef.nativeElement;
-    this.tableColumnHandleElement = this.elementRef.nativeElement.querySelector('#resizetablecolumnhandle');
+    this.tableColumnHandleElement = this.elementRef.nativeElement.querySelector('#resizeflextablecolumnhandle');
 
     fromEvent<MouseEvent>(this.tableColumnHandleElement, 'mousedown').pipe(
       tap((e) => e.preventDefault()),
       switchMap(() => {
 
-        const { width, right } = this.tableColumnElement
-          .closest('th')!
+        const { width, right, left } = this.tableColumnElement
+          .closest('mat-header-cell')!
           .getBoundingClientRect();
 
         return fromEvent<MouseEvent>(this.documentRef, 'mousemove').pipe(
@@ -65,7 +68,7 @@ export class ResizeTableColumnDirective implements AfterViewInit {
           distinctUntilChanged(),
           takeUntil(
             fromEvent(this.documentRef, 'mouseup').pipe(
-              tap((clientX) => this.saveColumnWidth())
+              //tap((clientX) => this.saveColumnWidth())
               )
             )
         );
@@ -81,7 +84,25 @@ export class ResizeTableColumnDirective implements AfterViewInit {
   //#####################################################################
 
   setTableColumnWidth(width: number): void {
-    this.elementRef.nativeElement.style.width = width + 'px';
+    this.elementRef.nativeElement.style.flex = '0 0 ' + width + 'px';
+    console.log(this.currentPosition)
+  }
+
+  //#####################################################################
+
+  getCurrentPosition(): number {
+    const parentNode = this.elementRef.nativeElement.parentNode;
+    const childNodes = this.elementRef.nativeElement.parentNode.childNodes;
+    const currentNode = this.elementRef.nativeElement
+
+    let position: number = 0;
+
+    for(let i=0; i<childNodes.length; i++) {
+      childNodes[i] === currentNode ? position = i : null;
+    }
+
+    return position;
+
   }
 
   //#####################################################################
@@ -100,7 +121,7 @@ export class ResizeTableColumnDirective implements AfterViewInit {
     console.log('RESTORE ', this.columnId.length)
     if(this.columnId.length > 0) {
       const width = JSON.parse(localStorage.getItem(this.columnId));
-      this.elementRef.nativeElement.style.width = width + 'px';
+      this.elementRef.nativeElement.style.flexBasis = width + 'px';
     }
   }
 
