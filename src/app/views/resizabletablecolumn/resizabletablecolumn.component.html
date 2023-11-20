@@ -4,17 +4,17 @@
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
             <ng-container matColumnDef="firstname">
-              <th mat-header-cell *matHeaderCellDef resizetablecolumn (resizetablecolumnchanged)="resizeTablecolumn($event)"> Vorname </th>
+              <th mat-header-cell *matHeaderCellDef resizetablecolumn="tablecolumn1">Vorname</th>
               <td mat-cell *matCellDef="let element" contenteditable="true" (blur)="userDataService.changeUserValueById(element?.id, 'first_name', $event)"> {{element?.first_name}} </td>
             </ng-container>
 
             <ng-container matColumnDef="lastname">
-              <th mat-header-cell *matHeaderCellDef resizetablecolumn (resizetablecolumnchanged)="resizeTablecolumn($event)"> Nachname </th>
+              <th mat-header-cell *matHeaderCellDef resizetablecolumn="tablecolumn2"> Nachname </th>
               <td mat-cell *matCellDef="let element" contenteditable="true" (blur)="userDataService.changeUserValueById(element?.id, 'last_name', $event)"> {{element?.last_name}} </td>
             </ng-container>
 
             <ng-container matColumnDef="city">
-              <th mat-header-cell *matHeaderCellDef resizetablecolumn (resizetablecolumnchanged)="resizeTablecolumn($event)"> Stadt </th>
+              <th mat-header-cell *matHeaderCellDef resizetablecolumn="tablecolumn3"> Stadt </th>
               <td mat-cell *matCellDef="let element" contenteditable="true" (blur)="userDataService.changeUserValueById(element?.id, 'address.city', $event)"> {{element?.address?.city}} </td>
             </ng-container>
 
@@ -43,8 +43,8 @@
 
 <table style="width:100%;">
     <tr style="background: #F1F1F1;">
-        <th resizetablecolumn (resizetablecolumnchanged)="resizeTablecolumn($event)">Lorem</th>
-        <th resizetablecolumn (resizetablecolumnchanged)="resizeTablecolumn($event)">Ipsum</th>
+        <th resizetablecolumn>Lorem</th>
+        <th resizetablecolumn>Ipsum</th>
         <th>Dolor</th>
     </tr>
     <tr>
@@ -53,8 +53,3 @@
         <td>CCC</td>
     </tr>
 </table>
-
-<div>
-  <button mat-flat-button (click)="saveTableColumnWidth()">Save</button>
-  <button mat-flat-button (click)="loadTableColumnWidth()">Load</button>
-</div>

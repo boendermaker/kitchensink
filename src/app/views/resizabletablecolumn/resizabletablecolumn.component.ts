@@ -26,23 +26,6 @@ export class ResizabletablecolumnComponent {
     this.handleDataSource();
   }
 
-  resizeTablecolumn(e) {
-    e.el.style.width = e.resizedTo + 'px';
-  }
-
-  setTableColumnElements(e): void {
-    this.tableColumnElements.push(e);
-  }
-
-  saveTableColumnWidth(): void {
-    localStorage.setItem(`tablecolumnresize-${this.constructor.name}`, JSON.stringify(this.tableColumnElements));
-  }
-
-  loadTableColumnWidth(): void {
-    const elements = <HTMLElement>JSON.parse(localStorage.getItem(`tablecolumnresize-${this.constructor.name}`));
-    console.log(elements[0])
-  }
-
   handleDataSource(): void {
     this.userDataService.userState_.pipe(untilDestroyed(this)).subscribe({
       next: (users: IUser[]) => {

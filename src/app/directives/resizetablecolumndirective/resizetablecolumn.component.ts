@@ -1,4 +1,5 @@
-import { Component, HostBinding } from "@angular/core";
+import { Component, EventEmitter, Inject, Output } from "@angular/core";
+import { IResizableTableColumnDirectiveChangedEvent } from "./resizetablecolumn.directive";
 
 @Component({
   selector: 'th[resizetablecolumn]',
@@ -7,5 +8,7 @@ import { Component, HostBinding } from "@angular/core";
   templateUrl: './resizetablecolumn.component.html',
 })
 export class ResizeTableColumnComponent {
+
   constructor() {}
+
 }
