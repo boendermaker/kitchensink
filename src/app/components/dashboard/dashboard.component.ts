@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Renderer2, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IDashboard } from './dashboard.interface';
 import { DashboardService } from './dashboard.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -12,7 +12,7 @@ import { tap } from 'rxjs/operators';
 })
 export class DashboardComponent implements OnInit {
 
-  selectedDashboard: Partial<IDashboard> = {};
+  renderedDashboard: Partial<IDashboard> = {};
 
   constructor(
     public dashboardService: DashboardService
@@ -20,17 +20,16 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.handleSelectDashboard();
+    this.handleRenderedDashboard();
   }
 
-  handleSelectDashboard(): void {
+  handleRenderedDashboard(): void {
     this.dashboardService
-    .selectedDashboard_
+    .renderedDashboard_
     .pipe(untilDestroyed(this))
     .subscribe({
-      next: (selectedDashboard) => {
-        console.log('SELECTED DC ', selectedDashboard);
-        this.selectedDashboard = selectedDashboard;
+      next: (renderedDashboard: IDashboard) => {
+        this.renderedDashboard = renderedDashboard;
       }
     })
   }

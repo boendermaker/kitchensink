@@ -1,6 +1,7 @@
-<ng-container *ngIf="this.selectedDashboard">
-  <gridster [options]="this.selectedDashboard.config">
-    <gridster-item [item]="widget" *ngFor="let widget of this.selectedDashboard.widgets">
+<ng-container *ngIf="this.renderedDashboard">
+  <div><button mat-mini-fab (click)="dashboardService.addEmptyWidget()"><i class="material-icons-filled">add</i></button></div>
+  <gridster [options]="this.renderedDashboard.config">
+    <gridster-item [item]="widget" *ngFor="let widget of this.renderedDashboard?.widgets">
       XXX
     </gridster-item>
   </gridster>

@@ -24,7 +24,7 @@ export class DashboardTabsComponent implements OnInit{
   ngOnInit(): void {
     this.dashboardService.dashboards_.pipe(untilDestroyed(this)).subscribe({
       next: (dashboards) => {
-        console.log(dashboards)
+        //console.log(dashboards)
       }
     })
   }

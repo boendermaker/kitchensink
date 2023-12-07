@@ -1,7 +1,7 @@
 <div>
-  <mat-tab-group (selectedIndexChange)="dashboardService.selectDashboardByIndex($event)">
+  <mat-tab-group (selectedIndexChange)="dashboardService.renderDashboardByIndex($event)">
       <mat-tab
-      *ngFor="let dashbaord of dashboardService.dashboards_ | async"
-      [label]="dashbaord?.label"></mat-tab>
+      *ngFor="let dashboard of dashboardService.dashboards_ | async"
+      [label]="dashboard?.label"></mat-tab>
   </mat-tab-group>
 </div>

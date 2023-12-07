@@ -30,4 +30,6 @@ export interface IDashboard {
   label?: string;
   config: IDashboardConfig
   widgets: IDashboardWidget[];
+  toggleEditMode?(): void;
+  optionsChanged?(): void;
 }
