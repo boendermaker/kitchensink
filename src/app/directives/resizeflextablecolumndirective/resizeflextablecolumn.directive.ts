@@ -40,7 +40,7 @@ export class ResizeFlexTableColumnDirective implements AfterViewInit {
 
   ngOnInit(): void {
     this.columnId = this.elementRef.nativeElement.getAttribute('resizeflextablecolumn');
-    //this.restoreColumnWidth();
+    this.restoreColumnWidth();
   }
 
   ngAfterViewInit(): void {
@@ -68,7 +68,7 @@ export class ResizeFlexTableColumnDirective implements AfterViewInit {
           distinctUntilChanged(),
           takeUntil(
             fromEvent(this.documentRef, 'mouseup').pipe(
-              //tap((clientX) => this.saveColumnWidth())
+              tap((clientX) => this.saveColumnWidth())
               )
             )
         );
@@ -85,11 +85,17 @@ export class ResizeFlexTableColumnDirective implements AfterViewInit {
 
   setTableColumnWidth(width: number): void {
     this.elementRef.nativeElement.style.flex = '0 0 ' + width + 'px';
-    console.log(this.currentPosition)
+
+    const matRows = this.tableColumnElement.parentNode.parentNode.querySelectorAll('mat-row');
+
+    matRows.forEach((row: HTMLElement) => {
+      (<HTMLElement>row.children[this.currentPosition]).style.flex = '0 0 ' + width + 'px';
+    })
+
   }
 
   //#####################################################################
-
+  //Gets the current position of the Headercell
   getCurrentPosition(): number {
     const parentNode = this.elementRef.nativeElement.parentNode;
     const childNodes = this.elementRef.nativeElement.parentNode.childNodes;
@@ -102,7 +108,6 @@ export class ResizeFlexTableColumnDirective implements AfterViewInit {
     }
 
     return position;
-
   }
 
   //#####################################################################
@@ -118,10 +123,9 @@ export class ResizeFlexTableColumnDirective implements AfterViewInit {
   //#####################################################################
 
   restoreColumnWidth(): void {
-    console.log('RESTORE ', this.columnId.length)
     if(this.columnId.length > 0) {
       const width = JSON.parse(localStorage.getItem(this.columnId));
-      this.elementRef.nativeElement.style.flexBasis = width + 'px';
+      this.elementRef.nativeElement.style.flex = '0 0 ' + width + 'px';
     }
   }
 
