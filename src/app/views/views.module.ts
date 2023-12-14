@@ -16,6 +16,7 @@ import { GridsterdashboardModule } from './gridsterdashboard/gridsterdashboard.m
 import { DialtimepickerModule } from './dialtimepicker/dialtimepicker.module';
 import { StateModule } from './state/state.module';
 import { ResizabletablecolumnModule } from './resizabletablecolumn/resizabletablecolumn.module';
+import { ScrollloadModule } from './scrollload/scrollload.module';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ResizabletablecolumnModule } from './resizabletablecolumn/resizabletabl
     DialtimepickerModule,
     StateModule,
     ResizabletablecolumnModule,
+    ScrollloadModule,
     AllAngularMaterialMDCModulesModule
   ]
 })

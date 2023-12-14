@@ -25,6 +25,7 @@ export class AppComponent {
     {title: 'Drag and Drop Tabs', path: '/dragdroptabs'},
     {title: 'State', path: '/state'},
     {title: 'Resize table columns', path: '/resizecolumn'},
+    {title: 'Load more on Scroll', path: '/scrollload'},
   ];
 
   constructor() {

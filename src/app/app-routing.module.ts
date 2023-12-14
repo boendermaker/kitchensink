@@ -15,6 +15,7 @@ import { GridsterdashboardComponent } from '@app/views/gridsterdashboard/gridste
 import { DragdroptabsComponent } from './views/dragdroptabs/dragdroptabs.component';
 import { StateComponent } from './views/state/state.component';
 import { ResizabletablecolumnComponent } from './views/resizabletablecolumn/resizabletablecolumn.component';
+import { ScrollloadComponent } from './views/scrollload/scrollload.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'dashboard', component: GridsterdashboardComponent },
   { path: 'dragdroptabs', component: DragdroptabsComponent },
   { path: 'state', component: StateComponent },
-  { path: 'resizecolumn', component: ResizabletablecolumnComponent }
+  { path: 'resizecolumn', component: ResizabletablecolumnComponent },
+  { path: 'scrollload', component: ScrollloadComponent }
 ];
 
 @NgModule({

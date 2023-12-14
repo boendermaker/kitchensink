@@ -4,15 +4,14 @@ import {delay, filter} from 'rxjs/operators';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
 /**
- * <ng-container *ngFor="let item of longList">
- *    <app-item
- *          observeVisibility
- *          [debounceTime]="300"
- *          (currentstate)="onState($event)">
- *       {{item?.id}}
- *     </app-item>
- * </ng-container>
- */
+* <div style="height: 400px; overflow-y: scroll; border:1px solid #CC0000;">
+*    <div *ngFor="let item of longList" style="width: 300px; padding:24px; border:1px solid #666; border-radius: 5px; margin-bottom: 24px;">
+*        <div>{{item?.first_name}} {{item?.last_name}}</div>
+*        <div>{{item?.address?.zip_code}} {{item?.address?.city}}</div>
+*    </div>
+*    <div observevisibility [debounceTime]="3000" (currentstate)="onState($event)" style="width: 300px; padding: 24px;"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
+* </div>
+*/
 @UntilDestroy()
 @Directive({
   selector: '[observevisibility]',
@@ -90,7 +89,7 @@ export class ObserveVisibilityDirective implements OnDestroy, OnInit, AfterViewI
 
         if (isStillVisible) {
           this.currentstate.emit({visible: true, element: target});
-          observer.unobserve(target);
+          //observer.unobserve(target);
         }
       });
   }
