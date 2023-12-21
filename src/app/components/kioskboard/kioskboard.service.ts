@@ -16,6 +16,8 @@ export class KioskboardService {
 
   openKioskboardDialog(formControl: AbstractControl<any, any>, elementRef: ElementRef): void {
 
+    this.dialog.closeAll();
+
     this.dialog.open<any>(KioskboardComponent, {
       width: '320px',
       hasBackdrop: false,
