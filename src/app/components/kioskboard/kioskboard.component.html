@@ -1,0 +1,25 @@
+<mat-card>
+
+    <mat-card-header class="b-d-flex b-justify-content-end">
+        <div>
+            <button mat-icon-button (click)="kioskboardService.closeKioskboardDialog()">
+                <i class="material-icons-filled">close</i>
+            </button>
+        </div>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <div class="board-button-container">
+    
+            <ng-container *ngFor="let buttonValue of [].constructor(9), let i = index">
+                <button mat-raised-button class="board-button d-b-flex d-justify-content-center d-align-items-center" (click)="setValue(i+1)">{{i+1}}</button>
+            </ng-container>
+            <button mat-raised-button class="board-button d-b-flex d-justify-content-center d-align-items-center" (click)="setValue('0')">0</button>
+            <button mat-raised-button class="board-button d-b-flex d-justify-content-center d-align-items-center" (click)="setValue('.')">,</button>
+            <button mat-raised-button class="board-button d-b-flex d-justify-content-center d-align-items-center" (click)="setValue('backspace')"><i class="material-icons-filled">backspace</i></button>
+
+        </div>
+
+    </mat-card-content>
+</mat-card>

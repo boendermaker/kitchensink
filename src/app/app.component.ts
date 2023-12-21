@@ -26,6 +26,7 @@ export class AppComponent {
     {title: 'State', path: '/state'},
     {title: 'Resize table columns', path: '/resizecolumn'},
     {title: 'Load more on Scroll', path: '/scrollload'},
+    {title: 'Virtual Keyboard', path: '/virtualkeyboard'},
   ];
 
   constructor() {

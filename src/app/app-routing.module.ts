@@ -16,6 +16,7 @@ import { DragdroptabsComponent } from './views/dragdroptabs/dragdroptabs.compone
 import { StateComponent } from './views/state/state.component';
 import { ResizabletablecolumnComponent } from './views/resizabletablecolumn/resizabletablecolumn.component';
 import { ScrollloadComponent } from './views/scrollload/scrollload.component';
+import { VirtualkeyboardComponent } from './views/virtualkeyboard/virtualkeyboard.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -34,7 +35,8 @@ const routes: Routes = [
   { path: 'dragdroptabs', component: DragdroptabsComponent },
   { path: 'state', component: StateComponent },
   { path: 'resizecolumn', component: ResizabletablecolumnComponent },
-  { path: 'scrollload', component: ScrollloadComponent }
+  { path: 'scrollload', component: ScrollloadComponent },
+  { path: 'virtualkeyboard', component: VirtualkeyboardComponent }
 ];
 
 @NgModule({

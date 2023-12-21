@@ -17,6 +17,7 @@ import { DialtimepickerModule } from './dialtimepicker/dialtimepicker.module';
 import { StateModule } from './state/state.module';
 import { ResizabletablecolumnModule } from './resizabletablecolumn/resizabletablecolumn.module';
 import { ScrollloadModule } from './scrollload/scrollload.module';
+import { VirtualkeyboardModule } from './virtualkeyboard/virtualkeyboard.module';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { ScrollloadModule } from './scrollload/scrollload.module';
     StateModule,
     ResizabletablecolumnModule,
     ScrollloadModule,
+    VirtualkeyboardModule,
     AllAngularMaterialMDCModulesModule
   ]
 })
