@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GridsterdashboardComponent } from './gridsterdashboard.component';
 import { DashboardModule } from '@app/components/dashboard/dashboard.module';
 import { DashboardTabsComponent } from "../../components/dashboard/dashboard-tabs/dashboard-tabs.component";
+import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 
 
 
@@ -13,6 +14,7 @@ import { DashboardTabsComponent } from "../../components/dashboard/dashboard-tab
     imports: [
         CommonModule,
         DashboardModule,
+        AllAngularMaterialMDCModulesModule,
         DashboardTabsComponent
     ]
 })

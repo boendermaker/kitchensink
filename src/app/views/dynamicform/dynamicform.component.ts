@@ -9,11 +9,10 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class DynamicformComponent implements OnInit {
 
-  dataSource: MatTableDataSource<AbstractControl>;
-  form: UntypedFormGroup;
+  form: FormGroup;
 
   constructor() {
-    this.form = new UntypedFormGroup({})
+
   }
 
   ngOnInit(): void {

@@ -4,20 +4,18 @@
   border: 1px solid #CC0000;
 }
 
-
-[class*="mat-column-"] {
-  min-width: 320px !important;
+.mat-column-position {
+  min-width: 50px;
+  width: 80px;
 }
 
-.mat-column-position {
-  width: 80px !important;
-  min-width: 80px !important;
-  max-width: 80px !important;
+.mat-column-name {
+  min-width: 200px;
+  width: 250px;
 }
 
 .mat-column-symbol {
-  text-align: end;
-  justify-content: flex-end;
+  min-width: 50px;
 }
 
 .mat-mdc-header-cell {

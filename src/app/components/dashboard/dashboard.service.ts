@@ -16,18 +16,16 @@ export class DashboardService {
   renderedDashboard_: Observable<IDashboard> = this.renderedDashboard$.asObservable();
   renderedDashboardId: string = '';
 
-  constructor() { }
-
-  logWidgetsPos(): void {
-    const dashboard = this.getDashboardById(this.renderedDashboardId);
-    console.log(dashboard)
+  get dashboardCount(): number {
+    return this.getDashboardTotalCount();
   }
+
+  constructor() { }
 
   //##################################################################
 
   addEmptyDashboard(label: string): void {
     const emptyDashboard: IDashboard = new Dashboard(label);
-    console.log('EMPTYDASHBAORD ', emptyDashboard);
     if(emptyDashboard) {
       this.dashboards$.next([...this.dashboards$.value, emptyDashboard]);
     }
@@ -61,6 +59,12 @@ export class DashboardService {
 
   getDashboardByIndex(index: number): IDashboard {
     return this.dashboards$.value[index];
+  }
+
+  //##################################################################
+
+  getDashboardTotalCount(): number {
+    return this.dashboards$.value.length;
   }
 
   //##################################################################
@@ -104,6 +108,20 @@ export class DashboardService {
 
   createUUID(): string {
     return crypto.randomUUID();
+  }
+
+  //##################################################################
+
+  saveToLocalStorage(): void {
+    const dashboards: IDashboard[] = this.dashboards$.value;
+    localStorage.setItem('TESTER', JSON.stringify(dashboards));
+  }
+
+  //##################################################################
+
+  loadFromLocalStorage(): void {
+    const dashboards = JSON.parse(localStorage.getItem('TESTER'));
+    this.dashboards$.next(dashboards);
   }
 
   //##################################################################

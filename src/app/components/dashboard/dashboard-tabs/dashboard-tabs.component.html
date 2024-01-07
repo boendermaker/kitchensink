@@ -1,5 +1,5 @@
 <div>
-  <mat-tab-group (selectedIndexChange)="dashboardService.renderDashboardByIndex($event)">
+  <mat-tab-group (selectedIndexChange)="dashboardService.renderDashboardByIndex($event)" mat-stretch-tabs="false" mat-align-tabs="start" backgroundColor="primary">
       <mat-tab
       *ngFor="let dashboard of dashboardService.dashboards_ | async"
       [label]="dashboard?.label"></mat-tab>
