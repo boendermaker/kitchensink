@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-checkbox',
+  selector: 'app-checkboxcontrol',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './checkbox.component.html',

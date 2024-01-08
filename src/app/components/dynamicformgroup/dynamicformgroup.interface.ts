@@ -1,11 +1,21 @@
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl, Validators } from "@angular/forms";
 
 export interface IDynamicFormGroup extends Array<IDynamicFormControl> {
 }
 
 export interface IDynamicFormControl {
-  controlType: 'text'|'password'|'select'|'checkbox'|'radio';
-  controlInstance: AbstractControl<any|any>;
-  controlLabel: string;
-  controlValue: string|number|boolean|(string|number|boolean)[];
+  name: string;
+  type: 'text'|'password'|'select'|'checkbox'|'radio';
+  value: any;
+  instance?: AbstractControl<any|any>;
+  attributes?: {[key: string]: any};
+  order?: number;
+}
+
+export interface IDynamicFormControlText extends IDynamicFormControl {
+  value: string;
+}
+
+export interface IDynamicFormControlSelect extends IDynamicFormControl {
+  value: { label: string; value: any; }[];
 }

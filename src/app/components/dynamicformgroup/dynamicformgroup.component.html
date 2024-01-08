@@ -1,1 +1,14 @@
-<p>dynamicformgroup works!</p>
+<div [formGroup]="parentFormGroup">
+
+    @for(control of controls; track control) {
+        @switch(control?.type) {
+            @case('text') {
+                <app-textcontrol [control]="control?.instance"></app-textcontrol>
+            }
+            @case('select') {
+                <app-selectcontrol [control]="control?.instance"></app-selectcontrol>
+            }
+        }
+    }
+
+</div>
