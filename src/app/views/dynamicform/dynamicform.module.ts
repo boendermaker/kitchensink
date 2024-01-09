@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DynamicformComponent } from './dynamicform.component';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { TableformgroupModule } from '@app/components/tableformgroup/tableformgroup.module';
-import { DynamicformgroupComponent } from "../../components/dynamicformgroup/dynamicformgroup.component";
+import { FormgroupbuilderComponent } from "../../components/dynamicformgroup/formgroupbuilder.component";
 
 
 @NgModule({
@@ -17,7 +17,7 @@ import { DynamicformgroupComponent } from "../../components/dynamicformgroup/dyn
         ReactiveFormsModule,
         FormsModule,
         TableformgroupModule,
-        DynamicformgroupComponent
+        FormgroupbuilderComponent
     ]
 })
 export class DynamicformModule { }

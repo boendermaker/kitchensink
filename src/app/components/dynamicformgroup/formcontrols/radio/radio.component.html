@@ -1,1 +1,7 @@
-<p>radio works!</p>
+<div>
+    <mat-radio-group [formControl]="control?.instance">
+        @for(option of control?.value; track option) {
+            <mat-radio-button [value]="option?.value">{{option?.label}}</mat-radio-button>
+        }
+    </mat-radio-group>
+</div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { IDynamicFormControlSelect, IDynamicFormControlText, IDynamicFormGroup } from '@app/components/dynamicformgroup/dynamicformgroup.interface';
+import { IFormGroupBuilderControlCheckbox, IFormGroupBuilderControlRadio, IFormGroupBuilderControlSelect, IFormGroupBuilderControlText, IFormGroupBuilder, IFormGroupBuilderControl } from '@app/components/dynamicformgroup/formgroupbuilder.interface';
 
 @Component({
   selector: 'app-dynamicform',
@@ -11,16 +11,16 @@ export class DynamicformComponent implements OnInit {
 
   form: FormGroup = new FormGroup({});
 
-  personalControls: IDynamicFormGroup = [
-    <IDynamicFormControlText>{
+  personalControls: IFormGroupBuilderControl[] = [
+    {
       name: 'vorname',
       type: 'text',
       instance: new FormControl(''),
-      value: '',
+      value: 'Lorem',
       attributes: {label: 'Vorname'},
       order: 0
     },
-    <IDynamicFormControlText>{
+    {
       name: 'nachname',
       type: 'text',
       instance: new FormControl(''),
@@ -28,13 +28,37 @@ export class DynamicformComponent implements OnInit {
       attributes: {label: 'Nachname'},
       order: 1
     },
-    <IDynamicFormControlSelect>{
+    {
       name: 'testselect',
       type: 'select',
       instance: new FormControl(''),
       value: [{label: 'Test1', value: 'Selected1'}, {label: 'Test2', value: 'Selected2'}],
-      attributes: {label: 'Auswahltest'},
+      attributes: {label: 'Auswahltest', selected: null},
       order: 2
+    },
+    {
+      name: 'testcheckbox',
+      type: 'checkbox',
+      instance: new FormControl(''),
+      value: 0,
+      attributes: {label: 'Auswahltest', selected: true},
+      order: 3
+    },
+    {
+      name: 'testcheckbox2',
+      type: 'checkbox',
+      instance: new FormControl(''),
+      value: 'Lorem Ipsum2',
+      attributes: {label: 'Auswahltest2', selected: false},
+      order: 4
+    },
+    {
+      name: 'testradio',
+      type: 'radio',
+      instance: new FormControl(''),
+      value: [{label: 'Radio1', value: 'RadioSelected1'}, {label: 'Radio2', value: 'RadioSelected2'}],
+      attributes: {label: 'Auswahltest', selected: 'RadioSelected2'},
+      order: 5
     }
   ];
 

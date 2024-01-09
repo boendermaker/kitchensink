@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AbstractControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
+import { IFormGroupBuilderControlSelect } from '../../formgroupbuilder.interface';
 
 @Component({
   selector: 'app-selectcontrol',
@@ -12,7 +13,7 @@ import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmater
 })
 export class SelectComponent {
 
-  @Input() control: AbstractControl<any|any>;
+  @Input() control: IFormGroupBuilderControlSelect;
 
   constructor() {
 

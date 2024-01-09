@@ -1,7 +1,8 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
-import { AbstractControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IFormGroupBuilderControlText } from '../../formgroupbuilder.interface';
 
 @Component({
   selector: 'app-textcontrol',
@@ -12,7 +13,7 @@ import { AbstractControl, FormsModule, ReactiveFormsModule } from '@angular/form
 })
 export class TextComponent {
 
-  @Input() control: AbstractControl<any|any>;
+  @Input() control: IFormGroupBuilderControlText;
 
   constructor() {
 

@@ -1,8 +1,8 @@
 <div>
     <mat-form-field>
     <mat-label>Favorite food</mat-label>
-    <mat-select [formControl]="control">
-      @for (option of control.value; track option) {
+    <mat-select [formControl]="control?.instance">
+      @for (option of control?.value; track option) {
         <mat-option [value]="option?.value">{{option?.label}}</mat-option>
       }
     </mat-select>
