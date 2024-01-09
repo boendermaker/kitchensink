@@ -12,7 +12,7 @@ export class DynamicformComponent implements OnInit {
   form: FormGroup = new FormGroup({});
 
   personalControls: IFormGroupBuilderControl[] = [
-    {
+    <IFormGroupBuilderControlText>{
       name: 'vorname',
       type: 'text',
       instance: new FormControl(''),
@@ -20,7 +20,7 @@ export class DynamicformComponent implements OnInit {
       attributes: {label: 'Vorname'},
       order: 0
     },
-    {
+    <IFormGroupBuilderControlText>{
       name: 'nachname',
       type: 'text',
       instance: new FormControl(''),
@@ -28,7 +28,7 @@ export class DynamicformComponent implements OnInit {
       attributes: {label: 'Nachname'},
       order: 1
     },
-    {
+    <IFormGroupBuilderControlSelect>{
       name: 'testselect',
       type: 'select',
       instance: new FormControl(''),
@@ -36,7 +36,7 @@ export class DynamicformComponent implements OnInit {
       attributes: {label: 'Auswahltest', selected: null},
       order: 2
     },
-    {
+    <IFormGroupBuilderControlCheckbox>{
       name: 'testcheckbox',
       type: 'checkbox',
       instance: new FormControl(''),
@@ -44,7 +44,7 @@ export class DynamicformComponent implements OnInit {
       attributes: {label: 'Auswahltest', selected: true},
       order: 3
     },
-    {
+    <IFormGroupBuilderControlCheckbox>{
       name: 'testcheckbox2',
       type: 'checkbox',
       instance: new FormControl(''),
@@ -52,7 +52,7 @@ export class DynamicformComponent implements OnInit {
       attributes: {label: 'Auswahltest2', selected: false},
       order: 4
     },
-    {
+    <IFormGroupBuilderControlRadio>{
       name: 'testradio',
       type: 'radio',
       instance: new FormControl(''),
