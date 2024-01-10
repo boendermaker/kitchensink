@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AbstractControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
-import { IFormGroupBuilderControlSelect } from '../../formgroupbuilder.interface';
+import { ControlSelectModel } from '../../model/control.select.model.class';
 
 @Component({
   selector: 'app-selectcontrol',
@@ -13,10 +13,17 @@ import { IFormGroupBuilderControlSelect } from '../../formgroupbuilder.interface
 })
 export class SelectComponent {
 
-  @Input() control: IFormGroupBuilderControlSelect;
+  @Input() control: ControlSelectModel;
 
   constructor() {
+  }
 
+  ngOnInit(): void {
+    this.init();
+  }
+
+  init(): void {
+    this.control.attributes.selected ? this.control.instance.patchValue(this.control.attributes.selected) : null;
   }
 
 }

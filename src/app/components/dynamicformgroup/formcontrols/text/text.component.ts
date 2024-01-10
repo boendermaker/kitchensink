@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IFormGroupBuilderControlText } from '../../formgroupbuilder.interface';
+import { ControlTextModel } from '../../model/control.text.model.class';
 
 @Component({
   selector: 'app-textcontrol',
@@ -11,12 +11,19 @@ import { IFormGroupBuilderControlText } from '../../formgroupbuilder.interface';
   templateUrl: './text.component.html',
   styleUrls: ['./text.component.scss']
 })
-export class TextComponent {
+export class TextComponent implements OnInit {
 
-  @Input() control: IFormGroupBuilderControlText;
+  @Input() control: ControlTextModel;
 
   constructor() {
+  }
 
+  ngOnInit(): void {
+    this.init();
+  }
+
+  init(): void {
+    this.control.options.value ?  this.control.instance.patchValue(this.control.options.value) : null;
   }
 
 }

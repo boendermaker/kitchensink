@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IFormGroupBuilderControlRadio } from '../../formgroupbuilder.interface';
+import { ControlRadioModel } from '../../model/control.radio.model.class';
 
 @Component({
   selector: 'app-radiocontrol',
@@ -13,7 +13,7 @@ import { IFormGroupBuilderControlRadio } from '../../formgroupbuilder.interface'
 })
 export class RadioComponent {
 
-  @Input() control: IFormGroupBuilderControlRadio;
+  @Input() control: ControlRadioModel;
 
   constructor() {
     
