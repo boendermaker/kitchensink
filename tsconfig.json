@@ -12,26 +12,32 @@
     "strict": false,
     "noImplicitOverride": false,
     "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
-    "declaration": false,
+    "declaration": true,
+    "declarationMap": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2020",
-    "module": "es2020",
+    "inlineSources": true,
+    "emitDecoratorMetadata": true,
+    "target": "ES2022",
+    "module": "ES2022",
     "lib": [
-      "es2020",
+      "es2022",
       "dom"
     ],
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
+    "noPropertyAccessFromIndexSignature": false,
     "strictInjectionParameters": false,
     "strictInputAccessModifiers": false,
-    "strictTemplates": false
+    "strictTemplates": false,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true
   }
 }

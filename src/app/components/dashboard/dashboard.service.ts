@@ -3,7 +3,7 @@ import { IDashboard, IDashboardConfig, IDashboardWidget } from './dashboard.inte
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Dashboard } from './dashboard.class';
 import { Widget } from './widget.class';
-import { GridsterItem } from 'angular-gridster2';
+import { GridsterItem } from '@app/components/gridster2/gridsterItem.interface';
 
 @Injectable()
 export class DashboardService {

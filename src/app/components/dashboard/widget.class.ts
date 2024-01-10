@@ -1,4 +1,5 @@
-import { GridsterConfig, GridsterItem } from "angular-gridster2";
+import { GridsterItem } from "@app/components/gridster2/gridsterItem.interface";
+import { GridsterConfig } from "@app/components/gridster2/gridsterConfig.interface";
 import { IDashboard, IDashboardWidget } from "./dashboard.interface";
 
 export class Widget<T1,T2> implements IDashboardWidget {

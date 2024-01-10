@@ -1,15 +1,5 @@
-import {
-  CompactType,
-  DisplayGrid,
-  Draggable,
-  GridsterComponent,
-  GridsterConfig,
-  GridsterItem,
-  GridsterItemComponent,
-  GridType,
-  PushDirections,
-  Resizable
-} from 'angular-gridster2';
+import { GridsterConfig, Resizable, Draggable, PushDirections } from '../gridster2/gridsterConfig.interface';
+import { GridsterItem } from '../gridster2/gridsterItem.interface'
 
 export interface IDashboardConfig extends GridsterConfig {
   draggable?: Draggable;

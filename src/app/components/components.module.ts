@@ -5,6 +5,8 @@ import { DrawermodaldialogModule } from '@app/components/drawermodaldialog/drawe
 import { CodeviewerModule } from './codeviewer/codeviewer.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { TableformgroupModule } from './tableformgroup/tableformgroup.module';
+import { GridsterModule } from '@app/components/gridster2/gridster.module'
+
 
 @NgModule({
   declarations: [
@@ -13,13 +15,15 @@ import { TableformgroupModule } from './tableformgroup/tableformgroup.module';
     CommonModule,
     AllAngularMaterialMDCModulesModule,
     DrawermodaldialogModule,
-    CodeviewerModule
+    CodeviewerModule,
+    GridsterModule
   ],
   exports: [
     DrawermodaldialogModule,
     CodeviewerModule,
     DashboardModule,
-    TableformgroupModule
+    TableformgroupModule,
+    GridsterModule
   ]
 })
 export class ComponentsModule { }

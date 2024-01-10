@@ -1,4 +1,4 @@
-import { CompactType, DisplayGrid, GridType } from "angular-gridster2";
+import { CompactType, DisplayGrid, GridType } from "@app/components/gridster2/gridsterConfig.interface";
 import { IDashboard, IDashboardConfig, IDashboardWidget } from "./dashboard.interface";
 
 export class Dashboard implements IDashboard {

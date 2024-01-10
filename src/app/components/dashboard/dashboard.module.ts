@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
-import { GridsterModule } from 'angular-gridster2';
+import { GridsterModule } from '@app/components/gridster2/gridster.module';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -11,7 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DashboardComponent
   ],
   exports:[
-    DashboardComponent
+    DashboardComponent,
+    GridsterModule,
   ],
   imports: [
     CommonModule,
