@@ -56,8 +56,8 @@ export class RecursiveComponent {
     item?.level === 1 ? this.setAllCollapsed(this.treeData, 0) : null;
     this.selectedItem = item;
     item['collapsed'] = !item['collapsed'];
-    console.log(item)
-    console.log(this.selectedItem, index, (<HTMLElement>e.target.nextSibling))
+    console.log(item);
+    console.log(this.selectedItem, index, (<HTMLElement>e.target.nextSibling));
   }
 
   //###################################################

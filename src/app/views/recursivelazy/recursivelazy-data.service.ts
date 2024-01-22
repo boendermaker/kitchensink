@@ -12,7 +12,7 @@ export class RecursiveLazyDataService {
   nodeData$: BehaviorSubject<INodeData> = new BehaviorSubject(null);
   treeData$: BehaviorSubject<INodeData> = new BehaviorSubject(null);
 
-  nodeData: INodeData[] = []
+  nodeData: INodeData[] = [];
   treeData: ITreeData[] = [];
   selectedItem: ITreeData;
   collapseNodes: boolean = true;
@@ -28,7 +28,7 @@ export class RecursiveLazyDataService {
         {id: 'cxdfe', parentid: 'r2rew', type: 'item', label: 'ItemC1' },
         {id: 'wxyas', parentid: 'r2rew', type: 'item', label: 'ItemC2' },
       {id: 'jfgh6', parentid: 'sf43a', type: 'item', label: 'ItemB2' }
-  ]
+  ];
 
   constructor() {
   }
