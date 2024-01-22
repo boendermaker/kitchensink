@@ -19,7 +19,7 @@ export class RecursiveLazyComponent implements OnInit {
   //###################################################
 
   ngOnInit(): void {
-    this.recursiveLazyDataService.renderNavigation();
+    this.recursiveLazyDataService.render();
   }
 
   //###################################################

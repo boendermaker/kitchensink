@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ITreeData, INodeData } from './interface';
-import { BehaviorSubject, Subject, skipWhile } from 'rxjs';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { BehaviorSubject } from 'rxjs';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Injectable({
@@ -192,7 +192,7 @@ export class RecursiveLazyDataService {
 
 //###########################################################################
 
-  async renderNavigation(): Promise<void> {
+  async render(): Promise<void> {
     //create rootnodes
     this.nodeData = [];
     this.treeData = [];

@@ -18,6 +18,7 @@
                 {{item?.level}}
                 {{recursiveLazyDataService.selectedItem === item ? '->'+item?.label : item?.label}}
                 {{item?.children?.length > 0 ? item?.collapsed ? '▲':'▼' : ''}}
+                <div *ngIf="item?.loading"><mat-spinner style="width: 24px; height: 24px;"></mat-spinner></div>
               </div>
 
               <ul *ngIf="item?.children?.length > 0 && !!item?.collapsed">
