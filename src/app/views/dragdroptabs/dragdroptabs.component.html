@@ -1,28 +1,61 @@
 <div>
 
-    <mat-tab-group
-    backgroundColor="primary"
-    color="primary"
-    mat-stretch-tabs="false"
-    mat-align-tabs="false">
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" #tabGroup animationDuration="1">
 
-        <mat-tab *ngFor="let tab of tabs; let i = index" [label]="tab?.Name?.Value" class="b-d-flex b-flex-nowrap">
-            
-            <ng-template matTabLabel>
-                <div [id]="'list-'+i" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropTab($event)" [cdkDropListConnectedTo]="getTabConnections(i)" class="b-d-flex b-flex-wrap">
-                    
-                    <div cdkDrag class="b-d-flex b-flex-row b-align-items-center">
-                        <div class="example-custom-placeholder" *cdkDragPlaceholder>⬇</div>
-                        <i class="material-icons-outlined" cdkDragHandle>drag_indicator</i>
-                        <div class="b-d-flex b-flex-row b-align-items-center"><span style="white-space: nowrap;">{{ tab?.Name?.Value }}</span></div>
-                    </div>
+    <mat-tab *ngFor="let tab of tabs; let index = index; trackBy: trackByIndex">
 
-                </div>
-            </ng-template>
+      <ng-template mat-tab-label>
 
-            <ng-template matTabContent><div style="padding: 24px;">{{ tab?.Name?.Value }}</div></ng-template>
+        <div class="child-menu-drop-list drag-list"
+        [id]="CHILD_ID_NAME + index"
+        (cdkDropListDropped)="onDropTab($event)"
+        [cdkDropListConnectedTo]="(childMenuIds$ | async)!"
+        cdkDropListOrientation="horizontal"
+        cdkDropList>
 
-        </mat-tab>
+          <div (cdkDragEntered)="onDragEntered($event)"
+          (cdkDragExited)="onDragExited($event)"
+          class="b-d-flex align-items-center"
+          cdkDrag>
+
+            <div *cdkDragPlaceholder class="drag-custom-placeholder"></div>
+
+            <div class="drag-wrapper b-d-flex w-100">
+
+              <div class="b-d-flex align-items-center">
+                <i cdkDragHandle class="material-icons-filled dragable">drag_indicator</i>
+                <div style="padding: 0 20px 0 10px; text-wrap: nowrap;">{{ tab.Name.Value }}</div>
+              </div>
+
+              <button (click)="onRemoveMenu($event, index)"
+                      [disabled]="tabs.length === 1"
+                      mat-icon-button>
+                <i class="material-icons-filled">close</i>
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </ng-template>
+
+      <div class="menu-content">
+        Menu content {{ menu}}
+      </div>
+
+    </mat-tab>
+
+    <mat-tab disabled>
+      <ng-template mat-tab-label>
+        <button mat-icon-button
+                class="add-button"
+                (click)="onAddChildControl($event)">
+          <i class="material-icons-filled">add</i>
+        </button>
+      </ng-template>
+    </mat-tab>
 
     </mat-tab-group>
 
