@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ITreeData, INodeData } from './interface';
-import { BehaviorSubject, Subject, skipWhile } from 'rxjs';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { BehaviorSubject } from 'rxjs';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Injectable({
@@ -12,7 +12,7 @@ export class RecursiveLazyDataService {
   nodeData$: BehaviorSubject<INodeData> = new BehaviorSubject(null);
   treeData$: BehaviorSubject<INodeData> = new BehaviorSubject(null);
 
-  nodeData: INodeData[] = []
+  nodeData: INodeData[] = [];
   treeData: ITreeData[] = [];
   selectedItem: ITreeData;
   collapseNodes: boolean = true;
@@ -28,7 +28,7 @@ export class RecursiveLazyDataService {
         {id: 'cxdfe', parentid: 'r2rew', type: 'item', label: 'ItemC1' },
         {id: 'wxyas', parentid: 'r2rew', type: 'item', label: 'ItemC2' },
       {id: 'jfgh6', parentid: 'sf43a', type: 'item', label: 'ItemB2' }
-  ]
+  ];
 
   constructor() {
   }
@@ -192,7 +192,7 @@ export class RecursiveLazyDataService {
 
 //###########################################################################
 
-  async renderNavigation(): Promise<void> {
+  async render(): Promise<void> {
     //create rootnodes
     this.nodeData = [];
     this.treeData = [];
