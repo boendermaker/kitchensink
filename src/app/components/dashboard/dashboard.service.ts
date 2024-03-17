@@ -120,8 +120,13 @@ export class DashboardService {
   //##################################################################
 
   loadFromLocalStorage(): void {
-    const dashboards = JSON.parse(localStorage.getItem('TESTER'));
-    this.dashboards$.next(dashboards);
+    const savedDashboards = JSON.parse(localStorage.getItem('TESTER'));
+    const tempDashboards: IDashboard[] = [];
+
+    savedDashboards.forEach((savedDashboard) => {
+      tempDashboards.push(new Dashboard('', savedDashboard))
+    })
+    this.dashboards$.next(tempDashboards);
   }
 
   //##################################################################

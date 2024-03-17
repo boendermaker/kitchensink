@@ -65,15 +65,17 @@ export class Dashboard implements IDashboard {
     scrollToNewItems: false
   };
 
-  constructor(label: string) {
+  constructor(label: string, dashBoardState?: IDashboard) {
     this.id = this.createUUID();
     this.label = label;
     this.config = this.defaultConfig;
     this.widgets = [];
+    if(dashBoardState) {
+      this.setState(dashBoardState);
+    }
   }
 
   toggleEditMode(): void {
-
     const override: Partial<IDashboardConfig> = {
       resizable: {
         enabled: !this.config.resizable.enabled
@@ -82,15 +84,20 @@ export class Dashboard implements IDashboard {
         enabled: !this.config.draggable.enabled
       }
     }
-
     this.config = {...this.config, ...override};
-
   }
 
   optionsChanged(): void {
     if (this.config.api && this.config.api.optionsChanged) {
       this.config.api.optionsChanged();
     }
+  }
+
+  private setState(dashBoardState: IDashboard): void {
+    this.widgets = dashBoardState.widgets;
+    this.config = dashBoardState.config;
+    this.id = dashBoardState.id;
+    this.label = dashBoardState.label;
   }
 
   private createUUID?(): string {

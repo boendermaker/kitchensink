@@ -1,0 +1,76 @@
+<h1>Composition Pattern</h1>
+<div style="margin-bottom: 48px;">
+  <p>
+    Composition Pattern within Angular
+  </p>
+</div>
+
+<div class="b-row">
+
+  <div class="b-col-md-6">
+
+    <mat-card style="margin-bottom: 24px;">
+      <mat-card-content>
+        {{privatesValue}}
+        {{demoPropA}}
+        {{demoPropB}}
+        <button mat-flat-button (click)="compositionClassA.countUp()">{{demoPropC}}</button>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+  <div class="b-col-md-6">
+        <h4>Composition Pattern following the pattern below</h4>
+
+        <p>
+
+          The Cat and Dog classes can implement both Walkable and Swimmable, and the Fish class can implement Swimmable. If we wanted to add a bird, we could simply add a Flyable class, and the bird could implement Walkable, Swimmable and Flyable.
+
+          The application is now loosely coupled, as each class stands on its own and is not dependent on another class. Let’s look at a full example.
+
+        </p>
+
+        <app-codeviewer height="500">
+<pre>
+             {{'class Animal {
+
+                eat() {
+                  document.write("Eating...&lt;br&gt;");
+                }
+              }
+
+              class Walkable {
+
+                walk() {
+                  document.write("Walking...&lt;br&gt;");
+                }
+              }
+
+              class Swimmable {
+
+                swim() {
+                  document.write("Swimming...&lt;br&gt;");
+                }
+              }
+
+              class Dog {
+
+                constructor() {
+                  this.animal = new Animal();
+                  this.walkable = new Walkable();
+                  this.swimmable = new Swimmable();
+                }
+              }
+
+              class Fish {
+
+                constructor() {
+                  this.animal = new Animal();
+                  this.swimmable = new Swimmable();
+                }
+              }'}}
+          </pre>
+        </app-codeviewer>
+  </div>
+
+</div>

@@ -18,7 +18,7 @@ import { StateModule } from './state/state.module';
 import { ResizabletablecolumnModule } from './resizabletablecolumn/resizabletablecolumn.module';
 import { ScrollloadModule } from './scrollload/scrollload.module';
 import { VirtualkeyboardModule } from './virtualkeyboard/virtualkeyboard.module';
-
+import { CompositionModule } from './composition/composition.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -45,6 +45,7 @@ import { VirtualkeyboardModule } from './virtualkeyboard/virtualkeyboard.module'
     ResizabletablecolumnModule,
     ScrollloadModule,
     VirtualkeyboardModule,
+    CompositionModule,
     AllAngularMaterialMDCModulesModule
   ]
 })

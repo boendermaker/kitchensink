@@ -27,6 +27,7 @@ export class AppComponent {
     {title: 'Resize table columns', path: '/resizecolumn'},
     {title: 'Load more on Scroll', path: '/scrollload'},
     {title: 'Virtual Keyboard', path: '/virtualkeyboard'},
+    {title: 'Component Composition', path: '/composition'},
   ];
 
   constructor() {

@@ -13,9 +13,9 @@ export class CodeviewerComponent implements OnInit {
   _code: string = '';
 
   @Input() height: number = 500;
-  @Input() set code(value) {
+  /*@Input() set code(value) {
     this._code = value;
-  };
+  };*/
 
   constructor() {
   }
@@ -24,5 +24,5 @@ export class CodeviewerComponent implements OnInit {
     console.log();
   }
 
-  
+
 }
