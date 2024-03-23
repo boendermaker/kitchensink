@@ -10,8 +10,8 @@ export class Widget<T1,T2> implements IDashboardWidget {
   defaultComponent: T1;
   settingsComponent: T2;
 
-  constructor(config?: GridsterItem) {
-    this.id = this.createUUID();
+  constructor(config?: GridsterItem, id?: string,) {
+    id ? this.id = id : this.id = this.createUUID();
     this.label = '';
     this.config = config;
   }

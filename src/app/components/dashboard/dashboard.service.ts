@@ -25,7 +25,7 @@ export class DashboardService {
   //##################################################################
 
   addEmptyDashboard(label: string): void {
-    const emptyDashboard: IDashboard = new Dashboard(label);
+    const emptyDashboard: IDashboard = new Dashboard(null, label);
     if(emptyDashboard) {
       this.dashboards$.next([...this.dashboards$.value, emptyDashboard]);
     }
@@ -52,13 +52,17 @@ export class DashboardService {
   //##################################################################
 
   getDashboardById(id: string): IDashboard {
-    return this.dashboards$.value.find(f => f.id === id);
+    if(id) {
+      return this.dashboards$.value.find(f => f.id === id);
+    }
   }
 
   //##################################################################
 
   getDashboardByIndex(index: number): IDashboard {
-    return this.dashboards$.value[index];
+    if(index) {
+      return this.dashboards$.value[index];
+    }
   }
 
   //##################################################################
@@ -112,6 +116,26 @@ export class DashboardService {
 
   //##################################################################
 
+  getDashboardStateAsJSON() {
+    const dashboardState: IDashboard[] = this.dashboards$.value;
+    return JSON.stringify(dashboardState);
+  }
+
+  //##################################################################
+
+  setDashboardStateFromJSON(dashboardState: IDashboard[]) {
+    if(dashboardState.length > 0) {
+      const tempDashboards: IDashboard[] = [];
+
+      dashboardState.forEach((dashboardStateItem) => {
+        tempDashboards.push(new Dashboard(dashboardStateItem))
+      })
+      this.dashboards$.next(tempDashboards);
+    }
+  }
+
+  //##################################################################
+
   saveToLocalStorage(): void {
     const dashboards: IDashboard[] = this.dashboards$.value;
     localStorage.setItem('TESTER', JSON.stringify(dashboards));
@@ -124,7 +148,7 @@ export class DashboardService {
     const tempDashboards: IDashboard[] = [];
 
     savedDashboards.forEach((savedDashboard) => {
-      tempDashboards.push(new Dashboard('', savedDashboard))
+      tempDashboards.push(new Dashboard(savedDashboard))
     })
     this.dashboards$.next(tempDashboards);
   }
