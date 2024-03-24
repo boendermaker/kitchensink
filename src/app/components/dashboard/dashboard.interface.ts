@@ -7,12 +7,26 @@ export interface IDashboardConfig extends GridsterConfig {
   pushDirections?: PushDirections;
 }
 
+export interface IDashboardWidgetConfig extends GridsterItem {
+
+}
+
+export interface IDashboardWidgetComponent {
+  label: string;
+  displayComponent: any;
+  settingsComponent: any;
+}
+
+export interface IDashboardWidgetComponentConfig {
+  [p: string]: any;
+}
+
 export interface IDashboardWidget {
-  id: string;
+  id?: string;
   label?: string;
-  defaultComponent?: any;
-  settingsComponent?: any;
-  config: GridsterItem;
+  widgetConfig?: IDashboardWidgetConfig;
+  widgetComponentKey?: string;
+  widgetComponentConfig?: IDashboardWidgetComponentConfig;
 }
 
 export interface IDashboard {

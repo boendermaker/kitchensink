@@ -1,7 +1,6 @@
-import { Component, DestroyRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IDashboard } from './dashboard.interface';
 import { DashboardService } from './dashboard.service';
-import { takeUntil, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -29,7 +28,6 @@ export class DashboardComponent implements OnInit {
     .pipe(untilDestroyed(this))
     .subscribe({
       next: (renderedDashboard: IDashboard) => {
-        console.log('RENDEREDDASHBOARD ', renderedDashboard);
         this.renderedDashboard = renderedDashboard;
       }
     })

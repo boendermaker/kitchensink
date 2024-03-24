@@ -1,0 +1,32 @@
+.widget-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.widget-container-header {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #CCC;
+}
+
+.widhet-container-header-headline {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.widget-container-header-actions {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.widget-container-content {
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  overflow-y: scroll;
+}

@@ -1,19 +1,37 @@
-import { GridsterItem } from "@app/components/gridster2/gridsterItem.interface";
-import { GridsterConfig } from "@app/components/gridster2/gridsterConfig.interface";
-import { IDashboard, IDashboardWidget } from "./dashboard.interface";
+import { IDashboardWidget, IDashboardWidgetComponentConfig, IDashboardWidgetConfig, defaultDashboardConfig, defaultWidgetConfig } from "./dashboard.interface";
 
-export class Widget<T1,T2> implements IDashboardWidget {
+export class Widget implements IDashboardWidget {
 
   id: string;
-  label: string;
-  config: GridsterItem;
-  defaultComponent: T1;
-  settingsComponent: T2;
+  label?: string;
+  widgetConfig?: IDashboardWidgetConfig;
+  widgetComponentKey?: string;
+  widgetComponentConfig?: IDashboardWidgetComponentConfig;
 
-  constructor(config?: GridsterItem, id?: string,) {
-    id ? this.id = id : this.id = this.createUUID();
-    this.label = '';
-    this.config = config;
+  constructor(widgetState: IDashboardWidget) {
+    if(widgetState) {
+      this.setState(widgetState);
+    }
+  }
+
+  setComponentConfig(widgetComponentConfig: IDashboardWidgetComponentConfig) {
+    this.widgetComponentConfig = widgetComponentConfig;
+  }
+
+  getComponentConfig(): IDashboardWidgetComponentConfig {
+    return this.widgetComponentConfig;
+  }
+
+  getId(): string {
+    return this.id;
+  }
+
+  private setState(widgetState: IDashboardWidget) {
+    this.id = widgetState.id ? widgetState.id : this.createUUID();
+    this.label = widgetState.label ? widgetState.label : '---';
+    this.widgetConfig = widgetState.widgetConfig ? widgetState.widgetConfig : defaultWidgetConfig;
+    this.widgetComponentKey = widgetState.widgetComponentKey;
+    this.widgetComponentConfig = widgetState.widgetComponentConfig;
   }
 
   private createUUID(): string {

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IDashboard, IDashboardConfig, IDashboardWidget } from './dashboard.interface';
+import { IDashboard, IDashboardConfig, IDashboardWidget, IDashboardWidgetComponent, IDashboardWidgetConfig, defaultWidgetConfig } from './dashboard.interface';
+import { dashboardWidgets } from './widgets';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Dashboard } from './dashboard.class';
 import { Widget } from './widget.class';
-import { GridsterItem } from '@app/components/gridster2/gridsterItem.interface';
 
 @Injectable()
 export class DashboardService {
@@ -33,12 +33,35 @@ export class DashboardService {
 
   //##################################################################
 
-  addEmptyWidget(): void {
+   addWidget(widgetKey: string) {
     const dashboard = this.getDashboardById(this.renderedDashboardId);
-    const config: GridsterItem = dashboard.config.api.getFirstPossiblePosition({x: 0, y: 0, rows: 1, cols: 1});
-    const emptyWidget: IDashboardWidget = new Widget(config);
-    dashboard?.widgets.push(emptyWidget);
+    const config: IDashboardWidgetConfig = dashboard.config.api.getFirstPossiblePosition(defaultWidgetConfig);
+    const newWidgetState: IDashboardWidget = {
+      id: null,
+      label: '---',
+      widgetConfig: defaultWidgetConfig,
+      widgetComponentKey: widgetKey,
+      widgetComponentConfig: {}
+    }
+
+    const newWidget: IDashboardWidget = new Widget(newWidgetState);
+
+    dashboard?.widgets.push(newWidget);
     this.renderDashboardById(this.renderedDashboardId);
+  }
+
+  //##################################################################
+
+  getAvailableWidgetKeys(): string[] {
+    return Object.keys(dashboardWidgets);
+  }
+
+  //##################################################################
+
+  getAvailableWidgetByKey(widgetKey: string): IDashboardWidgetComponent {
+    if(dashboardWidgets.hasOwnProperty(widgetKey)) {
+      return dashboardWidgets[widgetKey];
+    }
   }
 
   //##################################################################
@@ -116,14 +139,14 @@ export class DashboardService {
 
   //##################################################################
 
-  getDashboardsAsJSON() {
+  getDashboardStateAsJSON() {
     const dashboards: IDashboard[] = this.dashboards$.value;
     return JSON.stringify(dashboards);
   }
 
   //##################################################################
 
-  setDashboardsFromJSON(dashboards: IDashboard[]) {
+  setDashboardStateFromJSON(dashboards: IDashboard[]) {
     if(dashboards.length > 0) {
       const tempDashboards: IDashboard[] = [];
 
