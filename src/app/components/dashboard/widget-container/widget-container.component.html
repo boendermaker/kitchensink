@@ -5,5 +5,7 @@
       <button mat-icon-button><i class="material-icons-filled">more_vert</i></button>
     </div>
   </div>
-  <div class="widget-container-content"></div>
+  <div class="widget-container-content">
+    <ng-template #portalRef [cdkPortalOutlet]="componentPortal"></ng-template>
+  </div>
 </div>
