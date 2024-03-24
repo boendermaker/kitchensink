@@ -80,3 +80,10 @@ export const defaultDashboardConfig: IDashboardConfig = {
   disableWarnings: false,
   scrollToNewItems: false
 };
+
+export const defaultWidgetConfig = {
+  x: 0,
+  y: 0,
+  rows: 1,
+  cols: 1
+}

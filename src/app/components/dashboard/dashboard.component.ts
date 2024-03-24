@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
     .pipe(untilDestroyed(this))
     .subscribe({
       next: (renderedDashboard: IDashboard) => {
+        console.log('RENDEREDDASHBOARD ', renderedDashboard);
         this.renderedDashboard = renderedDashboard;
       }
     })
