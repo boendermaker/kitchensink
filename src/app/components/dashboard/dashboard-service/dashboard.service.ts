@@ -49,14 +49,14 @@ export class DashboardService {
 
   //##################################################################
 
-  getDashboardStateAsJSON() {
+  getState() {
     const dashboards: IDashboard[] = this.dashboards$.value;
-    return JSON.stringify(dashboards);
+    return dashboards;
   }
 
   //##################################################################
 
-  setDashboardStateFromJSON(dashboards: IDashboard[]) {
+  setState(dashboards: IDashboard[]) {
     if(dashboards.length > 0) {
       const tempDashboards: IDashboard[] = [];
 
