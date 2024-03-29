@@ -33,12 +33,15 @@ export class WidgetLinechartComponent {
 
 
   ngAfterViewInit() {
+
+    console.log('COM ', this.widget);
+
     // Chart code goes in here
     this.browserOnly(() => {
 
 
 
-let root = am5.Root.new("chartdiv");
+let root = am5.Root.new(this.widget.id);
 
 
 // Set themes

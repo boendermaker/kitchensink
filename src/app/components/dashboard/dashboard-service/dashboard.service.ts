@@ -4,9 +4,8 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Dashboard } from '../dashboard.class';
 import { DashboardServiceWidgetUtils } from './dashboard.service.widgetutils.class';
 import { DashboardServiceDashboardUtils } from './dashboard.service.dashboardutils.class';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-@UntilDestroy()
+
 @Injectable()
 export class DashboardService {
 
@@ -86,6 +85,7 @@ export class DashboardService {
       tempDashboards.push(new Dashboard(savedDashboard))
     })
     this.dashboards$.next(tempDashboards);
+    this.renderDashboardByIndex(0);
     this.stateChanged();
   }
 

@@ -6,6 +6,6 @@
     </div>
   </div>
   <div class="widget-container-content">
-    <ng-template #portalRef [cdkPortalOutlet]="componentPortal"></ng-template>
+    <ng-template #portalRef (attached)="onComponentRendering($event)" [cdkPortalOutlet]="componentPortal"></ng-template>
   </div>
 </div>
