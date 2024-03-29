@@ -1,14 +1,14 @@
 <div class="b-d-flex">
 
-  <mat-form-field>
-    <mat-label>Widgets</mat-label>
-    <mat-select [formControl]="widgetSelectControl">
-      @for (widget of dashboardWidgetsKeys; track widget) {
-        <mat-option [value]="widget">{{dashboardWidgets[widget].label}}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Widgets</mat-label>
+      <mat-select [formControl]="widgetSelectControl">
+        @for (widgetKey of dashboardService.widgetUtils.getAvailableWidgetKeys(); track widgetKey) {
+          <mat-option [value]="widgetKey">{{dashboardWidgets[widgetKey].label}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
 
-  <button mat-mini-fab (click)="dashboardService.addWidget(widgetSelectControl.value)" [disabled]="!widgetSelectControl.value"><i class="material-icons-filled">add</i></button>
+    <button mat-mini-fab (click)="dashboardService.widgetUtils.add(widgetSelectControl.value)" [disabled]="!widgetSelectControl.value || dashboardService.dashboardUtils.getTotalCount() === 0"><i class="material-icons-filled">add</i></button>
 
 </div>

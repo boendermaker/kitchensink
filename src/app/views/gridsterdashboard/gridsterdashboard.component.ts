@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from '@app/components/dashboard/dashboard.service';
+import { DashboardService } from '@app/components/dashboard/dashboard-service/dashboard.service';
 
 @Component({
   selector: 'app-gridsterdashboard',

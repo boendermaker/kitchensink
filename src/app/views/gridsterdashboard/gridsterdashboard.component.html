@@ -6,10 +6,10 @@
 </div>
 
 <div class="b-d-flex b-justify-content-end">
-  <button mat-icon-button (click)="dashboardService.addEmptyDashboard('Demoboard')" title="Add new empty dashboard">
+  <button mat-icon-button (click)="dashboardService.dashboardUtils.add('Demoboard')" title="Add new empty dashboard">
     <i class="material-icons-filled">add</i>
   </button>
-  <button mat-icon-button (click)="dashboardService.toggleEditMode()" title="Toggle editmode" [disabled]="dashboardService.dashboardCount <= 0">
+  <button mat-icon-button (click)="dashboardService.dashboardUtils.toggleEditMode()" title="Toggle editmode" [disabled]="dashboardService.dashboardCount <= 0">
     <i class="material-icons-filled">edit</i>
   </button>
   <button mat-icon-button (click)="dashboardService.saveToLocalStorage()" title="Save to local storage" [disabled]="dashboardService.dashboardCount <= 0">
@@ -20,8 +20,13 @@
   </button>
 </div>
 
-<div class="b-mt-4">
-  <app-dashboard-tabs></app-dashboard-tabs>
+<div class="b-row b-mt-4">
+  <div class="b-col-md-10">
+    <app-dashboard-tabs></app-dashboard-tabs>
+  </div>
+  <div class="b-col-md-2">
+    <app-widget-select></app-widget-select>
+  </div>
 </div>
 
 <div class="b-mt-4">

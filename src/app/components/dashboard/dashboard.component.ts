@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IDashboard } from './dashboard.interface';
-import { DashboardService } from './dashboard.service';
+import { DashboardService } from './dashboard-service/dashboard.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()

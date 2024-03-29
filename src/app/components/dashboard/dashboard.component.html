@@ -1,15 +1,9 @@
-<ng-container *ngIf="this.renderedDashboard">
-
-  <div class="b-d-flex b-justify-content-end">
-    <app-widget-select></app-widget-select>
-  </div>
-
+<ng-container *ngIf="renderedDashboard">
   <div>
-    <gridster [options]="this.renderedDashboard.config">
-      <gridster-item [item]="widget" *ngFor="let widget of this.renderedDashboard?.widgets">
+    <gridster [options]="renderedDashboard.config">
+      <gridster-item [item]="widget" *ngFor="let widget of renderedDashboard?.widgets">
         <app-widget-container [widget]="widget"></app-widget-container>
       </gridster-item>
     </gridster>
   </div>
-
 </ng-container>
