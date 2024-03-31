@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { DashboardService } from '../dashboard-service/dashboard.service';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { dashboardWidgets } from '../widgets';
+import { widgetContent } from '../widget-content';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -17,8 +17,6 @@ export class WidgetSelectComponent {
 
   dashboardService = inject(DashboardService);
   widgetSelectControl = new FormControl('');
-  dashboardWidgets = dashboardWidgets;
-  dashboardWidgetsKeys: string[] = Object.keys(dashboardWidgets);
 
   constructor() {
     this.handleStateChanged();

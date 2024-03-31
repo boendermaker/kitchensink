@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { IDashboard } from './dashboard.interface';
 import { DashboardService } from './dashboard-service/dashboard.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   renderedDashboard: Partial<IDashboard> = {};
 
   constructor(
-    public dashboardService: DashboardService
+    public dashboardService: DashboardService,
   ) {
   }
 

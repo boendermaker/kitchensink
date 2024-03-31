@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, ComponentRef, InjectionToken, Injector, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, InjectionToken, Injector, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { IDashboardWidget } from '../dashboard.interface';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { CommonModule } from '@angular/common';
-import { dashboardWidgets } from '../widgets';
+import { widgetContent } from '../widget-content';
 import {
   ComponentPortal,
   DomPortal,
@@ -12,6 +12,8 @@ import {
   CdkPortal,
   ComponentType,
 } from '@angular/cdk/portal';
+import { DashboardService } from '../dashboard-service/dashboard.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-widget-container',
@@ -25,31 +27,55 @@ export class WidgetcontainerComponent implements OnInit, AfterViewInit {
   @ViewChild(CdkPortal) portalRef: CdkPortal;
 
   @Input() widget: IDashboardWidget;
-  dashboardWidgets = dashboardWidgets;
   componentPortal: ComponentPortal<any>;
   componentRef: any;
 
-  constructor() {
+  constructor(
+    private dashboardService: DashboardService,
+    public dialog: MatDialog
+  ) {
   }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
-    this.loadComponent();
+    this.loadDisplayComponent();
   }
 
-  loadComponent() {
-    dashboardWidgets[this.widget.widgetComponentKey].displayComponent().then((component: ComponentType<any>) => {
+//##################################################################
+
+  loadDisplayComponent() {
+    const widgetContent = this.dashboardService.widgetUtils.getWidgetContentById(this.widget.contentId);
+    widgetContent.displayComponent().then((component: ComponentType<any>) => {
       if(component) {
         this.componentPortal = new ComponentPortal(component)
       }
     })
   }
 
+//##################################################################
+
   onComponentRendering(ref: ComponentRef<any>): void {
     ref = ref as ComponentRef<any>;
-    ref.instance['widget'] = this.widget;
+    ref.instance['widgetId'] = this.widget.id;
   }
+
+//##################################################################
+
+  removeWidget(): void {
+    this.dashboardService.widgetUtils.removeById(this.widget.id);
+  }
+
+//##################################################################
+
+  openSettingsDialog(): void {
+    /*const dialogRef = this.dialog.open(this.widget, {
+      data: {name: this.name, animal: this.animal},
+    });*/
+
+  }
+
+//##################################################################
 
 }

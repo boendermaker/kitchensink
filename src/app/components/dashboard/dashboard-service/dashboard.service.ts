@@ -27,7 +27,8 @@ export class DashboardService {
     return this.dashboardUtils.getTotalCount();
   }
 
-  constructor() {}
+  constructor(
+  ) {}
 
   //##################################################################
 

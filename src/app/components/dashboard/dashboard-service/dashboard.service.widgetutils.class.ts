@@ -1,7 +1,7 @@
-import { IDashboard, IDashboardWidget, IDashboardWidgetComponent, IDashboardWidgetConfig, defaultWidgetConfig } from "../dashboard.interface";
+import { IDashboard, IDashboardWidget, IDashboardWidgetContent, IDashboardWidgetConfig, defaultWidgetConfig } from "../dashboard.interface";
 import { DashboardService } from "./dashboard.service";
 import { Widget } from "../widget.class";
-import { dashboardWidgets } from "../widgets";
+import { widgetContent } from "../widget-content";
 
 export class DashboardServiceWidgetUtils {
 
@@ -13,15 +13,15 @@ export class DashboardServiceWidgetUtils {
 
 //##################################################################
 
-  add(widgetComponentKey: string) {
+  add(contentKey: string) {
     const dashboard = this.ref.dashboardUtils.getRendered();
     const config: IDashboardWidgetConfig = dashboard.config.api.getFirstPossiblePosition(defaultWidgetConfig);
     const newWidgetState: IDashboardWidget = {
       id: this.ref.createUUID(),
       label: '---',
-      widgetConfig: config,
-      widgetComponentKey: widgetComponentKey,
-      widgetComponentConfig: {}
+      config: config,
+      contentId: contentKey,
+      contentConfig: {}
     }
 
     const newWidget: IDashboardWidget = new Widget(newWidgetState);
@@ -34,7 +34,7 @@ export class DashboardServiceWidgetUtils {
 
   removeById(widtgId: string): void {
     const dashboard: IDashboard = this.ref.dashboardUtils.getRendered();
-    dashboard.widgets.filter(f => f.id !== widtgId);
+    dashboard.widgets = dashboard.widgets.filter(f => f.id !== widtgId);
     this.ref.stateChanged();
   }
 
@@ -42,21 +42,39 @@ export class DashboardServiceWidgetUtils {
 
   removeByIndex(widgetIndex: number): void {
     const dashboard: IDashboard = this.ref.dashboardUtils.getRendered();
-    dashboard.widgets.splice(widgetIndex, 1);
+    dashboard.widgets = dashboard.widgets.splice(widgetIndex, 1);
     this.ref.stateChanged();
   }
 
 //##################################################################
 
-  getAvailableWidgetKeys(): string[] {
-    return Object.keys(dashboardWidgets);
+  getById(widgetId: string): IDashboardWidget {
+    if(widgetId) {
+      const dashboard = this.ref.dashboardUtils.getRendered();
+      return dashboard.widgets.find(f => f.id === widgetId);
+    }
   }
 
 //##################################################################
 
-  getAvailableWidgetByKey(widgetKey: string): IDashboardWidgetComponent {
-    if(dashboardWidgets.hasOwnProperty(widgetKey)) {
-      return dashboardWidgets[widgetKey];
+  getByIndex(widgetIndex: number): IDashboardWidget {
+    if(widgetIndex) {
+      const dashboard = this.ref.dashboardUtils.getRendered();
+      return dashboard.widgets[widgetIndex];
+    }
+  }
+
+//##################################################################
+
+  getAllWidgetContent(): IDashboardWidgetContent[] {
+    return widgetContent;
+  }
+
+//##################################################################
+
+  getWidgetContentById(contentId: string): IDashboardWidgetContent {
+    if(contentId) {
+      return widgetContent.find(f => f.id === contentId);
     }
   }
 

@@ -1,12 +1,12 @@
-import { IDashboardWidget, IDashboardWidgetComponentConfig, IDashboardWidgetConfig, defaultDashboardConfig, defaultWidgetConfig } from "./dashboard.interface";
+import { IDashboardWidget, IDashboardWidgetContentConfig, IDashboardWidgetConfig, defaultDashboardConfig, defaultWidgetConfig } from "./dashboard.interface";
 
 export class Widget implements IDashboardWidget {
 
   id: string;
   label?: string;
-  widgetConfig?: IDashboardWidgetConfig;
-  widgetComponentKey?: string;
-  widgetComponentConfig?: IDashboardWidgetComponentConfig;
+  config?: IDashboardWidgetConfig;
+  contentId?: string;
+  contentConfig?: IDashboardWidgetContentConfig;
 
   constructor(widgetState: IDashboardWidget) {
     if(widgetState) {
@@ -14,24 +14,28 @@ export class Widget implements IDashboardWidget {
     }
   }
 
-  setComponentConfig(widgetComponentConfig: IDashboardWidgetComponentConfig) {
-    this.widgetComponentConfig = widgetComponentConfig;
-  }
-
-  getComponentConfig(): IDashboardWidgetComponentConfig {
-    return this.widgetComponentConfig;
-  }
-
   getId(): string {
     return this.id;
+  }
+
+  getContentId(): string {
+    return this.contentId;
+  }
+
+  setContentConfig(contentConfig: IDashboardWidgetContentConfig) {
+    this.contentConfig = contentConfig;
+  }
+
+  getContentConfig(): IDashboardWidgetContentConfig {
+    return this.contentConfig;
   }
 
   private setState(widgetState: IDashboardWidget) {
     this.id = widgetState.id ? widgetState.id : this.createUUID();
     this.label = widgetState.label ? widgetState.label : '---';
-    this.widgetConfig = widgetState.widgetConfig ? widgetState.widgetConfig : defaultWidgetConfig;
-    this.widgetComponentKey = widgetState.widgetComponentKey;
-    this.widgetComponentConfig = widgetState.widgetComponentConfig;
+    this.config = widgetState.config ? widgetState.config : defaultWidgetConfig;
+    this.contentId = widgetState.contentId;
+    this.contentConfig = widgetState.contentConfig;
   }
 
   private createUUID(): string {

@@ -1,8 +1,12 @@
 <div class="widget-container">
   <div class="widget-container-header">
-    <div class="widhet-container-header-headline">{{widget.label}}{{widget.widgetComponentKey}}</div>
+    <div class="widhet-container-header-headline">{{widget.label}}</div>
     <div class="widhet-container-header-actions">
-      <button mat-icon-button><i class="material-icons-filled">more_vert</i></button>
+      <button mat-icon-button [matMenuTriggerFor]="widgetMainMenu"><i class="material-icons-filled">more_vert</i></button>
+      <mat-menu #widgetMainMenu="matMenu">
+        <button mat-menu-item (click)="removeWidget()">Remove Widget</button>
+        <button mat-menu-item (click)="openSettingsDialog()">Settings</button>
+      </mat-menu>
     </div>
   </div>
   <div class="widget-container-content">

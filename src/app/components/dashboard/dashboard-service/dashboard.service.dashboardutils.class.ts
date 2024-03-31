@@ -83,7 +83,6 @@ export class DashboardServiceDashboardUtils {
       }
       return dashboardItem;
     })])
-
     this.ref.renderDashboardById(id);
   }
 
