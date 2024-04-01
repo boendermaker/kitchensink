@@ -1,34 +1,42 @@
-<h1>Gridster Dashboard</h1>
-<div style="margin-bottom: 48px;">
-  <p>
-    Gridster Dashboards implmentation with Gridster2
-  </p>
+<div style="display: flex; flex-direction: column; height: 100%;">
+
+  <div style="flex-grow: 0;">
+
+    <h1>Gridster Dashboard</h1>
+    <div style="margin-bottom: 48px;">
+      <p>
+        Gridster Dashboards implementation with Gridster2
+      </p>
+    </div>
+
+    <div class="b-d-flex b-justify-content-end">
+      <button mat-icon-button (click)="dashboardService.dashboardUtils.add('Demoboard')" title="Add new empty dashboard">
+        <i class="material-icons-filled">add</i>
+      </button>
+      <button mat-icon-button (click)="dashboardService.dashboardUtils.toggleEditMode()" title="Toggle editmode" [disabled]="dashboardService.dashboardCount <= 0">
+        <i class="material-icons-filled">edit</i>
+      </button>
+      <button mat-icon-button (click)="dashboardService.saveToLocalStorage()" title="Save to local storage" [disabled]="dashboardService.dashboardCount <= 0">
+        <i class="material-icons-filled">save</i>
+      </button>
+      <button mat-icon-button (click)="dashboardService.loadFromLocalStorage()" title="Load from local storage">
+        <i class="material-icons-filled">settings_backup_restore</i>
+      </button>
+    </div>
+
+    <div class="b-row b-mt-4">
+      <div class="b-col-md-10">
+        <app-dashboard-tabs></app-dashboard-tabs>
+      </div>
+      <div class="b-col-md-2">
+        <app-widget-select></app-widget-select>
+      </div>
+    </div>
+
 </div>
 
-<div class="b-d-flex b-justify-content-end">
-  <button mat-icon-button (click)="dashboardService.dashboardUtils.add('Demoboard')" title="Add new empty dashboard">
-    <i class="material-icons-filled">add</i>
-  </button>
-  <button mat-icon-button (click)="dashboardService.dashboardUtils.toggleEditMode()" title="Toggle editmode" [disabled]="dashboardService.dashboardCount <= 0">
-    <i class="material-icons-filled">edit</i>
-  </button>
-  <button mat-icon-button (click)="dashboardService.saveToLocalStorage()" title="Save to local storage" [disabled]="dashboardService.dashboardCount <= 0">
-    <i class="material-icons-filled">save</i>
-  </button>
-  <button mat-icon-button (click)="dashboardService.loadFromLocalStorage()" title="Load from local storage">
-    <i class="material-icons-filled">settings_backup_restore</i>
-  </button>
-</div>
-
-<div class="b-row b-mt-4">
-  <div class="b-col-md-10">
-    <app-dashboard-tabs></app-dashboard-tabs>
-  </div>
-  <div class="b-col-md-2">
-    <app-widget-select></app-widget-select>
-  </div>
-</div>
-
-<div class="b-mt-4">
+<div style="flex-grow: 1;">
   <app-dashboard></app-dashboard>
+</div>
+
 </div>

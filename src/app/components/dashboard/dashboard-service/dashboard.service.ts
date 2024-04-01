@@ -5,7 +5,6 @@ import { Dashboard } from '../dashboard.class';
 import { DashboardServiceWidgetUtils } from './dashboard.service.widgetutils.class';
 import { DashboardServiceDashboardUtils } from './dashboard.service.dashboardutils.class';
 
-
 @Injectable()
 export class DashboardService {
 

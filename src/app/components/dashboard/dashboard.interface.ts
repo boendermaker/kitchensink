@@ -18,7 +18,7 @@ export interface IDashboardWidgetContent {
   settingsComponent: any;
 }
 
-export interface IDashboardWidgetContentConfig {
+export interface IDashboardWidgetContentSettings {
   [p: string]: any;
 }
 
@@ -26,7 +26,7 @@ export interface IDashboardWidget {
   id?: string;
   config?: IDashboardWidgetConfig;
   contentId?: string;
-  contentConfig?: IDashboardWidgetContentConfig;
+  contentSettings?: IDashboardWidgetContentSettings;
 }
 
 export interface IDashboard {
@@ -39,10 +39,10 @@ export interface IDashboard {
 }
 
 export const defaultDashboardConfig: IDashboardConfig = {
-  setGridSize: true,
-  gridType: GridType.ScrollVertical,
+  //setGridSize: true,
+  gridType: GridType.Fixed,
   compactType: CompactType.None,
-  margin: 24,
+  margin: 12,
   outerMargin: true,
   outerMarginTop: null,
   outerMarginRight: null,
@@ -52,8 +52,8 @@ export const defaultDashboardConfig: IDashboardConfig = {
   mobileBreakpoint: 640,
   useBodyForBreakpoint: false,
   minCols: 8,
-  maxCols: 8,
-  minRows: 4,
+  maxCols: 100,
+  minRows: 8,
   maxRows: 100,
   maxItemCols: 100,
   minItemCols: 1,
@@ -84,7 +84,7 @@ export const defaultDashboardConfig: IDashboardConfig = {
     enabled: false
   },
   swap: false,
-  pushItems: true,
+  pushItems: false,
   disablePushOnDrag: false,
   disablePushOnResize: false,
   pushDirections: { north: true, east: true, south: true, west: true },
@@ -98,6 +98,7 @@ export const defaultDashboardConfig: IDashboardConfig = {
 export const defaultWidgetConfig = {
   x: 0,
   y: 0,
-  rows: 1,
-  cols: 1
+  rows: 3,
+  cols: 4,
+  hasContent: true
 }

@@ -1,4 +1,4 @@
-import { IDashboard, IDashboardWidget, IDashboardWidgetContent, IDashboardWidgetConfig, defaultWidgetConfig, IDashboardWidgetContentConfig } from "../dashboard.interface";
+import { IDashboard, IDashboardWidget, IDashboardWidgetContent, IDashboardWidgetConfig, defaultWidgetConfig, IDashboardWidgetContentSettings } from "../dashboard.interface";
 import { DashboardService } from "./dashboard.service";
 import { Widget } from "../widget.class";
 
@@ -19,7 +19,7 @@ export class DashboardServiceWidgetUtils {
       id: this.ref.createUUID(),
       config: config,
       contentId: contentId,
-      contentConfig: {}
+      contentSettings: {}
     }
 
     const newWidget: IDashboardWidget = new Widget(newWidgetState);
@@ -78,20 +78,20 @@ export class DashboardServiceWidgetUtils {
 
 //##################################################################
 
-  setContentConfig(widgetId: string, state: any): void {
+  setContentSettings(widgetId: string, state: any): void {
     if(state && widgetId) {
       const widget = this.getById(widgetId);
-      widget.contentConfig = state;
+      widget.contentSettings = state;
       this.ref.stateChanged();
     }
   }
 
 //##################################################################
 
-  getContentConfig(widgetId: string): IDashboardWidgetContentConfig {
+  getContentSettings(widgetId: string): IDashboardWidgetContentSettings {
     if(widgetId) {
       const widget = this.getById(widgetId);
-      return widget.contentConfig;
+      return widget.contentSettings;
     }
   }
 

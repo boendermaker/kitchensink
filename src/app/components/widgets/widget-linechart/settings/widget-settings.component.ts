@@ -61,14 +61,14 @@ export class WidgetLinechartSettingsComponent implements OnInit {
   //##################################################################
 
   restoreSettings(): void {
-    this.formGroup.setValue(this.widget.contentConfig);
+    this.formGroup.setValue(this.widget.contentSettings);
   }
 
   //##################################################################
 
   saveSettings(): void {
     const formState = this.formGroup.getRawValue();
-    this.dashboardService.widgetUtils.setContentConfig(this.widgetId, formState);
+    this.dashboardService.widgetUtils.setContentSettings(this.widgetId, formState);
     this.dialogRef.close();
   }
 

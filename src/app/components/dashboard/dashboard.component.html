@@ -1,9 +1,7 @@
 <ng-container *ngIf="renderedDashboard">
-  <div>
-    <gridster [options]="renderedDashboard.config">
-      <gridster-item [item]="widget" *ngFor="let widget of renderedDashboard?.widgets">
-        <app-widget-container [widgetId]="widget?.id"></app-widget-container>
-      </gridster-item>
-    </gridster>
-  </div>
+  <gridster [options]="renderedDashboard.config">
+    <gridster-item [item]="widget" *ngFor="let widget of renderedDashboard?.widgets">
+      <app-widget-container [widgetId]="widget?.id"></app-widget-container>
+    </gridster-item>
+  </gridster>
 </ng-container>

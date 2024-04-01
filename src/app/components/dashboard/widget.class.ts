@@ -1,11 +1,11 @@
-import { IDashboardWidget, IDashboardWidgetContentConfig, IDashboardWidgetConfig, defaultDashboardConfig, defaultWidgetConfig } from "./dashboard.interface";
+import { IDashboardWidget, IDashboardWidgetContentSettings, IDashboardWidgetConfig, defaultWidgetConfig } from "./dashboard.interface";
 
 export class Widget implements IDashboardWidget {
 
   id: string;
   config?: IDashboardWidgetConfig;
   contentId?: string;
-  contentConfig?: IDashboardWidgetContentConfig;
+  contentSettings?: IDashboardWidgetContentSettings;
 
   constructor(widgetState: IDashboardWidget) {
     if(widgetState) {
@@ -21,19 +21,20 @@ export class Widget implements IDashboardWidget {
     return this.contentId;
   }
 
-  setContentConfig(contentConfig: IDashboardWidgetContentConfig) {
-    this.contentConfig = contentConfig;
+  setContentSettings(contentSettings: IDashboardWidgetContentSettings) {
+    this.contentSettings = contentSettings;
   }
 
-  getContentConfig(): IDashboardWidgetContentConfig {
-    return this.contentConfig;
+  getContentSettings(): IDashboardWidgetContentSettings {
+    return this.contentSettings;
   }
 
   private setState(widgetState: IDashboardWidget) {
+    console.log('WIDGETSTATECONFIG ', widgetState.config)
     this.id = widgetState.id ? widgetState.id : this.createUUID();
     this.config = widgetState.config ? widgetState.config : defaultWidgetConfig;
     this.contentId = widgetState.contentId;
-    this.contentConfig = widgetState.contentConfig;
+    this.contentSettings = widgetState.contentSettings;
   }
 
   private createUUID(): string {
