@@ -1,0 +1,31 @@
+<div class="settings-container">
+
+  <div class="settings-header">
+      <h2>Widget-Settings</h2>
+      <div>
+        <button mat-icon-button><i class="material-icons-filled">close</i></button>
+      </div>
+  </div>
+
+  <div class="settings-content">
+    <form [formGroup]="formGroup">
+
+      <div class="b-d-flex b-flex-column">
+        <mat-form-field>
+          <mat-label>Label</mat-label>
+          <input matInput formControlName="label" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Color</mat-label>
+          <input matInput formControlName="color" type="color" />
+        </mat-form-field>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="settings-footer">
+    <button mat-flat-button color="primary">Save</button>
+  </div>
+
+</div>

@@ -1,0 +1,27 @@
+:host {
+  padding: 24px;
+  height: 100%;
+}
+
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  height: 100%;
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.settings-content {
+  flex-grow: 1;
+  overflow-y: scroll;
+}
+
+.settings-footer {
+  display: flex;
+  justify-content: flex-end;
+}
