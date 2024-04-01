@@ -128,11 +128,11 @@ export class WidgetLinechartComponent implements OnInit, AfterViewInit{
           var container = am5.Container.new(root, {});
           var circle0 = container.children.push(am5.Circle.new(root, {
             radius: 5,
-            fill: am5.color(this.widget.contentSettings['color'] ?? 0x000000)
+            fill: am5.color(this.widget.contentSettings['color'] !== '' ? this.widget.contentSettings['color'] : 0x000000 )
           }));
           var circle1 = container.children.push(am5.Circle.new(root, {
             radius: 5,
-            fill: am5.color(this.widget.contentSettings['color'] ?? 0x000000)
+            fill: am5.color(this.widget.contentSettings['color'] !== '' ? this.widget.contentSettings['color'] : 0x000000)
           }));
 
           circle1.animate({

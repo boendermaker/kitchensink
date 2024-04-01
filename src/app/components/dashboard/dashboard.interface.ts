@@ -40,7 +40,7 @@ export interface IDashboard {
 
 export const defaultDashboardConfig: IDashboardConfig = {
   //setGridSize: true,
-  gridType: GridType.Fixed,
+  gridType: GridType.ScrollVertical,
   compactType: CompactType.None,
   margin: 12,
   outerMargin: true,
@@ -61,7 +61,7 @@ export const defaultDashboardConfig: IDashboardConfig = {
   minItemRows: 1,
   maxItemArea: 2500,
   minItemArea: 1,
-  defaultItemCols: 1,
+  defaultItemCols: 2,
   defaultItemRows: 1,
   fixedColWidth: 105,
   fixedRowHeight: 105,

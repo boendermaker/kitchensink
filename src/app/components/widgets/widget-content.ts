@@ -9,8 +9,8 @@ export const widgetContent: IDashboardWidgetContent[] = [
   },
   {
     id: 'ae4006bc-13c7-4122-a113-368018f1cc49',
-    label: 'XY Chart 2',
-    displayComponent: () => import('@app/components/widgets/widget-linechart/widget-linechart.component').then(component => component.WidgetLinechartComponent),
-    settingsComponent: () => import('@app/components/widgets/widget-linechart/settings/widget-settings.component').then(component => component.WidgetLinechartSettingsComponent)
+    label: 'Apex linechart',
+    displayComponent: () => import('@app/components/widgets/widget-apexchart1/widget-linechart.component').then(component => component.WidgetLinechartComponent),
+    settingsComponent: () => import('@app/components/widgets/widget-apexchart1/settings/widget-settings.component').then(component => component.WidgetLinechartSettingsComponent)
   }
 ];

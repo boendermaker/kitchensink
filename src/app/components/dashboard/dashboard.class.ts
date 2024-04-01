@@ -40,7 +40,8 @@ export class Dashboard implements IDashboard {
   private setState(dashBoardState: IDashboard): void {
     this.id = dashBoardState.id;
     this.widgets = dashBoardState.widgets;
-    this.config = dashBoardState.config;
+    //this.config = dashBoardState.config;
+    this.config = defaultDashboardConfig;
     this.label = dashBoardState.label;
   }
 

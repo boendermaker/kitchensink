@@ -94,6 +94,8 @@ export class WidgetcontainerComponent implements OnInit, AfterViewInit {
   openSettingsDialog() {
     this.widgetContent.settingsComponent().then((component: ComponentType<any>) => {
       this.dialog.open(component, {
+        width: '80vw',
+        height: '80vh',
         data: {
           dashboardService: this.dashboardService,
           widgetId: this.widgetId
