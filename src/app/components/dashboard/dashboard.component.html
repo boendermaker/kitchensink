@@ -2,7 +2,7 @@
   <div>
     <gridster [options]="renderedDashboard.config">
       <gridster-item [item]="widget" *ngFor="let widget of renderedDashboard?.widgets">
-        <app-widget-container [widget]="widget"></app-widget-container>
+        <app-widget-container [widgetId]="widget?.id"></app-widget-container>
       </gridster-item>
     </gridster>
   </div>

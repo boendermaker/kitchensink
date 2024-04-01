@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IDashboard } from '../dashboard.interface';
+import { IDashboard, IDashboardWidgetContent } from '../dashboard.interface';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Dashboard } from '../dashboard.class';
 import { DashboardServiceWidgetUtils } from './dashboard.service.widgetutils.class';
@@ -8,6 +8,8 @@ import { DashboardServiceDashboardUtils } from './dashboard.service.dashboarduti
 
 @Injectable()
 export class DashboardService {
+
+  widgetContent: IDashboardWidgetContent[] = [];
 
   widgetUtils: DashboardServiceWidgetUtils = new DashboardServiceWidgetUtils(this);
   dashboardUtils: DashboardServiceDashboardUtils = new DashboardServiceDashboardUtils(this);
@@ -45,6 +47,13 @@ export class DashboardService {
     const dashboard = this.dashboards$.value[index];
     this.renderedDashboardId = dashboard?.id;
     this.renderedDashboard$.next(dashboard);
+    this.stateChanged();
+  }
+
+  //##################################################################
+
+  setWidgetContent(widgetContent: IDashboardWidgetContent[]): void {
+    this.widgetContent = widgetContent;
     this.stateChanged();
   }
 

@@ -24,7 +24,6 @@ export interface IDashboardWidgetContentConfig {
 
 export interface IDashboardWidget {
   id?: string;
-  label?: string;
   config?: IDashboardWidgetConfig;
   contentId?: string;
   contentConfig?: IDashboardWidgetContentConfig;
@@ -32,7 +31,7 @@ export interface IDashboardWidget {
 
 export interface IDashboard {
   id: string;
-  label?: string;
+  label: string;
   config: IDashboardConfig
   widgets: IDashboardWidget[];
   toggleEditMode?(): void;

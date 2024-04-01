@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '@app/components/dashboard/dashboard-service/dashboard.service';
+import { widgetContent } from '@app/components/widgets/widget-content';
 
 @Component({
   selector: 'app-gridsterdashboard',
@@ -16,7 +17,7 @@ export class GridsterdashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.dashboardService.setWidgetContent(widgetContent);
   }
 
 }

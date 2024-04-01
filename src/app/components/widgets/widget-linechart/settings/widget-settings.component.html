@@ -1,0 +1,17 @@
+<div class="settings-container">
+  <form [formGroup]="formGroup">
+  <div class="b-d-flex">
+    <mat-form-field>
+      <mat-label>Label</mat-label>
+      <input matInput formControlName="label" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Color</mat-label>
+      <input matInput formControlName="color" />
+    </mat-form-field>
+  </div>
+  <div class="b-d-flex b-justify-content-end">
+    <button mat-flat-button (click)="saveSettings()">Save</button>
+  </div>
+</form>
+</div>

@@ -7,13 +7,15 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
 
   renderedDashboard: Partial<IDashboard> = {};
 
   constructor(
+    private cdr: ChangeDetectorRef,
     public dashboardService: DashboardService,
   ) {
   }
@@ -29,6 +31,7 @@ export class DashboardComponent implements OnInit {
     .subscribe({
       next: (renderedDashboard: IDashboard) => {
         this.renderedDashboard = renderedDashboard;
+        this.cdr.markForCheck();
       }
     })
   }

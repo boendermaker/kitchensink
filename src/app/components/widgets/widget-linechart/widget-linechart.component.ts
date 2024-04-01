@@ -1,11 +1,13 @@
-import { AfterViewInit, Component, Inject, Input, NgZone, OnInit, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, Input, NgZone, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated';
 import { IDashboardWidget } from '@app/components/dashboard/dashboard.interface';
 import { DashboardService } from '@app/components/dashboard/dashboard-service/dashboard.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-widget-linechart',
   standalone: true,
@@ -18,11 +20,13 @@ export class WidgetLinechartComponent implements OnInit, AfterViewInit{
   private root!: am5.Root;
   widgetId: string;
   widget: IDashboardWidget;
+  series: am5xy.LineSeries;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private zone: NgZone,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private cdr: ChangeDetectorRef
     ) {
   }
 
@@ -30,6 +34,7 @@ export class WidgetLinechartComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
     this.getWidget();
+    this.handleStateChanged();
   }
 
 //##################################################################
@@ -112,6 +117,8 @@ export class WidgetLinechartComponent implements OnInit, AfterViewInit{
         })
       }));
 
+      this.series = series;
+
       data[data.length - 1].bullet = true;
       series.data.setAll(data);
 
@@ -121,11 +128,11 @@ export class WidgetLinechartComponent implements OnInit, AfterViewInit{
           var container = am5.Container.new(root, {});
           var circle0 = container.children.push(am5.Circle.new(root, {
             radius: 5,
-            fill: am5.color(0xff0000)
+            fill: am5.color(this.widget.contentConfig['color'] ?? 0x000000)
           }));
           var circle1 = container.children.push(am5.Circle.new(root, {
             radius: 5,
-            fill: am5.color(0xff0000)
+            fill: am5.color(this.widget.contentConfig['color'] ?? 0x000000)
           }));
 
           circle1.animate({
@@ -183,5 +190,17 @@ export class WidgetLinechartComponent implements OnInit, AfterViewInit{
       });
     }
   }
+
+//##################################################################
+
+  handleStateChanged(): void {
+    this.dashboardService.stateChanged_.pipe(untilDestroyed(this)).subscribe({
+      next: () => {
+        this.cdr.markForCheck();
+      }
+    })
+  }
+
+//##################################################################
 
 }

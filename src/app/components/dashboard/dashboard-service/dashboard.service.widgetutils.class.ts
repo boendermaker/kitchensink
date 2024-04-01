@@ -1,7 +1,6 @@
-import { IDashboard, IDashboardWidget, IDashboardWidgetContent, IDashboardWidgetConfig, defaultWidgetConfig } from "../dashboard.interface";
+import { IDashboard, IDashboardWidget, IDashboardWidgetContent, IDashboardWidgetConfig, defaultWidgetConfig, IDashboardWidgetContentConfig } from "../dashboard.interface";
 import { DashboardService } from "./dashboard.service";
 import { Widget } from "../widget.class";
-import { widgetContent } from "../widget-content";
 
 export class DashboardServiceWidgetUtils {
 
@@ -13,14 +12,13 @@ export class DashboardServiceWidgetUtils {
 
 //##################################################################
 
-  add(contentKey: string) {
+  add(contentId: string) {
     const dashboard = this.ref.dashboardUtils.getRendered();
     const config: IDashboardWidgetConfig = dashboard.config.api.getFirstPossiblePosition(defaultWidgetConfig);
     const newWidgetState: IDashboardWidget = {
       id: this.ref.createUUID(),
-      label: '---',
       config: config,
-      contentId: contentKey,
+      contentId: contentId,
       contentConfig: {}
     }
 
@@ -66,15 +64,34 @@ export class DashboardServiceWidgetUtils {
 
 //##################################################################
 
-  getAllWidgetContent(): IDashboardWidgetContent[] {
-    return widgetContent;
+  getAllContent(): IDashboardWidgetContent[] {
+    return this.ref.widgetContent;
   }
 
 //##################################################################
 
-  getWidgetContentById(contentId: string): IDashboardWidgetContent {
+  getContentById(contentId: string): IDashboardWidgetContent {
     if(contentId) {
-      return widgetContent.find(f => f.id === contentId);
+      return this.ref.widgetContent.find(f => f.id === contentId);
+    }
+  }
+
+//##################################################################
+
+  setContentConfig(widgetId: string, state: any): void {
+    if(state && widgetId) {
+      const widget = this.getById(widgetId);
+      widget.contentConfig = state;
+      this.ref.stateChanged();
+    }
+  }
+
+//##################################################################
+
+  getContentConfig(widgetId: string): IDashboardWidgetContentConfig {
+    if(widgetId) {
+      const widget = this.getById(widgetId);
+      return widget.contentConfig;
     }
   }
 

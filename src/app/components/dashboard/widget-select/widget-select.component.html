@@ -3,7 +3,7 @@
     <mat-form-field>
       <mat-label>Widgets</mat-label>
       <mat-select [formControl]="widgetSelectControl">
-        @for (widgetContent of dashboardService.widgetUtils.getAllWidgetContent(); track widgetContent) {
+        @for (widgetContent of dashboardService.widgetUtils.getAllContent(); track widgetContent) {
           <mat-option [value]="widgetContent?.id">{{widgetContent?.label}}</mat-option>
         }
       </mat-select>

@@ -3,7 +3,6 @@ import { IDashboardWidget, IDashboardWidgetContentConfig, IDashboardWidgetConfig
 export class Widget implements IDashboardWidget {
 
   id: string;
-  label?: string;
   config?: IDashboardWidgetConfig;
   contentId?: string;
   contentConfig?: IDashboardWidgetContentConfig;
@@ -32,7 +31,6 @@ export class Widget implements IDashboardWidget {
 
   private setState(widgetState: IDashboardWidget) {
     this.id = widgetState.id ? widgetState.id : this.createUUID();
-    this.label = widgetState.label ? widgetState.label : '---';
     this.config = widgetState.config ? widgetState.config : defaultWidgetConfig;
     this.contentId = widgetState.contentId;
     this.contentConfig = widgetState.contentConfig;
