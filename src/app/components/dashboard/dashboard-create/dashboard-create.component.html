@@ -1,13 +1,13 @@
-<div class="settings-container">
+<div class="create-container">
 
-  <div class="settings-header">
-      <h2>Widget-Settings</h2>
+  <div class="create-header">
+      <h2>Create Dashboard</h2>
       <div>
         <button mat-icon-button (click)="closeModalDialog()"><i class="material-icons-filled">close</i></button>
       </div>
   </div>
 
-  <div class="settings-content">
+  <div class="create-content">
     <form [formGroup]="formGroup">
 
       <div class="b-d-flex b-flex-column">
@@ -20,8 +20,8 @@
     </form>
   </div>
 
-  <div class="settings-footer">
-    <button mat-flat-button color="primary">Save</button>
+  <div class="create-footer">
+    <button mat-flat-button color="primary" (click)="createDashboard()">Create and close</button>
   </div>
 
 </div>

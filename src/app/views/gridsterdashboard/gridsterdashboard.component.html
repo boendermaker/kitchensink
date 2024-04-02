@@ -10,7 +10,7 @@
     </div>
 
     <div class="b-d-flex b-justify-content-end">
-      <button mat-icon-button (click)="dashboardService.dashboardUtils.add('Demoboard')" title="Add new empty dashboard">
+      <button mat-icon-button (click)="dashboardService.dashboardUtils.create()" title="Add new dashboard">
         <i class="material-icons-filled">add</i>
       </button>
       <button mat-icon-button (click)="dashboardService.dashboardUtils.toggleEditMode()" title="Toggle editmode" [disabled]="dashboardService.dashboardCount <= 0">

@@ -1,13 +1,30 @@
+import { MatDialog } from "@angular/material/dialog";
 import { Dashboard } from "../dashboard.class";
 import { IDashboard, IDashboardConfig } from "../dashboard.interface";
 import { DashboardService } from "./dashboard.service";
+import { DashboardSettingsComponent } from "../dashboard-settings/dashboard-settings.component";
+import { DashboardCreateComponent } from "../dashboard-create/dashboard-create.component";
 
 export class DashboardServiceDashboardUtils {
 
   ref: DashboardService;
 
-  constructor(ref: DashboardService) {
+  constructor(
+    ref: DashboardService
+  ) {
     this.ref = ref;
+  }
+
+//##################################################################
+
+  create(): void {
+    this.openDashboardCreateDialog();
+  }
+
+//##################################################################
+
+  edit(): void {
+    this.openDashboardSettingsDialog();
   }
 
 //##################################################################
@@ -84,6 +101,30 @@ export class DashboardServiceDashboardUtils {
       return dashboardItem;
     })])
     this.ref.renderDashboardById(id);
+  }
+
+//##################################################################
+
+  openDashboardCreateDialog(): void {
+    this.ref.dashboardDialog.open(DashboardCreateComponent, {
+      width: '20vw',
+      height: '30vh',
+      data: {
+        dashboardService: this.ref
+      }
+    })
+  }
+
+//##################################################################
+
+  openDashboardSettingsDialog(): void {
+    this.ref.dashboardDialog.open(DashboardSettingsComponent, {
+      width: '60vw',
+      height: '80vh',
+      data: {
+        dashboardService: this.ref
+      }
+    })
   }
 
 //##################################################################

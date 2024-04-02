@@ -5,8 +5,6 @@ import { Dashboard } from '../dashboard.class';
 import { DashboardServiceWidgetUtils } from './dashboard.service.widgetutils.class';
 import { DashboardServiceDashboardUtils } from './dashboard.service.dashboardutils.class';
 import { MatDialog } from '@angular/material/dialog';
-import { DashboardSettingsComponent } from '../dashboard-settings/dashboard-settings.component';
-import { ComponentType } from '@angular/cdk/portal';
 
 @Injectable()
 export class DashboardService {
@@ -32,7 +30,8 @@ export class DashboardService {
   }
 
   constructor(
-    private dashboardSettingsDialog: MatDialog
+    public dashboardDialog: MatDialog,
+    public widgetDialog: MatDialog
   ) {}
 
   //##################################################################
@@ -104,47 +103,14 @@ export class DashboardService {
 
   //##################################################################
 
-    createUUID(): string {
-      return crypto.randomUUID();
-    }
+  createUUID(): string {
+    return crypto.randomUUID();
+  }
 
   //##################################################################
 
-    stateChanged(): void {
-      this.stateChanged$.next(true);
-    }
-
-  //##################################################################
-
-    openDashboardSettingsDialog(): void {
-      this.dashboardSettingsDialog.open(DashboardSettingsComponent, {
-        width: '80vw',
-        height: '80vh',
-        data: {
-          dashboardService: this,
-
-        }
-      })
-    }
-
-  //##################################################################
-
-  openWidgetSettingsDialog(widgetId: string) {
-
-    const widget = this.widgetUtils.getById(widgetId);
-    const contentId = widget?.contentId;
-    const widgetContent = this.widgetUtils.getContentById(contentId);
-
-    widgetContent.settingsComponent().then((component: ComponentType<any>) => {
-      this.dashboardSettingsDialog.open(component, {
-        width: '80vw',
-        height: '80vh',
-        data: {
-          dashboardService: this,
-          widgetId: widgetId
-        },
-      });
-    })
+  stateChanged(): void {
+    this.stateChanged$.next(true);
   }
 
   //##################################################################

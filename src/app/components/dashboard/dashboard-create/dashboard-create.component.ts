@@ -8,16 +8,16 @@ import { DashboardService } from '../dashboard-service/dashboard.service';
   selector: 'app-dashboard-settings',
   standalone: true,
   imports: [AllAngularMaterialMDCModulesModule, ReactiveFormsModule],
-  templateUrl: './dashboard-settings.component.html',
-  styleUrl: './dashboard-settings.component.scss'
+  templateUrl: './dashboard-create.component.html',
+  styleUrl: './dashboard-create.component.scss'
 })
-export class DashboardSettingsComponent implements OnInit {
+export class DashboardCreateComponent implements OnInit {
 
   dashboardService: DashboardService;
   formGroup: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<DashboardSettingsComponent>,
+    public dialogRef: MatDialogRef<DashboardCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder
   ) {
@@ -32,14 +32,16 @@ export class DashboardSettingsComponent implements OnInit {
 
   createFormGroup(): void {
     this.formGroup = this.fb.group({
-      label: this.fb.control('')
+      label: this.fb.control('New dashboard')
     })
   }
 
 //##################################################################
 
-  saveDashboard(): void {
-    this.dashboardService.dashboardUtils;
+  createDashboard(): void {
+    const label: string = this.formGroup.get('label').value !== '' ? this.formGroup.get('label').value : 'Empty dashboard';
+    this.dashboardService.dashboardUtils.add(label);
+    this.closeModalDialog();
   }
 
 //##################################################################

@@ -1,6 +1,8 @@
 import { IDashboard, IDashboardWidget, IDashboardWidgetContent, IDashboardWidgetConfig, defaultWidgetConfig, IDashboardWidgetContentSettings } from "../dashboard.interface";
 import { DashboardService } from "./dashboard.service";
 import { Widget } from "../widget.class";
+import { ComponentType } from "@angular/cdk/portal";
+import { MatDialog } from "@angular/material/dialog";
 
 export class DashboardServiceWidgetUtils {
 
@@ -93,6 +95,27 @@ export class DashboardServiceWidgetUtils {
       const widget = this.getById(widgetId);
       return widget.contentSettings;
     }
+  }
+
+//##################################################################
+
+  openWidgetSettingsDialog(widgetId: string) {
+
+    const widget = this.getById(widgetId);
+    const contentId = widget?.contentId;
+    const widgetContent = this.getContentById(contentId);
+
+    widgetContent.settingsComponent().then((component: ComponentType<any>) => {
+      this.ref.widgetDialog.open(component, {
+        width: '80vw',
+        height: '80vh',
+        data: {
+          dashboardService: this,
+          widgetId: widgetId
+        },
+      });
+    })
+
   }
 
 //##################################################################
