@@ -1,27 +1,32 @@
-<div class="settings-container">
+<div class="dialog-container">
 
-  <div class="settings-header">
-      <h2>Widget-Settings</h2>
+  <div class="dialog-header">
+      <h2>Dashboard settings</h2>
       <div>
         <button mat-icon-button (click)="closeModalDialog()"><i class="material-icons-filled">close</i></button>
       </div>
   </div>
 
-  <div class="settings-content">
-    <form [formGroup]="formGroup">
+  <div class="dialog-content">
+    @if(dashboard?.id) {
+      <form [formGroup]="formGroup">
 
-      <div class="b-d-flex b-flex-column">
-        <mat-form-field>
-          <mat-label>Label</mat-label>
-          <input matInput formControlName="label" />
-        </mat-form-field>
-      </div>
+        <div class="b-d-flex b-flex-column">
+          <mat-form-field>
+            <mat-label>Label</mat-label>
+            <input matInput formControlName="label" />
+          </mat-form-field>
+        </div>
 
-    </form>
+      </form>
+    }@else {
+      <div>No active Dashboard</div>
+    }
+
   </div>
 
-  <div class="settings-footer">
-    <button mat-flat-button color="primary">Save</button>
+  <div class="dialog-footer">
+    <button mat-flat-button color="primary" (click)="updateDashboard()">Update and close</button>
   </div>
 
 </div>

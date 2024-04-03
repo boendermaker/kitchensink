@@ -14,11 +14,13 @@
 .settings-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .settings-content {
   flex-grow: 1;
   overflow-y: scroll;
+  padding-right: 12px;
 }
 
 .settings-footer {

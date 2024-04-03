@@ -38,6 +38,12 @@ export interface IDashboard {
   optionsChanged?(): void;
 }
 
+export interface IDashboardDialogSize {
+  small?: { width: string, height: string};
+  medium?: { width: string, height: string};
+  large?: { width: string, height: string};
+}
+
 export const defaultDashboardConfig: IDashboardConfig = {
   //setGridSize: true,
   gridType: GridType.ScrollVertical,
@@ -101,4 +107,19 @@ export const defaultWidgetConfig = {
   rows: 3,
   cols: 4,
   hasContent: true
+}
+
+export const dashboardDialogSize: IDashboardDialogSize = {
+  small: {
+    width: '20vw',
+    height: '30vh'
+  },
+  medium: {
+    width: '60vw',
+    height: '40vh'
+  },
+  large: {
+    width: '90vw',
+    height: '90vh'
+  },
 }

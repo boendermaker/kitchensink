@@ -2,7 +2,6 @@ import { IDashboard, IDashboardWidget, IDashboardWidgetContent, IDashboardWidget
 import { DashboardService } from "./dashboard.service";
 import { Widget } from "../widget.class";
 import { ComponentType } from "@angular/cdk/portal";
-import { MatDialog } from "@angular/material/dialog";
 
 export class DashboardServiceWidgetUtils {
 

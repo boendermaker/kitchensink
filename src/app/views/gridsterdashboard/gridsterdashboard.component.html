@@ -10,8 +10,14 @@
     </div>
 
     <div class="b-d-flex b-justify-content-end">
-      <button mat-icon-button (click)="dashboardService.dashboardUtils.create()" title="Add new dashboard">
+      <button mat-icon-button (click)="dashboardService.dashboardUtils.create(DashboardCreateComponent)" title="Add new dashboard">
         <i class="material-icons-filled">add</i>
+      </button>
+      <button mat-icon-button (click)="dashboardService.dashboardUtils.edit(DashboardSettingsComponent)" title="Edit selected dashboard" [disabled]="dashboardService.dashboardCount <= 0">
+        <i class="material-icons-filled">settings</i>
+      </button>
+      <button mat-icon-button (click)="dashboardService.dashboardUtils.remove()" title="Remove selected dashboard" [disabled]="dashboardService.dashboardCount <= 0">
+        <i class="material-icons-filled">delete</i>
       </button>
       <button mat-icon-button (click)="dashboardService.dashboardUtils.toggleEditMode()" title="Toggle editmode" [disabled]="dashboardService.dashboardCount <= 0">
         <i class="material-icons-filled">edit</i>

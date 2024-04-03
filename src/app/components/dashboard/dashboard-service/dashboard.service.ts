@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { IDashboard, IDashboardWidgetContent } from '../dashboard.interface';
+import { IDashboard, IDashboardDialogSize, IDashboardWidgetContent, dashboardDialogSize } from '../dashboard.interface';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Dashboard } from '../dashboard.class';
 import { DashboardServiceWidgetUtils } from './dashboard.service.widgetutils.class';
 import { DashboardServiceDashboardUtils } from './dashboard.service.dashboardutils.class';
 import { MatDialog } from '@angular/material/dialog';
+import { ComponentType } from '@angular/cdk/portal';
 
 @Injectable()
 export class DashboardService {
@@ -114,5 +115,18 @@ export class DashboardService {
   }
 
   //##################################################################
+
+  openDialog(component: ComponentType<any>, size?: 'small'|'medium'|'large', data?: Record<string, any>): void {
+    this.dashboardDialog.open(component, {
+      width: size ? dashboardDialogSize[size].width : dashboardDialogSize.medium.width,
+      height: '30vh',
+      data: {
+        dashboardService: this,
+        ...data
+      }
+    })
+  }
+
+//##################################################################
 
 }

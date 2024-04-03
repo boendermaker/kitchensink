@@ -1,13 +1,13 @@
-<div class="create-container">
+<div class="dialog-container">
 
-  <div class="create-header">
+  <div class="dialog-header">
       <h2>Create Dashboard</h2>
       <div>
         <button mat-icon-button (click)="closeModalDialog()"><i class="material-icons-filled">close</i></button>
       </div>
   </div>
 
-  <div class="create-content">
+  <div class="dialog-content">
     <form [formGroup]="formGroup">
 
       <div class="b-d-flex b-flex-column">
@@ -20,7 +20,7 @@
     </form>
   </div>
 
-  <div class="create-footer">
+  <div class="dialog-footer">
     <button mat-flat-button color="primary" (click)="createDashboard()">Create and close</button>
   </div>
 

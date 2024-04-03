@@ -1,9 +1,7 @@
-import { MatDialog } from "@angular/material/dialog";
 import { Dashboard } from "../dashboard.class";
 import { IDashboard, IDashboardConfig } from "../dashboard.interface";
 import { DashboardService } from "./dashboard.service";
-import { DashboardSettingsComponent } from "../dashboard-settings/dashboard-settings.component";
-import { DashboardCreateComponent } from "../dashboard-create/dashboard-create.component";
+import { ComponentType } from "@angular/cdk/portal";
 
 export class DashboardServiceDashboardUtils {
 
@@ -17,14 +15,14 @@ export class DashboardServiceDashboardUtils {
 
 //##################################################################
 
-  create(): void {
-    this.openDashboardCreateDialog();
+  create(component: ComponentType<any>, data?: Record<string, any>): void {
+    this.ref.openDialog(component, 'small', data);
   }
 
 //##################################################################
 
-  edit(): void {
-    this.openDashboardSettingsDialog();
+  edit(component: ComponentType<any>, data?: Record<string, any>): void {
+    this.ref.openDialog(component, 'medium', data);
   }
 
 //##################################################################
@@ -33,6 +31,16 @@ export class DashboardServiceDashboardUtils {
     const emptyDashboard: IDashboard = new Dashboard(null, label);
     if(emptyDashboard) {
       this.ref.dashboards$.next([...this.ref.dashboards$.value, emptyDashboard]);
+      this.ref.stateChanged();
+    }
+  }
+
+//##################################################################
+
+  remove(): void {
+    const id: string = this.ref.renderedDashboardId;
+    if(id) {
+      this.ref.dashboards$.next(this.ref.dashboards$.value.filter(r => r.id !== id));
       this.ref.stateChanged();
     }
   }
@@ -58,7 +66,8 @@ export class DashboardServiceDashboardUtils {
 //##################################################################
 
   getRendered(): IDashboard {
-    return this.getById(this.ref.renderedDashboardId);
+    const dashboard: IDashboard = this.getById(this.ref.renderedDashboardId);
+    return dashboard;
   }
 
 //##################################################################
@@ -74,6 +83,8 @@ export class DashboardServiceDashboardUtils {
   getByIndex(index: number): IDashboard {
     if(index) {
       return this.ref.dashboards$.value[index];
+    }else {
+      return null;
     }
   }
 
@@ -93,38 +104,32 @@ export class DashboardServiceDashboardUtils {
 
 //##################################################################
 
-  updateDashboardConfig(id: string, config: IDashboardConfig): void {
-    this.ref.dashboards$.next([...this.ref.dashboards$.value.map((dashboardItem: IDashboard) => {
-      if(dashboardItem.id === id) {
-        dashboardItem.config = {...dashboardItem.config, ...config};
-      }
-      return dashboardItem;
-    })])
-    this.ref.renderDashboardById(id);
+  updateDashboard(changedDashboard: IDashboard): void {
+    const id: string = this.ref.renderedDashboardId;
+    if(id) {
+      this.ref.dashboards$.next([...this.ref.dashboards$.value.map((dashboard: IDashboard) => {
+        if(dashboard.id === id) {
+          dashboard = {...dashboard, ...changedDashboard};
+        }
+        return dashboard;
+      })])
+      this.ref.renderDashboardById(id);
+    }
   }
 
 //##################################################################
 
-  openDashboardCreateDialog(): void {
-    this.ref.dashboardDialog.open(DashboardCreateComponent, {
-      width: '20vw',
-      height: '30vh',
-      data: {
-        dashboardService: this.ref
-      }
-    })
-  }
-
-//##################################################################
-
-  openDashboardSettingsDialog(): void {
-    this.ref.dashboardDialog.open(DashboardSettingsComponent, {
-      width: '60vw',
-      height: '80vh',
-      data: {
-        dashboardService: this.ref
-      }
-    })
+  updateConfig(config: IDashboardConfig): void {
+    const id: string = this.ref.renderedDashboardId;
+    if(id) {
+      this.ref.dashboards$.next([...this.ref.dashboards$.value.map((dashboardItem: IDashboard) => {
+        if(dashboardItem.id === id) {
+          dashboardItem.config = {...dashboardItem.config, ...config};
+        }
+        return dashboardItem;
+      })])
+      this.ref.renderDashboardById(id);
+    }
   }
 
 //##################################################################

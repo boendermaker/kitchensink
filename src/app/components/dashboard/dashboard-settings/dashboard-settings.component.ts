@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { DashboardService } from '../dashboard-service/dashboard.service';
+import { IDashboard } from '../dashboard.interface';
 
 @Component({
   selector: 'app-dashboard-settings',
@@ -14,6 +15,7 @@ import { DashboardService } from '../dashboard-service/dashboard.service';
 export class DashboardSettingsComponent implements OnInit {
 
   dashboardService: DashboardService;
+  dashboard: IDashboard;
   formGroup: FormGroup;
 
   constructor(
@@ -26,6 +28,14 @@ export class DashboardSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.createFormGroup();
+    this.getRenderedDashboard();
+    this.setFormGroup();
+  }
+
+//##################################################################
+
+  getRenderedDashboard(): void {
+    this.dashboard = this.dashboardService.dashboardUtils.getRendered();
   }
 
 //##################################################################
@@ -38,8 +48,20 @@ export class DashboardSettingsComponent implements OnInit {
 
 //##################################################################
 
-  saveDashboard(): void {
-    this.dashboardService.dashboardUtils;
+  setFormGroup(): void {
+    this.formGroup.patchValue({
+      label: this.dashboard.label
+    })
+  }
+
+//##################################################################
+
+  updateDashboard(): void {
+    const changedDashboard: IDashboard = this.dashboardService.dashboardUtils.getRendered();
+    changedDashboard.label = this.formGroup.get('label').value;
+
+    this.dashboardService.dashboardUtils.updateDashboard(changedDashboard);
+    this.closeModalDialog();
   }
 
 //##################################################################

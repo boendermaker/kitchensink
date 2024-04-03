@@ -6,7 +6,6 @@ import { DashboardTabsComponent } from "../../components/dashboard/dashboard-tab
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 
 
-
 @NgModule({
     declarations: [
         GridsterdashboardComponent

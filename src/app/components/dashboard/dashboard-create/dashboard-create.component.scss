@@ -3,7 +3,7 @@
   height: 100%;
 }
 
-.create-container {
+.dialog-container {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -11,17 +11,19 @@
   height: 100%;
 }
 
-.create-header {
+.dialog-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.create-content {
+.dialog-content {
   flex-grow: 1;
   overflow-y: scroll;
+  padding-right: 12px;
 }
 
-.create-footer {
+.dialog-footer {
   display: flex;
   justify-content: flex-end;
 }
