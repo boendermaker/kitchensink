@@ -19,6 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './widget-container.component.scss'
 })
 export class WidgetcontainerComponent implements OnInit, AfterViewInit {
+[x: string]: any;
 
   @ViewChild(CdkPortal) portalRef: CdkPortal;
 

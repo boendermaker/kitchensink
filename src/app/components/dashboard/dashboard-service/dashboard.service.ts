@@ -102,6 +102,7 @@ export class DashboardService {
       tempDashboards.push(new Dashboard(savedDashboard))
     })
     this.dashboards$.next(tempDashboards);
+    this.dashboardUtils.setDashboardTab(0);
     this.renderDashboardByIndex(0);
     this.stateChanged();
   }
