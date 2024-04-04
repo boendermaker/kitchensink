@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IDashboard, IDashboardDialogSize, IDashboardWidgetContent, dashboardDialogSize } from '../dashboard.interface';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { IDashboard, IDashboardWidgetContent, dashboardDialogSize } from '../dashboard.interface';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Dashboard } from '../dashboard.class';
 import { DashboardServiceWidgetUtils } from './dashboard.service.widgetutils.class';
 import { DashboardServiceDashboardUtils } from './dashboard.service.dashboardutils.class';
@@ -22,9 +22,13 @@ export class DashboardService {
   renderedDashboard$: BehaviorSubject<IDashboard> = new BehaviorSubject(null);
   renderedDashboard_: Observable<IDashboard> = this.renderedDashboard$.asObservable();
   renderedDashboardId: string = '';
+  renderedDashboardIndex: number = 0;
 
   stateChanged$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   stateChanged_: Observable<boolean> = this.stateChanged$.asObservable();
+
+  tabIndex$: BehaviorSubject<number> = new BehaviorSubject(null);
+  tabIndex_: Observable<number> = this.tabIndex$.asObservable();
 
   get dashboardCount(): number {
     return this.dashboardUtils.getTotalCount();
@@ -119,7 +123,7 @@ export class DashboardService {
   openDialog(component: ComponentType<any>, size?: 'small'|'medium'|'large', data?: Record<string, any>): void {
     this.dashboardDialog.open(component, {
       width: size ? dashboardDialogSize[size].width : dashboardDialogSize.medium.width,
-      height: '30vh',
+      height: size ? dashboardDialogSize[size].height : dashboardDialogSize.medium.height,
       data: {
         dashboardService: this,
         ...data

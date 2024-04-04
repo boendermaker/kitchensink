@@ -41,6 +41,8 @@ export class DashboardServiceDashboardUtils {
     const id: string = this.ref.renderedDashboardId;
     if(id) {
       this.ref.dashboards$.next(this.ref.dashboards$.value.filter(r => r.id !== id));
+      this.setDashboardTab(0);
+      this.ref.renderDashboardByIndex(0);
       this.ref.stateChanged();
     }
   }
@@ -50,6 +52,8 @@ export class DashboardServiceDashboardUtils {
   removeById(id: string): void {
     if(id) {
       this.ref.dashboards$.next(this.ref.dashboards$.value.filter(r => r.id !== id));
+      this.setDashboardTab(0);
+      this.ref.renderDashboardByIndex(0);
       this.ref.stateChanged();
     }
   }
@@ -59,6 +63,8 @@ export class DashboardServiceDashboardUtils {
   removeByIndex(index: number): void {
     if(index) {
       this.ref.dashboards$.next(this.ref.dashboards$.value.splice(index, 1));
+      this.setDashboardTab(0);
+      this.ref.renderDashboardByIndex(index);
       this.ref.stateChanged();
     }
   }
@@ -90,8 +96,20 @@ export class DashboardServiceDashboardUtils {
 
 //##################################################################
 
+  getIndexById(id: string): number {
+    return this.ref.dashboards$.value.findIndex(f => f.id === id);
+  }
+
+//##################################################################
+
   getTotalCount(): number {
     return this.ref.dashboards$.value.length;
+  }
+
+//##################################################################
+
+  setDashboardTab(index: number): void {
+    this.ref.tabIndex$.next(index);
   }
 
 //##################################################################
