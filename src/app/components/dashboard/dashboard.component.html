@@ -1,7 +1,11 @@
 <ng-container *ngIf="renderedDashboard">
   <gridster [options]="renderedDashboard.config">
     <gridster-item [item]="widget" *ngFor="let widget of renderedDashboard?.widgets">
-      <app-widget-container [widgetId]="widget?.id"></app-widget-container>
+      @if(customWidgetContainer) {
+        <ng-template #portalRef (attached)="onComponentRendering($event, widget)" [cdkPortalOutlet]="componentPortal"></ng-template>
+      }@else {
+        <app-widget-container [widgetId]="widget?.id"></app-widget-container>
+      }
     </gridster-item>
   </gridster>
 </ng-container>

@@ -10,7 +10,6 @@ import {
 } from '@angular/cdk/portal';
 import { DashboardService } from '../dashboard-service/dashboard.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Template } from '@amcharts/amcharts5';
 
 @Component({
   selector: 'app-widget-container',

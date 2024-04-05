@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { DrawermodaldialogModule } from '@app/components/drawermodaldialog/drawermodaldialog.module';
 import { CodeviewerModule } from './codeviewer/codeviewer.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { TableformgroupModule } from './tableformgroup/tableformgroup.module';
 import { GridsterModule } from '@app/components/gridster2/gridster.module'
 
@@ -21,7 +20,6 @@ import { GridsterModule } from '@app/components/gridster2/gridster.module'
   exports: [
     DrawermodaldialogModule,
     CodeviewerModule,
-    DashboardModule,
     TableformgroupModule,
     GridsterModule
   ]

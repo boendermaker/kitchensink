@@ -1,5 +1,7 @@
+import { TemplateRef } from '@angular/core';
 import { GridsterConfig, Resizable, Draggable, PushDirections, DisplayGrid, GridType, CompactType } from '../gridster2/gridsterConfig.interface';
 import { GridsterItem } from '../gridster2/gridsterItem.interface'
+import { Template } from '@amcharts/amcharts5';
 
 export interface IDashboardConfig extends GridsterConfig {
   draggable?: Draggable;
