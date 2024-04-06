@@ -5,12 +5,18 @@
         <button mat-icon-button [matMenuTriggerFor]="widgetMainMenu"><i class="material-icons-filled">more_vert</i></button>
         <mat-menu #widgetMainMenu="matMenu">
           <button mat-menu-item (click)="removeWidget()">Remove Widget</button>
-          <button mat-menu-item (click)="reloadWidget()">Reload Widget</button>
-          <button mat-menu-item (click)="openSettingsDialog()">Settings</button>
+          @if(componentPortal) {
+            <button mat-menu-item (click)="reloadWidget()">Reload Widget</button>
+            <button mat-menu-item (click)="openSettingsDialog()">Settings</button>
+          }
         </mat-menu>
     </div>
   </div>
   <div class="widget-container-content">
-    <ng-template #portalRef (attached)="onComponentRendering($event)" [cdkPortalOutlet]="componentPortal"></ng-template>
+    @if(componentPortal) {
+      <ng-template #portalRef (attached)="onComponentRendering($event)" [cdkPortalOutlet]="componentPortal"></ng-template>
+    }@else {
+      <div style="height: 100%; display: flex; justify-content: center; align-items: center; text-align: center;"><mat-spinner mode="indeterminate"></mat-spinner></div>
+    }
   </div>
 </div>

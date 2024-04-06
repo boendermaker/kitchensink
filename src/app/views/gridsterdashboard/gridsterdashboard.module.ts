@@ -5,7 +5,6 @@ import { DashboardComponent } from '@app/components/dashboard/dashboard.componen
 import { DashboardTabsComponent } from "../../components/dashboard/dashboard-tabs/dashboard-tabs.component";
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { WidgetSelectComponent } from "../../components/dashboard/widget-select/widget-select.component";
-import { WidgetContainerComponent } from '@app/components/dashboard/widget-container-custom/widget-container.component';
 
 
 @NgModule({
@@ -17,8 +16,7 @@ import { WidgetContainerComponent } from '@app/components/dashboard/widget-conta
         AllAngularMaterialMDCModulesModule,
         DashboardComponent,
         DashboardTabsComponent,
-        WidgetSelectComponent,
-        WidgetContainerComponent
+        WidgetSelectComponent
     ]
 })
 export class GridsterdashboardModule { }

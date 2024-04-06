@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ComponentRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { IDashboardWidget, IDashboardWidgetContent } from '../dashboard.interface';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { CommonModule } from '@angular/common';
@@ -10,8 +10,11 @@ import {
 } from '@angular/cdk/portal';
 import { DashboardService } from '../dashboard-service/dashboard.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Template } from '@amcharts/amcharts5';
 
+/**
+ * Widget-Container-Component
+ * Holds content component, headline and actions of widget
+ */
 @Component({
   selector: 'app-widget-container',
   standalone: true,
@@ -24,7 +27,6 @@ export class WidgetContainerComponent implements OnInit, AfterViewInit {
   @ViewChild(CdkPortal) portalRef: CdkPortal;
 
   @Input() widgetId: string;
-  @Input() widgetActionsTemplate: TemplateRef<any>;
   widget: IDashboardWidget = {};
   widgetContent: IDashboardWidgetContent = null;
   componentPortal: ComponentPortal<any>;
@@ -62,12 +64,14 @@ export class WidgetContainerComponent implements OnInit, AfterViewInit {
 //##################################################################
 
   loadDisplayComponent() {
-    this.widgetContent.displayComponent().then((component: ComponentType<any>) => {
-      if(component) {
-        this.componentPortal = new ComponentPortal(component)
-        this.cdr.markForCheck();
-      }
-    })
+    if(this.widgetContent) {
+      this.widgetContent.displayComponent().then((component: ComponentType<any>) => {
+        if(component) {
+          this.componentPortal = new ComponentPortal(component)
+          this.cdr.markForCheck();
+        }
+      })
+    }
   }
 
 //##################################################################
@@ -95,14 +99,10 @@ export class WidgetContainerComponent implements OnInit, AfterViewInit {
 
   openSettingsDialog() {
     this.widgetContent.settingsComponent().then((component: ComponentType<any>) => {
-      this.dialog.open(component, {
-        width: '80vw',
-        height: '80vh',
-        data: {
-          dashboardService: this.dashboardService,
+      this.dashboardService.openDialog(component, 'medium', {
           widgetId: this.widgetId
-        },
-      });
+        }
+      )
     })
   }
 

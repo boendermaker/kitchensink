@@ -10,6 +10,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { WidgetContainerComponent } from './widget-container/widget-container.component';
 import { WidgetSelectComponent } from './widget-select/widget-select.component';
 
+
+/**
+ * Dashboard Component
+ * <pre>
+ * Use a custom widget container component instead the default one:
+ * <app-dashboard [customWidgetContainer]="YourCustomComponentImportReference"></app-dashboard>
+ * </pre>
+ */
 @UntilDestroy()
 @Component({
   selector: 'app-dashboard',

@@ -4,7 +4,6 @@ import { widgetContent } from '@app/components/widgets/widget-content';
 import { DashboardCreateComponent } from '@app/components/dashboard/dashboard-create/dashboard-create.component';
 import { DashboardSettingsComponent } from '@app/components/dashboard/dashboard-settings/dashboard-settings.component';
 import { ComponentType } from '@angular/cdk/portal';
-import { WidgetContainerComponent } from '@app/components/dashboard/widget-container-custom/widget-container.component';
 
 @Component({
   selector: 'app-gridsterdashboard',
@@ -16,7 +15,6 @@ export class GridsterdashboardComponent implements OnInit {
 
   DashboardCreateComponent: ComponentType<any> = DashboardCreateComponent;
   DashboardSettingsComponent: ComponentType<any> = DashboardSettingsComponent;
-  WidgetContainerComponent: ComponentType<any> = WidgetContainerComponent;
 
   constructor(
     public dashboardService: DashboardService

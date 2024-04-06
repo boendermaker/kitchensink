@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { GridsterConfig, Resizable, Draggable, PushDirections, DisplayGrid, GridType, CompactType } from '../gridster2/gridsterConfig.interface';
 import { GridsterItem } from '../gridster2/gridsterItem.interface'
-import { Template } from '@amcharts/amcharts5';
+
 
 export interface IDashboardConfig extends GridsterConfig {
   draggable?: Draggable;
@@ -106,8 +106,8 @@ export const defaultDashboardConfig: IDashboardConfig = {
 export const defaultWidgetConfig = {
   x: 0,
   y: 0,
-  rows: 3,
-  cols: 4,
+  rows: 4,
+  cols: 3,
   hasContent: true
 }
 
@@ -117,8 +117,8 @@ export const dashboardDialogSize: IDashboardDialogSize = {
     height: '30vh'
   },
   medium: {
-    width: '60vw',
-    height: '40vh'
+    width: '70vw',
+    height: '80vh'
   },
   large: {
     width: '90vw',

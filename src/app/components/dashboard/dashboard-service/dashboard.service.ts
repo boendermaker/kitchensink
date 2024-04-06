@@ -40,6 +40,13 @@ export class DashboardService {
   ) {}
 
   //##################################################################
+  /** Initially set the widget content components, passt Object of Type IDashboardWidgetContent[] */
+  setWidgetContent(widgetContent: IDashboardWidgetContent[]): void {
+    this.widgetContent = widgetContent;
+    this.stateChanged();
+  }
+
+  //##################################################################
 
   renderDashboardById(id: string): void {
     this.renderedDashboardId = id;
@@ -54,13 +61,6 @@ export class DashboardService {
     const dashboard = this.dashboards$.value[index];
     this.renderedDashboardId = dashboard?.id;
     this.renderedDashboard$.next(dashboard);
-    this.stateChanged();
-  }
-
-  //##################################################################
-
-  setWidgetContent(widgetContent: IDashboardWidgetContent[]): void {
-    this.widgetContent = widgetContent;
     this.stateChanged();
   }
 

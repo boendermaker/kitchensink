@@ -99,20 +99,25 @@ export class DashboardServiceWidgetUtils {
 //##################################################################
 
   openWidgetSettingsDialog(widgetId: string) {
-
     const widget = this.getById(widgetId);
     const contentId = widget?.contentId;
     const widgetContent = this.getContentById(contentId);
 
     widgetContent.settingsComponent().then((component: ComponentType<any>) => {
-      this.ref.widgetDialog.open(component, {
+
+      this.ref.openDialog(component, 'medium', {
+        widgetId: widgetId
+      });
+
+      /*this.ref.widgetDialog.open(component, {
         width: '80vw',
         height: '80vh',
         data: {
           dashboardService: this,
           widgetId: widgetId
         },
-      });
+      });*/
+
     })
 
   }
