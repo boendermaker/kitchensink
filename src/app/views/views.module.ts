@@ -19,6 +19,7 @@ import { ResizabletablecolumnModule } from './resizabletablecolumn/resizabletabl
 import { ScrollloadModule } from './scrollload/scrollload.module';
 import { VirtualkeyboardModule } from './virtualkeyboard/virtualkeyboard.module';
 import { CompositionModule } from './composition/composition.module';
+import { TimerangeModule } from './timerange/timerange.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -46,6 +47,7 @@ import { CompositionModule } from './composition/composition.module';
     ScrollloadModule,
     VirtualkeyboardModule,
     CompositionModule,
+    TimerangeModule,
     AllAngularMaterialMDCModulesModule
   ]
 })
