@@ -49,7 +49,9 @@ export class TimesliderComponent implements OnInit, AfterViewInit {
     this.dragResizer('left');
     this.dragResizer('right');
     this.dragRange();
-    this.positionToPercent();
+    this.resizeRange('left');
+    this.resizeRange('right');
+    this.positionToValue();
   }
 
   //########################################################################
@@ -167,8 +169,8 @@ export class TimesliderComponent implements OnInit, AfterViewInit {
     }
 
     resizer.style.left = posX + 'px';
-    this.positionToPercent();
     limitBounds(type);
+    this.positionToValue();
   }
 
   //########################################################################
@@ -199,24 +201,26 @@ export class TimesliderComponent implements OnInit, AfterViewInit {
 
   //########################################################################
 
-  positionToPercent(): void {
+  positionToValue(): void {
 
     const resizerLeftRect = this.resizerLeft.getBoundingClientRect();
     const resizerRightRect = this.resizerRight.getBoundingClientRect();
     const dateAxisRect = this.dateAxis.getBoundingClientRect();
 
-    const leftPercent = (resizerLeftRect.left - dateAxisRect.left) / dateAxisRect.width * 100 / 100;
-    const rightPercent = (resizerRightRect.left - dateAxisRect.left) / dateAxisRect.width * 100 / 100;
+    const leftPercent = (resizerLeftRect.left - dateAxisRect.left) / dateAxisRect.width;
+    const rightPercent = (resizerRightRect.left - dateAxisRect.left) / dateAxisRect.width;
 
-    //console.log(leftPercent, rightPercent);
+    const timeDiff = this.timeTo - this.timeFrom;
+    const valueLeft = this.timeFrom + timeDiff * leftPercent;
+    const valueRight = this.timeTo + timeDiff * rightPercent;
 
-    const timeDiff = this.timeFrom - this.timeTo;
-    const percentTime = Math.floor(this.timeTo * rightPercent /1000/60/60/24);
     console.log(
       this.timeFrom,
       this.timeTo,
-      percentTime,
-      DateTime.fromMillis(percentTime).toFormat('dd.MM.yyyy HH:mm'),
+      valueLeft,
+      valueRight,
+      DateTime.fromMillis(valueLeft).toFormat('dd.MM.yyyy HH:mm:ss'),
+      DateTime.fromMillis(valueRight).toFormat('dd.MM.yyyy HH:mm:ss')
     )
 
     
