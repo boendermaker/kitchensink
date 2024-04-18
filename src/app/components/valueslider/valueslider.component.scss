@@ -1,7 +1,8 @@
-.timeslider {
+.valueslider {
     width: 100%;
     padding: 0;
     margin:0;
+    box-sizing: border-box;
 
     &__dateaxis {
         position: relative;
@@ -19,6 +20,7 @@
             background: black;
             cursor: pointer;
             z-index: 10;
+            opacity: .25;
         }
 
         &__resizer-right {
@@ -29,9 +31,10 @@
             background: black;
             cursor: pointer;
             z-index: 12;
+            opacity: .25;
         }
 
-        &__tick-container {
+        &__scale {
             position: absolute;
             bottom: -20px;
             left: 0;

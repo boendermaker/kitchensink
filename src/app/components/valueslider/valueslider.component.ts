@@ -1,25 +1,47 @@
-import { time } from '@amcharts/amcharts5';
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, Renderer2 } from '@angular/core';
-import { DateTime } from 'luxon';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { distinctUntilChanged, fromEvent, map, switchMap, takeUntil, tap } from 'rxjs';
 
+interface IRect {
+  hostRect: DOMRect;
+  sliderContainerRect: DOMRect;
+  dateAxisRect: DOMRect;
+  rangeRect: DOMRect;
+  resizerLeftRect: DOMRect;
+  resizerRightRect: DOMRect;
+  scaleRect: DOMRect;
+  tickRect: DOMRect;
+}
+
+/**
+ * inputs: minValue, maxValue
+ * outputs: sliderLeftValue, sliderRightValue
+ */
 @Component({
-  selector: 'app-timeslider',
+  selector: 'app-valueslider',
   standalone: true,
   imports: [],
-  templateUrl: './timeslider.component.html',
-  styleUrl: './timeslider.component.scss'
+  templateUrl: './valueslider.component.html',
+  styleUrl: './valueslider.component.scss'
 })
-export class TimesliderComponent implements OnInit, AfterViewInit {
+export class ValueSliderComponent implements OnInit, AfterViewInit {
 
-  timeFrom: number = DateTime.now().minus({days: 1}).toMillis();
-  timeTo: number = DateTime.now().toMillis();
+  @Input() set minValue(value: number) {
+    this._minValue = Number(value);
+  };
+  @Input() set maxValue(value: number) {
+    this._maxValue = Number(value);
+  };
+  @Output() sliderLeftValue: EventEmitter<number> = new EventEmitter();
+  @Output() sliderRightValue: EventEmitter<number> = new EventEmitter();
+
+  _minValue: number = null;
+  _maxValue: number = null;
 
   hostEl: HTMLElement;
   sliderContainer: HTMLElement;
   dateAxis: HTMLElement;
-  tickContainer: HTMLElement;
+  scale: HTMLElement;
   tick: HTMLElement;
   range: HTMLElement;
   resizerLeft: HTMLElement;
@@ -45,26 +67,30 @@ export class TimesliderComponent implements OnInit, AfterViewInit {
 
   //########################################################################
 
-  render(): void {
-    this.dragResizer('left');
-    this.dragResizer('right');
-    this.dragRange();
-    this.resizeRange('left');
-    this.resizeRange('right');
-    this.positionToValue();
-  }
-
-  //########################################################################
-
   initElements(): void {
     this.hostEl = this.el.nativeElement;
-    this.sliderContainer = this.hostEl.querySelector('#timeslider');
+    this.sliderContainer = this.hostEl.querySelector('#valueslider');
     this.dateAxis = this.hostEl.querySelector('#dateaxis')
     this.range = this.hostEl.querySelector('#range');
     this.resizerLeft = this.hostEl.querySelector('#resizer-left');
     this.resizerRight = this.hostEl.querySelector('#resizer-right');
-    this.tickContainer = this.hostEl.querySelector('#tick-container');
+    this.scale = this.hostEl.querySelector('#scale');
     this.tick = this.hostEl.querySelector('#tick');
+  }
+
+  //########################################################################
+
+  getRect() {
+    return {
+      hostRect: this.hostEl.getBoundingClientRect(),
+      sliderContainerRect: this.sliderContainer.getBoundingClientRect(),
+      dateAxisRect: this.dateAxis.getBoundingClientRect(),
+      rangeRect: this.range.getBoundingClientRect(),
+      resizerLeftRect: this.resizerLeft.getBoundingClientRect(),
+      resizerRightRect: this.resizerRight.getBoundingClientRect(),
+      scaleRect: this.scale.getBoundingClientRect(),
+      tickRect: this.tick.getBoundingClientRect()
+    }
   }
 
   //########################################################################
@@ -103,7 +129,7 @@ export class TimesliderComponent implements OnInit, AfterViewInit {
   //########################################################################
 
   dragRange(): void {
-    
+
     fromEvent<MouseEvent>(this.range, 'mousedown').pipe(
       tap((e) => e.preventDefault()),
       switchMap(() => {
@@ -133,16 +159,18 @@ export class TimesliderComponent implements OnInit, AfterViewInit {
   //########################################################################
 
   positionRange(posX: number): void {
-    const rangeRect = this.range.getBoundingClientRect();
+    const {rangeRect, dateAxisRect} = this.getRect();
+    //const rangeRect = this.range.getBoundingClientRect();
+    
     const limitBounds = () => {
       if(posX <= 0) {
         this.range.style.left = 0 + 'px';
         this.positionResizer('left', 0);
         this.positionResizer('right', this.distance);
       }
-      if(posX > this.dateAxis.getBoundingClientRect().width - this.range.getBoundingClientRect().width) {
-        this.range.style.left = this.dateAxis.getBoundingClientRect().width - this.range.getBoundingClientRect().width + 'px';
-        this.positionResizer('left', rangeRect.left - this.dateAxis.getBoundingClientRect().left);
+      if(posX > dateAxisRect.width - rangeRect.width) {
+        this.range.style.left = dateAxisRect.width - rangeRect.width + 'px';
+        this.positionResizer('left', rangeRect.left - dateAxisRect.left);
       }
     }
 
@@ -156,20 +184,29 @@ export class TimesliderComponent implements OnInit, AfterViewInit {
 
   positionResizer(type: 'left'|'right', posX: number): void {
     const resizer: HTMLElement = type == 'left' ? this.resizerLeft : this.resizerRight;
+    const resizerRect: DOMRect = resizer.getBoundingClientRect();
+    const {dateAxisRect, resizerLeftRect, resizerRightRect} = this.getRect();
+
     const limitBounds = (type: 'left'|'right') => {
       if(posX <= 0) {
         resizer.style.left = 0 + 'px';
       }
-      if(posX > this.dateAxis.getBoundingClientRect().width - resizer.getBoundingClientRect().width) {
-        resizer.style.left = this.dateAxis.getBoundingClientRect().width - resizer.getBoundingClientRect().width + 'px';
+      if(posX > dateAxisRect.width - resizerRect.width) {
+        resizer.style.left = dateAxisRect.width - resizerRect.width + 'px';
       }
-      if(this.distance <= (this.resizerLeft.getBoundingClientRect().width + this.resizerRight.getBoundingClientRect().width)) {
-        resizer.style.left = this.range.getBoundingClientRect().left + 'px';
-      }
-    }
+      if(type == 'right' && posX <= dateAxisRect.left - resizerRect.left + resizerRect.width) {
+        resizer.style.left = dateAxisRect.left + resizerRect.width + 'px';
+      }else {
 
+      }
+      /*if(this.distance < (resizerLeftRect.width + resizerRightRect.width)) {
+        resizer.style.left = resizerLeftRect.left - dateAxisRect.left + resizerLeftRect.width + 'px';
+      }*/
+    }
+    
     resizer.style.left = posX + 'px';
     limitBounds(type);
+        
     this.positionToValue();
   }
 
@@ -177,9 +214,10 @@ export class TimesliderComponent implements OnInit, AfterViewInit {
   
   resizeRange(type: 'left'|'right'): void {
     this.distance = this.getResizerDistance();
+    const {resizerLeftRect, dateAxisRect} = this.getRect();
 
     if(type == 'left') {
-      this.range.style.left = this.resizerLeft.getBoundingClientRect().left - this.dateAxis.getBoundingClientRect().left + 'px';
+      this.range.style.left = resizerLeftRect.left - dateAxisRect.left + 'px';
       this.range.style.width = this.distance + 'px';
     }
     if(type == 'right') {
@@ -190,9 +228,7 @@ export class TimesliderComponent implements OnInit, AfterViewInit {
   //########################################################################
 
   getResizerDistance(): number {
-    const resizerLeftRect = this.resizerLeft.getBoundingClientRect();
-    const resizerRightRect = this.resizerRight.getBoundingClientRect();
-    const dateAxisRect = this.dateAxis.getBoundingClientRect();
+    const {resizerLeftRect, resizerRightRect, dateAxisRect} = this.getRect();
 
     const distance = Math.abs(((resizerRightRect.left - dateAxisRect.left) - (resizerLeftRect.left - dateAxisRect.left)));
 
@@ -202,27 +238,24 @@ export class TimesliderComponent implements OnInit, AfterViewInit {
   //########################################################################
 
   positionToValue(): void {
+    const {resizerLeftRect, resizerRightRect, dateAxisRect} = this.getRect();
 
-    const resizerLeftRect = this.resizerLeft.getBoundingClientRect();
-    const resizerRightRect = this.resizerRight.getBoundingClientRect();
-    const dateAxisRect = this.dateAxis.getBoundingClientRect();
+      const leftPercent = (resizerLeftRect.left - dateAxisRect.left) / dateAxisRect.width;
+      const rightPercent = (resizerRightRect.left - dateAxisRect.left) / dateAxisRect.width;
 
-    const leftPercent = (resizerLeftRect.left - dateAxisRect.left) / dateAxisRect.width;
-    const rightPercent = (resizerRightRect.left - dateAxisRect.left) / dateAxisRect.width;
+      const diff = this._maxValue - this._minValue;
+      const valueLeft = this._minValue + diff * leftPercent;
+      const valueRight = this._minValue + diff * rightPercent;
 
-    const timeDiff = this.timeTo - this.timeFrom;
-    const valueLeft = this.timeFrom + timeDiff * leftPercent;
-    const valueRight = this.timeTo + timeDiff * rightPercent;
+      this.sliderLeftValue.emit(valueLeft);
+      this.sliderRightValue.emit(valueRight);
 
-    console.log(
-      this.timeFrom,
-      this.timeTo,
-      valueLeft,
-      valueRight,
-      DateTime.fromMillis(valueLeft).toFormat('dd.MM.yyyy HH:mm:ss'),
-      DateTime.fromMillis(valueRight).toFormat('dd.MM.yyyy HH:mm:ss')
-    )
-
+      /*console.log(
+        this._minValue,
+        this._maxValue,
+        valueLeft,
+        valueRight
+      )*/
     
     /*for(let i=0; i<rangeMinutes; i++) {
       this.tickContainer.append(this.tick.cloneNode(true));
@@ -231,5 +264,16 @@ export class TimesliderComponent implements OnInit, AfterViewInit {
   }
 
   //########################################################################
+
+  render(): void {
+    this.dragResizer('left');
+    this.dragResizer('right');
+    this.dragRange();
+    this.resizeRange('left');
+    this.resizeRange('right');
+    this.positionToValue();
+  }
+
+//########################################################################
 
 }

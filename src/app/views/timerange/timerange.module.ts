@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TimerangeComponent } from './timerange.component';
-import { TimesliderComponent } from '@app/components/timeslider/timeslider.component';
-
+import { ValueSliderComponent } from '@app/components/valueslider/valueslider.component';
 
 
 @NgModule({
@@ -11,7 +10,7 @@ import { TimesliderComponent } from '@app/components/timeslider/timeslider.compo
   imports: [
     CommonModule,
     TimerangeComponent,
-    TimesliderComponent
+    ValueSliderComponent
   ]
 })
 export class TimerangeModule { }

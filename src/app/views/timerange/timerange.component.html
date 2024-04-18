@@ -1,4 +1,4 @@
-<h1>Setting Timerange concepts</h1>
+<h1>Rangesliders</h1>
 <div style="margin-bottom: 48px;">
   <p>
     Manage application state during runtime with only a service.
@@ -6,5 +6,10 @@
 </div>
 
 <div class="b-d-flex b-flex-column" style="gap: 24px;">
-    <app-timeslider></app-timeslider>
+    <app-valueslider [minValue]="0" [maxValue]="100" (sliderLeftValue)="leftValue($event)" (sliderRightValue)="rightValue($event)"></app-valueslider>
+</div>
+
+<div class="b-d-flex b-justify-content-between">
+<div>{{valueLeft}}</div>
+<div>{{valueRight}}</div>
 </div>
