@@ -11,9 +11,9 @@
     "forceConsistentCasingInFileNames": true,
     "strict": false,
     "noImplicitOverride": false,
-    "noPropertyAccessFromIndexSignature": true,
+    "noPropertyAccessFromIndexSignature": false,
     "noImplicitReturns": false,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": false,
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
@@ -38,6 +38,6 @@
     "strictInputAccessModifiers": false,
     "strictTemplates": false,
     "skipTemplateCodegen": true,
-    "strictMetadataEmit": true
+    "strictMetadataEmit": false
   }
 }

@@ -20,6 +20,7 @@ import { ScrollloadModule } from './scrollload/scrollload.module';
 import { VirtualkeyboardModule } from './virtualkeyboard/virtualkeyboard.module';
 import { CompositionModule } from './composition/composition.module';
 import { TimerangeModule } from './timerange/timerange.module';
+import { TableformModule } from './tableform/tableform.module'
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -48,6 +49,7 @@ import { TimerangeModule } from './timerange/timerange.module';
     VirtualkeyboardModule,
     CompositionModule,
     TimerangeModule,
+    TableformModule,
     AllAngularMaterialMDCModulesModule
   ]
 })

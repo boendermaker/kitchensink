@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableformComponent } from './tableform.component';
+import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -9,7 +11,10 @@ import { TableformComponent } from './tableform.component';
     TableformComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AllAngularMaterialMDCModulesModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class TableformModule { }
