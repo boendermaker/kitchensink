@@ -1,13 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { UserFormGroup } from '@app/shared/formgroups/userformgroup.class';
 
-interface IUser {
-  id: string;
-  username: string;
-  firstname: string;
-  lastname: string;
-}
 
 @Component({
   selector: 'app-tableform',
@@ -16,10 +11,12 @@ interface IUser {
 })
 export class TableformComponent {
 
+  @ViewChild(MatTable) table: MatTable<any>;
+
   tableFormGroup: FormGroup;
-  user: IUser[] = [];
-  dataSource: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
   displayedColumns: string[] = ['username', 'firstname', 'lastname'];
+
 
   get userFormArray(): FormArray {
     return this.tableFormGroup.get('users') as FormArray;
@@ -30,10 +27,18 @@ export class TableformComponent {
     this.tableFormGroup = this.fb.group({
       users: this.fb.array([])
     });
+    this.dataSource.data = this.userFormArray.controls;
   }
 
   ngOnInit(): void {
-
+    console.log()
   }
+
+  addUser(): void {
+    this.userFormArray.push(new UserFormGroup().form);
+    this.table.renderRows();
+  }
+
+
 
 }

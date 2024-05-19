@@ -1,24 +1,52 @@
+<h1>Formarray tableform Add/Remove Items</h1>
+<div style="margin-bottom: 48px;">
+  <p>
+    Manage application state during runtime with only a service.
+  </p>
+  <button mat-mini-fab (click)="addUser()"><i class="material-icons-filled">add</i></button>
+</div>
+
 <form [formGroup]="tableFormGroup">
-<table mat-table [dataSource]="dataSource">
+<table mat-table [dataSource]="dataSource" formArrayName="users">
 
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    <td mat-cell *matCellDef="let row let rowIndex = index" [formGroupName]="rowIndex">
+      <mat-form-field>
+        <mat-label>id</mat-label>
+        <input matInput formControlName="id">
+      </mat-form-field>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="username">
     <th mat-header-cell *matHeaderCellDef> Username </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <td mat-cell *matCellDef="let row let rowIndex = index" [formGroupName]="rowIndex">
+      <mat-form-field>
+        <mat-label>username</mat-label>
+        <input matInput formControlName="userName">
+      </mat-form-field>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="firstname">
     <th mat-header-cell *matHeaderCellDef> Firstname </th>
-    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    <td mat-cell *matCellDef="let row let rowIndex = index" [formGroupName]="rowIndex">
+      <mat-form-field>
+        <mat-label>firstname</mat-label>
+        <input matInput formControlName="firstName">
+      </mat-form-field>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="lastname">
     <th mat-header-cell *matHeaderCellDef> Lastname </th>
-    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    <td mat-cell *matCellDef="let row let rowIndex = index" [formGroupName]="rowIndex">
+      <mat-form-field>
+        <mat-label>lastname</mat-label>
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
