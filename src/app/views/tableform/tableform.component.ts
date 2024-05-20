@@ -2,8 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { UserFormGroup } from '@app/shared/formgroups/userformgroup.class';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-
+@UntilDestroy()
 @Component({
   selector: 'app-tableform',
   templateUrl: './tableform.component.html',
@@ -14,6 +15,7 @@ export class TableformComponent {
   @ViewChild(MatTable) table: MatTable<any>;
 
   tableFormGroup: FormGroup;
+  tableFormState: any;
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   displayedColumns: string[] = ['username', 'firstname', 'lastname'];
 
@@ -31,14 +33,22 @@ export class TableformComponent {
   }
 
   ngOnInit(): void {
-    console.log()
+    this.handleFormChange();
   }
 
   addUser(): void {
-    this.userFormArray.push(new UserFormGroup().form);
+
+    this.userFormArray.push(new UserFormGroup({id: crypto.randomUUID()}).form);
     this.table.renderRows();
   }
 
+  handleFormChange(): void {
+    this.tableFormGroup.valueChanges.pipe(untilDestroyed(this)).subscribe({
+      next: (state) => {
+        this.tableFormState = JSON.stringify(state, null, 4);
+      }
+    })
+  }
 
 
 }

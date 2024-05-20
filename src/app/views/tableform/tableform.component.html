@@ -6,11 +6,14 @@
   <button mat-mini-fab (click)="addUser()"><i class="material-icons-filled">add</i></button>
 </div>
 
+<div class="b-row">
+  <div class="b-col-md-6">
+
 <form [formGroup]="tableFormGroup">
 <table mat-table [dataSource]="dataSource" formArrayName="users">
 
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <th mat-header-cell *matHeaderCellDef>ID</th>
     <td mat-cell *matCellDef="let row let rowIndex = index" [formGroupName]="rowIndex">
       <mat-form-field>
         <mat-label>id</mat-label>
@@ -20,7 +23,7 @@
   </ng-container>
 
   <ng-container matColumnDef="username">
-    <th mat-header-cell *matHeaderCellDef> Username </th>
+    <th mat-header-cell *matHeaderCellDef>Username</th>
     <td mat-cell *matCellDef="let row let rowIndex = index" [formGroupName]="rowIndex">
       <mat-form-field>
         <mat-label>username</mat-label>
@@ -30,7 +33,7 @@
   </ng-container>
 
   <ng-container matColumnDef="firstname">
-    <th mat-header-cell *matHeaderCellDef> Firstname </th>
+    <th mat-header-cell *matHeaderCellDef>Firstname</th>
     <td mat-cell *matCellDef="let row let rowIndex = index" [formGroupName]="rowIndex">
       <mat-form-field>
         <mat-label>firstname</mat-label>
@@ -40,7 +43,7 @@
   </ng-container>
 
   <ng-container matColumnDef="lastname">
-    <th mat-header-cell *matHeaderCellDef> Lastname </th>
+    <th mat-header-cell *matHeaderCellDef>Lastname</th>
     <td mat-cell *matCellDef="let row let rowIndex = index" [formGroupName]="rowIndex">
       <mat-form-field>
         <mat-label>lastname</mat-label>
@@ -49,8 +52,24 @@
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Lastname</th>
+    <td mat-cell *matCellDef="let row let rowIndex = index" [formGroupName]="rowIndex">
+      <div><button mat-icon-button><i class="material-icons-filled" (click)="deleteRow">delete</i></button></div>
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
 </form>
+
+</div>
+
+<div class="b-col-md-6">
+  <h4>Formstate</h4>
+  <app-codeviewer height="500">{{tableFormState}}</app-codeviewer>
+</div>
+
+</div>
