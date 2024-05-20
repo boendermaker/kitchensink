@@ -17,7 +17,7 @@ export class TableformComponent {
   tableFormGroup: FormGroup;
   tableFormState: any;
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
-  displayedColumns: string[] = ['username', 'firstname', 'lastname'];
+  displayedColumns: string[] = ['username', 'firstname', 'lastname', 'actions'];
 
 
   get userFormArray(): FormArray {
@@ -37,8 +37,14 @@ export class TableformComponent {
   }
 
   addUser(): void {
-
     this.userFormArray.push(new UserFormGroup({id: crypto.randomUUID()}).form);
+    this.table.renderRows();
+  }
+
+  removeUser(index: number): void {
+    console.log(index);
+    this.userFormArray.removeAt(index);
+    //this.dataSource.data = this.userFormArray.controls;
     this.table.renderRows();
   }
 

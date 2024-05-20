@@ -55,7 +55,7 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Lastname</th>
     <td mat-cell *matCellDef="let row let rowIndex = index" [formGroupName]="rowIndex">
-      <div><button mat-icon-button><i class="material-icons-filled" (click)="deleteRow">delete</i></button></div>
+      <div><button mat-icon-button (click)="removeUser(rowIndex)"><i class="material-icons-filled">delete</i></button></div>
     </td>
   </ng-container>
 
