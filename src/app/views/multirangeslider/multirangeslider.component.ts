@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { ValueSliderComponent } from "../../components/valueslider/valueslider.component";
 
 @Component({
-    selector: 'app-timerange',
+    selector: 'app-multirangeslider',
     standalone: true,
-    templateUrl: './timerange.component.html',
-    styleUrl: './timerange.component.scss',
+    templateUrl: './multirangeslider.component.html',
+    styleUrl: './multirangeslider.component.scss',
     imports: [ValueSliderComponent]
 })
-export class TimerangeComponent implements OnInit {
+export class MultirangeSliderComponent implements OnInit {
 
     valueLeft: number;
     valueRight: number;

@@ -28,7 +28,7 @@ export class AppComponent {
     {title: 'Load more on Scroll', path: '/scrollload'},
     {title: 'Virtual Keyboard', path: '/virtualkeyboard'},
     {title: 'Component Composition', path: '/composition'},
-    {title: 'Timerange concepts', path: '/timerange'},
+    {title: 'Multirange Slider', path: '/multirangeslider'},
   ];
 
   constructor() {

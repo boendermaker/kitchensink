@@ -21,8 +21,8 @@ export class DrawermodalComponent implements OnInit {
 
   openModal(): void {
     const dialogRef = this.modalDialog.open(DrawermodaldialogComponent, {
-      width: '100%',
-      height: '90%',
+      width: '90vw',
+      height: '90vh',
       data: {},
     });
 

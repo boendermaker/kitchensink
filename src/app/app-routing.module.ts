@@ -18,7 +18,7 @@ import { ResizabletablecolumnComponent } from './views/resizabletablecolumn/resi
 import { ScrollloadComponent } from './views/scrollload/scrollload.component';
 import { VirtualkeyboardComponent } from './views/virtualkeyboard/virtualkeyboard.component';
 import { CompositionComponent } from './views/composition/composition.component';
-import { TimerangeComponent } from './views/timerange/timerange.component';
+import { MultirangeSliderComponent } from './views/multirangeslider/multirangeslider.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -40,7 +40,7 @@ const routes: Routes = [
   { path: 'scrollload', component: ScrollloadComponent },
   { path: 'virtualkeyboard', component: VirtualkeyboardComponent },
   { path: 'composition', component: CompositionComponent },
-  { path: 'timerange', component: TimerangeComponent }
+  { path: 'multirangeslider', component: MultirangeSliderComponent }
 ];
 
 @NgModule({

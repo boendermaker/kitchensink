@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TimerangeComponent } from './timerange.component';
+import { MultirangeSliderComponent } from './multirangeslider.component';
 import { ValueSliderComponent } from '@app/components/valueslider/valueslider.component';
 
 
@@ -9,8 +9,8 @@ import { ValueSliderComponent } from '@app/components/valueslider/valueslider.co
   ],
   imports: [
     CommonModule,
-    TimerangeComponent,
+    MultirangeSliderComponent,
     ValueSliderComponent
   ]
 })
-export class TimerangeModule { }
+export class MultirangeSliderModule { }

@@ -13,13 +13,12 @@ import { WebcomponentModule } from '@app/views/webcomponent/webcomponent.module'
 import { CodeviewerModule } from '@app/components/codeviewer/codeviewer.module';
 import { DragdroptabsModule } from './dragdroptabs/dragdroptabs.module';
 import { GridsterdashboardModule } from './gridsterdashboard/gridsterdashboard.module';
-import { DialtimepickerModule } from './dialtimepicker/dialtimepicker.module';
 import { StateModule } from './state/state.module';
 import { ResizabletablecolumnModule } from './resizabletablecolumn/resizabletablecolumn.module';
 import { ScrollloadModule } from './scrollload/scrollload.module';
 import { VirtualkeyboardModule } from './virtualkeyboard/virtualkeyboard.module';
 import { CompositionModule } from './composition/composition.module';
-import { TimerangeModule } from './timerange/timerange.module';
+import { MultirangeSliderModule } from './multirangeslider/multirangeslider.module';
 import { TableformModule } from './tableform/tableform.module'
 
 @NgModule({
@@ -42,13 +41,12 @@ import { TableformModule } from './tableform/tableform.module'
     WebcomponentModule,
     DragdroptabsModule,
     GridsterdashboardModule,
-    DialtimepickerModule,
     StateModule,
     ResizabletablecolumnModule,
     ScrollloadModule,
     VirtualkeyboardModule,
     CompositionModule,
-    TimerangeModule,
+    MultirangeSliderModule,
     TableformModule,
     AllAngularMaterialMDCModulesModule
   ]
