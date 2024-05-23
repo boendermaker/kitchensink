@@ -1,0 +1,67 @@
+<div class="main-container">
+
+    <section class="header-section">
+      <div class="header-section-headline">
+        <h6>FormArrayEditor</h6>
+      </div>
+      <div class="header-section-actions">
+        <button mat-icon-button (click)="addFormArrayItem()"><i class="material-icons-filled">add</i></button>
+      </div>
+    </section>
+  
+    <form [formGroup]="parentFormGroup">
+      <form [formArrayName]="parentFormArrayname">
+  
+    <section class="table-section">
+  
+      <table mat-table #formArrayTable [dataSource]="dataSource" class="mat-mdc-table--sticky-header">
+  
+        <ng-container matColumnDef="userName">
+          <th mat-header-cell *matHeaderCellDef>userName</th>
+          <td mat-cell *matCellDef="let row let rowIndex = index" [formGroupName]="rowIndex">
+            <mat-form-field>
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="userName">
+            </mat-form-field>
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef>firstName</th>
+          <td mat-cell *matCellDef="let row let rowIndex = index" [formGroupName]="rowIndex">
+            <mat-form-field>
+              <mat-label>First name</mat-label>
+              <input matInput formControlName="firstName">
+            </mat-form-field>
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef>lastName</th>
+            <td mat-cell *matCellDef="let row let rowIndex = index" [formGroupName]="rowIndex">
+              <mat-form-field>
+                <mat-label>Last name</mat-label>
+                <input matInput formControlName="lastName" >
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+        <ng-container matColumnDef="actions" style="width:0;">
+          <th mat-header-cell *matHeaderCellDef style="width:0;"></th>
+          <td mat-cell *matCellDef="let row let rowIndex = index" style="width:0;">
+            <button mat-icon-button (click)="removeFormArrayItem(rowIndex)"><i class="material-icons-filled">delete</i></button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+  
+    </section>
+  
+      </form>
+    </form>
+  
+  
+  </div>
+  

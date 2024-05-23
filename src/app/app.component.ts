@@ -29,6 +29,7 @@ export class AppComponent {
     {title: 'Virtual Keyboard', path: '/virtualkeyboard'},
     {title: 'Component Composition', path: '/composition'},
     {title: 'Multirange Slider', path: '/multirangeslider'},
+    {title: 'Control Container FormArray', path: '/controlcontainer'},
   ];
 
   constructor() {
