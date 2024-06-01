@@ -1,4 +1,4 @@
-# Kitchensink Boendermaker.de
+# Kitchensink Angular 17+ with CDK and Angular-Material
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17+
 
