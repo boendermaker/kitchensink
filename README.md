@@ -78,12 +78,13 @@ Dragsort a Mat-Tabgroup by dragging around the tabs and deleting by actionbutton
 ### State management with only an angular service
 Service and Behaviorsubjects are used to globally offer control over the appstate
 
-![state](https://www.boendermaker.de/github/statemanagementservice.gif | width=800)
+<img src="https://www.boendermaker.de/github/statemanagementservice.gif" style="width: 100%; height: auto;">
 
 
 ### Resize Mat-Table columns by drag
 Use a draghandle to resize each column of a mat-table
 
+<img src="https://www.boendermaker.de/github/tabelresizecolumns.gif" style="width: 100%; height: auto;">
 ![resizecolumns](https://www.boendermaker.de/github/tabelresizecolumns.gif | width=800)
 
 
