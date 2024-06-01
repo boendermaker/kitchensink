@@ -14,12 +14,14 @@ Mat table combined with a Formgroup, Formcontrols and a Formarray
 
 ![Tableform](https://www.boendermaker.de/github/formarraytable.gif?) 
 
+---
 
 ### Mat-Dialog Drawer
 Mat-Dialog including a Mat-Drawe with open/close action
 
 ![Flowers](https://www.boendermaker.de/github/modaldialogdrawer.gif?)
 
+---
 
 ### Mat-Table
 Default Mat-Table with data from an array
