@@ -24,91 +24,91 @@ Mat-Dialog including a Mat-Drawe with open/close action
 ### Mat-Table
 Default Mat-Table with data from an array
 
-![Flowers](https://www.boendermaker.de/github/datatable.gif)
+![mattable](https://www.boendermaker.de/github/datatable.gif)
 
 
 ### CDK Virtual-Scroll
 Default CDK Virtualscroll example
 
-![Flowers](https://www.boendermaker.de/github/cdkvirtualscroll.gif)
+![virtalscroll](https://www.boendermaker.de/github/cdkvirtualscroll.gif)
 
 
 ### Dynamic Formbuilder
 Build Mat-Formgroups with their correpsonding Controls by a Model
 
-![Flowers](https://www.boendermaker.de/github/dyanamicformbuilder.gif)
+![formbuilder](https://www.boendermaker.de/github/dyanamicformbuilder.gif)
 
 
 ### Recursive hierarchical menu
 Builds recusrivly a hierarchical indented menu structure
 
-![Flowers](https://www.boendermaker.de/github/recursivehierarchicalmenu.gif)
+![recursivemenu](https://www.boendermaker.de/github/recursivehierarchicalmenu.gif)
 
 
 ### Lazy recursive hierarchical menu
 Builds recusrivly a hierarchical indented menu structure and loads menuitems only on click
 
-![Flowers](https://www.boendermaker.de/github/lazyrecursivehierarchicalmenu.gif)
+![lazyrecursivemenu](https://www.boendermaker.de/github/lazyrecursivehierarchicalmenu.gif)
 
 
 ### Chiplists with formarray
 Mat-Chiplists that make use of formarrays and are part of a formgroup
 
-![Flowers](https://www.boendermaker.de/github/chiplistformarray.gif)
+![chiplist](https://www.boendermaker.de/github/chiplistformarray.gif)
 
 
 ### Webcomponents used in angular
 Makes use of lit-html and lit lib from google to reactivly connect webcomponents with angular
 
-![Flowers](https://www.boendermaker.de/github/webcomponents.gif)
+![webcomponents](https://www.boendermaker.de/github/webcomponents.gif)
 
 
 ### Gridster dashboard example
 Makes use of gridster dashboard, a service and several components to deliver dashboard functionality
 
-![Flowers](https://www.boendermaker.de/github/gridsterdashboard.gif)
+![dashboard](https://www.boendermaker.de/github/gridsterdashboard.gif)
 
 
 ### Mat-Tabgroup draggable and deletable
 Dragsort a Mat-Tabgroup by dragging around the tabs and deleting by actionbutton
 
-![Flowers](https://www.boendermaker.de/github/dragdropdeletetabs.gif)
+![dragtabs](https://www.boendermaker.de/github/dragdropdeletetabs.gif)
 
 
 ### State management with only an angular service
 Service and Behaviorsubjects are used to globally offer control over the appstate
 
-![Flowers](https://www.boendermaker.de/github/statemanagementservice.gif)
+![state](https://www.boendermaker.de/github/statemanagementservice.gif)
 
 
 ### Resize Mat-Table columns by drag
 Use a draghandle to resize each column of a mat-table
 
-![Flowers](https://www.boendermaker.de/github/tabelresizecolumns.gif)
+![resizecolumns](https://www.boendermaker.de/github/tabelresizecolumns.gif)
 
 
 ### Kiosk keyboard
 Open a virtual kiosk keyboard on click to enter characters by mouse
 
-![Flowers](https://www.boendermaker.de/github/virtualkeyboard.gif)
+![kioskeyboard](https://www.boendermaker.de/github/virtualkeyboard.gif)
 
 
 ### Component composition pattern
 Demonstrates reactive usage of composition pattern within angular components
 
-![Flowers](https://www.boendermaker.de/github/compositionpattern.gif)
+![composition](https://www.boendermaker.de/github/compositionpattern.gif)
 
 
 ### Multi range slider
 Implementation of a slider that has a two draghandles and a draggable range to slide to entire range
 
-![Flowers](https://www.boendermaker.de/github/multirangeslider.gif)
+![multirangeslider](https://www.boendermaker.de/github/multirangeslider.gif)
 
 
 ### Control container formarray table
 Connect a component with a table and formcontrols and a formarray in it to an formarray in an external formgroup
 
-![Flowers](https://www.boendermaker.de/github/controlcontainerformarraytableform.gif)
+![controlcontainer](https://www.boendermaker.de/github/controlcontainerformarraytableform.gif)
 
 
 To get more help and info for this kitchensink, just write me an e-mail to info@boendermaker.de
