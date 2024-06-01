@@ -78,7 +78,7 @@ Dragsort a Mat-Tabgroup by dragging around the tabs and deleting by actionbutton
 ### State management with only an angular service
 Service and Behaviorsubjects are used to globally offer control over the appstate
 
-<img src="https://www.boendermaker.de/github/statemanagementservice.gif" style="width: 100%; height: auto;">
+<img src="https://www.boendermaker.de/github/statemanagementservice.gif" width="100%">
 
 
 ### Resize Mat-Table columns by drag
