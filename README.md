@@ -12,13 +12,13 @@ Change to projectfolder and run `ng serve` for a dev server. Navigate to `http:/
 ### Mat-Table Formarray
 Mat table combined with a Formgroup, Formcontrols and a Formarray
 
-![Tableform](https://www.boendermaker.de/github/formarraytable.gif) 
+![Tableform](https://www.boendermaker.de/github/formarraytable.gif?) 
 
 
 ### Mat-Dialog Drawer
 Mat-Dialog including a Mat-Drawe with open/close action
 
-![Flowers](https://www.boendermaker.de/github/modaldialogdrawer.gif)
+![Flowers](https://www.boendermaker.de/github/modaldialogdrawer.gif?)
 
 
 ### Mat-Table
