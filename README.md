@@ -1,14 +1,17 @@
-# Kitchensink
+# Kitchensink Boendermaker.de
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0. and is updated to Angular 15.0.0
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17+
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Change to projectfolder and run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## What you currently will find here
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+| ![Tableform](https://www.boendermaker.de/github/formarraytable.gif) | I am text to the right |
+| ![Flowers](https://www.boendermaker.de/github/modaldialogdrawer.gif) | I am text to the right |
+| ![Flowers](https://www.boendermaker.de/github/matdatatable) | I am text to the right |
+| ![Flowers](https://www.boendermaker.de/github/matdatatable) | I am text to the right |
 
 ## Build
 
