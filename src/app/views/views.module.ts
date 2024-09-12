@@ -20,6 +20,7 @@ import { VirtualkeyboardModule } from './virtualkeyboard/virtualkeyboard.module'
 import { CompositionModule } from './composition/composition.module';
 import { MultirangeSliderModule } from './multirangeslider/multirangeslider.module';
 import { TableformModule } from './tableform/tableform.module'
+import { MultilangControlModule } from './multilangcontrol/multilangcontrol.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -48,6 +49,7 @@ import { TableformModule } from './tableform/tableform.module'
     CompositionModule,
     MultirangeSliderModule,
     TableformModule,
+    MultilangControlModule,
     AllAngularMaterialMDCModulesModule
   ]
 })

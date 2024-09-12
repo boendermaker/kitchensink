@@ -30,6 +30,7 @@ export class AppComponent {
     {title: 'Component Composition', path: '/composition'},
     {title: 'Multirange Slider', path: '/multirangeslider'},
     {title: 'Control Container FormArray', path: '/controlcontainer'},
+    {title: 'Multi Language Control', path: '/multilangcontrol'},
   ];
 
   constructor() {
