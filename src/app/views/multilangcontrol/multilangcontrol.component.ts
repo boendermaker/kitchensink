@@ -46,7 +46,7 @@ export class MultilangControlComponent implements AfterViewInit {
 
   buildFormGroup<FORMMODELTYPE>(formModel: FORMMODELTYPE, formGroup: FormGroup) {
 
-    const getPaths = (item) => {
+    const getPaths = (item: {[p: string]: string}) => {
       const iter = (r, p) => {
         const keys = Object.keys(r);
         if (keys.length) {
@@ -59,7 +59,7 @@ export class MultilangControlComponent implements AfterViewInit {
       return result;
     }
 
-    const fullPaths = (paths: any[]) => {
+    const fullPaths = (paths: string[]) => {
       const fullPaths = [];
 
       paths.forEach((path) => {
@@ -71,9 +71,8 @@ export class MultilangControlComponent implements AfterViewInit {
             temp += path[c] + '.';
           }
           count++;
-          fullPaths.push(temp);
+          fullPaths.push(temp.slice(0, -1));
         }
-        console.log(temp)
       })
 
 
@@ -82,49 +81,6 @@ export class MultilangControlComponent implements AfterViewInit {
     }
 
     console.log('FULL ', fullPaths(getPaths(this.formModel)));
-
-    const loop = (obj, currentKey, level) => {
-
-      level = level || '';
-
-      for(const key in obj) {
-
-        if(Object.keys(obj[key]).length) {
-          console.log(level, key, 'haschilds')
-        }else {
-          console.log(level, key, 'nochilds')
-        }
-
-        if(typeof obj[key] === 'object') {
-
-          if(Array.isArray(obj[key])) {
-            obj[key].forEach(arrayItem => loop(arrayItem, key, level + '.'))
-          }else {
-            loop(obj[key], key, level + '.');
-          }
-
-        }else {
-
-        }
-
-
-      }
-
-    }
-
-
-    const paths = getPaths(this.formModel);
-    console.log('PATHS ', paths);
-
-    paths.forEach((path) => {
-      const currentPath = [];
-      path.forEach((pathItem) => {
-
-      })
-    })
-
-
-    console.log(_.flatten(this.formModel))
 
   }
 
