@@ -25,7 +25,10 @@ export class MultilangControlComponent implements AfterViewInit {
         AB: ''
       },
       B: {
-        BA: '',
+        BA: [
+          {x: '', y: '', z: ''},
+          {x: '', y: '', z: ''},
+        ],
         BB: {
           BBA: {
             BBAA: '',
