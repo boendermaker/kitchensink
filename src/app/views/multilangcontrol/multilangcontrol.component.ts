@@ -64,20 +64,15 @@ export class MultilangControlComponent implements AfterViewInit {
 
       paths.forEach((path) => {
         let temp = '';
-        let count = 0;
 
         for(let i=0; i<path.length; i++) {
           for(let c=i; c<i+1; c++) {
             temp += path[c] + '.';
           }
-          count++;
           fullPaths.push(temp.slice(0, -1));
         }
       })
-
-
       return fullPaths
-
     }
 
     console.log('FULL ', fullPaths(getPaths(this.formModel)));
