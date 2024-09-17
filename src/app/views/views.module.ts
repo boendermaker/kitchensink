@@ -19,8 +19,8 @@ import { ScrollloadModule } from './scrollload/scrollload.module';
 import { VirtualkeyboardModule } from './virtualkeyboard/virtualkeyboard.module';
 import { CompositionModule } from './composition/composition.module';
 import { MultirangeSliderModule } from './multirangeslider/multirangeslider.module';
-import { TableformModule } from './tableform/tableform.module'
-import { MultilangControlModule } from './multilangcontrol/multilangcontrol.module';
+import { TableformModule } from './tableform/tableform.module';
+import { ModelToFormModule } from './modeltoform/modeltoform.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -49,7 +49,7 @@ import { MultilangControlModule } from './multilangcontrol/multilangcontrol.modu
     CompositionModule,
     MultirangeSliderModule,
     TableformModule,
-    MultilangControlModule,
+    ModelToFormModule,
     AllAngularMaterialMDCModulesModule
   ]
 })

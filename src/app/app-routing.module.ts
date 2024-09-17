@@ -20,7 +20,7 @@ import { VirtualkeyboardComponent } from './views/virtualkeyboard/virtualkeyboar
 import { CompositionComponent } from './views/composition/composition.component';
 import { MultirangeSliderComponent } from './views/multirangeslider/multirangeslider.component';
 import { ControlcontainerComponent } from './views/controlcontainer/controlcontainer.component';
-import { MultilangControlComponent } from './views/multilangcontrol/multilangcontrol.component';
+import { ModelToFormComponent } from './views/modeltoform/modeltoform.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: 'composition', component: CompositionComponent },
   { path: 'multirangeslider', component: MultirangeSliderComponent },
   { path: 'controlcontainer', component: ControlcontainerComponent },
-  { path: 'multilangcontrol', component: MultilangControlComponent }
+  { path: 'multilangcontrol', component: ModelToFormComponent }
 ];
 
 @NgModule({
