@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, signal } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 
@@ -47,18 +47,18 @@ export class ModelToFormComponent implements AfterViewInit {
 
   createForm(data: any): FormGroup {
     const group = new FormGroup({});
-    
+
     for(let key in data) {
       if(Array.isArray(data[key])) {
 
         group.addControl(key, new FormArray([this.createForm(data[key][0])]));
-        
+
         for(let i=1; i<data[key].length; i++) {
           (<FormArray>group.get(key)).push(this.createForm(data[key][i]));
         }
 
       }else {
-        
+
         if(typeof data[key] === 'object') {
           group.addControl(key, this.createForm(data[key]));
         }else {
@@ -74,10 +74,15 @@ export class ModelToFormComponent implements AfterViewInit {
 //##########################################################
 
   buildFormGroup<FORMMODELTYPE>(formModel: FORMMODELTYPE, formGroup: FormGroup) {
-
     console.log('CREATEDFORM ', this.createForm(this.formModel));
-
   }
 
+//##########################################################
+
+  tester(value: string) {
+    return signal(value);
+  }
+
+//##########################################################
 
 }
