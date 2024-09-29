@@ -21,6 +21,7 @@ import { CompositionComponent } from './views/composition/composition.component'
 import { MultirangeSliderComponent } from './views/multirangeslider/multirangeslider.component';
 import { ControlcontainerComponent } from './views/controlcontainer/controlcontainer.component';
 import { ModelToFormComponent } from './views/modeltoform/modeltoform.component';
+import { RxjsplaygroundComponent } from './views/rxjsplayground/rxjsplayground.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -44,7 +45,8 @@ const routes: Routes = [
   { path: 'composition', component: CompositionComponent },
   { path: 'multirangeslider', component: MultirangeSliderComponent },
   { path: 'controlcontainer', component: ControlcontainerComponent },
-  { path: 'multilangcontrol', component: ModelToFormComponent }
+  { path: 'modeltoformgroup', component: ModelToFormComponent },
+  { path: 'rxjsplayground', component: RxjsplaygroundComponent }
 ];
 
 @NgModule({

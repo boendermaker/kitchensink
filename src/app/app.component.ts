@@ -30,7 +30,8 @@ export class AppComponent {
     {title: 'Component Composition', path: '/composition'},
     {title: 'Multirange Slider', path: '/multirangeslider'},
     {title: 'Control Container FormArray', path: '/controlcontainer'},
-    {title: 'Multi Language Control', path: '/multilangcontrol'},
+    {title: 'Model to Formgroup', path: '/modeltoformgroup'},
+    {title: 'RXJS Playground', path: '/rxjsplayground'},
   ];
 
   constructor() {
