@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg
+   width="500px"
+   height="500px"
+   viewBox="0 0 500 500"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="svgplayground.svg"
+   inkscape:export-filename="svgplayground.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs2" />
+<sodipodi:namedview
+   id="namedview2"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="2.362"
+   inkscape:cx="249.78831"
+   inkscape:cy="182.2608"
+   inkscape:window-width="2560"
+   inkscape:window-height="1377"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg1" />
+<g
+   id="layer1"
+   x="0"
+   y="0">
+  <rect
+     style="fill:#000000"
+     id="rect1"
+     width="200"
+     height="48"
+     x="0"
+     y="0" />
+  <text
+     x="10"
+     y="15"
+     style="font-family: Arial, font-size: 1px; fill: white;"
+     id="text1">XXX</text>
+  <text
+     x="10"
+     y="30"
+     style="font-family: Arial, font-size: 16px; fill: white;"
+     id="text2">XXX</text>
+</g>
+<g
+   id="Layer2" />
+
+, x=0 y=0
+        <rect
+   style="fill:#336699;stroke-width:0.769056"
+   id="rect5"
+   width="118.28958"
+   height="50"
+   x="0"
+   y="150"
+   inkscape:transform-center-x="2.1168501"
+   inkscape:transform-center-y="-23.708721" />
+<rect
+   style="fill:#336699;stroke-width:1.1123"
+   id="rect8"
+   width="112.78577"
+   height="109.69518"
+   x="140.7282"
+   y="120.36411"
+   inkscape:transform-center-x="0.42337003"
+   inkscape:transform-center-y="-52.943421" />
+<rect
+   style="fill:#336699;stroke-width:1.55258"
+   id="rect9"
+   width="116.17273"
+   height="207.49365"
+   x="277.64606"
+   y="78.450462"
+   inkscape:transform-center-x="1.2701101"
+   inkscape:transform-center-y="-100.14511" />
+</svg>

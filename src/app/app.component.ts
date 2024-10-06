@@ -32,6 +32,7 @@ export class AppComponent {
     {title: 'Control Container FormArray', path: '/controlcontainer'},
     {title: 'Model to Formgroup', path: '/modeltoformgroup'},
     {title: 'RXJS Playground', path: '/rxjsplayground'},
+    {title: 'SVG Playground', path: '/svgplayground'},
   ];
 
   constructor() {

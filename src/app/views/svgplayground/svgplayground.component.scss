@@ -1,0 +1,16 @@
+.svgplayground {
+
+  display: flex;
+  flex-direction: column;
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+  }
+
+}
+
+#svgcontainer {
+  background: white;
+}

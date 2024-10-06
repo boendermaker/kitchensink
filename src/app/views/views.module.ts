@@ -22,6 +22,7 @@ import { MultirangeSliderModule } from './multirangeslider/multirangeslider.modu
 import { TableformModule } from './tableform/tableform.module';
 import { ModelToFormModule } from './modeltoform/modeltoform.module';
 import { RxjsplaygroundComponent } from './rxjsplayground/rxjsplayground.component';
+import { SvgplaygroundComponent } from './svgplayground/svgplayground.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -52,6 +53,7 @@ import { RxjsplaygroundComponent } from './rxjsplayground/rxjsplayground.compone
     TableformModule,
     ModelToFormModule,
     RxjsplaygroundComponent,
+    SvgplaygroundComponent,
     AllAngularMaterialMDCModulesModule
   ]
 })
