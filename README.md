@@ -9,6 +9,14 @@ Change to projectfolder and run `ng serve` for a dev server. Navigate to `http:/
 ## What you will find here
 
 
+### SVG Playground
+Animate SVG-Elements by Value by choosing a value and add it by clicking on a SVG Element
+
+![SVGPlayground](https://www.boendermaker.de/github/svgplayground.gif?)
+
+---
+
+
 ### Mat-Table Formarray
 Mat table combined with a Formgroup, Formcontrols and a Formarray
 
