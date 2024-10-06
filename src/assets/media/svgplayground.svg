@@ -36,27 +36,75 @@
 <g
    id="layer1"
    x="0"
-   y="0">
+   y="0"
+   transform="translate(0.8467402,202.79424)">
   <rect
-     style="fill:#000000"
+     style="fill:#000000;stroke-width:0.764917"
      id="rect1"
-     width="200"
+     width="117.01948"
      height="48"
      x="0"
      y="0" />
   <text
      x="10"
      y="15"
-     style="font-family: Arial, font-size: 1px; fill: white;"
+     style="font-family:Arial, font-size;fill:#ffffff"
      id="text1">XXX</text>
   <text
      x="10"
-     y="30"
-     style="font-family: Arial, font-size: 16px; fill: white;"
+     y="38"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.3333px;font-family:Arial, font-size;-inkscape-font-specification:'Arial, font-size, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff"
      id="text2">XXX</text>
 </g>
 <g
+   id="layer1-3"
+   x="0"
+   y="0"
+   transform="translate(127.35986,203.48857)">
+  <rect
+     style="fill:#000000;stroke-width:0.764917"
+     id="rect1-2"
+     width="117.01948"
+     height="48"
+     x="0"
+     y="0" />
+  <text
+     x="10"
+     y="15"
+     style="font-family:Arial, font-size;fill:#ffffff"
+     id="text1-1">XXX</text>
+  <text
+     x="10"
+     y="38"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.3333px;font-family:Arial, font-size;-inkscape-font-specification:'Arial, font-size, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff"
+     id="text2-1">XXX</text>
+</g>
+<g
+   id="layer1-3-7"
+   x="0"
+   y="0"
+   transform="translate(254.72396,204.17443)">
+  <rect
+     style="fill:#000000;stroke-width:0.764917"
+     id="rect1-2-1"
+     width="117.01948"
+     height="48"
+     x="0"
+     y="0" />
+  <text
+     x="10"
+     y="15"
+     style="font-family:Arial, font-size;fill:#ffffff"
+     id="text1-1-6">XXX</text>
+  <text
+     x="10"
+     y="38"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.3333px;font-family:Arial, font-size;-inkscape-font-specification:'Arial, font-size, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff"
+     id="text2-1-6">XXX</text>
+</g>
+<g
    id="Layer2" />
+
 
 , x=0 y=0
         <rect
@@ -69,21 +117,21 @@
    inkscape:transform-center-x="2.1168501"
    inkscape:transform-center-y="-23.708721" />
 <rect
-   style="fill:#336699;stroke-width:1.1123"
+   style="fill:#336699;stroke-width:1.13298"
    id="rect8"
-   width="112.78577"
+   width="117.01947"
    height="109.69518"
-   x="140.7282"
-   y="120.36411"
-   inkscape:transform-center-x="0.42337003"
+   x="127.18034"
+   y="89.88147"
+   inkscape:transform-center-x="0.43926062"
    inkscape:transform-center-y="-52.943421" />
 <rect
-   style="fill:#336699;stroke-width:1.55258"
+   style="fill:#336699;stroke-width:1.42713"
    id="rect9"
    width="116.17273"
-   height="207.49365"
-   x="277.64606"
-   y="78.450462"
+   height="175.31754"
+   x="254.78407"
+   y="24.682468"
    inkscape:transform-center-x="1.2701101"
-   inkscape:transform-center-y="-100.14511" />
+   inkscape:transform-center-y="-84.615567" />
 </svg>
