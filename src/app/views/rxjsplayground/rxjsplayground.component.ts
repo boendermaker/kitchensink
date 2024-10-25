@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { forkJoin, map, mergeMap, of, share, shareReplay, switchMap } from 'rxjs';
+import { combineLatest, delay, first, forkJoin, interval, map, mergeMap, of, share, shareReplay, switchMap, take, timer } from 'rxjs';
 import { CodeviewerModule } from "../../components/codeviewer/codeviewer.module";
 
 interface IUser {
@@ -16,8 +16,7 @@ interface IUser {
 })
 export class RxjsplaygroundComponent {
 
-  switchMapCode = null;
-  forkJoinCode = null;
+  code = null;
 
   constructor(
     private http: HttpClient
@@ -25,8 +24,10 @@ export class RxjsplaygroundComponent {
     this.switchMapRequests();
     this.forkJoinRequests();
     this.getPostsByUser();
+    this.getPostsByUserWithInterval();
     this.getPostsAndTodosByUser();
     this.getPostsAndTodosByUserAndCommentsByPost();
+    this.combineLatestRequests();
   }
 
 //##########################################
@@ -72,7 +73,7 @@ export class RxjsplaygroundComponent {
         return data;
       })
 
-    ).subscribe((data) => this.switchMapCode = `User: entries${data.users.length}, Posts: entries${data.posts.length}, Todos: entries${data.todos.length}`);
+    ).subscribe((data) => this.code += `SwitchMap -> User: entries${data.users.length}, Posts: entries${data.posts.length}, Todos: entries${data.todos.length}\n`);
   }
 
 //##########################################
@@ -81,12 +82,26 @@ export class RxjsplaygroundComponent {
 
     return forkJoin({
         users: this.getPlaceholderUsers(),
-        posts: this.getPlaceholderPosts(''),
-        todos: this.getPlaceholderTodos('')
+        posts: this.getPlaceholderPosts('1'),
+        todos: this.getPlaceholderTodos('1')
       })
-      .subscribe((data) => this.forkJoinCode = `User: entries${data.users.length}, Posts: entries${data.posts.length}, Todos: entries${data.todos.length}`);
+      .subscribe((data) => this.code += `forkJoin -> User: entries${data.users.length}, Posts: entries${data.posts.length}, Todos: entries${data.todos.length}\n`);
 
   }
+
+//##########################################
+
+  combineLatestRequests() {
+
+    return combineLatest({
+        users: this.getPlaceholderUsers(),
+        posts: this.getPlaceholderPosts('1').pipe(delay(3000)),
+        todos: this.getPlaceholderTodos('1')
+      })
+      .subscribe((data) => this.code += `combineLatest -> User: entries${data.users.length}, Posts: entries${data.posts.length}, Todos: entries${data.todos.length}\n`);
+
+  }
+
 
 //##########################################
 
@@ -95,7 +110,7 @@ export class RxjsplaygroundComponent {
 
       switchMap((users: IUser[]) => {
 
-        return forkJoin(
+        return combineLatest(
 
           users.map((user) => this.getPlaceholderPosts(user.id).pipe(
 
@@ -111,6 +126,35 @@ export class RxjsplaygroundComponent {
 
     )
     .subscribe((data) => console.log(data))
+  }
+
+//##########################################
+
+  getPostsByUserWithInterval(): void {
+    this.getPlaceholderUsers().pipe(
+
+      switchMap((users: IUser[]) => {
+
+        return forkJoin(
+
+          users.map((user) => forkJoin({
+            loop: interval(1000).pipe(take(10), map(() => user.id)),
+            posts: this.getPlaceholderPosts(user.id),
+            todos: this.getPlaceholderTodos(user.id)
+          }).pipe(
+
+            map(({loop, posts, todos}) => {
+              return { loop, posts, todos };
+            })
+
+          ))
+
+        )
+
+      })
+
+    )
+    .subscribe((data) => data.forEach(({ loop, posts, todos }) => this.code += `User: ${loop} - Posts: entries${posts.length}, Todos: entries${todos.length}\n`))
   }
 
 //##########################################
@@ -155,13 +199,17 @@ export class RxjsplaygroundComponent {
 
             postscomplete: this.getPlaceholderPosts(user.id).pipe(
               switchMap((posts: any[]) => {
+
                 return forkJoin(
+
                   posts.map((post) => this.getPlaceholderComments(post.id).pipe(
                     map((comments: any[]) => {
                       return { post, comments }
                     })
                   ))
+
                 );
+
               })
             ),
             todos: this.getPlaceholderTodos(user.id)
