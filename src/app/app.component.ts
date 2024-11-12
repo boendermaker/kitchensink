@@ -33,6 +33,7 @@ export class AppComponent {
     {title: 'Model to Formgroup', path: '/modeltoformgroup'},
     {title: 'RXJS Playground', path: '/rxjsplayground'},
     {title: 'SVG Playground', path: '/svgplayground'},
+    {title: 'Datagrid', path: '/datagrid'},
   ];
 
   constructor() {

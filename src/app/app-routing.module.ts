@@ -23,6 +23,7 @@ import { ControlcontainerComponent } from './views/controlcontainer/controlconta
 import { ModelToFormComponent } from './views/modeltoform/modeltoform.component';
 import { RxjsplaygroundComponent } from './views/rxjsplayground/rxjsplayground.component';
 import { SvgplaygroundComponent } from './views/svgplayground/svgplayground.component';
+import { DatagridComponent } from './views/datagrid/datagrid.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -48,7 +49,8 @@ const routes: Routes = [
   { path: 'controlcontainer', component: ControlcontainerComponent },
   { path: 'modeltoformgroup', component: ModelToFormComponent },
   { path: 'rxjsplayground', component: RxjsplaygroundComponent },
-  { path: 'svgplayground', component: SvgplaygroundComponent }
+  { path: 'svgplayground', component: SvgplaygroundComponent },
+  { path: 'datagrid', component: DatagridComponent }
 ];
 
 @NgModule({
