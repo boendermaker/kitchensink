@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { forkJoin, map, mergeMap, of, share, shareReplay, switchMap } from 'rxjs';
+import { combineLatest, forkJoin, map, mergeMap, of, share, shareReplay, switchMap } from 'rxjs';
 import { CodeviewerModule } from "../../components/codeviewer/codeviewer.module";
 
 interface IUser {
@@ -18,11 +18,13 @@ export class RxjsplaygroundComponent {
 
   switchMapCode = null;
   forkJoinCode = null;
+  combineLatestCode = null;
 
   constructor(
     private http: HttpClient
   ) {
     this.switchMapRequests();
+    this.combineLatestRequests();
     this.forkJoinRequests();
     this.getPostsByUser();
     this.getPostsAndTodosByUser();
@@ -49,6 +51,20 @@ export class RxjsplaygroundComponent {
 
 //##########################################
 
+  combineLatestRequests() {
+    return this.getPlaceholderUsers().pipe(
+      switchMap((users: IUser[]) => {
+        return combineLatest({
+          users: of(users),
+          posts: this.getPlaceholderPosts('1'),
+          todos: this.getPlaceholderTodos('1')
+        })
+      })
+    ).subscribe((data) => console.log('COMBINE LATEST', this.combineLatestCode = `User: entries${data.users.length}, Posts: entries${data.posts.length}, Todos: entries${data.todos.length}`));
+  }
+
+//##########################################
+
   switchMapRequests() {
     const data = {
       users: [],
@@ -59,12 +75,12 @@ export class RxjsplaygroundComponent {
 
       switchMap((users: IUser[]) => {
         data.users = users;
-        return this.getPlaceholderPosts('');
+        return this.getPlaceholderPosts('1');
       }),
 
       switchMap((posts: any[]) => {
         data.posts = posts;
-        return this.getPlaceholderTodos('');
+        return this.getPlaceholderTodos('1');
       }),
 
       map((todos: any[]) => {
@@ -81,8 +97,8 @@ export class RxjsplaygroundComponent {
 
     return forkJoin({
         users: this.getPlaceholderUsers(),
-        posts: this.getPlaceholderPosts(''),
-        todos: this.getPlaceholderTodos('')
+        posts: this.getPlaceholderPosts('1'),
+        todos: this.getPlaceholderTodos('1')
       })
       .subscribe((data) => this.forkJoinCode = `User: entries${data.users.length}, Posts: entries${data.posts.length}, Todos: entries${data.todos.length}`);
 
