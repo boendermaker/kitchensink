@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild  } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BehaviorSubject, Observable, delay } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
