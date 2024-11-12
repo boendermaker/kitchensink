@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { DatagridtableComponent } from '@app/components/datagridtable/datagridtable.component';
+import { DatagridTableCellComponent } from '@app/components/datagridtable/cell/cell.component';
+import { DatagridTableComponent } from '@app/components/datagridtable/datagridtable.component';
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [DatagridtableComponent, MatTableModule, MatSortModule],
+  imports: [DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss'
 })

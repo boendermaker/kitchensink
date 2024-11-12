@@ -1,5 +1,5 @@
-import { AfterContentInit, Component, ContentChild, ContentChildren, input, Input, OnInit, QueryList, ViewChild } from '@angular/core';
-import { MatTableModule, MatTableDataSource, MatTable, MatNoDataRow, MatColumnDef, MatRowDef, MatHeaderRowDef } from '@angular/material/table';
+import { AfterContentInit, Component, ContentChild, ContentChildren, EventEmitter, HostBinding, Input, Output, QueryList, ViewChild, ViewEncapsulation } from '@angular/core';
+import { MatTableModule, MatTable, MatColumnDef, MatRowDef, MatHeaderRowDef } from '@angular/material/table';
 
 export interface Column {
   columnDef: string;
@@ -16,13 +16,15 @@ export interface Column {
   templateUrl: './datagridtable.component.html',
   styleUrl: './datagridtable.component.scss'
 })
-export class DatagridtableComponent implements AfterContentInit {
+export class DatagridTableComponent implements AfterContentInit {
 
   @ContentChildren(MatHeaderRowDef) headerRowDefs: QueryList<MatHeaderRowDef>;
   @ContentChildren(MatRowDef) rowDefs: QueryList<MatRowDef<any>>;
   @ContentChildren(MatColumnDef) columnDefs: QueryList<MatColumnDef>;
 
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
+
+  @Output() tableInstance = new EventEmitter<MatTable<any>>();
 
   @Input() dataSource: any[];
   @Input() columns: string[];
@@ -31,6 +33,7 @@ export class DatagridtableComponent implements AfterContentInit {
     this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
     this.rowDefs.forEach(rowDef => this.table.addRowDef(rowDef));
     this.headerRowDefs.forEach(headerRowDef => this.table.addHeaderRowDef(headerRowDef));
+    this.tableInstance.emit(this.table);
   }
 
 }
