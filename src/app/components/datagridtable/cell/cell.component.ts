@@ -9,8 +9,6 @@ import { Component, HostBinding } from '@angular/core';
 })
 export class DatagridTableCellComponent {
 
-  @HostBinding('class') materialTableCellClasses = 'mat-mdc-cell mdc-data-table__cell cdk-cell';
-
   constructor() {
 
   }

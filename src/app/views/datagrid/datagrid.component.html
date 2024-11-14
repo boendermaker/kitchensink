@@ -1,6 +1,10 @@
 <app-datagridtable [dataSource]="tabledata" [columns]="displayedColumns">
-    <ng-container matColumnDef="name">
-        <th datagridtableheader mat-header-cell *matHeaderCellDef>name</th>
-        <td datagridtablecell mat-cell *matCellDef="let element">{{element.name}}</td>
-    </ng-container>
+    
+    @for(displayedColumn of displayedColumns; track displayedColumn) {
+        <app-datagridtablecolumn [matColumnDef]="displayedColumn">
+            <th datagridtableheader mat-header-cell *matHeaderCellDef>{{displayedColumn}}</th>
+            <td datagridtablecell mat-cell *matCellDef="let element">{{element[displayedColumn]}}</td>
+        </app-datagridtablecolumn>
+    }
+
 </app-datagridtable>

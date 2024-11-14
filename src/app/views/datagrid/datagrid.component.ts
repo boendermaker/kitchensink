@@ -28,7 +28,7 @@ export class DatagridComponent {
 
   dataSource = new MatTableDataSource<any>();
 
-  displayedColumns: string[] = ['name'];
+  displayedColumns: string[] = ['position', 'name'];
 
   constructor() {
 
