@@ -1,10 +1,12 @@
 <app-datagridtable [dataSource]="tabledata" [columns]="displayedColumns">
-    
-    @for(displayedColumn of displayedColumns; track displayedColumn) {
-        <app-datagridtablecolumn [matColumnDef]="displayedColumn">
-            <th datagridtableheader mat-header-cell *matHeaderCellDef>{{displayedColumn}}</th>
-            <td datagridtablecell mat-cell *matCellDef="let element">{{element[displayedColumn]}}</td>
-        </app-datagridtablecolumn>
-    }
+
+  @for(displayedColumn of displayedColumns; track displayedColumn) {
+
+    <app-datagridtablecolumn [matColumnDef]="displayedColumn">
+      <th datagridtableheader mat-header-cell *matHeaderCellDef>{{displayedColumn}}</th>
+      <td datagridtablecell mat-cell *matCellDef="let element">{{element[displayedColumn]}}</td>
+    </app-datagridtablecolumn>
+
+  }
 
 </app-datagridtable>

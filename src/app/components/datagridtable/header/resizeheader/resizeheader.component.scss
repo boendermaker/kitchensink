@@ -1,0 +1,39 @@
+:host {
+  &:last-child .bar {
+    display: none;
+  }
+}
+
+.resizeTableColumnHandle {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.resizeTableColumnHandle__content {
+  flex: 1;
+}
+
+.resizeTableColumnHandle__handle {
+  display: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  padding: 0 24px;
+  margin: 0;
+  justify-self: flex-end;
+  border-right: 2px solid black;
+  //border-left: 2px solid transparent;
+  //border-right: 2px solid transparent;
+  //background: blueviolet;
+  //background-clip: content-box;
+  opacity: .1;
+  transition: opacity 0.3s;
+  cursor: ew-resize;
+
+  &:hover,
+  &:active {
+    opacity: 1;
+    transition: opacity 0.3s;
+
+  }
+}

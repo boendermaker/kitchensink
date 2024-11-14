@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { DatagridTableHeaderComponent } from '@app/components/datagridtable/header/header.component';
 import { DatagridTableCellComponent } from '@app/components/datagridtable/cell/cell.component';
+import { DatagridTableColumnComponent } from '@app/components/datagridtable/column/column.component';
 import { DatagridTableComponent } from '@app/components/datagridtable/datagridtable.component';
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent],
+  imports: [DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss'
 })
@@ -28,10 +30,9 @@ export class DatagridComponent {
 
   dataSource = new MatTableDataSource<any>();
 
-  displayedColumns: string[] = ['position', 'name'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
   constructor() {
-
   }
 
   ngOnInit() {
