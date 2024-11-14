@@ -26,7 +26,8 @@ import { SvgplaygroundComponent } from './svgplayground/svgplayground.component'
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [],
+  declarations: [
+  ],
   exports: [
     CodeviewerModule
   ],

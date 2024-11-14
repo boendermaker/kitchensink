@@ -8,7 +8,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   selector: 'app-resizabletablecolumn',
   templateUrl: './resizabletablecolumn.component.html',
   styleUrls: ['./resizabletablecolumn.component.scss'],
-  providers: [UserDataService]
+  providers: [UserDataService],
 })
 export class ResizabletablecolumnComponent {
 
