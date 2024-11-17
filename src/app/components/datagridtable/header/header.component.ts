@@ -2,15 +2,14 @@ import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef
 import { distinctUntilChanged, fromEvent, map, switchMap, takeUntil, tap } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { DatagridTableResizeHeaderComponent } from '@app/components/datagridtable/header/resizeheader/resizeheader.component';
-import { DatagridTableColumnComponent } from '../column/column.component';
-import { DragDropTableService } from '../dragdrop.servce';
 import { DragRefConfig, CdkDragHandle, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
+import { TableDragDropService } from '../tabledragdrop.service';
 
 @Component({
   selector: '[datagridtableheader]',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, DatagridTableResizeHeaderComponent, CdkDragHandle],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableResizeHeaderComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -27,8 +26,8 @@ export class DatagridTableHeaderComponent implements AfterViewInit, AfterContent
 
   constructor(
     @Inject(DOCUMENT) public documentRef: Document,
-    private dragDropTableService: DragDropTableService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    public tableDragDropService: TableDragDropService
   ) {
 
   }
@@ -43,39 +42,47 @@ export class DatagridTableHeaderComponent implements AfterViewInit, AfterContent
 
   //################################################
 
+
+
+  //################################################
+
   handleColumnResize(): void {
 
     this.tableHeaderElement = this.elementRef.nativeElement;
     this.tableHeaderHandleElement = this.elementRef.nativeElement.querySelector('#resizetablecolumnhandle');
 
-    fromEvent<MouseEvent>(this.tableHeaderHandleElement, 'mousedown').pipe(
-      tap((e) => e.preventDefault()),
-      switchMap(() => {
+    if(this.tableDragDropService.resizeColumns) {
 
-        const { width, right } = this.tableHeaderElement
-          .closest('th')!
-          .getBoundingClientRect();
+      fromEvent<MouseEvent>(this.tableHeaderHandleElement, 'mousedown').pipe(
+        tap((e) => e.preventDefault()),
+        switchMap(() => {
 
-        return fromEvent<MouseEvent>(this.documentRef, 'mousemove').pipe(
-          map(({ clientX }) => {
-            const finalWidth = width + clientX - right;
-            this.columnWidth = finalWidth;
-            this.tableHeaderElement.closest('th')!.style.width = `${finalWidth}px`;
-            return finalWidth;
-          }),
-          distinctUntilChanged(),
-          takeUntil(
-            fromEvent(this.documentRef, 'mouseup').pipe(
-              tap()
+          const { width, right } = this.tableHeaderElement
+            .closest('th')!
+            .getBoundingClientRect();
+
+          return fromEvent<MouseEvent>(this.documentRef, 'mousemove').pipe(
+            map(({ clientX }) => {
+              const finalWidth = width + clientX - right;
+              this.columnWidth = finalWidth;
+              this.tableHeaderElement.closest('th')!.style.width = `${finalWidth}px`;
+              return finalWidth;
+            }),
+            distinctUntilChanged(),
+            takeUntil(
+              fromEvent(this.documentRef, 'mouseup').pipe(
+                tap()
+                )
               )
-            )
-        );
-      })
-    ).subscribe({
-      next: (width) => {
+          );
+        })
+      ).subscribe({
+        next: (width) => {
 
-      }
-    });
+        }
+      });
+
+    }
 
   }
 

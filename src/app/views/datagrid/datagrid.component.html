@@ -1,4 +1,4 @@
-<app-datagridtable [dataSource]="tabledata" [columns]="displayedColumns">
+<app-datagridtable [dataSource]="tabledata" [columns]="displayedColumns" [dragSortRows]="true" [dragSortColumns]="true" [resizeColumns]="false">
 
   @for(displayedColumn of displayedColumns; track displayedColumn) {
 
