@@ -1,28 +1,33 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, Inject, QueryList, signal, WritableSignal } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, Inject, QueryList, signal, ViewChild, WritableSignal } from '@angular/core';
 import { distinctUntilChanged, fromEvent, map, switchMap, takeUntil, tap } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { DatagridTableResizeHeaderComponent } from '@app/components/datagridtable/header/resizeheader/resizeheader.component';
 import { DatagridTableColumnComponent } from '../column/column.component';
+import { DragDropTableService } from '../dragdrop.servce';
+import { DragRefConfig, CdkDragHandle, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 
 @Component({
   selector: '[datagridtableheader]',
   standalone: true,
-  imports: [DatagridTableResizeHeaderComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableResizeHeaderComponent, CdkDragHandle],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
 })
+
 export class DatagridTableHeaderComponent implements AfterViewInit, AfterContentInit {
 
-  @ContentChildren(DatagridTableHeaderComponent, {read: ElementRef}) header: QueryList<ElementRef>;
+  @ContentChildren(DatagridTableHeaderComponent) header: QueryList<DatagridTableHeaderComponent>;
 
   tableHeaderElement: HTMLElement;
   tableHeaderHandleElement: HTMLElement;
   columnWidth: number = 0;
-  columnId: string = '';
+  columnId: number;
   isLastHeader: WritableSignal<boolean> = signal(false);
 
   constructor(
     @Inject(DOCUMENT) public documentRef: Document,
+    private dragDropTableService: DragDropTableService,
     private elementRef: ElementRef
   ) {
 
@@ -34,7 +39,6 @@ export class DatagridTableHeaderComponent implements AfterViewInit, AfterContent
   }
 
   ngAfterContentInit(): void {
-
   }
 
   //################################################

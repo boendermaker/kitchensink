@@ -5,6 +5,7 @@ import { DatagridTableHeaderComponent } from '@app/components/datagridtable/head
 import { DatagridTableCellComponent } from '@app/components/datagridtable/cell/cell.component';
 import { DatagridTableColumnComponent } from '@app/components/datagridtable/column/column.component';
 import { DatagridTableComponent } from '@app/components/datagridtable/datagridtable.component';
+import { CdkDragHandle, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-datagrid',
@@ -37,6 +38,10 @@ export class DatagridComponent {
 
   ngOnInit() {
     this.dataSource.data = this.tabledata;
+  }
+
+  dropColumn(e): void {
+    console.log('dropColumn', e);
   }
 
 }

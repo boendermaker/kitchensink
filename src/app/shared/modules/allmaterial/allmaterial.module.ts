@@ -36,6 +36,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTreeModule} from '@angular/material/tree';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   exports: [
@@ -56,6 +57,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatExpansionModule,
     MatGridListModule,
     MatInputModule,
+    MatIconModule,
     MatListModule,
     MatMenuModule,
     MatNativeDateModule,

@@ -1,4 +1,8 @@
-<app-resizehandle [hidden]="isLastHeader()">
+<div style="display: flex; width: 100%;">
+<div headerdraghandle>
+  <i class="material-icons-filled">drag_indicator</i>
+</div>
+<app-resizehandle [hidden]="isLastHeader()" style="flex-grow: 1">
   <ng-content></ng-content>
 </app-resizehandle>
-
+</div>

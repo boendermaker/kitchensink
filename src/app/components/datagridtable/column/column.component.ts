@@ -1,13 +1,14 @@
 import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, QueryList } from '@angular/core';
 import { DatagridTableHeaderComponent } from '../header/header.component';
 import { DatagridTableCellComponent } from '../cell/cell.component';
+import { CdkDrag } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-datagridtablecolumn',
   standalone: true,
   imports: [],
   templateUrl: './column.component.html',
-  styleUrl: './column.component.scss'
+  styleUrl: './column.component.scss',
 })
 export class DatagridTableColumnComponent implements AfterContentInit {
 

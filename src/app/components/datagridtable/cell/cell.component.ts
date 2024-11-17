@@ -1,11 +1,11 @@
 import { Component, HostBinding } from '@angular/core';
+import { CdkDrag } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: '[datagridtablecell]',
   standalone: true,
   imports: [],
   templateUrl: './cell.component.html',
-  styleUrl: './cell.component.scss'
 })
 export class DatagridTableCellComponent {
 
