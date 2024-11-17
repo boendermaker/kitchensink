@@ -67,10 +67,11 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   ngOnInit(): void {
-    this.handleTableData();
+
   }
 
   ngAfterViewInit(): void {
+    this.handleTableData();
     this.initDragDrop();
   }
 
@@ -85,7 +86,6 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   handleTableData(): void {
     this.tableData.subscribe((data) => {
       this.dataSource.data = data;
-      this.tableDragDropService.dropLists['rowdropzone'].data = data;
       this.table.renderRows();
     });
   }
@@ -112,7 +112,6 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.tableDragDropService.dropLists['rowdropzone'].dropped
     .subscribe((a) => {
       if(a.isPointerOverContainer) {
-        console.log(a)
         moveItemInArray(this.dataSource.data, a.previousIndex, a.currentIndex);
         this.cdr.detectChanges();
         this.table.renderRows();

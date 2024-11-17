@@ -123,7 +123,7 @@ export class TableDragDropService {
  * @param dragHandleSelector
  */
   updateChanges(dropList: string, draggablesName: string, draggableSelector: string, dragHandleSelector?: string): void {
-    delete this.draggables[draggablesName];
+    this.draggables[draggablesName] = [];
 
     this.tableRef.nativeElement.querySelectorAll(draggableSelector).forEach((draggableElement, index) => {
         this.addDraggable(draggablesName, draggableElement, dragHandleSelector ? draggableElement.querySelector(dragHandleSelector) : null);
