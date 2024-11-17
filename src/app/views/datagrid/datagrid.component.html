@@ -1,4 +1,4 @@
-<app-datagridtable [dataSource]="tabledata" [columns]="displayedColumns" [dragSortRows]="true" [dragSortColumns]="true" [resizeColumns]="false">
+<app-datagridtable [tableData]="tableData" [columns]="displayedColumns" [dragSortRows]="true" [dragSortColumns]="true" [resizeColumns]="false">
 
   @for(displayedColumn of displayedColumns; track displayedColumn) {
 
@@ -10,3 +10,5 @@
   }
 
 </app-datagridtable>
+
+<button (click)="addData()">ADD</button>

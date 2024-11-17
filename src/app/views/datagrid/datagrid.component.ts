@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { DatagridTableHeaderComponent } from '@app/components/datagridtable/header/header.component';
@@ -6,6 +6,7 @@ import { DatagridTableCellComponent } from '@app/components/datagridtable/cell/c
 import { DatagridTableColumnComponent } from '@app/components/datagridtable/column/column.component';
 import { DatagridTableComponent } from '@app/components/datagridtable/datagridtable.component';
 import { CdkDragHandle, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-datagrid',
@@ -16,7 +17,7 @@ import { CdkDragHandle, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 })
 export class DatagridComponent {
 
-  tabledata: any[] = [
+  tableData: BehaviorSubject<any[]> = new BehaviorSubject([
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
     {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
     {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
@@ -27,17 +28,18 @@ export class DatagridComponent {
     {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
     {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
     {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  ];
-
-  dataSource = new MatTableDataSource<any>();
+  ]);
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
-    this.dataSource.data = this.tabledata;
+  }
+
+  addData(): void {
+    this.tableData.next(this.tableData.value.concat({position: Math.round(Math.random()*100), name: 'Blubb', weight: Math.random()*1000, symbol: 'XX'}));
   }
 
   dropColumn(e): void {

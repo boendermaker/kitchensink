@@ -1,7 +1,8 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, DragDrop, DragRef, DropListRef, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef, EventEmitter, HostBinding, Input, Output, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef, EventEmitter, HostBinding, Input, Output, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { MatTableModule, MatTable, MatColumnDef, MatRowDef, MatHeaderRowDef, MatTableDataSource } from '@angular/material/table';
 import { TableDragDropService } from './tabledragdrop.service';
+import { BehaviorSubject } from 'rxjs';
 
 export interface Column {
   columnDef: string;
@@ -17,8 +18,10 @@ export interface Column {
   imports: [MatTableModule, CdkDropListGroup],
   templateUrl: './datagridtable.component.html',
   styleUrl: './datagridtable.component.scss',
-  providers: [TableDragDropService]
+  providers: [TableDragDropService],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
+
 export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   @ContentChildren(MatHeaderRowDef) headerRowDefs: QueryList<MatHeaderRowDef>;
@@ -28,7 +31,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
   @ViewChild(MatTable, {read: ElementRef}) tableRef: ElementRef;
 
-  @Input() dataSource: any;
+  @Input() tableData: BehaviorSubject<any[]> = new BehaviorSubject([]);
   @Input() columns: string[];
   @Input()
   get resizeColumns(): boolean {
@@ -54,6 +57,8 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.tableDragDropService.dragSortRows = value;
   }
 
+  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
+
   constructor(
     private tableDragDropService: TableDragDropService,
     private el: ElementRef,
@@ -62,7 +67,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   ngOnInit(): void {
-    console.log(this.dataSource);
+    this.handleTableData();
   }
 
   ngAfterViewInit(): void {
@@ -73,6 +78,16 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
     this.rowDefs.forEach(rowDef => this.table.addRowDef(rowDef));
     this.headerRowDefs.forEach(headerRowDef => this.table.addHeaderRowDef(headerRowDef));
+  }
+
+  //################################################
+
+  handleTableData(): void {
+    this.tableData.subscribe((data) => {
+      this.dataSource.data = data;
+      this.tableDragDropService.dropLists['rowdropzone'].data = data;
+      this.table.renderRows();
+    });
   }
 
   //################################################
@@ -97,7 +112,9 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.tableDragDropService.dropLists['rowdropzone'].dropped
     .subscribe((a) => {
       if(a.isPointerOverContainer) {
-        moveItemInArray(this.dataSource, a.previousIndex, a.currentIndex);
+        console.log(a)
+        moveItemInArray(this.dataSource.data, a.previousIndex, a.currentIndex);
+        this.cdr.detectChanges();
         this.table.renderRows();
       }
     });
