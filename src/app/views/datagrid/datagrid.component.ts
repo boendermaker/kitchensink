@@ -6,11 +6,13 @@ import { DatagridTableCellComponent } from '@app/components/datagridtable/cell/c
 import { DatagridTableColumnComponent } from '@app/components/datagridtable/column/column.component';
 import { DatagridTableComponent } from '@app/components/datagridtable/datagridtable.component';
 import { DatagridTableActionsComponent } from "../../components/datagridtable/actions/actions.component";
+import { TitleComponent } from "../../components/datagridtable/title/title.component";
+import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, TitleComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss'
 })
@@ -35,8 +37,8 @@ export class DatagridComponent {
     {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
   ];
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  displayedColumns2: string[] = ['position', 'name', 'symbol'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
+  displayedColumns2: string[] = ['position', 'name', 'symbol', 'actions'];
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>(this.tableData);
   dataSource2: MatTableDataSource<any> = new MatTableDataSource<any>(this.tableData2);
@@ -51,9 +53,19 @@ export class DatagridComponent {
     this.dataSource.connect().next(this.tableData);
   }
 
+  removeData(): void {
+    this.tableData.pop();
+    this.dataSource.connect().next(this.tableData);
+  }
+
   addData2(): void {
-    this.tableData2.push({position: Math.round(Math.random()*100), name: 'Blah', weight: Math.random()*1000, symbol: 'XX'});
-    this.dataSource.connect().next(this.tableData2);
+    this.tableData2.push({position: Math.round(Math.random()*100), name: 'Blah', symbol: Math.random()*500});
+    this.dataSource2.connect().next(this.tableData2);
+  }
+
+  removeData2(): void {
+    this.tableData2.shift();
+    this.dataSource2.connect().next(this.tableData2);
   }
 
   dropColumn(e): void {

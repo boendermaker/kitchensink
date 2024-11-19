@@ -1,14 +1,32 @@
 <app-datagridtable [dataSource]="dataSource" [columns]="displayedColumns" [dragSortRows]="true" [dragSortColumns]="true" [resizeColumns]="false">
 
-  <app-actions></app-actions>
+  <app-datagridtable-title title="Lorem Ipsum">
+    <span prefix>Davor</span><span suffix>Danach</span>
+  </app-datagridtable-title>
 
-  @for(displayedColumn of displayedColumns; track displayedColumn) {
+  <app-datagridtable-actions>
+    <button mat-icon-button><i class="material-icons-filled">search</i></button>
+    <button mat-icon-button (click)="addData()"><i class="material-icons-filled">add</i></button>
+    <button mat-icon-button (click)="removeData()"><i class="material-icons-filled">remove</i></button>
+    <button mat-icon-button [matMenuTriggerFor]="menu"><i class="material-icons-filled">more_vert</i></button>
+  </app-datagridtable-actions>
 
-    <app-datagridtablecolumn [matColumnDef]="displayedColumn">
-      <th datagridtableheader mat-header-cell *matHeaderCellDef>{{displayedColumn}}</th>
-      <td datagridtablecell mat-cell *matCellDef="let element">{{element[displayedColumn]}}</td>
-    </app-datagridtablecolumn>
-
+  @for(displayedColumn of displayedColumns; track displayedColumn; let index = $index) {
+    @if(index < displayedColumns.length-1) {
+      <app-datagridtablecolumn [matColumnDef]="displayedColumn">
+        <th datagridtableheader mat-header-cell *matHeaderCellDef>{{displayedColumn}}</th>
+        <td datagridtablecell mat-cell *matCellDef="let element">{{element[displayedColumn]}}</td>
+      </app-datagridtablecolumn>
+    }@else{
+      <app-datagridtablecolumn matColumnDef="actions">
+        <th datagridtableheader mat-header-cell *matHeaderCellDef></th>
+        <td datagridtablecell mat-cell *matCellDef="let element">
+          <app-datagridtable-rowactions>
+            <button mat-icon-button><i class="material-icons-filled">delete</i></button>
+          </app-datagridtable-rowactions>
+        </td>
+      </app-datagridtablecolumn>    
+    }
   }
 
 </app-datagridtable>
@@ -19,18 +37,57 @@
 
 <app-datagridtable [dataSource]="dataSource2" [columns]="displayedColumns2" [dragSortRows]="false" [dragSortColumns]="false" [resizeColumns]="false">
 
-  <app-actions></app-actions>
+  <app-datagridtable-title title="Dolor sit">
+    Lorem Ipsum<span suffix>Danach</span><span suffix>Noch ein danach</span>
+  </app-datagridtable-title>
 
-  @for(displayedColumn of displayedColumns; track displayedColumn) {
+  <app-datagridtable-actions>
+    <button mat-icon-button (click)="addData2()"><i class="material-icons-filled">add</i></button>
+    <button mat-icon-button (click)="removeData2()"><i class="material-icons-filled">remove</i></button>
+    <button mat-icon-button [matMenuTriggerFor]="menu2"><i class="material-icons-filled">more_vert</i></button>
+  </app-datagridtable-actions>
 
-    <app-datagridtablecolumn [matColumnDef]="displayedColumn">
-      <th datagridtableheader mat-header-cell *matHeaderCellDef>{{displayedColumn}}</th>
-      <td datagridtablecell mat-cell *matCellDef="let element">{{element[displayedColumn]}}</td>
-    </app-datagridtablecolumn>
-
+  @for(displayedColumn of displayedColumns; track displayedColumn; let index = $index) {
+    @if(index < displayedColumns.length - 1) {
+      <app-datagridtablecolumn [matColumnDef]="displayedColumn">
+        <th datagridtableheader mat-header-cell *matHeaderCellDef>{{displayedColumn}}</th>
+        <td datagridtablecell mat-cell *matCellDef="let element">{{element[displayedColumn]}}</td>
+      </app-datagridtablecolumn>    
+    }@else {
+      <app-datagridtablecolumn matColumnDef="actions">
+        <th datagridtableheader mat-header-cell *matHeaderCellDef></th>
+        <td datagridtablecell mat-cell *matCellDef="let element">
+          <app-datagridtable-rowactions>
+            <button mat-icon-button><i class="material-icons-filled">delete</i></button>
+          </app-datagridtable-rowactions>
+        </td>
+      </app-datagridtablecolumn> 
+    }
   }
 
 </app-datagridtable>
+
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <span>Lorem</span>
+  </button>
+  <button mat-menu-item disabled>
+    <span>Boretum</span>
+  </button>
+  <button mat-menu-item>
+    <span>Dolor sit amet</span>
+  </button>
+</mat-menu>
+
+<mat-menu #menu2="matMenu">
+  <button mat-menu-item>
+    <span>Lorem</span>
+  </button>
+  <button mat-menu-item>
+    <span>Dolor sit amet</span>
+  </button>
+</mat-menu>
 
 <br>
 <br>

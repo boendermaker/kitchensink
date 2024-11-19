@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { DatagridTableService } from '../datagridtable.service';
 
 @Component({
-  selector: 'app-actions',
+  selector: 'app-datagridtable-actions',
   standalone: true,
   imports: [],
   templateUrl: './actions.component.html',
