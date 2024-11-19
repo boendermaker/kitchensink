@@ -14,7 +14,7 @@ export class DatagridTableResizeHeaderComponent implements AfterContentInit {
   constructor(private elementRef: ElementRef) {}
 
   ngAfterContentInit() {
-    console.log('RESIZE ', this.elementRef.nativeElement);
+    //console.log('RESIZE ', this.elementRef.nativeElement);
   }
 
 }
