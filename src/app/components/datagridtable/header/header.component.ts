@@ -4,7 +4,7 @@ import { DOCUMENT } from '@angular/common';
 import { DatagridTableResizeHeaderComponent } from '@app/components/datagridtable/header/resizeheader/resizeheader.component';
 import { DragRefConfig, CdkDragHandle, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
-import { TableDragDropService } from '../tabledragdrop.service';
+import { DatagridTableService } from '../datagridtable.service';
 
 @Component({
   selector: '[datagridtableheader]',
@@ -27,7 +27,7 @@ export class DatagridTableHeaderComponent implements AfterViewInit, AfterContent
   constructor(
     @Inject(DOCUMENT) public documentRef: Document,
     private elementRef: ElementRef,
-    public tableDragDropService: TableDragDropService
+    public datagridTableService: DatagridTableService
   ) {
 
   }
@@ -51,7 +51,7 @@ export class DatagridTableHeaderComponent implements AfterViewInit, AfterContent
     this.tableHeaderElement = this.elementRef.nativeElement;
     this.tableHeaderHandleElement = this.elementRef.nativeElement.querySelector('#resizetablecolumnhandle');
 
-    if(this.tableDragDropService.resizeColumns) {
+    if(this.datagridTableService?.state?.resizeColumns) {
 
       fromEvent<MouseEvent>(this.tableHeaderHandleElement, 'mousedown').pipe(
         tap((e) => e.preventDefault()),

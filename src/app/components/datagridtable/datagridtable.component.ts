@@ -1,7 +1,7 @@
 import { CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, DragDrop, DragRef, DropListRef, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { AfterContentInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef, EventEmitter, HostBinding, Input, Output, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { MatTableModule, MatTable, MatColumnDef, MatRowDef, MatHeaderRowDef, MatTableDataSource } from '@angular/material/table';
-import { TableDragDropService } from './tabledragdrop.service';
+import { DatagridTableService } from './datagridtable.service';
 import { BehaviorSubject } from 'rxjs';
 
 export interface Column {
@@ -15,11 +15,11 @@ export interface Column {
 @Component({
   selector: 'app-datagridtable',
   standalone: true,
-  imports: [MatTableModule, CdkDropListGroup],
+  imports: [MatTableModule, CdkDropListGroup, CdkDropList, CdkDrag],
   templateUrl: './datagridtable.component.html',
   styleUrl: './datagridtable.component.scss',
-  providers: [TableDragDropService],
-  changeDetection: ChangeDetectionStrategy.Default,
+  providers: [DatagridTableService],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 
 export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
@@ -31,36 +31,34 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
   @ViewChild(MatTable, {read: ElementRef}) tableRef: ElementRef;
 
-  @Input() tableData: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  @Input() dataSource: MatTableDataSource<any>;
   @Input() columns: string[];
   @Input()
   get resizeColumns(): boolean {
-    return this.tableDragDropService.resizeColumns;
+    return this.datagridTableService.state.resizeColumns;
   }
   set resizeColumns(value: boolean) {
-    this.tableDragDropService.resizeColumns = value;
+    this.datagridTableService.state.resizeColumns = value;
   }
 
   @Input()
   get dragSortColumns(): boolean {
-    return this.tableDragDropService.dragSortColumns;
+    return this.datagridTableService.state.dragSortColumns;
   }
   set dragSortColumns(value: boolean) {
-    this.tableDragDropService.dragSortColumns = value;
+    this.datagridTableService.state.dragSortColumns = value;
   }
 
   @Input()
   get dragSortRows(): boolean {
-    return this.tableDragDropService.dragSortRows;
+    return this.datagridTableService.state.dragSortRows;
   }
   set dragSortRows(value: boolean) {
-    this.tableDragDropService.dragSortRows = value;
+    this.datagridTableService.state.dragSortRows = value;
   }
 
-  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
-
   constructor(
-    private tableDragDropService: TableDragDropService,
+    private datagridTableService: DatagridTableService,
     private el: ElementRef,
     private cdr: ChangeDetectorRef
   ) {
@@ -72,7 +70,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   ngAfterViewInit(): void {
     this.handleTableData();
-    this.initDragDrop();
+    this.initColumnDragDrop();
   }
 
   ngAfterContentInit() {
@@ -84,61 +82,46 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   //################################################
 
   handleTableData(): void {
-    this.tableData.subscribe((data) => {
-      this.dataSource.data = data;
+    this.dataSource.connect().subscribe((data) => {
       this.table.renderRows();
     });
   }
 
   //################################################
 
-  initDragDrop(): void {
-    this.tableDragDropService.setTableRef(this.tableRef);
+  initColumnDragDrop(): void {
+    if(this.datagridTableService.state.dragSortColumns) {
 
-    if(this.dragSortColumns) {
-      this.tableDragDropService.handleDragDrop('dropzone', 'thead', 'header', 'th', 'horizontal', '[headerdraghandle]');
-      this.handleColumnDropped();
-    }
-    if(this.dragSortRows) {
-      this.tableDragDropService.handleDragDrop('rowdropzone', 'tbody', 'row', 'tbody>tr', 'vertical');
-      this.handleRowDropped();
-    }
+      this.datagridTableService.setTableRef(this.tableRef);
 
-  }
+      this.datagridTableService.createDropList('columnDropList', this.tableRef.nativeElement.querySelector('thead'));
 
-  //################################################
-
-  handleRowDropped(): void {
-    this.tableDragDropService.dropLists['rowdropzone'].dropped
-    .subscribe((a) => {
-      if(a.isPointerOverContainer) {
-        moveItemInArray(this.dataSource.data, a.previousIndex, a.currentIndex);
-        this.cdr.detectChanges();
-        this.table.renderRows();
+      const updateColumns = () => { 
+        this.datagridTableService.state.dropLists['columnDropList'].withItems(this.datagridTableService.getDraggables(this.tableRef.nativeElement.querySelectorAll('th'))).withOrientation('horizontal');
       }
-    });
+
+      updateColumns();
+
+      this.datagridTableService.state.dropLists['columnDropList'].dropped.subscribe({
+        next: (event) => {
+          if(event.isPointerOverContainer) {
+            moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
+            this.cdr.detectChanges();
+            updateColumns();
+            this.table.renderRows();
+          }
+        }
+      })
+
+    }
   }
 
   //################################################
-
-  handleColumnDropped(): void {
-    this.tableDragDropService.dropLists['dropzone'].dropped
-    .subscribe((a) => {
-      if(a.isPointerOverContainer) {
-        moveItemInArray(this.columns, a.previousIndex, a.currentIndex);
-        this.cdr.detectChanges();
-        this.tableDragDropService.updateChanges('dropzone', 'header', 'th', '[headerdraghandle]');
-        this.tableDragDropService.updateChanges('rowdropzone', 'row', 'tbody>tr');
-        this.table.renderRows();
-      }
-    });
+  rowDropped(e): void {
+    const data = this.dataSource.data;
+    moveItemInArray(data, e.previousIndex, e.currentIndex);
+    this.dataSource.connect().next(data);
   }
-
-  //################################################
-
-  //################################################
-
-
 
   //################################################
 

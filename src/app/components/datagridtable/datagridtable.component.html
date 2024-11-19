@@ -1,10 +1,15 @@
-<div>
-    <table mat-table [dataSource]="dataSource" cdkDropListGroup>
+<div class="datagridtable">
+
+  <div>
+    <ng-content select="app-actions"></ng-content>
+  </div>
+
+    <table mat-table [dataSource]="dataSource" cdkDropList cdkDropListData="dataSource.data" (cdkDropListDropped)="rowDropped($event)">
 
       <ng-content></ng-content>
 
       <tr mat-header-row *matHeaderRowDef="columns"></tr>
-      <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns;" cdkDrag [cdkDragdata]="row" [cdkDragDisabled]="!dragSortRows"></tr>
 
     </table>
-</div>
+  </div>

@@ -1,4 +1,6 @@
-<app-datagridtable [tableData]="tableData" [columns]="displayedColumns" [dragSortRows]="true" [dragSortColumns]="true" [resizeColumns]="false">
+<app-datagridtable [dataSource]="dataSource" [columns]="displayedColumns" [dragSortRows]="true" [dragSortColumns]="true" [resizeColumns]="false">
+
+  <app-actions></app-actions>
 
   @for(displayedColumn of displayedColumns; track displayedColumn) {
 
@@ -11,4 +13,30 @@
 
 </app-datagridtable>
 
+<br>
+<br>
+<br>
+
+<app-datagridtable [dataSource]="dataSource2" [columns]="displayedColumns2" [dragSortRows]="false" [dragSortColumns]="false" [resizeColumns]="false">
+
+  <app-actions></app-actions>
+
+  @for(displayedColumn of displayedColumns; track displayedColumn) {
+
+    <app-datagridtablecolumn [matColumnDef]="displayedColumn">
+      <th datagridtableheader mat-header-cell *matHeaderCellDef>{{displayedColumn}}</th>
+      <td datagridtablecell mat-cell *matCellDef="let element">{{element[displayedColumn]}}</td>
+    </app-datagridtablecolumn>
+
+  }
+
+</app-datagridtable>
+
+<br>
+<br>
+
 <button (click)="addData()">ADD</button>
+
+<br>
+<br>
+<br>

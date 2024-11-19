@@ -5,19 +5,18 @@ import { DatagridTableHeaderComponent } from '@app/components/datagridtable/head
 import { DatagridTableCellComponent } from '@app/components/datagridtable/cell/cell.component';
 import { DatagridTableColumnComponent } from '@app/components/datagridtable/column/column.component';
 import { DatagridTableComponent } from '@app/components/datagridtable/datagridtable.component';
-import { CdkDragHandle, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
-import { BehaviorSubject } from 'rxjs';
+import { DatagridTableActionsComponent } from "../../components/datagridtable/actions/actions.component";
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent],
+  imports: [DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss'
 })
 export class DatagridComponent {
 
-  tableData: BehaviorSubject<any[]> = new BehaviorSubject([
+  tableData: any[] = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
     {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
     {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
@@ -28,18 +27,33 @@ export class DatagridComponent {
     {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
     {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
     {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  ]);
+  ];
+
+  tableData2: any[] = [
+    {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+    {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+    {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+  ];
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns2: string[] = ['position', 'name', 'symbol'];
 
-  constructor(private cdr: ChangeDetectorRef) {
-  }
+  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>(this.tableData);
+  dataSource2: MatTableDataSource<any> = new MatTableDataSource<any>(this.tableData2);
 
-  ngOnInit() {
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) {
   }
 
   addData(): void {
-    this.tableData.next(this.tableData.value.concat({position: Math.round(Math.random()*100), name: 'Blubb', weight: Math.random()*1000, symbol: 'XX'}));
+    this.tableData.push({position: Math.round(Math.random()*100), name: 'Blubb', weight: Math.random()*1000, symbol: 'XX'});
+    this.dataSource.connect().next(this.tableData);
+  }
+
+  addData2(): void {
+    this.tableData2.push({position: Math.round(Math.random()*100), name: 'Blah', weight: Math.random()*1000, symbol: 'XX'});
+    this.dataSource.connect().next(this.tableData2);
   }
 
   dropColumn(e): void {
