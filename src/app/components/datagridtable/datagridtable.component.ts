@@ -97,7 +97,11 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
       this.datagridTableService.createDropList('columnDropList', this.tableRef.nativeElement.querySelector('thead'));
 
       const updateColumns = () => { 
-        this.datagridTableService.state.dropLists['columnDropList'].withItems(this.datagridTableService.getDraggables(this.tableRef.nativeElement.querySelectorAll('th'))).withOrientation('horizontal');
+        this.datagridTableService.state.dropLists['columnDropList']
+        .withItems(
+          this.datagridTableService.getDraggables(this.tableRef.nativeElement.querySelectorAll('th'), '[headerdraghandle]')
+        )
+        .withOrientation('horizontal');
       }
 
       updateColumns();

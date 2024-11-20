@@ -1,11 +1,12 @@
 <div style="display: flex; width: 100%;">
-
+  
   @if(datagridTableService?.state?.dragSortColumns) {
-    <div headerdraghandle>
+    <div headerdraghandle style="cursor: grab;">
       <i class="material-icons-filled">drag_indicator</i>
     </div>
   }
   <app-resizehandle [hidden]="isLastHeader() || !datagridTableService?.state?.resizeColumns" style="flex-grow: 1">
     <ng-content></ng-content>
   </app-resizehandle>
+
 </div>

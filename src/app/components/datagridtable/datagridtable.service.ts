@@ -62,8 +62,17 @@ export class DatagridTableService {
 
 //###########################
 
-  getDraggables(draggables: QueryList<ElementRef>): DragRef[] {
-    return Array.from(draggables).map((el) => this.dragDrop.createDrag(el));
+  getDraggables(draggables: QueryList<HTMLElement>, dragHandleSelector?: string): DragRef[] {
+    return Array.from(draggables).map((elDraggable: HTMLElement) => { 
+      const draggable: DragRef = this.dragDrop.createDrag(elDraggable);
+      let dragHandle: HTMLElement | null = null;
+
+      if(dragHandleSelector) {
+        dragHandle = elDraggable.querySelector(dragHandleSelector);
+      }
+
+      return dragHandle ? draggable.withHandles([dragHandle]) : draggable;
+    })
   }
 
 //###########################
