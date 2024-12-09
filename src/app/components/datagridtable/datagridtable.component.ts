@@ -15,7 +15,7 @@ export interface Column {
 @Component({
   selector: 'app-datagridtable',
   standalone: true,
-  imports: [MatTableModule, CdkDropListGroup, CdkDropList, CdkDrag],
+  imports: [MatTableModule, CdkDropList, CdkDrag],
   templateUrl: './datagridtable.component.html',
   styleUrl: './datagridtable.component.scss',
   providers: [DatagridTableService],
@@ -82,6 +82,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   //################################################
 
   handleTableData(): void {
+    this.datagridTableService.setDataSource(this.dataSource);
     this.dataSource.connect().subscribe((data) => {
       this.table.renderRows();
     });

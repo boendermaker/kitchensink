@@ -7,7 +7,7 @@ import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmater
 import { DatagridTableService } from '../datagridtable.service';
 
 @Component({
-  selector: '[datagridtableheader]',
+  selector: 'app-datagridtable-header',
   standalone: true,
   imports: [AllAngularMaterialMDCModulesModule, DatagridTableResizeHeaderComponent],
   templateUrl: './header.component.html',
@@ -34,15 +34,10 @@ export class DatagridTableHeaderComponent implements AfterViewInit, AfterContent
 
   ngAfterViewInit(): void {
     this.handleColumnResize();
-    this.isLastHeader.set(this.elementRef.nativeElement.nextSibling.tagName !== 'TH');
   }
 
   ngAfterContentInit(): void {
   }
-
-  //################################################
-
-  
 
   //################################################
 
