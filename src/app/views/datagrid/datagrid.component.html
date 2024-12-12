@@ -1,4 +1,4 @@
-<app-datagridtable [dataSource]="dataSource" [columns]="displayedColumns" [dragSortRows]="true" [dragSortColumns]="true" [resizeColumns]="false">
+<app-datagridtable [dataSource]="dataSource" [columns]="displayedColumns" [dragSortRows]="true" [dragSortColumns]="true" [resizeColumns]="false" matSort #sort="matSort">
 
   <app-datagridtable-title title="Lorem Ipsum">
     <span prefix>Davor</span><span suffix>Danach</span>
@@ -14,7 +14,7 @@
   @for(displayedColumn of displayedColumns; track displayedColumn; let index = $index) {
     @if(index < displayedColumns.length-1) {
       <app-datagridtablecolumn [matColumnDef]="displayedColumn">
-        <th mat-header-cell *matHeaderCellDef>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
           <app-datagridtable-header>{{displayedColumn}}</app-datagridtable-header>
         </th>
         <td mat-cell *matCellDef="let element">
@@ -26,10 +26,14 @@
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
           <app-datagridtable-rowactions>
-            <button mat-icon-button><i class="material-icons-filled">delete</i></button>
+            <button mat-icon-button title="Löschen" (click)="tester($event)"><i class="material-icons-filled">delete</i></button>
+            <button mat-icon-button title="Hinzufügen" (click)="tester($event)"><i class="material-icons-filled">add</i></button>
+            <button mat-icon-button title="Verschieben" (click)="tester($event)"><i class="material-icons-filled">move</i></button>
+            <button mat-icon-button title="Test" (click)="tester($event)"><i class="material-icons-filled">delete</i></button>
+            <button mat-icon-button title="Test" (click)="tester($event)"><i class="material-icons-filled">delete</i></button>
           </app-datagridtable-rowactions>
         </td>
-      </app-datagridtablecolumn>    
+      </app-datagridtablecolumn>
     }
   }
 

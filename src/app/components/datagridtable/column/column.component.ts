@@ -1,7 +1,9 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, QueryList } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, computed, contentChild, ContentChild, ContentChildren, effect, ElementRef, Input, QueryList } from '@angular/core';
 import { DatagridTableHeaderComponent } from '../header/header.component';
 import { DatagridTableCellComponent } from '../cell/cell.component';
-import { CdkDrag } from '@angular/cdk/drag-drop';
+import { MatColumnDef } from '@angular/material/table';
+import { DatagridTableService } from '../datagridtable.service';
+import { combineLatest, firstValueFrom, forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-datagridtablecolumn',
@@ -10,24 +12,37 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
   templateUrl: './column.component.html',
   styleUrl: './column.component.scss',
 })
-export class DatagridTableColumnComponent implements AfterContentInit {
+export class DatagridTableColumnComponent implements AfterViewInit, AfterContentInit {
 
-  @ContentChildren(DatagridTableHeaderComponent, {read: ElementRef}) header: QueryList<ElementRef>;
+  @ContentChildren(DatagridTableHeaderComponent, {descendants: true}) headerElements: QueryList<DatagridTableHeaderComponent>;
+  @ContentChildren(DatagridTableCellComponent, {descendants: true}) cellElements: QueryList<DatagridTableCellComponent>;
+  @Input() matColumnDef: MatColumnDef;
 
-  headerElements: ElementRef[] = [];
-
-  constructor() {
+  constructor(
+    private datagridTableService: DatagridTableService,
+  ) {
   }
 
-  ngAfterContentInit(): void {
-    this.getHeader();
+  ngOnInit(): void {
+    
   }
 
-  getHeader(): void {
-    this.header.changes.subscribe((header) => {
-      header.toArray().forEach(headerItem => {
-        this.headerElements.push(headerItem.nativeElement);
-      });
+  ngAfterViewInit() {
+    console.log();
+  }
+
+  ngAfterContentInit() {
+    this.getColumnComponents();
+  }
+
+  getColumnComponents() {
+    combineLatest({
+      headerCells: this.headerElements.changes,
+      columnCells: this.cellElements.changes
+    }).subscribe(({headerCells, columnCells}) => {
+      headerCells = headerCells.toArray()[0];
+      columnCells = columnCells.toArray()[0];
+      console.log('HEADER ELEMENTS ', this.matColumnDef, headerCells, columnCells);
     });
   }
 

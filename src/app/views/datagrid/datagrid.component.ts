@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { DatagridTableHeaderComponent } from '@app/components/datagridtable/header/header.component';
@@ -6,17 +6,20 @@ import { DatagridTableCellComponent } from '@app/components/datagridtable/cell/c
 import { DatagridTableColumnComponent } from '@app/components/datagridtable/column/column.component';
 import { DatagridTableComponent } from '@app/components/datagridtable/datagridtable.component';
 import { DatagridTableActionsComponent } from "../../components/datagridtable/actions/actions.component";
+import { DatagridTableRowactionsComponent } from "../../components/datagridtable/rowactions/rowactions.component";
 import { TitleComponent } from "../../components/datagridtable/title/title.component";
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, TitleComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, TitleComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss'
 })
 export class DatagridComponent {
+
+  @ViewChild('table') table: DatagridTableComponent;
 
   tableData: any[] = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -48,6 +51,10 @@ export class DatagridComponent {
   ) {
   }
 
+  ngAfterViewInit(): void {
+    console.log(this.table)
+  }
+
   addData(): void {
     this.tableData.push({position: Math.round(Math.random()*100), name: 'Blubb', weight: Math.random()*1000, symbol: 'XX'});
     this.dataSource.connect().next(this.tableData);
@@ -70,6 +77,10 @@ export class DatagridComponent {
 
   dropColumn(e): void {
     console.log('dropColumn', e);
+  }
+
+  tester(e): void {
+    console.log('tester', e);
   }
 
 }

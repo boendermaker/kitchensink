@@ -1,8 +1,7 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, Inject, QueryList, signal, ViewChild, WritableSignal } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, forwardRef, Inject, QueryList, signal, ViewChild, WritableSignal } from '@angular/core';
 import { distinctUntilChanged, fromEvent, map, switchMap, takeUntil, tap } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { DatagridTableResizeHeaderComponent } from '@app/components/datagridtable/header/resizeheader/resizeheader.component';
-import { DragRefConfig, CdkDragHandle, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { DatagridTableService } from '../datagridtable.service';
 
@@ -16,18 +15,17 @@ import { DatagridTableService } from '../datagridtable.service';
 
 export class DatagridTableHeaderComponent implements AfterViewInit, AfterContentInit {
 
-  @ContentChildren(DatagridTableHeaderComponent) header: QueryList<DatagridTableHeaderComponent>;
-
   tableHeaderElement: HTMLElement;
   tableHeaderHandleElement: HTMLElement;
   columnWidth: number = 0;
   columnId: number;
+  currentColumn: string = '';
   isLastHeader: WritableSignal<boolean> = signal(false);
 
   constructor(
     @Inject(DOCUMENT) public documentRef: Document,
     private elementRef: ElementRef,
-    public datagridTableService: DatagridTableService
+    public datagridTableService: DatagridTableService,
   ) {
 
   }
@@ -37,6 +35,7 @@ export class DatagridTableHeaderComponent implements AfterViewInit, AfterContent
   }
 
   ngAfterContentInit(): void {
+    console.log('CURRENTCOLUMN ', this.currentColumn)
   }
 
   //################################################

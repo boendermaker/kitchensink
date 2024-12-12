@@ -1,5 +1,6 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
 import { CdkDrag } from '@angular/cdk/drag-drop';
+import { MatCellDef } from '@angular/material/table';
 
 @Component({
   selector: 'app-datagridtable-cell',
@@ -9,8 +10,15 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
 })
 export class DatagridTableCellComponent {
 
-  constructor() {
+  @Input() cellDef: MatCellDef;
+  tester: string = '';
 
+  constructor(private elementRef: ElementRef) {
+
+  }
+
+  ngAfterViewInit(): void {
+    //console.log('CELLDEF ', this.cellDef);
   }
 
 }

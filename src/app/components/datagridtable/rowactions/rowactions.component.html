@@ -1,3 +1,20 @@
-<ng-template #content>
-<ng-content></ng-content>
-</ng-template>
+<div class="rowactions-container">
+    <ng-content></ng-content>
+    
+    @if(rowActionsMenuItems.length > 0) {
+        <button mat-icon-button [matMenuTriggerFor]="rowactionsmenu">
+            <i class="material-icons-filled">more_vert</i>
+        </button>
+        <mat-menu #rowactionsmenu="matMenu">
+            @for(rowActionsMenuItem of rowActionsMenuItems; track rowActionsMenuItem; let index = $index) {
+                <button mat-menu-item (click)="rowActionsMenuItem?.listener($event)">
+                    <div class="rowaction-menuitem">
+                        <i class="material-icons-filled">{{rowActionsMenuItem?.icon}}</i>
+                        <span>{{rowActionsMenuItem?.title}}</span>
+                    </div>
+                </button>
+            }
+        </mat-menu>
+    }
+
+</div>

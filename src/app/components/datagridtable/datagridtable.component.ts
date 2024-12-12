@@ -18,8 +18,7 @@ export interface Column {
   imports: [MatTableModule, CdkDropList, CdkDrag],
   templateUrl: './datagridtable.component.html',
   styleUrl: './datagridtable.component.scss',
-  providers: [DatagridTableService],
-  changeDetection: ChangeDetectionStrategy.Default
+  providers: [DatagridTableService]
 })
 
 export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
