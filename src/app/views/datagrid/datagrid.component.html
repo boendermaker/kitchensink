@@ -28,9 +28,24 @@
           <app-datagridtable-rowactions>
             <button mat-icon-button title="Löschen" (click)="tester($event)"><i class="material-icons-filled">delete</i></button>
             <button mat-icon-button title="Hinzufügen" (click)="tester($event)"><i class="material-icons-filled">add</i></button>
-            <button mat-icon-button title="Verschieben" (click)="tester($event)"><i class="material-icons-filled">move</i></button>
-            <button mat-icon-button title="Test" (click)="tester($event)"><i class="material-icons-filled">delete</i></button>
-            <button mat-icon-button title="Test" (click)="tester($event)"><i class="material-icons-filled">delete</i></button>
+            <button mat-menu-item title="Test" (click)="tester($event)">
+              <div class="b-d-flex b-align-items-center" style="gap: 8px;">
+                <i class="material-icons-filled">delete</i>
+                <span>Lorem ipsum</span>
+              </div>
+            </button>
+            <button mat-menu-item title="Test" (click)="tester($event)">
+              <div class="b-d-flex b-align-items-center" style="gap: 8px;">
+                <i class="material-icons-filled">delete</i>
+                <span>Lorem ipsum</span>
+              </div>
+            </button>
+            <button mat-menu-item title="Test" (click)="tester($event)">
+              <div class="b-d-flex b-align-items-center" style="gap: 8px;">
+                <i class="material-icons-filled">delete</i>
+                <span>Lorem ipsum</span>
+              </div>
+            </button>
           </app-datagridtable-rowactions>
         </td>
       </app-datagridtablecolumn>
