@@ -3,6 +3,7 @@ import { AfterContentInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetecto
 import { MatTableModule, MatTable, MatColumnDef, MatRowDef, MatHeaderRowDef, MatTableDataSource } from '@angular/material/table';
 import { DatagridTableService } from './datagridtable.service';
 import { BehaviorSubject } from 'rxjs';
+import { DatagridTableActionsComponent } from './actions/actions.component';
 
 export interface Column {
   columnDef: string;
@@ -22,6 +23,8 @@ export interface Column {
 })
 
 export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
+
+  @ContentChild(DatagridTableActionsComponent, {static: true}) datagridTableActions: DatagridTableActionsComponent;
 
   @ContentChildren(MatHeaderRowDef) headerRowDefs: QueryList<MatHeaderRowDef>;
   @ContentChildren(MatRowDef) rowDefs: QueryList<MatRowDef<any>>;
@@ -76,9 +79,15 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
     this.rowDefs.forEach(rowDef => this.table.addRowDef(rowDef));
     this.headerRowDefs.forEach(headerRowDef => this.table.addHeaderRowDef(headerRowDef));
+    //this.datagridTableActions.datagridTableRef$.next(this);
+    this.datagridTableActions.ref = this;
   }
 
   //################################################
+
+  tester(): void {
+    console.log('CALLED FROM TABLEACTIONS COMPONENT IN DATAGRIDTABLE COMPONENT');
+  }
 
   handleTableData(): void {
     this.datagridTableService.setDataSource(this.dataSource);

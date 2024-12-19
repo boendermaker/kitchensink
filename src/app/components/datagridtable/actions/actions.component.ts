@@ -1,5 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, computed, OnInit, Optional, WritableSignal } from '@angular/core';
 import { DatagridTableService } from '../datagridtable.service';
+import { DatagridTableComponent } from '../datagridtable.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-datagridtable-actions',
@@ -8,18 +10,24 @@ import { DatagridTableService } from '../datagridtable.service';
   templateUrl: './actions.component.html',
   styleUrl: './actions.component.scss'
 })
-export class DatagridTableActionsComponent implements OnInit, AfterViewInit {
+export class DatagridTableActionsComponent implements OnInit, AfterViewInit, AfterContentInit {
 
-  constructor(private datagridTableService: DatagridTableService) {
+  ref: DatagridTableComponent;
 
+  constructor(
+    private datagridTableService: DatagridTableService,
+    private cdr: ChangeDetectorRef,
+    @Optional() public parent?: DatagridTableComponent,
+  ) {
   }
 
   ngOnInit() {
-    
+    this.parent.tester();
   }
 
   ngAfterViewInit() {
-    console.log('X ', this.datagridTableService)
   }
 
+  ngAfterContentInit() {
+  }
 }
