@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild, ViewChildren } from '@angular/core';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { DatagridTableHeaderComponent } from '@app/components/datagridtable/header/header.component';
@@ -19,7 +19,7 @@ import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmater
 })
 export class DatagridComponent {
 
-  @ViewChild('table') table: DatagridTableComponent;
+  @ViewChildren('table') table: DatagridTableComponent;
 
   tableData: any[] = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -52,7 +52,7 @@ export class DatagridComponent {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.table)
+    console.log(this.table);    
   }
 
   addData(): void {
