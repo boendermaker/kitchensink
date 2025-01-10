@@ -102,7 +102,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   handleColumnFilters(): void {
 
-    //Filtercomponents should be passed as an callback function from a component
+    //Should be passed as an callback function from a component
     const weightFilter = (row) => {
       const column = 'weight'; //Get column from DI
       return row[column] >= 1 && row[column] <= 5;
