@@ -24,6 +24,7 @@ import { ModelToFormComponent } from './views/modeltoform/modeltoform.component'
 import { RxjsplaygroundComponent } from './views/rxjsplayground/rxjsplayground.component';
 import { SvgplaygroundComponent } from './views/svgplayground/svgplayground.component';
 import { DatagridComponent } from './views/datagrid/datagrid.component';
+import { AutomigrationsComponent } from './views/automigrations/automigrations.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -50,7 +51,8 @@ const routes: Routes = [
   { path: 'modeltoformgroup', component: ModelToFormComponent },
   { path: 'rxjsplayground', component: RxjsplaygroundComponent },
   { path: 'svgplayground', component: SvgplaygroundComponent },
-  { path: 'datagrid', component: DatagridComponent }
+  { path: 'datagrid', component: DatagridComponent },
+  { path: 'automigrations', component: AutomigrationsComponent },
 ];
 
 @NgModule({

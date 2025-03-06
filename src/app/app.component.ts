@@ -34,6 +34,7 @@ export class AppComponent {
     {title: 'RXJS Playground', path: '/rxjsplayground'},
     {title: 'SVG Playground', path: '/svgplayground'},
     {title: 'Datagrid', path: '/datagrid'},
+    {title: 'Automigrations', path: '/automigrations'},
   ];
 
   constructor() {
