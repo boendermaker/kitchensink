@@ -25,6 +25,7 @@ import { RxjsplaygroundComponent } from './views/rxjsplayground/rxjsplayground.c
 import { SvgplaygroundComponent } from './views/svgplayground/svgplayground.component';
 import { DatagridComponent } from './views/datagrid/datagrid.component';
 import { AutomigrationsComponent } from './views/automigrations/automigrations.component';
+import { MultilanguageformComponent } from './views/multilanguageform/multilanguageform.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'svgplayground', component: SvgplaygroundComponent },
   { path: 'datagrid', component: DatagridComponent },
   { path: 'automigrations', component: AutomigrationsComponent },
+  { path: 'multilanguageform', component: MultilanguageformComponent },
 ];
 
 @NgModule({

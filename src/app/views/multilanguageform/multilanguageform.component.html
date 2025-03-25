@@ -1,0 +1,24 @@
+<form [formGroup]="multiLanguageFormGroup">
+
+    <div style="display: flex; flex-direction: column;">
+
+        <mat-form-field>
+            <input matInput formControlName="id" name="name">
+        </mat-form-field>
+
+        <form formGroupName="messages">
+
+            <form formGroupName="de-DE">
+                <mat-form-field>
+                    <input matInput formControlName="title" name="title">
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea matInput formControlName="message" name="message"></textarea>
+                </mat-form-field>
+            </form>
+
+        </form>
+
+    </div>
+
+</form>

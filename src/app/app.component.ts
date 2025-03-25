@@ -35,6 +35,7 @@ export class AppComponent {
     {title: 'SVG Playground', path: '/svgplayground'},
     {title: 'Datagrid', path: '/datagrid'},
     {title: 'Automigrations', path: '/automigrations'},
+    {title: 'Multilanguage Form', path: '/multilanguageform'}
   ];
 
   constructor() {
