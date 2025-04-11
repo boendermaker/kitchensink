@@ -1,11 +1,10 @@
 import { DragDrop, DragRef, DragRefConfig, DropListOrientation, DropListRef } from '@angular/cdk/drag-drop';
-import { ElementRef, Injectable, QueryList } from '@angular/core';
-import { NativeDateAdapter } from '@angular/material/core';
+import { ComponentRef, ElementRef, Injectable, QueryList } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatTab } from '@angular/material/tabs';
 
 export interface IDatagridTableState {
   dataSource: MatTableDataSource<any>;
+  columnFilter?: any[]
   dropLists: {[p:string]: DropListRef};
   draggables: {[p:string]: DragRef[]};
   tableRef: ElementRef;
@@ -19,6 +18,7 @@ export class DatagridTableService {
 
   state: IDatagridTableState = {
     dataSource: null,
+    columnFilter: [],
     dropLists: {},
     draggables: {},
     tableRef: null as unknown as ElementRef,
@@ -33,6 +33,13 @@ export class DatagridTableService {
 
   setDataSource(dataSource: MatTableDataSource<any>): void {
     this.state.dataSource = dataSource;
+  }
+
+//###########################
+
+  addColumnFilterRef<C>(filterComponentRef: C): void {
+    console.log('FILTERREFS SERVICE ', filterComponentRef);
+    this.state.columnFilter.push(filterComponentRef);
   }
 
 //###########################

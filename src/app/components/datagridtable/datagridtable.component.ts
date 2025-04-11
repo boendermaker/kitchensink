@@ -118,7 +118,8 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
       return row[column].includes('H');
     }
 
-    const filterArray = [stringFilter, rangeFilter, weightFilter];
+    //const filterArray = [stringFilter, rangeFilter, weightFilter];
+    const filterArray = this.datagridTableService.state.columnFilter
 
     this.dataSource.data = this.dataSource.data.filter((row) => {
       const resultArray = [];
@@ -138,7 +139,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
       this.datagridTableService.createDropList('columnDropList', this.tableRef.nativeElement.querySelector('thead'));
 
-      const updateColumns = () => { 
+      const updateColumns = () => {
         this.datagridTableService.state.dropLists['columnDropList']
         .withItems(
           this.datagridTableService.getDraggables(this.tableRef.nativeElement.querySelectorAll('th'), '[headerdraghandle]')

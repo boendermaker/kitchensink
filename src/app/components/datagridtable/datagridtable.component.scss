@@ -26,3 +26,7 @@
     }
 
 }
+
+::ng-deep .mat-mdc-header-cell {
+    overflow: initial !important;
+}

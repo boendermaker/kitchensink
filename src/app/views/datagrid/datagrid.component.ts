@@ -9,11 +9,12 @@ import { DatagridTableActionsComponent } from "../../components/datagridtable/ac
 import { DatagridTableRowactionsComponent } from "../../components/datagridtable/rowactions/rowactions.component";
 import { TitleComponent } from "../../components/datagridtable/title/title.component";
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
+import { StringfilterComponent } from '@app/components/datagridtable/columnfilter/stringfilter/stringfilter.component';
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, TitleComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, TitleComponent, StringfilterComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss'
 })
