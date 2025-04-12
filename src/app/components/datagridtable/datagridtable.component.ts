@@ -1,18 +1,10 @@
-import { CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, DragDrop, DragRef, DropListRef, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { AfterContentInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef, EventEmitter, HostBinding, Input, Output, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef, Input, QueryList, ViewChild } from '@angular/core';
 import { MatTableModule, MatTable, MatColumnDef, MatRowDef, MatHeaderRowDef, MatTableDataSource } from '@angular/material/table';
 import { DatagridTableService } from './datagridtable.service';
-import { BehaviorSubject, filter } from 'rxjs';
 import { DatagridTableActionsComponent } from './actions/actions.component';
 import * as _ from 'lodash';
 
-export interface Column {
-  columnDef: string;
-  header: string;
-  cell: Function;
-  isLink?: boolean;
-  url?: string;
-}
 
 @Component({
   selector: 'app-datagridtable',
@@ -72,7 +64,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   ngAfterViewInit(): void {
-    this.handleTableData();
+    this.setTableData();
     this.initColumnDragDrop();
   }
 
@@ -90,47 +82,11 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     console.log('CALLED FROM TABLEACTIONS COMPONENT IN DATAGRIDTABLE COMPONENT');
   }
 
-  handleTableData(): void {
+  setTableData(): void {
     this.datagridTableService.setDataSource(this.dataSource);
-    this.dataSource.connect().subscribe((data) => {
-      this.table.renderRows();
-    });
-    this.handleColumnFilters();
   }
 
   //################################################
-
-  handleColumnFilters(): void {
-
-    //Should be passed as an callback function from a component
-    const weightFilter = (row) => {
-      const column = 'weight'; //Get column from DI
-      return row[column] >= 1 && row[column] <= 5;
-    }
-
-    const rangeFilter = (row) => {
-      const column = 'position'; //Get column from DI
-      return row[column] >= 1 && row[column] <= 6;
-    }
-
-    const stringFilter = (row) => {
-      const column = 'name'; //Get column from DI
-      return row[column].includes('H');
-    }
-
-    //const filterArray = [stringFilter, rangeFilter, weightFilter];
-    const filterArray = this.datagridTableService.state.columnFilter
-
-    this.dataSource.data = this.dataSource.data.filter((row) => {
-      const resultArray = [];
-
-      filterArray.forEach((fn) => {
-        resultArray.push(fn(row));
-      });
-
-      return resultArray.every(v => v === true);
-    });
-  }
 
   initColumnDragDrop(): void {
     if(this.datagridTableService.state.dragSortColumns) {
@@ -164,6 +120,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   //################################################
+
   rowDropped(e): void {
     const data = this.dataSource.data;
     moveItemInArray(data, e.previousIndex, e.currentIndex);

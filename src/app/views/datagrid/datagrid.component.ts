@@ -9,7 +9,7 @@ import { DatagridTableActionsComponent } from "../../components/datagridtable/ac
 import { DatagridTableRowactionsComponent } from "../../components/datagridtable/rowactions/rowactions.component";
 import { TitleComponent } from "../../components/datagridtable/title/title.component";
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
-import { StringfilterComponent } from '@app/components/datagridtable/columnfilter/stringfilter/stringfilter.component';
+import { StringfilterComponent } from '@app/components/datagridtable/header/columnfilter/stringfilter/stringcolumnfilter.component';
 
 @Component({
   selector: 'app-datagrid',
@@ -53,7 +53,7 @@ export class DatagridComponent {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.table);    
+    console.log(this.table);
   }
 
   addData(): void {

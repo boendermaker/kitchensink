@@ -1,0 +1,17 @@
+<details (clickoutside)="closeFilter()" #detail>
+    <summary></summary>
+    <div class="columnfilter">
+
+        <div class="columnfilter__header">Filter: {{filtercolumn}}</div>
+        <div class="columnfilter__content">
+          <mat-form-field class="columnfilter__content__input">
+            <mat-label>Filter</mat-label>
+            <input matInput [formControl]="filterControl" placeholder="Filter" />
+          </mat-form-field>
+        </div>
+        <div class="columnfilter__footer">
+          <button mat-button class="columnfilter__footer__button" (click)="updateFilter()">Anwenden</button>
+          <button mat-button class="columnfilter__footer__button" (click)="resetFilter()">Zurücksetzen</button>
+        </div>
+    </div>
+</details>

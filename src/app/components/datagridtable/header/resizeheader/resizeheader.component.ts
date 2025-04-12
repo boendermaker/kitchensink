@@ -1,7 +1,7 @@
 import { AfterContentInit, Component, ElementRef, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-resizehandle',
+  selector: 'app-datagridtable-resizehandle',
   standalone: true,
   imports: [],
   templateUrl: './resizeheader.component.html',

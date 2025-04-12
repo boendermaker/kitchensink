@@ -1,11 +1,23 @@
-<div style="display: flex; width: 100%;">
-  
-  @if(datagridTableService?.state?.dragSortColumns) {
-    <div headerdraghandle style="cursor: grab;">
-      <i class="material-icons-filled">drag_indicator</i>
-    </div>
-  }
-  
-  <app-resizehandle [hidden]="isLastHeader() || !datagridTableService?.state?.resizeColumns" style="flex-grow: 1">
-    <ng-content></ng-content>
-  </app-resizehandle>
+<div class="datagridtable-header">
+
+  <div class="datagridtable-header__drag-handle">
+    @if(datagridTableService?.state?.dragSortColumns) {
+      <div headerdraghandle style="cursor: grab;">
+        <i class="material-icons-filled">drag_indicator</i>
+      </div>
+    }
+  </div>
+
+  <div class="datagridtable-header__content">
+    <ng-content select="app-datagridtable-headercontent"></ng-content>
+  </div>
+
+  <div class="datagridtable-header__columnfilter" style="border:1px solid red;">
+    <ng-content select="[filtercolumn]"></ng-content>
+  </div>
+
+  <div class="datagridtable-header__resize-handle">
+    <app-datagridtable-resizehandle [hidden]="isLastHeader() || !datagridTableService?.state?.resizeColumns" style="flex-grow: 1"></app-datagridtable-resizehandle>
+  </div>
+
+</div>

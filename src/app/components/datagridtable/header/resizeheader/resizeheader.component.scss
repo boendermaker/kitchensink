@@ -5,15 +5,6 @@
 }
 
 .resizeTableColumnHandle {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.resizeTableColumnHandle__content {
-  flex: 1;
-}
-
-.resizeTableColumnHandle__handle {
   display: absolute;
   top: 0;
   bottom: 0;

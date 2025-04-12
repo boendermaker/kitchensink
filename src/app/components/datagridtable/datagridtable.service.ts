@@ -1,13 +1,16 @@
 import { DragDrop, DragRef, DragRefConfig, DropListOrientation, DropListRef } from '@angular/cdk/drag-drop';
 import { ComponentRef, ElementRef, Injectable, QueryList } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import * as _ from 'lodash';
 
 export interface IDatagridTableState {
+  sourceDataSource: MatTableDataSource<any>;
   dataSource: MatTableDataSource<any>;
-  columnFilter?: any[]
+  columnFilter?: Function[]
   dropLists: {[p:string]: DropListRef};
   draggables: {[p:string]: DragRef[]};
   tableRef: ElementRef;
+  tableInstanceRef: MatTable<any>;
   dragSortColumns: boolean;
   dragSortRows: boolean;
   resizeColumns: boolean;
@@ -17,17 +20,35 @@ export interface IDatagridTableState {
 export class DatagridTableService {
 
   state: IDatagridTableState = {
-    dataSource: null,
+    sourceDataSource: new MatTableDataSource<any>(),
+    dataSource: new MatTableDataSource<any>(),
     columnFilter: [],
     dropLists: {},
     draggables: {},
     tableRef: null as unknown as ElementRef,
+    tableInstanceRef: null as unknown as MatTable<any>,
     dragSortColumns: false,
     dragSortRows: false,
     resizeColumns: false
   }
 
-  constructor(private dragDrop: DragDrop) {  }
+  constructor(
+    private dragDrop: DragDrop
+  ) {
+
+  }
+
+//###########################
+
+  setTableInstanceRef(tableInstanceRef: MatTable<any>): void {
+    this.state.tableInstanceRef = tableInstanceRef;
+  }
+
+//###########################
+
+  setTableRef(tableRef: ElementRef): void {
+    this.state.tableRef = tableRef;
+  }
 
 //###########################
 
@@ -37,10 +58,25 @@ export class DatagridTableService {
 
 //###########################
 
-  addColumnFilterRef<C>(filterComponentRef: C): void {
-    console.log('FILTERREFS SERVICE ', filterComponentRef);
-    this.state.columnFilter.push(filterComponentRef);
+  updateDataSourceData(dataSource: MatTableDataSource<any>): void {
+    this.state.dataSource.data = dataSource.data;
   }
+
+//###########################
+
+  addColumnFilterCallback(filterCallback: Function): void {
+    this.state.columnFilter.push(filterCallback);
+  }
+
+//###########################
+
+  filterDataSource(): void {
+    this.state.dataSource.filterPredicate = (dataRow: any, filter: string): boolean => {
+      return this.state.columnFilter.every((filterCallback: Function) => filterCallback(dataRow));
+    }
+    this.state.dataSource.filter = 'Car';
+    console.log('SOURCEDATASOURCE', this.state.sourceDataSource.data);
+  };
 
 //###########################
 
@@ -67,12 +103,6 @@ export class DatagridTableService {
 
 //###########################
 
-  setTableRef(tableRef: ElementRef): void {
-    this.state.tableRef = tableRef;
-  }
-
-//###########################
-
   createDropList(name: string, el: ElementRef): void {
     this.state.dropLists[name] = this.dragDrop.createDropList(el);
   }
@@ -80,7 +110,7 @@ export class DatagridTableService {
 //###########################
 
   getDraggables(draggables: QueryList<HTMLElement>, dragHandleSelector?: string): DragRef[] {
-    return Array.from(draggables).map((elDraggable: HTMLElement) => { 
+    return Array.from(draggables).map((elDraggable: HTMLElement) => {
       const draggable: DragRef = this.dragDrop.createDrag(elDraggable);
       let dragHandle: HTMLElement | null = null;
 

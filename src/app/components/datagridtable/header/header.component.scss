@@ -1,3 +1,38 @@
 :host {
+  position: relative;
   min-width: 0px;
+}
+
+.datagridtable-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  border:1px solid green;
+
+  &__drag-handle {
+    display: flex;
+    align-items: center;
+    width: 20px;
+    cursor: move;
+  }
+
+  &__content {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  &__columfilter-handle {
+    display: flex;
+    align-items: center;
+    width: 20px;
+  }
+
+  &__resize-handle {
+    display: flex;
+    align-items: center;
+    width: 10px;
+    cursor: col-resize;
+  }
+
 }
