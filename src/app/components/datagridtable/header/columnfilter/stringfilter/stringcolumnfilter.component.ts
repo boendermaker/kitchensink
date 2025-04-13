@@ -1,10 +1,10 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { BaseColumnFilter } from '../basecolumnfilter.class';
 import * as _ from 'lodash';
 import { DatagridTableService } from '../../../datagridtable.service';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from '@app/directives/clickoutsidedirective/clickoutside.directive';
+import { IDatagridTableColumnFilterComponent } from '@app/components/datagridtable/interfaces/columnfilter.interface';
 
 @Component({
   selector: 'app-datagridtable-columnfilter-string',
@@ -13,7 +13,7 @@ import { ClickOutsideDirective } from '@app/directives/clickoutsidedirective/cli
   templateUrl: './stringcolumnfilter.component.html',
   styleUrl: './stringcolumnfilter.component.scss'
 })
-export class StringfilterComponent extends BaseColumnFilter implements OnInit {
+export class StringfilterComponent implements IDatagridTableColumnFilterComponent, OnInit {
 
   @ViewChild('detail') detailElement: ElementRef<HTMLDetailsElement> | undefined;
 
@@ -24,7 +24,6 @@ export class StringfilterComponent extends BaseColumnFilter implements OnInit {
   constructor(
     private datagridTableService: DatagridTableService,
   ) {
-    super();
   }
 
   ngOnInit() {
@@ -34,7 +33,7 @@ export class StringfilterComponent extends BaseColumnFilter implements OnInit {
 //###########################
 
   closeFilter(): void {
-    (this.detailElement?.nativeElement.toggleAttribute('open', false) as unknown) as void;
+    this.detailElement?.nativeElement.toggleAttribute('open', false);
   }
 
 //###########################

@@ -52,14 +52,18 @@ export class DatagridTableService {
 
 //###########################
 
-  setDataSource(dataSource: MatTableDataSource<any>): void {
-    this.state.dataSource = dataSource;
+  setDataSource(dataSource: MatTableDataSource<any> | Array<any>): void {
+    if(dataSource instanceof MatTableDataSource) {
+      this.state.dataSource = dataSource;
+    }else if (Array.isArray(dataSource)) {
+      this.state.dataSource.data = dataSource;
+    }
   }
 
 //###########################
 
-  updateDataSourceData(dataSource: MatTableDataSource<any>): void {
-    this.state.dataSource.data = dataSource.data;
+  refresh(): void {
+    this.state.tableInstanceRef.renderRows();
   }
 
 //###########################

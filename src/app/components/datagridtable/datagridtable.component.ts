@@ -4,6 +4,7 @@ import { MatTableModule, MatTable, MatColumnDef, MatRowDef, MatHeaderRowDef, Mat
 import { DatagridTableService } from './datagridtable.service';
 import { DatagridTableActionsComponent } from './actions/actions.component';
 import * as _ from 'lodash';
+import { Observable, Subject } from 'rxjs';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   @ViewChild(MatTable, {read: ElementRef}) tableRef: ElementRef;
 
   @Input() dataSource: MatTableDataSource<any>;
+  @Input() dataArray: any[];
+  @Input() dataArrayChanged: Observable<void>;
   @Input() columns: string[];
   @Input()
   get resizeColumns(): boolean {
@@ -64,6 +67,8 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   ngAfterViewInit(): void {
+    this.setTableInstanceRef();
+    this.handleDataArrayChanged();
     this.setTableData();
     this.initColumnDragDrop();
   }
@@ -83,7 +88,25 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   setTableData(): void {
-    this.datagridTableService.setDataSource(this.dataSource);
+    this.datagridTableService.setDataSource(this.dataSource ?? this.dataArray);
+  }
+
+  //################################################
+
+  setTableInstanceRef(): void {
+    this.datagridTableService.setTableInstanceRef(this.table);
+  }
+
+  //################################################
+
+  handleDataArrayChanged(): void {
+    if(this.dataArrayChanged) {
+      this.dataArrayChanged.subscribe({
+        next: () => {
+          this.datagridTableService.refresh();
+        }
+      })
+    }
   }
 
   //################################################

@@ -1,18 +1,18 @@
 <div class="datagridtable-header">
 
-  <div class="datagridtable-header__drag-handle">
-    @if(datagridTableService?.state?.dragSortColumns) {
-      <div headerdraghandle style="cursor: grab;">
-        <i class="material-icons-filled">drag_indicator</i>
-      </div>
-    }
-  </div>
+  @if(datagridTableService?.state?.dragSortColumns) {
+    <div class="datagridtable-header__drag-handle">
+        <div headerdraghandle style="cursor: grab;">
+          <i class="material-icons-filled">drag_indicator</i>
+        </div>
+    </div>
+  }
 
   <div class="datagridtable-header__content">
     <ng-content select="app-datagridtable-headercontent"></ng-content>
   </div>
 
-  <div class="datagridtable-header__columnfilter" style="border:1px solid red;">
+  <div class="datagridtable-header__columnfilter" style="border:1px solid red;" #columnfilter>
     <ng-content select="[filtercolumn]"></ng-content>
   </div>
 

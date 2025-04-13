@@ -10,6 +10,7 @@ import { DatagridTableRowactionsComponent } from "../../components/datagridtable
 import { TitleComponent } from "../../components/datagridtable/title/title.component";
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { StringfilterComponent } from '@app/components/datagridtable/header/columnfilter/stringfilter/stringcolumnfilter.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-datagrid',
@@ -41,11 +42,20 @@ export class DatagridComponent {
     {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
   ];
 
+  tableData3: any[] = [
+    {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+    {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+    {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+  ];
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
   displayedColumns2: string[] = ['position', 'name', 'symbol', 'actions'];
+  displayedColumns3: string[] = ['position', 'name', 'symbol', 'actions'];
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>(this.tableData);
   dataSource2: MatTableDataSource<any> = new MatTableDataSource<any>(this.tableData2);
+
+  dataArrayChanged: Subject<void> = new Subject<void>();
 
   constructor(
     private cdr: ChangeDetectorRef
@@ -74,6 +84,18 @@ export class DatagridComponent {
   removeData2(): void {
     this.tableData2.shift();
     this.dataSource2.connect().next(this.tableData2);
+  }
+
+  addData3(): void {
+    this.tableData3.push({position: Math.round(Math.random()*100), name: 'Blah', symbol: Math.random()*500});
+    this.dataArrayChanged.next();
+    console.log(this.tableData3);
+  }
+
+  removeData3(): void {
+    this.tableData3.shift();
+    this.dataArrayChanged.next();
+    console.log(this.tableData3);
   }
 
   dropColumn(e): void {
