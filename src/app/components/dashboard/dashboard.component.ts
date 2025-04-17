@@ -30,7 +30,6 @@ import { WidgetSelectComponent } from './widget-select/widget-select.component';
       AllAngularMaterialMDCModulesModule,
       ReactiveFormsModule,
       WidgetContainerComponent,
-      WidgetSelectComponent
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush

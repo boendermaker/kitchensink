@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import './assets/fonts/roboto/roboto';
-@import './assets/styles/index';
+@use './assets/fonts/roboto/roboto';
+@use './assets/styles/index';
 
 * {
   box-sizing: border-box;
