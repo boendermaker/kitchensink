@@ -8,7 +8,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 @Component({
   selector: 'app-tableform',
   templateUrl: './tableform.component.html',
-  styleUrls: ['./tableform.component.scss']
+  styleUrls: ['./tableform.component.scss'],
+  standalone: false,
 })
 export class TableformComponent {
 

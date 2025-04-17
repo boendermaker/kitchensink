@@ -15,6 +15,7 @@ import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 @UntilDestroy()
 @Directive({
   selector: '[observevisibility]',
+  standalone: false,
 })
 export class ObserveVisibilityDirective implements OnDestroy, OnInit, AfterViewInit {
   private observer: IntersectionObserver | undefined;

@@ -7,7 +7,8 @@ import { firstValueFrom, lastValueFrom } from 'rxjs';
 @Component({
   selector: 'app-composition',
   templateUrl: './composition.component.html',
-  styleUrl: './composition.component.scss'
+  styleUrl: './composition.component.scss',
+  standalone: false,
 })
 export class CompositionComponent implements OnInit, AfterViewInit, AfterContentInit {
 

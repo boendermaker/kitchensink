@@ -4,7 +4,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'app-drawermodaldialog',
   templateUrl: './drawermodaldialog.component.html',
-  styleUrls: ['./drawermodaldialog.component.scss']
+  styleUrls: ['./drawermodaldialog.component.scss'],
+  standalone: false,
 })
 export class DrawermodaldialogComponent {
 

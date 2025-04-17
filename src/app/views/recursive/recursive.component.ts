@@ -5,7 +5,8 @@ import { rndID } from '@app/shared/util/rndid'
 @Component({
   selector: 'app-recursive',
   templateUrl: './recursive.component.html',
-  styleUrls: ['./recursive.component.scss']
+  styleUrls: ['./recursive.component.scss'],
+  standalone: false,
 })
 
 export class RecursiveComponent {

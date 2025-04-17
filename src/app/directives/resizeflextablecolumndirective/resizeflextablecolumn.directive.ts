@@ -22,6 +22,7 @@ export interface IResizableTableColumnDirectiveChangedEvent {
 @UntilDestroy()
 @Directive({
   selector: '[resizeflextablecolumn]',
+  standalone: false,
 })
 export class ResizeFlexTableColumnDirective implements AfterViewInit {
   @Output() resizetablecolumnchanged: EventEmitter<IResizableTableColumnDirectiveChangedEvent> = new EventEmitter();

@@ -6,7 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-dragdroptabs',
   templateUrl: './dragdroptabs.component.html',
-  styleUrls: ['./dragdroptabs.component.scss']
+  styleUrls: ['./dragdroptabs.component.scss'],
+  standalone: false,
 })
 export class DragdroptabsComponent implements OnInit {
 

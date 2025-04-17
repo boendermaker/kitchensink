@@ -49,7 +49,8 @@ export interface IUser {
 @Component({
   selector: 'app-webcomponent',
   templateUrl: './webcomponent.component.html',
-  styleUrls: ['./webcomponent.component.scss']
+  styleUrls: ['./webcomponent.component.scss'],
+  standalone: false,
 })
 export class WebcomponentComponent implements OnInit, AfterViewInit {
 

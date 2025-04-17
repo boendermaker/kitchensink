@@ -6,7 +6,8 @@ import { KioskboardService } from '@app/components/kioskboard/kioskboard.service
 @Component({
   selector: 'app-virtualkeyboard',
   templateUrl: './virtualkeyboard.component.html',
-  styleUrls: ['./virtualkeyboard.component.scss']
+  styleUrls: ['./virtualkeyboard.component.scss'],
+  standalone: false,
 })
 export class VirtualkeyboardComponent implements OnInit {
 

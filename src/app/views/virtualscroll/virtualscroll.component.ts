@@ -4,7 +4,8 @@ import { Component, ViewChild } from '@angular/core';
 @Component({
   selector: 'app-virtualscroll',
   templateUrl: './virtualscroll.component.html',
-  styleUrls: ['./virtualscroll.component.scss']
+  styleUrls: ['./virtualscroll.component.scss'],
+  standalone: false,
 })
 export class VirtualscrollComponent {
 

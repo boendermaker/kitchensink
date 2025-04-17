@@ -23,6 +23,7 @@ import { TableformModule } from './tableform/tableform.module';
 import { ModelToFormModule } from './modeltoform/modeltoform.module';
 import { RxjsplaygroundComponent } from './rxjsplayground/rxjsplayground.component';
 import { SvgplaygroundComponent } from './svgplayground/svgplayground.component';
+import { ScrollloadComponent } from './scrollload/scrollload.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

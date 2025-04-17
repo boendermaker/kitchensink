@@ -9,7 +9,8 @@ import { ComponentType } from '@angular/cdk/portal';
   selector: 'app-gridsterdashboard',
   templateUrl: './gridsterdashboard.component.html',
   styleUrls: ['./gridsterdashboard.component.scss'],
-  providers: [DashboardService]
+  providers: [DashboardService],
+  standalone: false,
 })
 export class GridsterdashboardComponent implements OnInit {
 

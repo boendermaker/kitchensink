@@ -7,6 +7,7 @@ import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
   selector: 'app-codeviewer',
   templateUrl: './codeviewer.component.html',
   styleUrls: ['./codeviewer.component.scss'],
+  standalone: false,
 })
 export class CodeviewerComponent implements OnInit {
 

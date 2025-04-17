@@ -10,7 +10,8 @@ import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-chiplist',
   templateUrl: './chiplist.component.html',
-  styleUrls: ['./chiplist.component.scss']
+  styleUrls: ['./chiplist.component.scss'],
+  standalone: false,
 })
 export class ChiplistComponent implements OnInit {
 

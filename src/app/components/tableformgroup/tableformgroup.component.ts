@@ -5,7 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-tableform',
   templateUrl: './tableformgroup.component.html',
-  styleUrls: ['./tableformgroup.component.scss']
+  styleUrls: ['./tableformgroup.component.scss'],
+  standalone: false,
 })
 export class TableformgroupComponent implements OnInit {
 

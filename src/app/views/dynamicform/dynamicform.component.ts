@@ -8,7 +8,8 @@ import { ControlTextModel } from '@app/components/dynamicformgroup/model/control
 @Component({
   selector: 'app-dynamicform',
   templateUrl: './dynamicform.component.html',
-  styleUrls: ['./dynamicform.component.scss']
+  styleUrls: ['./dynamicform.component.scss'],
+  standalone: false,
 })
 export class DynamicformComponent implements OnInit {
 

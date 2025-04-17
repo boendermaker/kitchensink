@@ -5,7 +5,8 @@ import { BlocklyOptions } from 'blockly';
 @Component({
   selector: 'app-blockly',
   templateUrl: './blockly.component.html',
-  styleUrls: ['./blockly.component.scss']
+  styleUrls: ['./blockly.component.scss'],
+  standalone: false,
 })
 export class BlocklyComponent implements OnInit, AfterViewInit {
 

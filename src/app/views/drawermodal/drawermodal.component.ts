@@ -5,7 +5,8 @@ import {DrawermodaldialogComponent} from '../../components/drawermodaldialog/dra
 @Component({
   selector: 'app-drawermodal',
   templateUrl: './drawermodal.component.html',
-  styleUrls: ['./drawermodal.component.scss']
+  styleUrls: ['./drawermodal.component.scss'],
+  standalone: false,
 })
 export class DrawermodalComponent implements OnInit {
 

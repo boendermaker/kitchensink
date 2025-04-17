@@ -7,7 +7,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 @Component({
   selector: 'app-scrollload',
   templateUrl: './scrollload.component.html',
-  styleUrls: ['./scrollload.component.scss']
+  styleUrls: ['./scrollload.component.scss'],
+  standalone: false,
 })
 export class ScrollloadComponent implements OnInit {
 

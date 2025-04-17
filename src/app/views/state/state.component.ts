@@ -7,6 +7,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
   selector: 'app-state',
   templateUrl: './state.component.html',
   styleUrls: ['./state.component.scss'],
+  standalone: false,
 })
 export class StateComponent implements OnInit {
 

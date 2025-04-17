@@ -6,7 +6,7 @@ import { ValueSliderComponent } from "../../components/valueslider/valueslider.c
     standalone: true,
     templateUrl: './multirangeslider.component.html',
     styleUrl: './multirangeslider.component.scss',
-    imports: [ValueSliderComponent]
+    imports: [ValueSliderComponent],
 })
 export class MultirangeSliderComponent implements OnInit {
 

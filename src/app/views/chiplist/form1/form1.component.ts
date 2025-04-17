@@ -9,7 +9,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 @Component({
   selector: 'app-form1',
   templateUrl: './form1.component.html',
-  styleUrls: ['./form1.component.scss']
+  styleUrls: ['./form1.component.scss'],
+  standalone: false,
 })
 export class Form1Component {
 

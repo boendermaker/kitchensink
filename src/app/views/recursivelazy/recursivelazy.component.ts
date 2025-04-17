@@ -6,7 +6,8 @@ import { RecursiveLazyDataService } from './recursivelazy-data.service';
 @Component({
   selector: 'app-recursive-lazy',
   templateUrl: './recursivelazy.component.html',
-  styleUrls: ['./recursivelazy.component.scss']
+  styleUrls: ['./recursivelazy.component.scss'],
+  standalone: false,
 })
 
 export class RecursiveLazyComponent implements OnInit {

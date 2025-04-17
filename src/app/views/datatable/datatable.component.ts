@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-datatable',
   templateUrl: './datatable.component.html',
-  styleUrls: ['./datatable.component.scss']
+  styleUrls: ['./datatable.component.scss'],
+  standalone: false,
 })
 export class DatatableComponent {
 
