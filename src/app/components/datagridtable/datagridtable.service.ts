@@ -2,34 +2,39 @@ import { DragDrop, DragRef, DragRefConfig, DropListOrientation, DropListRef } fr
 import { ComponentRef, ElementRef, Injectable, QueryList } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import * as _ from 'lodash';
+import { DatagridTableComponent } from './datagridtable.component';
 
 export interface IDatagridTableState {
-  sourceDataSource: MatTableDataSource<any>;
   dataSource: MatTableDataSource<any>;
   columnFilter?: Function[]
   dropLists: {[p:string]: DropListRef};
   draggables: {[p:string]: DragRef[]};
-  tableRef: ElementRef;
-  tableInstanceRef: MatTable<any>;
   dragSortColumns: boolean;
   dragSortRows: boolean;
   resizeColumns: boolean;
+  sorting: boolean;
+  toggleColumns: boolean;
+  tableRef: ElementRef;
+  tableInstanceRef: MatTable<any>;
+  tableComponentRef: DatagridTableComponent;
 }
 
 @Injectable()
 export class DatagridTableService {
 
   state: IDatagridTableState = {
-    sourceDataSource: new MatTableDataSource<any>(),
     dataSource: new MatTableDataSource<any>(),
     columnFilter: [],
     dropLists: {},
     draggables: {},
-    tableRef: null as unknown as ElementRef,
-    tableInstanceRef: null as unknown as MatTable<any>,
+    resizeColumns: false,
     dragSortColumns: false,
     dragSortRows: false,
-    resizeColumns: false
+    sorting: false,
+    toggleColumns: false,
+    tableRef: null as unknown as ElementRef,
+    tableInstanceRef: null as unknown as MatTable<unknown>,
+    tableComponentRef: null as unknown as DatagridTableComponent
   }
 
   constructor(
@@ -40,7 +45,7 @@ export class DatagridTableService {
 
 //###########################
 
-  setTableInstanceRef(tableInstanceRef: MatTable<any>): void {
+  setTableInstanceRef(tableInstanceRef: MatTable<unknown>): void {
     this.state.tableInstanceRef = tableInstanceRef;
   }
 
@@ -52,7 +57,13 @@ export class DatagridTableService {
 
 //###########################
 
-  setDataSource(dataSource: MatTableDataSource<any> | Array<any>): void {
+  setTableComponentRef(tableComponentRef: DatagridTableComponent): void {
+    this.state.tableComponentRef = tableComponentRef;
+  }
+
+//###########################
+
+  setDataSource(dataSource: MatTableDataSource<unknown> | Array<unknown>): void {
     if(dataSource instanceof MatTableDataSource) {
       this.state.dataSource = dataSource;
     }else if (Array.isArray(dataSource)) {
@@ -78,8 +89,7 @@ export class DatagridTableService {
     this.state.dataSource.filterPredicate = (dataRow: any, filter: string): boolean => {
       return this.state.columnFilter.every((filterCallback: Function) => filterCallback(dataRow));
     }
-    this.state.dataSource.filter = 'Car';
-    console.log('SOURCEDATASOURCE', this.state.sourceDataSource.data);
+    this.state.dataSource.filter = ' ';
   };
 
 //###########################

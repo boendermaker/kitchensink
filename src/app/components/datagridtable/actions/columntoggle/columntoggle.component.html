@@ -1,0 +1,15 @@
+<button mat-menu-item [matMenuTriggerFor]="columntoggle">
+  <span>Spalten</span>
+</button>
+
+<mat-menu #columntoggle="matMenu">
+  <button mat-menu-item>
+    <span>Spalte1</span>
+  </button>
+  <button mat-menu-item disabled>
+    <span>Spalte2</span>
+  </button>
+  <button mat-menu-item>
+    <span>Spalte3</span>
+  </button>
+</mat-menu>

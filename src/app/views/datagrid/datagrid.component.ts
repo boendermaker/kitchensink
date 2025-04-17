@@ -10,12 +10,13 @@ import { DatagridTableRowactionsComponent } from "../../components/datagridtable
 import { TitleComponent } from "../../components/datagridtable/title/title.component";
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { StringfilterComponent } from '@app/components/datagridtable/header/columnfilter/stringfilter/stringcolumnfilter.component';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { ColumntoggleComponent } from "../../components/datagridtable/actions/columntoggle/columntoggle.component";
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, TitleComponent, StringfilterComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, TitleComponent, StringfilterComponent, ColumntoggleComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss'
 })
@@ -54,8 +55,11 @@ export class DatagridComponent {
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>(this.tableData);
   dataSource2: MatTableDataSource<any> = new MatTableDataSource<any>(this.tableData2);
+  dataSourceConnection: BehaviorSubject<unknown> = this.dataSource.connect();
+  dataSource2Connection: BehaviorSubject<unknown> = this.dataSource2.connect();
 
-  dataArrayChanged: Subject<void> = new Subject<void>();
+
+  dataChanged: Subject<void> = new Subject<void>();
 
   constructor(
     private cdr: ChangeDetectorRef
@@ -68,33 +72,33 @@ export class DatagridComponent {
 
   addData(): void {
     this.tableData.push({position: Math.round(Math.random()*100), name: 'Blubb', weight: Math.random()*1000, symbol: 'XX'});
-    this.dataSource.connect().next(this.tableData);
+    this.dataSourceConnection.next(this.tableData);
   }
 
   removeData(): void {
     this.tableData.pop();
-    this.dataSource.connect().next(this.tableData);
+    this.dataSourceConnection.next(this.tableData);
   }
 
   addData2(): void {
     this.tableData2.push({position: Math.round(Math.random()*100), name: 'Blah', symbol: Math.random()*500});
-    this.dataSource2.connect().next(this.tableData2);
+    this.dataSource2Connection.next(this.tableData2);
   }
 
   removeData2(): void {
     this.tableData2.shift();
-    this.dataSource2.connect().next(this.tableData2);
+    this.dataSource2Connection.next(this.tableData2);
   }
 
   addData3(): void {
     this.tableData3.push({position: Math.round(Math.random()*100), name: 'Blah', symbol: Math.random()*500});
-    this.dataArrayChanged.next();
+    this.dataChanged.next();
     console.log(this.tableData3);
   }
 
   removeData3(): void {
     this.tableData3.shift();
-    this.dataArrayChanged.next();
+    this.dataChanged.next();
     console.log(this.tableData3);
   }
 

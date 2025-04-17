@@ -19,7 +19,6 @@ import { Observable, Subject } from 'rxjs';
 export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   @ContentChild(DatagridTableActionsComponent, {static: true}) datagridTableActions: DatagridTableActionsComponent;
-
   @ContentChildren(MatHeaderRowDef) headerRowDefs: QueryList<MatHeaderRowDef>;
   @ContentChildren(MatRowDef) rowDefs: QueryList<MatRowDef<any>>;
   @ContentChildren(MatColumnDef) columnDefs: QueryList<MatColumnDef>;
@@ -28,48 +27,29 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   @ViewChild(MatTable, {read: ElementRef}) tableRef: ElementRef;
 
   @Input() dataSource: MatTableDataSource<any>;
-  @Input() dataArray: any[];
-  @Input() dataArrayChanged: Observable<void>;
+  @Input() renderRows: Observable<void>;
   @Input() columns: string[];
-  @Input()
-  get resizeColumns(): boolean {
-    return this.datagridTableService.state.resizeColumns;
-  }
-  set resizeColumns(value: boolean) {
-    this.datagridTableService.state.resizeColumns = value;
-  }
-
-  @Input()
-  get dragSortColumns(): boolean {
-    return this.datagridTableService.state.dragSortColumns;
-  }
-  set dragSortColumns(value: boolean) {
-    this.datagridTableService.state.dragSortColumns = value;
-  }
-
-  @Input()
-  get dragSortRows(): boolean {
-    return this.datagridTableService.state.dragSortRows;
-  }
-  set dragSortRows(value: boolean) {
-    this.datagridTableService.state.dragSortRows = value;
-  }
+  @Input() resizeColumns: boolean = false;
+  @Input() dragSortColumns: boolean = false;
+  @Input() dragSortRows: boolean = false;
+  @Input() sortColumns: boolean = false;
+  @Input() toggleColumns: boolean = false;
 
   constructor(
-    private datagridTableService: DatagridTableService,
+    public datagridTableService: DatagridTableService,
     private el: ElementRef,
     private cdr: ChangeDetectorRef
   ) {
   }
 
   ngOnInit(): void {
-
+    this.setTableOptions();
+    this.handleRenderRows();
+    this.setTableData();
   }
 
   ngAfterViewInit(): void {
-    this.setTableInstanceRef();
-    this.handleDataArrayChanged();
-    this.setTableData();
+    this.setTableRefs();
     this.initColumnDragDrop();
   }
 
@@ -77,7 +57,6 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
     this.rowDefs.forEach(rowDef => this.table.addRowDef(rowDef));
     this.headerRowDefs.forEach(headerRowDef => this.table.addHeaderRowDef(headerRowDef));
-    //this.datagridTableActions.datagridTableRef$.next(this);
     this.datagridTableActions.ref = this;
   }
 
@@ -88,20 +67,32 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   setTableData(): void {
-    this.datagridTableService.setDataSource(this.dataSource ?? this.dataArray);
+    this.datagridTableService.setDataSource(this.dataSource);
   }
 
   //################################################
 
-  setTableInstanceRef(): void {
+  setTableOptions(): void {
+    this.datagridTableService.state.resizeColumns = this.resizeColumns;
+    this.datagridTableService.state.dragSortColumns = this.dragSortColumns;
+    this.datagridTableService.state.dragSortRows = this.dragSortRows;
+    this.datagridTableService.state.sorting = this.sortColumns;
+    this.datagridTableService.state.resizeColumns = this.resizeColumns;
+  }
+
+  //################################################
+
+  setTableRefs(): void {
     this.datagridTableService.setTableInstanceRef(this.table);
+    this.datagridTableService.setTableRef(this.tableRef);
+    this.datagridTableService.setTableComponentRef(this);
   }
 
   //################################################
 
-  handleDataArrayChanged(): void {
-    if(this.dataArrayChanged) {
-      this.dataArrayChanged.subscribe({
+  handleRenderRows(): void {
+    if(this.renderRows) {
+      this.renderRows.subscribe({
         next: () => {
           this.datagridTableService.refresh();
         }
@@ -113,9 +104,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   initColumnDragDrop(): void {
     if(this.datagridTableService.state.dragSortColumns) {
-
       this.datagridTableService.setTableRef(this.tableRef);
-
       this.datagridTableService.createDropList('columnDropList', this.tableRef.nativeElement.querySelector('thead'));
 
       const updateColumns = () => {
@@ -134,7 +123,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
             moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
             this.cdr.detectChanges();
             updateColumns();
-            this.table.renderRows();
+            this.datagridTableService.refresh();
           }
         }
       })
@@ -145,7 +134,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   //################################################
 
   rowDropped(e): void {
-    const data = this.dataSource.data;
+    const data = this.datagridTableService.state.dataSource.data;
     moveItemInArray(data, e.previousIndex, e.currentIndex);
     this.dataSource.connect().next(data);
   }

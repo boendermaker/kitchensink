@@ -9,7 +9,7 @@
     </div>
   </div>
 
-    <table mat-table [dataSource]="dataSource" cdkDropList cdkDropListData="dataSource.data" (cdkDropListDropped)="rowDropped($event)">
+    <table mat-table [dataSource]="datagridTableService.state.dataSource" cdkDropList cdkDropListData="datagridTableService.state.dataSource.data" (cdkDropListDropped)="rowDropped($event)">
 
       <ng-content></ng-content>
 
