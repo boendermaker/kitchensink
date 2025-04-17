@@ -6,6 +6,8 @@ import { DatagridTableComponent } from './datagridtable.component';
 
 export interface IDatagridTableState {
   dataSource: MatTableDataSource<any>;
+  columns: string[];
+  displayedColumns: string[];
   columnFilter?: Function[]
   dropLists: {[p:string]: DropListRef};
   draggables: {[p:string]: DragRef[]};
@@ -14,7 +16,7 @@ export interface IDatagridTableState {
   resizeColumns: boolean;
   sorting: boolean;
   toggleColumns: boolean;
-  tableRef: ElementRef;
+  tableElementRef: ElementRef;
   tableInstanceRef: MatTable<any>;
   tableComponentRef: DatagridTableComponent;
 }
@@ -25,6 +27,8 @@ export class DatagridTableService {
   state: IDatagridTableState = {
     dataSource: new MatTableDataSource<any>(),
     columnFilter: [],
+    columns: [],
+    displayedColumns: [],
     dropLists: {},
     draggables: {},
     resizeColumns: false,
@@ -32,7 +36,7 @@ export class DatagridTableService {
     dragSortRows: false,
     sorting: false,
     toggleColumns: false,
-    tableRef: null as unknown as ElementRef,
+    tableElementRef: null as unknown as ElementRef,
     tableInstanceRef: null as unknown as MatTable<unknown>,
     tableComponentRef: null as unknown as DatagridTableComponent
   }
@@ -51,8 +55,8 @@ export class DatagridTableService {
 
 //###########################
 
-  setTableRef(tableRef: ElementRef): void {
-    this.state.tableRef = tableRef;
+  setTableElementRef(tableElementRef: ElementRef): void {
+    this.state.tableElementRef = tableElementRef;
   }
 
 //###########################

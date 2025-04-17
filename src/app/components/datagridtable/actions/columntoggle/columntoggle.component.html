@@ -3,13 +3,13 @@
 </button>
 
 <mat-menu #columntoggle="matMenu">
-  <button mat-menu-item>
-    <span>Spalte1</span>
-  </button>
-  <button mat-menu-item disabled>
-    <span>Spalte2</span>
-  </button>
-  <button mat-menu-item>
-    <span>Spalte3</span>
-  </button>
+  <form [formGroup]="columnToggleFormGroup">
+    <div formArrayName="tester">
+      @for(displayedColumn of datagridTableService.state.columns; track displayedColumn; let index = $index) {
+        <button mat-menu-item>
+          <mat-checkbox [formControlName]="index">{{ displayedColumn }}</mat-checkbox>
+        </button>
+      }
+    </div>
+  </form>
 </mat-menu>

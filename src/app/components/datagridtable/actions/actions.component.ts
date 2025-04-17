@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, computed, OnInit, Optional, WritableSignal } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, computed, ContentChildren, OnInit, Optional, QueryList, WritableSignal } from '@angular/core';
 import { DatagridTableService } from '../datagridtable.service';
 import { DatagridTableComponent } from '../datagridtable.component';
 import { BehaviorSubject } from 'rxjs';
@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DatagridTableActionsComponent implements OnInit, AfterViewInit, AfterContentInit {
 
-  ref: DatagridTableComponent;
+  @ContentChildren('actions') tableActions: QueryList<any>;
 
   constructor(
     private datagridTableService: DatagridTableService,
@@ -22,12 +22,17 @@ export class DatagridTableActionsComponent implements OnInit, AfterViewInit, Aft
   }
 
   ngOnInit() {
-    this.parent.tester();
+    console.log('TABLESERICE ACTIONS ', this.datagridTableService);
   }
 
   ngAfterViewInit() {
+    
   }
 
   ngAfterContentInit() {
+    console.log('Actions Content Init', this.tableActions);
+    this.tableActions.changes.subscribe((item) => {
+      console.log('ITEM ', item)
+    })
   }
 }

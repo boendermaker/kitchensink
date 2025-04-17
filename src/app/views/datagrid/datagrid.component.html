@@ -7,7 +7,7 @@
 
   matSort #sort="matSort">
 
-  <app-datagridtable-title title="Lorem Ipsum">
+  <app-datagridtable-title title="Lorem Ipsum">  
     <span prefix>Davor</span><span suffix>Danach</span>
   </app-datagridtable-title>
 
@@ -16,6 +16,18 @@
     <button mat-icon-button (click)="addData()"><i class="material-icons-filled">add</i></button>
     <button mat-icon-button (click)="removeData()"><i class="material-icons-filled">remove</i></button>
     <button mat-icon-button [matMenuTriggerFor]="menu"><i class="material-icons-filled">more_vert</i></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <span>Lorem</span>
+      </button>
+      <button mat-menu-item disabled>
+        <span>Boretum</span>
+      </button>
+      <button mat-menu-item>
+        <span>Spalten</span>
+      </button>
+      <app-datagridtable-columntoggle></app-datagridtable-columntoggle>
+    </mat-menu>
   </app-datagridtable-actions>
 
   @for(displayedColumn of displayedColumns; track displayedColumn; let index = $index) {
@@ -157,20 +169,6 @@
   }
 
 </app-datagridtable>
-
-
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>
-    <span>Lorem</span>
-  </button>
-  <button mat-menu-item disabled>
-    <span>Boretum</span>
-  </button>
-  <button mat-menu-item>
-    <span>Spalten</span>
-  </button>
-  <app-datagridtable-columntoggle></app-datagridtable-columntoggle>
-</mat-menu>
 
 <mat-menu #menu2="matMenu">
   <button mat-menu-item>
