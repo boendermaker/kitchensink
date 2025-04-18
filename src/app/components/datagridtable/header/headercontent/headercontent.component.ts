@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './headercontent.component.html',
   styleUrl: './headercontent.component.scss'
 })
-export class HeadercontentComponent {
+export class DatagridTableHeadercontentComponent {
 
 }

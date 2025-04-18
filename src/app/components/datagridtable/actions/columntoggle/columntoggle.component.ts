@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, DestroyRef, inject, Input, Optional, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { DatagridTableService } from '../../datagridtable.service';
 import { DatagridTableActionsComponent } from '../actions.component';
@@ -11,43 +12,52 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular
   templateUrl: './columntoggle.component.html',
   styleUrl: './columntoggle.component.scss'
 })
-export class ColumntoggleComponent {
+export class DatagridTableColumntoggleComponent implements OnInit {
+
   destroyRef: DestroyRef = inject(DestroyRef);
 
-  @Input() mode: 'menuitem' | 'action';
+  @Input() mode: 'menuitem' | 'actionbutton';
 
-  columnToggleFormGroup: FormGroup = new FormGroup({
-    tester: new FormArray([]),
-  });
+  formGroup: FormGroup = new FormGroup({})
 
   constructor(
     public datagridTableService: DatagridTableService,
     private cdr: ChangeDetectorRef,
-    @Optional() public parent?: DatagridTableActionsComponent,
   ) {
   }
 
   ngOnInit() {
-    this.handleToggleColumn();    
+    this.addToogleColumnControls();
+    this.formGroupChanged();
   }
 
-  ngAfterViewInit() {
-     
-  }
+  //###########################
 
-  ngAfterContentInit() {
-  }
-
-  handleToggleColumn() {
-    this.columnToggleFormGroup.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: (value) => {
-        console.log(value);
+  addToogleColumnControls() {
+    this.datagridTableService.state.columns.forEach((column: string) => {
+      if (!this.formGroup.get(column)) {
+        this.formGroup.addControl(column, new FormControl(true));
       }
     });
   }
 
-}
-function takeUntilDestroyed(destroyRef: any): import("rxjs").OperatorFunction<any, unknown> {
-  throw new Error('Function not implemented.');
+  //###########################
+
+  updateDisplayedColumns(value: unknown) {
+    this.datagridTableService.state.displayedColumns = Object.keys(value).filter((key: string) => value[key]);
+    this.datagridTableService.state.tableInstanceRef.renderRows();
+  }
+
+  //###########################
+
+  formGroupChanged(): void {
+    this.formGroup.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: unknown) => {
+      this.updateDisplayedColumns(value);
+      this.datagridTableService.triggerStateChange();
+    });
+  }
+
+  //###########################
+
 }
 

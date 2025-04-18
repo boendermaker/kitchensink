@@ -1,15 +1,16 @@
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, forwardRef, Inject, QueryList, Renderer2, signal, ViewChild, ViewChildren, WritableSignal } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, forwardRef, Inject, Optional, QueryList, Renderer2, signal, ViewChild, ViewChildren, WritableSignal } from '@angular/core';
 import { distinctUntilChanged, fromEvent, map, switchMap, takeUntil, tap } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { DatagridTableResizeHeaderComponent } from '@app/components/datagridtable/header/resizeheader/resizeheader.component';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { DatagridTableService } from '../datagridtable.service';
-import { StringfilterComponent } from './columnfilter/stringfilter/stringcolumnfilter.component';
+import { DatagridTableOrderColumnComponent } from "./ordercolumn/ordercolumn.component";
+import { DatagridTableColumnComponent } from '../column/column.component';
 
 @Component({
   selector: 'app-datagridtable-header',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, DatagridTableResizeHeaderComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableResizeHeaderComponent, DatagridTableOrderColumnComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -18,11 +19,10 @@ export class DatagridTableHeaderComponent implements AfterViewInit, AfterContent
 
   @ViewChild('columnfilter') columnFilterElement!: ElementRef<HTMLDivElement>;
 
+  columnName: string = '';
   tableHeaderElement: HTMLElement;
   tableHeaderHandleElement: HTMLElement;
   columnWidth: number = 0;
-  columnId: number;
-  currentColumn: string = '';
   isLastHeader: WritableSignal<boolean> = signal(false);
 
   constructor(
@@ -30,8 +30,13 @@ export class DatagridTableHeaderComponent implements AfterViewInit, AfterContent
     private elementRef: ElementRef,
     private renderer: Renderer2,
     public datagridTableService: DatagridTableService,
+    @Optional() public datagridTableColumnComponentRef: DatagridTableColumnComponent,
   ) {
 
+  }
+
+  ngOnInit(): void {
+    this.getColumnName();
   }
 
   ngAfterViewInit(): void {
@@ -40,7 +45,12 @@ export class DatagridTableHeaderComponent implements AfterViewInit, AfterContent
   }
 
   ngAfterContentInit(): void {
-    console.log('INSTANCE ');
+  }
+
+  //################################################
+
+  getColumnName(): void {
+    this.columnName = this.datagridTableColumnComponentRef.getColumnName();
   }
 
   //################################################

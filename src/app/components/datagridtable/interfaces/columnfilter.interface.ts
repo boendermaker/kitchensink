@@ -1,5 +1,9 @@
+import { DatagridTableColumnComponent } from "../column/column.component";
+
 export interface IDatagridTableColumnFilterComponent {
-  filtercolumn: string;
+  columnName: string;
+  datagridTableColumnComponentRef: DatagridTableColumnComponent
+  getColumnName(): void
   filterCallback(dataRow: any): boolean;
   closeFilter(): void;
   updateFilter(): void;

@@ -8,7 +8,7 @@ import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmater
   templateUrl: './title.component.html',
   styleUrl: './title.component.scss'
 })
-export class TitleComponent {
+export class DatagridTableTitleComponent {
 
   @Input() title: string;
 

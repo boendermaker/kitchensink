@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { ISideNavItem } from './components/sidenav/sidenav.interface';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -39,8 +40,16 @@ export class AppComponent {
     {title: 'Multilanguage Form', path: '/multilanguageform'}
   ];
 
-  constructor() {
+  constructor(
+    private matIconRegistry: MatIconRegistry
+  ) {
+    this.setMatIconFont();
+  }
 
+  setMatIconFont(): void {
+    this.matIconRegistry.classNameForFontAlias('material-icons-filled');
+    this.matIconRegistry.setDefaultFontSetClass('material-icons-filled');
+    this.matIconRegistry.registerFontClassAlias('material-icons-filled', 'material-icons-outlined');
   }
 
 }

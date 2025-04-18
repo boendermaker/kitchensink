@@ -1,8 +1,10 @@
-import { DragDrop, DragRef, DragRefConfig, DropListOrientation, DropListRef } from '@angular/cdk/drag-drop';
+import { DragDrop, DragRef, DragRefConfig, DropListOrientation, DropListRef, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ComponentRef, ElementRef, Injectable, QueryList } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import * as _ from 'lodash';
 import { DatagridTableComponent } from './datagridtable.component';
+import { firstValueFrom, Observable, Subject } from 'rxjs';
+
 
 export interface IDatagridTableState {
   dataSource: MatTableDataSource<any>;
@@ -10,12 +12,11 @@ export interface IDatagridTableState {
   displayedColumns: string[];
   columnFilter?: Function[]
   dropLists: {[p:string]: DropListRef};
-  draggables: {[p:string]: DragRef[]};
-  dragSortColumns: boolean;
-  dragSortRows: boolean;
-  resizeColumns: boolean;
-  sorting: boolean;
+  orderColumns: boolean;
   toggleColumns: boolean;
+  resizeColumns: boolean;
+  dragSortRows: boolean;
+  sorting: boolean;
   tableElementRef: ElementRef;
   tableInstanceRef: MatTable<any>;
   tableComponentRef: DatagridTableComponent;
@@ -24,18 +25,20 @@ export interface IDatagridTableState {
 @Injectable()
 export class DatagridTableService {
 
+  stateChange$: Subject<void> = new Subject();
+  stateChange_: Observable<void> = this.stateChange$.asObservable();
+
   state: IDatagridTableState = {
     dataSource: new MatTableDataSource<any>(),
     columnFilter: [],
     columns: [],
     displayedColumns: [],
     dropLists: {},
-    draggables: {},
+    orderColumns: false,
     resizeColumns: false,
-    dragSortColumns: false,
+    toggleColumns: false,
     dragSortRows: false,
     sorting: false,
-    toggleColumns: false,
     tableElementRef: null as unknown as ElementRef,
     tableInstanceRef: null as unknown as MatTable<unknown>,
     tableComponentRef: null as unknown as DatagridTableComponent
@@ -77,8 +80,28 @@ export class DatagridTableService {
 
 //###########################
 
+  getColumnIndex(columnName: string): number {
+    return this.state.displayedColumns.indexOf(columnName);
+  }
+
+//###########################
+
+  orderColumn(columnName: string, direction: 'left' | 'right'): void {
+    const columnIndex = this.getColumnIndex(columnName);
+    moveItemInArray(this.state.displayedColumns, columnIndex, direction === 'left' ? columnIndex - 1 : columnIndex + 1);
+    this.triggerStateChange();
+  }
+
+//###########################
+
   refresh(): void {
     this.state.tableInstanceRef.renderRows();
+  }
+
+//###########################
+
+  triggerStateChange(): void {
+    this.stateChange$.next();
   }
 
 //###########################
@@ -98,67 +121,5 @@ export class DatagridTableService {
 
 //###########################
 
-  getDraggable(name: string, el: ElementRef<HTMLElement> | HTMLElement, dragHandle?: ElementRef<HTMLElement> | HTMLElement, cfg?: DragRefConfig): void {
-    if(!Array.isArray(this.state.draggables[name])) {
-      this.state.draggables[name] = [];
-    }
-
-    const draggable = this.dragDrop.createDrag(el, cfg);
-
-    if(dragHandle) {
-      this.state.draggables[name].push(draggable.withHandles([dragHandle]));
-    }else {
-      this.state.draggables[name].push(draggable);
-    }
-
-  }
-
-//###########################
-
-  connectDraggablesToDropList(draggables: string, droplist: string): void {
-    this.state.dropLists[droplist].withItems(this.state.draggables[draggables]);
-  }
-
-//###########################
-
-  createDropList(name: string, el: ElementRef): void {
-    this.state.dropLists[name] = this.dragDrop.createDropList(el);
-  }
-
-//###########################
-
-  getDraggables(draggables: QueryList<HTMLElement>, dragHandleSelector?: string): DragRef[] {
-    return Array.from(draggables).map((elDraggable: HTMLElement) => {
-      const draggable: DragRef = this.dragDrop.createDrag(elDraggable);
-      let dragHandle: HTMLElement | null = null;
-
-      if(dragHandleSelector) {
-        dragHandle = elDraggable.querySelector(dragHandleSelector);
-      }
-
-      return dragHandle ? draggable.withHandles([dragHandle]) : draggable;
-    })
-  }
-
-//###########################
-
-  resetAll(): void {
-    this.resetAllDraggables();
-    this.resetAllDropLists();
-  }
-
-//###########################
-
-  resetAllDraggables(): void {
-    this.state.draggables = {};
-  }
-
-//###########################
-
-  resetAllDropLists(): void {
-    this.state.dropLists = {};
-  }
-
-//###########################
 
 }

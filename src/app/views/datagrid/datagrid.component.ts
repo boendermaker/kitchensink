@@ -7,16 +7,16 @@ import { DatagridTableColumnComponent } from '@app/components/datagridtable/colu
 import { DatagridTableComponent } from '@app/components/datagridtable/datagridtable.component';
 import { DatagridTableActionsComponent } from "../../components/datagridtable/actions/actions.component";
 import { DatagridTableRowactionsComponent } from "../../components/datagridtable/rowactions/rowactions.component";
-import { TitleComponent } from "../../components/datagridtable/title/title.component";
+import { DatagridTableTitleComponent } from "../../components/datagridtable/title/title.component";
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
-import { StringfilterComponent } from '@app/components/datagridtable/header/columnfilter/stringfilter/stringcolumnfilter.component';
+import { DatagridTableStringfilterComponent } from '@app/components/datagridtable/header/columnfilter/stringfilter/stringcolumnfilter.component';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { ColumntoggleComponent } from "../../components/datagridtable/actions/columntoggle/columntoggle.component";
+import { DatagridTableColumntoggleComponent } from "../../components/datagridtable/actions/columntoggle/columntoggle.component";
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, TitleComponent, StringfilterComponent, ColumntoggleComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss'
 })

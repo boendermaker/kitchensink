@@ -2,6 +2,7 @@ import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, computed
 import { DatagridTableService } from '../datagridtable.service';
 import { DatagridTableComponent } from '../datagridtable.component';
 import { BehaviorSubject } from 'rxjs';
+import { DatagridTableColumnComponent } from '../column/column.component';
 
 @Component({
   selector: 'app-datagridtable-actions',
@@ -17,16 +18,16 @@ export class DatagridTableActionsComponent implements OnInit, AfterViewInit, Aft
   constructor(
     private datagridTableService: DatagridTableService,
     private cdr: ChangeDetectorRef,
-    @Optional() public parent?: DatagridTableComponent,
+    @Optional() public tester?: DatagridTableColumnComponent,
   ) {
   }
 
   ngOnInit() {
-    console.log('TABLESERICE ACTIONS ', this.datagridTableService);
+    console.log('TABLESERICE ACTIONS ', this.tester);
   }
 
   ngAfterViewInit() {
-    
+
   }
 
   ngAfterContentInit() {

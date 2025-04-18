@@ -1,10 +1,11 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Optional, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 import { DatagridTableService } from '../../../datagridtable.service';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from '@app/directives/clickoutsidedirective/clickoutside.directive';
 import { IDatagridTableColumnFilterComponent } from '@app/components/datagridtable/interfaces/columnfilter.interface';
+import { DatagridTableColumnComponent } from '@app/components/datagridtable/column/column.component';
 
 @Component({
   selector: 'app-datagridtable-columnfilter-string',
@@ -13,21 +14,28 @@ import { IDatagridTableColumnFilterComponent } from '@app/components/datagridtab
   templateUrl: './stringcolumnfilter.component.html',
   styleUrl: './stringcolumnfilter.component.scss'
 })
-export class StringfilterComponent implements IDatagridTableColumnFilterComponent, OnInit {
+export class DatagridTableStringfilterComponent implements IDatagridTableColumnFilterComponent, OnInit {
 
   @ViewChild('detail') detailElement: ElementRef<HTMLDetailsElement> | undefined;
 
-  @Input() filtercolumn: string;
-
+  columnName: string = '';
   filterControl: FormControl<string> = new FormControl<string>('');
 
   constructor(
     private datagridTableService: DatagridTableService,
+    @Optional() public datagridTableColumnComponentRef: DatagridTableColumnComponent,
   ) {
   }
 
   ngOnInit() {
+    this.getColumnName();
     this.addFilterCallback();
+  }
+
+//###########################
+
+  getColumnName(): void {
+    this.columnName = this.datagridTableColumnComponentRef.getColumnName();
   }
 
 //###########################
@@ -57,8 +65,8 @@ export class StringfilterComponent implements IDatagridTableColumnFilterComponen
 
 //###########################
 
-  filterCallback(dataRow: any): boolean {
-    const columnValue: string = dataRow?.[this.filtercolumn.toLowerCase()].toString().toLowerCase();
+  filterCallback(dataRow: unknown): boolean {
+    const columnValue: string = dataRow?.[this.columnName].toString().toLowerCase();
     const filterValue: string = this.filterControl.value.toString().toLowerCase();
     return columnValue.includes(filterValue);
   }

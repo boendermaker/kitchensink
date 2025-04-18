@@ -1,13 +1,13 @@
 <app-datagridtable
   [dataSource]="dataSource"
   [columns]="displayedColumns"
+  [orderColumns]="true"
   [dragSortRows]="true"
-  [dragSortColumns]="true"
   [resizeColumns]="false"
 
   matSort #sort="matSort">
 
-  <app-datagridtable-title title="Lorem Ipsum">  
+  <app-datagridtable-title title="Lorem Ipsum">
     <span prefix>Davor</span><span suffix>Danach</span>
   </app-datagridtable-title>
 
@@ -36,7 +36,7 @@
         <th mat-header-cell *matHeaderCellDef>
           <app-datagridtable-header>
             <app-datagridtable-headercontent mat-sort-header>{{displayedColumn}}</app-datagridtable-headercontent>
-            <app-datagridtable-columnfilter-string [filtercolumn]="displayedColumn"></app-datagridtable-columnfilter-string>
+            <app-datagridtable-columnfilter-string columnfilter></app-datagridtable-columnfilter-string>
           </app-datagridtable-header>
         </th>
         <td mat-cell *matCellDef="let element">
@@ -84,7 +84,7 @@
   [dataSource]="dataSource2"
   [columns]="displayedColumns2"
   [dragSortRows]="false"
-  [dragSortColumns]="false"
+  [orderColumns]="false"
   [resizeColumns]="false">
 
   <app-datagridtable-title title="Dolor sit">
@@ -103,7 +103,7 @@
         <th mat-header-cell *matHeaderCellDef>
           <app-datagridtable-header>
             <app-datagridtable-headercontent>{{displayedColumn}}</app-datagridtable-headercontent>
-            <app-datagridtable-columnfilter-string [filtercolumn]="displayedColumn"></app-datagridtable-columnfilter-string>
+            <app-datagridtable-columnfilter-string columnfilter></app-datagridtable-columnfilter-string>
           </app-datagridtable-header>
         </th>
         <td mat-cell *matCellDef="let element">
@@ -130,7 +130,7 @@
   [renderRows]="dataChanged.asObservable()"
   [columns]="displayedColumns3"
   [dragSortRows]="false"
-  [dragSortColumns]="false"
+  [orderColumns]="false"
   [resizeColumns]="false">
 
   <app-datagridtable-title title="Dolor sit">
@@ -149,7 +149,7 @@
         <th mat-header-cell *matHeaderCellDef>
           <app-datagridtable-header>
             <app-datagridtable-headercontent>{{displayedColumn}}</app-datagridtable-headercontent>
-            <app-datagridtable-columnfilter-string [filtercolumn]="displayedColumn"></app-datagridtable-columnfilter-string>
+            <app-datagridtable-columnfilter-string columnfilter></app-datagridtable-columnfilter-string>
           </app-datagridtable-header>
         </th>
         <td mat-cell *matCellDef="let element">
