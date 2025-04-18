@@ -10,8 +10,8 @@
     padding: 8px;
     color: black;
     background: white;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 
     &__header {
         display: flex;
@@ -29,4 +29,17 @@
         display: flex;
     }
 
+}
+
+
+details > summary {
+  list-style-type: 'filter_alt';
+  font-family: 'Material Icons Filled';
+  cursor: pointer;
+}
+
+details[open] > summary {
+  list-style-type: 'filter_alt_off';
+  font-family: 'Material Icons Filled';
+  cursor: pointer;
 }

@@ -1,16 +1,18 @@
 import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef, Input, QueryList, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, DestroyRef, ElementRef, inject, Input, QueryList, ViewChild } from '@angular/core';
 import { MatTableModule, MatTable, MatColumnDef, MatRowDef, MatHeaderRowDef, MatTableDataSource } from '@angular/material/table';
 import { DatagridTableService } from './datagridtable.service';
 import { DatagridTableActionsComponent } from './actions/actions.component';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AllAngularMaterialMDCModulesModule } from '../../shared/modules/allmaterial/allmaterial.module';
 
 
 @Component({
   selector: 'app-datagridtable',
   standalone: true,
-  imports: [MatTableModule, CdkDropList, CdkDrag],
+  imports: [AllAngularMaterialMDCModulesModule, CdkDropList, CdkDrag],
   templateUrl: './datagridtable.component.html',
   styleUrl: './datagridtable.component.scss',
   providers: [DatagridTableService]
@@ -27,13 +29,15 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   @ViewChild(MatTable, {read: ElementRef}) tableElementRef: ElementRef;
 
   @Input() dataSource: MatTableDataSource<unknown>;
-  @Input() renderRows: Observable<void>;
+  @Input() stateChange: Observable<void>;
   @Input() columns: string[];
   @Input() resizeColumns: boolean = false;
   @Input() orderColumns: boolean = false;
   @Input() sortColumns: boolean = false;
   @Input() toggleColumns: boolean = false;
   @Input() dragSortRows: boolean = false;
+
+  destroyRef:DestroyRef = inject(DestroyRef);
 
   constructor(
     public datagridTableService: DatagridTableService,
@@ -57,6 +61,19 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
     this.rowDefs.forEach(rowDef => this.table.addRowDef(rowDef));
     this.headerRowDefs.forEach(headerRowDef => this.table.addHeaderRowDef(headerRowDef));
+  }
+
+  //################################################
+
+  handleExternalStateChange(): void {
+    if(this.stateChange) {
+      this.stateChange.subscribe({
+        next: () => {
+          this.datagridTableService.triggerStateChange();
+          this.datagridTableService.refresh();
+        }
+      })
+    }
   }
 
   //################################################
@@ -88,8 +105,8 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   //################################################
 
   handleRenderRows(): void {
-    if(this.renderRows) {
-      this.renderRows.subscribe({
+    if(this.stateChange) {
+      this.stateChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: () => {
           this.datagridTableService.refresh();
         }

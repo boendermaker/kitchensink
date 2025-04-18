@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, Optional, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 import { DatagridTableService } from '../../../datagridtable.service';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
@@ -14,7 +14,7 @@ import { DatagridTableColumnComponent } from '@app/components/datagridtable/colu
   templateUrl: './stringcolumnfilter.component.html',
   styleUrl: './stringcolumnfilter.component.scss'
 })
-export class DatagridTableStringfilterComponent implements IDatagridTableColumnFilterComponent, OnInit {
+export class DatagridTableStringfilterComponent implements IDatagridTableColumnFilterComponent, OnInit, OnDestroy {
 
   @ViewChild('detail') detailElement: ElementRef<HTMLDetailsElement> | undefined;
 
@@ -30,6 +30,11 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
   ngOnInit() {
     this.getColumnName();
     this.addFilterCallback();
+  }
+
+  ngOnDestroy(): void {
+    this.resetAllFilterCallback();
+    this.datagridTableService.triggerStateChange();
   }
 
 //###########################
@@ -54,6 +59,13 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
 
   resetFilter(): void {
     this.filterControl.setValue('');
+    this.updateFilter();
+  }
+
+//###########################
+
+  resetAllFilterCallback(): void {
+    this.datagridTableService.resetAllColumnFilterCallback();
     this.updateFilter();
   }
 

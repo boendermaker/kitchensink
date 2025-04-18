@@ -6,15 +6,20 @@
 .datagridtable-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   width: 100%;
   border:1px solid green;
 
-  &__drag-handle {
+  &__ordercolumn-actions {
     display: flex;
     align-items: center;
-    max-width: 20px;
+    justify-content: center;
     cursor: move;
+  }
+
+  &__columfilter {
+    display: flex;
+    align-items: center;
   }
 
   &__content {
@@ -22,17 +27,9 @@
     flex-grow: 1;
   }
 
-  &__columfilter-handle {
-    display: flex;
-    align-items: center;
-    max-width: 20px;
-  }
-
   &__resize-handle {
     display: flex;
     align-items: center;
-    max-width: 10px;
     cursor: col-resize;
   }
-
 }

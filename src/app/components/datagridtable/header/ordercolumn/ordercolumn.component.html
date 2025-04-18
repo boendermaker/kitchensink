@@ -1,7 +1,9 @@
 <div class="order-column">
-  <div (click)="orderColumn('left')">
-    <mat-icon>delete</mat-icon>
+  <div class="order-column__left" (click)="orderColumn('left')">
+    <mat-icon>chevron_left</mat-icon>
   </div>
-  <div (click)="orderColumn('right')">></div>
+  <div class="order-column__right" (click)="orderColumn('right')">
+    <mat-icon>chevron_right</mat-icon>
+  </div>
   <div>{{$columnIndex()}}</div>
 </div>

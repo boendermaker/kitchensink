@@ -4,14 +4,15 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import * as _ from 'lodash';
 import { DatagridTableComponent } from './datagridtable.component';
 import { firstValueFrom, Observable, Subject } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 export interface IDatagridTableState {
   dataSource: MatTableDataSource<any>;
+  paginator: MatPaginator;
   columns: string[];
   displayedColumns: string[];
   columnFilter?: Function[]
-  dropLists: {[p:string]: DropListRef};
   orderColumns: boolean;
   toggleColumns: boolean;
   resizeColumns: boolean;
@@ -30,10 +31,10 @@ export class DatagridTableService {
 
   state: IDatagridTableState = {
     dataSource: new MatTableDataSource<any>(),
+    paginator: null as unknown as MatPaginator,
     columnFilter: [],
     columns: [],
     displayedColumns: [],
-    dropLists: {},
     orderColumns: false,
     resizeColumns: false,
     toggleColumns: false,
@@ -105,6 +106,21 @@ export class DatagridTableService {
   }
 
 //###########################
+
+  resetAllColumnFilterCallback(): void {
+    this.state.columnFilter = [];
+  }
+
+//###########################
+
+  removeColumnFilterCallback(filterCallback: Function): void {
+    const index = this.state.columnFilter.indexOf(filterCallback);
+    if (index !== -1) {
+      this.state.columnFilter.splice(index, 1);
+    }
+  }
+
+  //###########################
 
   addColumnFilterCallback(filterCallback: Function): void {
     this.state.columnFilter.push(filterCallback);

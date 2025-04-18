@@ -1,5 +1,19 @@
 .order-column {
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 }

@@ -66,7 +66,7 @@ export class DatagridTableColumnComponent implements OnInit, AfterContentInit {
     }).subscribe(({headerCells, columnCells}) => {
       headerCells = headerCells.toArray()[0];
       columnCells = columnCells.toArray()[0];
-      console.log('HEADER ELEMENTS ', this.matColumnDef, headerCells, columnCells);
+      //console.log('HEADER ELEMENTS ', this.matColumnDef, headerCells, columnCells);
     });
   }
 
