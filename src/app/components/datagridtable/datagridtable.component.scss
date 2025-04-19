@@ -31,6 +31,20 @@
       flex-grow: 1;
       overflow-y: scroll;
       overflow-x: auto;
+
+      table {
+        height: 0;
+
+        &>th {
+          width: 0;
+        }
+
+        &>td {
+          width: 0;
+        }
+
+      }
+
     }
 
     &__footer {

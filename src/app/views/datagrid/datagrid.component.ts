@@ -12,11 +12,14 @@ import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmater
 import { DatagridTableStringfilterComponent } from '@app/components/datagridtable/header/columnfilter/stringfilter/stringcolumnfilter.component';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { DatagridTableColumntoggleComponent } from "../../components/datagridtable/actions/columntoggle/columntoggle.component";
+import { DatagridTableOrderColumnComponent } from "@app/components/datagridtable/header/ordercolumn/ordercolumn.component";
+import { DatagridTableResizeColumnComponent } from "@app/components/datagridtable/header/resizecolumn/resizecolumn.component";
+import { DatagridTablePaginatorComponent } from "../../components/datagridtable/paginator/paginator.component";
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent, DatagridTableOrderColumnComponent, DatagridTableResizeColumnComponent, DatagridTablePaginatorComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss'
 })

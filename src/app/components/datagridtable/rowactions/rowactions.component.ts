@@ -24,11 +24,11 @@ export class DatagridTableRowactionsComponent implements AfterViewInit, AfterCon
   }
 
   ngAfterViewInit() {
-    
+
   }
 
   async ngAfterContentInit() {
-    this.menuItems.forEach(() => { 
+    this.menuItems.forEach(() => {
       this.rowActionsMenuItems = this.menuItems.toArray();
     })
   }

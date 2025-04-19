@@ -13,9 +13,6 @@ export interface IDatagridTableState {
   columns: string[];
   displayedColumns: string[];
   columnFilter?: Function[]
-  orderColumns: boolean;
-  toggleColumns: boolean;
-  resizeColumns: boolean;
   dragSortRows: boolean;
   sorting: boolean;
   tableElementRef: ElementRef;
@@ -35,9 +32,6 @@ export class DatagridTableService {
     columnFilter: [],
     columns: [],
     displayedColumns: [],
-    orderColumns: false,
-    resizeColumns: false,
-    toggleColumns: false,
     dragSortRows: false,
     sorting: false,
     tableElementRef: null as unknown as ElementRef,

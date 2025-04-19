@@ -1,0 +1,16 @@
+.resizeColumnHandle {
+  display: flex;
+  width: 5px;
+  background: black;
+  border-radius: 25%;
+  opacity: .4;
+  transition: opacity 0.3s;
+  cursor: ew-resize;
+
+  &:hover,
+  &:active {
+    opacity: 1;
+    transition: opacity 0.3s;
+
+  }
+}

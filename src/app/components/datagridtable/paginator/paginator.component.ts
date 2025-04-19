@@ -2,7 +2,7 @@ import { Component, Optional, ViewChild } from '@angular/core';
 import { Options } from 'blockly';
 import { DatagridTableComponent } from '../datagridtable.component';
 import { DatagridTableService } from '../datagridtable.service';
-import { MatPaginator } from '@angular/material/paginator.d-BpWCCOIR';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-datagridtable-paginator',

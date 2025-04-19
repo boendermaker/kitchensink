@@ -67,7 +67,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   handleExternalStateChange(): void {
     if(this.stateChange) {
-      this.stateChange.subscribe({
+      this.stateChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: () => {
           this.datagridTableService.triggerStateChange();
           this.datagridTableService.refresh();
@@ -87,11 +87,8 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   setTableStateProperties(): void {
     this.datagridTableService.state.columns = this.columns;
     this.datagridTableService.state.displayedColumns = _.clone(this.columns);
-    this.datagridTableService.state.resizeColumns = this.resizeColumns;
-    this.datagridTableService.state.orderColumns = this.orderColumns;
     this.datagridTableService.state.dragSortRows = this.dragSortRows;
     this.datagridTableService.state.sorting = this.sortColumns;
-    this.datagridTableService.state.resizeColumns = this.resizeColumns;
   }
 
   //################################################

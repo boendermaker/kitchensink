@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 import { DatagridTableService } from '../../../datagridtable.service';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
@@ -12,7 +12,8 @@ import { DatagridTableColumnComponent } from '@app/components/datagridtable/colu
   standalone: true,
   imports: [AllAngularMaterialMDCModulesModule, ReactiveFormsModule, ClickOutsideDirective],
   templateUrl: './stringcolumnfilter.component.html',
-  styleUrl: './stringcolumnfilter.component.scss'
+  styleUrl: './stringcolumnfilter.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatagridTableStringfilterComponent implements IDatagridTableColumnFilterComponent, OnInit, OnDestroy {
 
@@ -34,7 +35,6 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
 
   ngOnDestroy(): void {
     this.resetAllFilterCallback();
-    this.datagridTableService.triggerStateChange();
   }
 
 //###########################
@@ -66,7 +66,6 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
 
   resetAllFilterCallback(): void {
     this.datagridTableService.resetAllColumnFilterCallback();
-    this.updateFilter();
   }
 
 //###########################

@@ -2,9 +2,6 @@
   <app-datagridtable
     [dataSource]="dataSource"
     [columns]="displayedColumns"
-    [orderColumns]="true"
-    [dragSortRows]="true"
-    [resizeColumns]="false"
     matSort
     #sort="matSort">
 
@@ -31,13 +28,17 @@
       </mat-menu>
     </app-datagridtable-actions>
 
+    <app-datagridtable-paginator></app-datagridtable-paginator>
+
     @for(displayedColumn of displayedColumns; track displayedColumn; let index = $index) {
       @if(index < displayedColumns.length-1) {
         <app-datagridtablecolumn [matColumnDef]="displayedColumn">
           <th mat-header-cell *matHeaderCellDef>
             <app-datagridtable-header>
               <app-datagridtable-headercontent mat-sort-header>{{displayedColumn}}</app-datagridtable-headercontent>
+              <app-datagridtable-ordercolumn></app-datagridtable-ordercolumn>
               <app-datagridtable-columnfilter-string columnfilter></app-datagridtable-columnfilter-string>
+              <app-datagridtable-resizecolumn></app-datagridtable-resizecolumn>
             </app-datagridtable-header>
           </th>
           <td mat-cell *matCellDef="let element">
