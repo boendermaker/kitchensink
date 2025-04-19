@@ -8,7 +8,11 @@
   align-items: center;
   gap: 8px;
   width: 100%;
-  border:1px solid green;
+
+  &__content {
+    display: flex;
+    flex-grow: 1;
+  }
 
   &__ordercolumn-actions {
     display: flex;
@@ -22,14 +26,11 @@
     align-items: center;
   }
 
-  &__content {
-    display: flex;
-    flex-grow: 1;
-  }
-
   &__resize-handle {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
+    width: 10px;
     cursor: col-resize;
   }
 }

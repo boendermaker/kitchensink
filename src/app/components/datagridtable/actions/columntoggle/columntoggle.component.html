@@ -1,11 +1,20 @@
-<button mat-menu-item [matMenuTriggerFor]="columntoggle">
-  <span>Spalten</span>
-</button>
+@if(menuitem) {
+  <button mat-menu-item [matMenuTriggerFor]="columntoggle" (click)="$event.stopPropagation()">
+    <div class="b-d-flex b-align-items-center" style="gap: 8px;">
+      <mat-icon>splitscreen_left</mat-icon>
+      <span>Spalten</span>
+    </div>
+  </button>
+}@else {
+  <button mat-icon-button [matMenuTriggerFor]="columntoggle" (click)="$event.stopPropagation()">
+    <mat-icon>splitscreen_left</mat-icon>
+  </button>
+}
 
 <mat-menu #columntoggle="matMenu">
   <form [formGroup]="formGroup">
-    @for(column of datagridTableService.state.columns; track column; let index = $index) {
-      <button mat-menu-item>
+    @for(column of $hideableColumns(); track column; let index = $index) {
+      <button mat-menu-item (click)="$event.stopPropagation()">
         <mat-checkbox [formControlName]="column">{{ column }}</mat-checkbox>
       </button>
     }

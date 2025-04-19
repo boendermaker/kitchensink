@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, Component, DestroyRef, inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, inject, Input, OnInit, Optional, signal, ViewChild, WritableSignal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { DatagridTableService } from '../../datagridtable.service';
 import { DatagridTableActionsComponent } from '../actions.component';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-datagridtable-columntoggle',
@@ -14,11 +15,13 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular
 })
 export class DatagridTableColumntoggleComponent implements OnInit {
 
+  @Input() menuitem: boolean = false;
+  @Input() exclude: string[];
+
   destroyRef: DestroyRef = inject(DestroyRef);
-
-  @Input() mode: 'menuitem' | 'actionbutton';
-
   formGroup: FormGroup = new FormGroup({})
+
+  $hideableColumns: WritableSignal<string[]> = signal([]);
 
   constructor(
     public datagridTableService: DatagridTableService,
@@ -27,15 +30,21 @@ export class DatagridTableColumntoggleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.addToogleColumnControls();
+    this.addToggleColumnControls();
     this.formGroupChanged();
+    this.setHideableColumns();
   }
 
   //###########################
 
-  addToogleColumnControls() {
+  setHideableColumns(): void {
+    this.$hideableColumns.set(this.datagridTableService.state.columns.filter((column: string) => !this.exclude?.includes(column)));
+  }
+
+
+  addToggleColumnControls() {
     this.datagridTableService.state.columns.forEach((column: string) => {
-      if (!this.formGroup.get(column)) {
+      if (!this.formGroup?.get(column)) {
         this.formGroup.addControl(column, new FormControl(true));
       }
     });

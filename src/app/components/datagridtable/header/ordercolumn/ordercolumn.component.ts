@@ -2,10 +2,11 @@ import { Component, computed, Input, OnInit, Optional, Signal, WritableSignal } 
 import { DatagridTableColumnComponent } from '../../column/column.component';
 import { DatagridTableService } from '../../datagridtable.service';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-datagridtable-ordercolumn',
-  imports: [AllAngularMaterialMDCModulesModule],
+  imports: [AllAngularMaterialMDCModulesModule, NgStyle],
   templateUrl: './ordercolumn.component.html',
   styleUrl: './ordercolumn.component.scss'
 })

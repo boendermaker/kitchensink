@@ -1,8 +1,8 @@
 <div class="order-column">
-  <div class="order-column__left" (click)="orderColumn('left')">
+  <div class="order-column__left" (click)="orderColumn('left')" [ngStyle]="{'opacity': $columnIndex() === 0 ? '0.3' : '1'}">
     <mat-icon>chevron_left</mat-icon>
   </div>
-  <div class="order-column__right" (click)="orderColumn('right')">
+  <div class="order-column__right" (click)="orderColumn('right')" [ngStyle]="{'opacity': $columnIndex() === datagridTableService.state.columns.length ? '0.5' : '1'}">
     <mat-icon>chevron_right</mat-icon>
   </div>
   <div>{{$columnIndex()}}</div>

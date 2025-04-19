@@ -1,7 +1,6 @@
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChildren, ElementRef, OnInit, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, ElementRef, Input, OnInit, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
 import { MatMenu, MatMenuItem } from '@angular/material/menu';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
-import { firstValueFrom, lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-datagridtable-rowactions',
@@ -10,11 +9,11 @@ import { firstValueFrom, lastValueFrom } from 'rxjs';
   templateUrl: './rowactions.component.html',
   styleUrl: './rowactions.component.scss'
 })
-export class DatagridTableRowactionsComponent implements AfterViewInit, AfterContentInit {
+export class DatagridTableRowactionsComponent {
 
   @ContentChildren(MatMenuItem) menuItems: QueryList<MatMenuItem>;
 
-  rowActionsMenuItems: MatMenuItem[] = [];
+  @Input() showMenuItems: boolean = false;
 
   constructor(
     private elementRef: ElementRef,
@@ -23,7 +22,7 @@ export class DatagridTableRowactionsComponent implements AfterViewInit, AfterCon
   ) {
   }
 
-  ngAfterViewInit() {
+  /*ngAfterViewInit() {
 
   }
 
@@ -31,6 +30,6 @@ export class DatagridTableRowactionsComponent implements AfterViewInit, AfterCon
     this.menuItems.forEach(() => {
       this.rowActionsMenuItems = this.menuItems.toArray();
     })
-  }
+  }*/
 
 }

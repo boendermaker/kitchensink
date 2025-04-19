@@ -1,13 +1,12 @@
 <div class="rowactions-container">
     <ng-content></ng-content>
 
-    @if(rowActionsMenuItems?.length > 0) {
-        <button mat-icon-button [matMenuTriggerFor]="rowactionsmenu">
-            <i class="material-icons-filled">more_vert</i>
-        </button>
-        <mat-menu #rowactionsmenu="matMenu">
-            <ng-content select="[mat-menu-item]"></ng-content>
-        </mat-menu>
+    @if(showMenuItems) {
+      <button mat-icon-button [matMenuTriggerFor]="rowactionsmenu">
+          <i class="material-icons-filled">more_vert</i>
+      </button>
+      <mat-menu #rowactionsmenu="matMenu">
+          <ng-content select="[mat-menu-item], [datagridtable-menu-item]"></ng-content>
+      </mat-menu>
     }
-
 </div>

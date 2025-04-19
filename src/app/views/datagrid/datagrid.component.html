@@ -24,7 +24,7 @@
         <button mat-menu-item>
           <span>Spalten</span>
         </button>
-        <app-datagridtable-columntoggle></app-datagridtable-columntoggle>
+        <app-datagridtable-columntoggle datagridtable-menu-item [menuitem]="true" [exclude]="['actions', 'position']"></app-datagridtable-columntoggle>
       </mat-menu>
     </app-datagridtable-actions>
 
@@ -49,27 +49,19 @@
         <app-datagridtablecolumn matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <app-datagridtable-rowactions>
-              <button mat-icon-button title="Löschen" (click)="tester($event)"><i class="material-icons-filled">delete</i></button>
-              <button mat-icon-button title="Hinzufügen" (click)="tester($event)"><i class="material-icons-filled">add</i></button>
+            <app-datagridtable-rowactions [showMenuItems]="true">
+              <button mat-icon-button title="Löschen" (click)="tester($event)"><mat-icon>add</mat-icon></button>
+              <button mat-icon-button title="Hinzufügen" (click)="tester($event)"><mat-icon>delete</mat-icon></button>
               <button mat-menu-item title="Test" (click)="tester($event)">
-                <div class="b-d-flex b-align-items-center" style="gap: 8px;">
-                  <i class="material-icons-filled">delete</i>
-                  <span>Lorem ipsum</span>
-                </div>
+                  <span class="b-d-flex b-align-items-center" style="gap: 8px;"><mat-icon>delete</mat-icon>Lorem ipsum</span>
               </button>
-              <button mat-menu-item title="Test" (click)="tester($event)">
-                <div class="b-d-flex b-align-items-center" style="gap: 8px;">
-                  <i class="material-icons-filled">delete</i>
-                  <span>Lorem ipsum</span>
-                </div>
+              <button mat-menu-item title="Test" (click)="tester($event)" class="b-d-flex b-align-items-center" style="gap: 8px;">
+                <span class="b-d-flex b-align-items-center" style="gap: 8px;"><mat-icon>delete</mat-icon>Lorem ipsum</span>
               </button>
-              <button mat-menu-item title="Test" (click)="tester($event)">
-                <div class="b-d-flex b-align-items-center" style="gap: 8px;">
-                  <i class="material-icons-filled">delete</i>
-                  <span>Lorem ipsum</span>
-                </div>
+              <button mat-menu-item title="Test" (click)="tester($event)" class="b-d-flex b-align-items-center" style="gap: 8px;">
+                <span class="b-d-flex b-align-items-center" style="gap: 8px;"><mat-icon>delete</mat-icon>Lorem ipsum</span>
               </button>
+              <app-datagridtable-columntoggle datagridtable-menu-item [menuitem]="true" [exclude]="['actions', 'position']"></app-datagridtable-columntoggle>
             </app-datagridtable-rowactions>
           </td>
         </app-datagridtablecolumn>

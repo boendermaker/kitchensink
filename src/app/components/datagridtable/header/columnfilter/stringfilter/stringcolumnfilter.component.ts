@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 import { DatagridTableService } from '../../../datagridtable.service';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
@@ -18,12 +18,14 @@ import { DatagridTableColumnComponent } from '@app/components/datagridtable/colu
 export class DatagridTableStringfilterComponent implements IDatagridTableColumnFilterComponent, OnInit, OnDestroy {
 
   @ViewChild('detail') detailElement: ElementRef<HTMLDetailsElement> | undefined;
+  @ViewChild('content') columnFilterElement: ElementRef<HTMLDetailsElement> | undefined;
 
   columnName: string = '';
   filterControl: FormControl<string> = new FormControl<string>('');
 
   constructor(
     private datagridTableService: DatagridTableService,
+    private elementRef: ElementRef<HTMLElement>,
     @Optional() public datagridTableColumnComponentRef: DatagridTableColumnComponent,
   ) {
   }

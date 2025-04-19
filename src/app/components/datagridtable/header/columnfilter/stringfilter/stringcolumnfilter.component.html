@@ -1,6 +1,6 @@
 <details (clickoutside)="closeFilter()" #detail>
     <summary></summary>
-    <div class="columnfilter">
+    <div class="columnfilter" #content>
         <div class="columnfilter__header">Filter: {{columnName}}</div>
         <div class="columnfilter__content">
           <mat-form-field class="columnfilter__content__input">
@@ -9,6 +9,8 @@
           </mat-form-field>
         </div>
         <div class="columnfilter__footer">
+          <br>
+          <br>
           <button mat-button class="columnfilter__footer__button" (click)="updateFilter()">Anwenden</button>
           <button mat-button class="columnfilter__footer__button" (click)="resetFilter()">Zurücksetzen</button>
         </div>
