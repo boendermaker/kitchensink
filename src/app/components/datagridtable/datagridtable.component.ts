@@ -1,5 +1,5 @@
 import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, DestroyRef, ElementRef, inject, Input, QueryList, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, DestroyRef, ElementRef, EventEmitter, inject, Input, Output, QueryList, ViewChild } from '@angular/core';
 import { MatTableModule, MatTable, MatColumnDef, MatRowDef, MatHeaderRowDef, MatTableDataSource } from '@angular/material/table';
 import { DatagridTableService } from './datagridtable.service';
 import { DatagridTableActionsComponent } from './actions/actions.component';
@@ -7,6 +7,7 @@ import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AllAngularMaterialMDCModulesModule } from '../../shared/modules/allmaterial/allmaterial.module';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -27,15 +28,13 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   @ViewChild(MatTable, {static: true}) table: MatTable<unknown>;
   @ViewChild(MatTable, {read: ElementRef}) tableElementRef: ElementRef;
+  @ViewChild(MatSort) sort!: MatSort;
 
   @Input() dataSource: MatTableDataSource<unknown>;
-  @Input() stateChange: Observable<void>;
+  @Input() triggerChange: Observable<void>;
   @Input() columns: string[];
-  @Input() resizeColumns: boolean = false;
-  @Input() orderColumns: boolean = false;
-  @Input() sortColumns: boolean = false;
-  @Input() toggleColumns: boolean = false;
   @Input() dragSortRows: boolean = false;
+  @Output() service: EventEmitter<DatagridTableService> = new EventEmitter<DatagridTableService>();
 
   destroyRef:DestroyRef = inject(DestroyRef);
 
@@ -44,6 +43,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     private el: ElementRef,
     private cdr: ChangeDetectorRef
   ) {
+
   }
 
   ngOnInit(): void {
@@ -53,8 +53,9 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   ngAfterViewInit(): void {
-    this.setTableRefs();
+    this.setRefs();
     this.datagridTableService.triggerStateChange();
+    this.service.emit(this.datagridTableService);
   }
 
   ngAfterContentInit() {
@@ -66,8 +67,8 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   //################################################
 
   handleExternalStateChange(): void {
-    if(this.stateChange) {
-      this.stateChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    if(this.triggerChange) {
+      this.triggerChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: () => {
           this.datagridTableService.triggerStateChange();
           this.datagridTableService.refresh();
@@ -88,12 +89,12 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.datagridTableService.state.columns = this.columns;
     this.datagridTableService.state.displayedColumns = _.clone(this.columns);
     this.datagridTableService.state.dragSortRows = this.dragSortRows;
-    this.datagridTableService.state.sorting = this.sortColumns;
   }
 
   //################################################
 
-  setTableRefs(): void {
+  setRefs(): void {
+    this.datagridTableService.setSort(this.sort);
     this.datagridTableService.setTableInstanceRef(this.table);
     this.datagridTableService.setTableElementRef(this.tableElementRef);
     this.datagridTableService.setTableComponentRef(this);
@@ -102,8 +103,8 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   //################################################
 
   handleRenderRows(): void {
-    if(this.stateChange) {
-      this.stateChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    if(this.triggerChange) {
+      this.triggerChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: () => {
           this.datagridTableService.refresh();
         }

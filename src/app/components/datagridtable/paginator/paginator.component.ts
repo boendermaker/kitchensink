@@ -1,26 +1,57 @@
-import { Component, Optional, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, input, OnInit, Optional, ViewChild } from '@angular/core';
 import { Options } from 'blockly';
 import { DatagridTableComponent } from '../datagridtable.component';
 import { DatagridTableService } from '../datagridtable.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 
 @Component({
   selector: 'app-datagridtable-paginator',
-  imports: [],
+  imports: [AllAngularMaterialMDCModulesModule],
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.scss'
 })
-export class DatagridTablePaginatorComponent {
+export class DatagridTablePaginatorComponent implements OnInit, AfterViewInit {
+
+  @Input() connect: boolean = true;
+  @Input() pageSize: number;
+  @Input() pageSizeOptions: number[] = [10, 25, 100, 500, 1000];
 
   @ViewChild('paginator') paginator: MatPaginator;
 
   constructor(
-    private datagridTableService: DatagridTableService,
+    public datagridTableService: DatagridTableService,
+    public cdr: ChangeDetectorRef,
     @Optional() public datagridTableComponentRef: DatagridTableComponent,
   ) {
 
   }
 
+  ngOnInit(): void {
 
+  }
+
+  ngAfterViewInit(): void {
+    this.datagridTableService.setPaginator(this.paginator);
+    this.connectToDataSource();
+    this.handlePageChange();
+  }
+
+  handlePageChange(): void {
+    this.datagridTableService.state.paginator.page.subscribe({
+      next: () => {
+        this.datagridTableService.state.$pageIndex.set(this.paginator.pageIndex);
+        this.datagridTableService.state.$pageSize.set(this.paginator.pageSize);
+        this.datagridTableService.triggerStateChange();
+      }
+    })
+  }
+
+  connectToDataSource(): void {
+    if(this.connect) {
+      this.datagridTableService.setDataLength(this.datagridTableService.state.dataSource.data.length);
+      this.datagridTableService.connectPaginatorToDataSource();
+    }
+  }
 
 }

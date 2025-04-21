@@ -1,1 +1,6 @@
-<p>paginator works!</p>
+<mat-paginator
+  [length]="this.datagridTableService.state.$dataLength()"
+  [pageSizeOptions]="pageSizeOptions"
+  [pageSize]="pageSize"
+  #paginator></mat-paginator>
+

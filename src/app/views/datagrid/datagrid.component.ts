@@ -15,17 +15,19 @@ import { DatagridTableColumntoggleComponent } from "../../components/datagridtab
 import { DatagridTableOrderColumnComponent } from "@app/components/datagridtable/header/ordercolumn/ordercolumn.component";
 import { DatagridTableResizeColumnComponent } from "@app/components/datagridtable/header/resizecolumn/resizecolumn.component";
 import { DatagridTablePaginatorComponent } from "../../components/datagridtable/paginator/paginator.component";
+import { GithubIssue, TestDataService } from '@app/components/datagridtable/testdata.service';
+import { DatagridTableService } from '@app/components/datagridtable/datagridtable.service';
+import { DatagridTableLoadingIndicatorComponent } from "../../components/datagridtable/loadingindicator/loadingindicator.component";
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent, DatagridTableOrderColumnComponent, DatagridTableResizeColumnComponent, DatagridTablePaginatorComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent, DatagridTableOrderColumnComponent, DatagridTableResizeColumnComponent, DatagridTablePaginatorComponent, DatagridTableLoadingIndicatorComponent],
   templateUrl: './datagrid.component.html',
-  styleUrl: './datagrid.component.scss'
+  styleUrl: './datagrid.component.scss',
+  providers: [TestDataService],
 })
 export class DatagridComponent {
-
-  @ViewChildren('table') table: DatagridTableComponent;
 
   tableData: any[] = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -55,22 +57,29 @@ export class DatagridComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
   displayedColumns2: string[] = ['position', 'name', 'symbol', 'actions'];
   displayedColumns3: string[] = ['position', 'name', 'symbol', 'actions'];
+  displayedColumnsGithub: string[] = ['created_at', 'number', 'state', 'title'];
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>(this.tableData);
   dataSource2: MatTableDataSource<any> = new MatTableDataSource<any>(this.tableData2);
+  dataSourceGithub: MatTableDataSource<GithubIssue> = new MatTableDataSource<GithubIssue>([]);
   dataSourceConnection: BehaviorSubject<unknown> = this.dataSource.connect();
   dataSource2Connection: BehaviorSubject<unknown> = this.dataSource2.connect();
 
-
   dataChanged: Subject<void> = new Subject<void>();
+  datagridTableServiceGithub: DatagridTableService;
 
   constructor(
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    public testDataService: TestDataService
   ) {
   }
 
+  ngOnInit(): void {
+
+  }
+
   ngAfterViewInit(): void {
-    console.log(this.table);
+    this.testDataService.init(this.datagridTableServiceGithub);
   }
 
   addData(): void {
@@ -96,13 +105,11 @@ export class DatagridComponent {
   addData3(): void {
     this.tableData3.push({position: Math.round(Math.random()*100), name: 'Blah', symbol: Math.random()*500});
     this.dataChanged.next();
-    console.log(this.tableData3);
   }
 
   removeData3(): void {
     this.tableData3.shift();
     this.dataChanged.next();
-    console.log(this.tableData3);
   }
 
   dropColumn(e): void {

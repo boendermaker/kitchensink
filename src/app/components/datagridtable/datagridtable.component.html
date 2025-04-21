@@ -9,8 +9,12 @@
     </div>
   </div>
 
+
   <div class="datagridtable__content">
-    <table mat-table [dataSource]="datagridTableService.state.dataSource" cdkDropList cdkDropListData="datagridTableService.state.dataSource.data" (cdkDropListDropped)="rowDropped($event)">
+
+    <ng-content select="app-datagridtable-loadingindicator"></ng-content>
+
+    <table mat-table [dataSource]="datagridTableService.state.dataSource" cdkDropList cdkDropListData="datagridTableService.state.dataSource.data" (cdkDropListDropped)="rowDropped($event)" matSort #sort="matSort">
 
       <ng-content></ng-content>
 

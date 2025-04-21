@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, OnInit, Optional, Renderer2, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 import { DatagridTableService } from '../../../datagridtable.service';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
@@ -15,7 +15,7 @@ import { DatagridTableColumnComponent } from '@app/components/datagridtable/colu
   styleUrl: './stringcolumnfilter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DatagridTableStringfilterComponent implements IDatagridTableColumnFilterComponent, OnInit, OnDestroy {
+export class DatagridTableStringfilterComponent implements IDatagridTableColumnFilterComponent, OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('detail') detailElement: ElementRef<HTMLDetailsElement> | undefined;
   @ViewChild('content') columnFilterElement: ElementRef<HTMLDetailsElement> | undefined;
@@ -26,6 +26,7 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
   constructor(
     private datagridTableService: DatagridTableService,
     private elementRef: ElementRef<HTMLElement>,
+    private renderer: Renderer2,
     @Optional() public datagridTableColumnComponentRef: DatagridTableColumnComponent,
   ) {
   }
@@ -33,6 +34,10 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
   ngOnInit() {
     this.getColumnName();
     this.addFilterCallback();
+  }
+
+  ngAfterViewInit(): void {
+    //this.positionFilter();
   }
 
   ngOnDestroy(): void {

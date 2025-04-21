@@ -1,39 +1,48 @@
 import { DragDrop, DragRef, DragRefConfig, DropListOrientation, DropListRef, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ComponentRef, ElementRef, Injectable, QueryList } from '@angular/core';
+import { ComponentRef, effect, ElementRef, Injectable, QueryList, signal, WritableSignal } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import * as _ from 'lodash';
 import { DatagridTableComponent } from './datagridtable.component';
 import { firstValueFrom, Observable, Subject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 
 export interface IDatagridTableState {
-  dataSource: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<unknown>;
   paginator: MatPaginator;
+  $dataLength?: WritableSignal<number>;
+  $pageSize?: WritableSignal<number>;
+  $pageIndex?: WritableSignal<number>;
+  $isLoading?: WritableSignal<boolean>;
+  sort: MatSort;
   columns: string[];
   displayedColumns: string[];
   columnFilter?: Function[]
   dragSortRows: boolean;
-  sorting: boolean;
   tableElementRef: ElementRef;
-  tableInstanceRef: MatTable<any>;
+  tableInstanceRef: MatTable<unknown>;
   tableComponentRef: DatagridTableComponent;
 }
 
 @Injectable()
 export class DatagridTableService {
 
-  stateChange$: Subject<void> = new Subject();
+  private stateChange$: Subject<void> = new Subject();
   stateChange_: Observable<void> = this.stateChange$.asObservable();
 
   state: IDatagridTableState = {
     dataSource: new MatTableDataSource<any>(),
     paginator: null as unknown as MatPaginator,
+    $dataLength: signal(0),
+    $pageSize: signal(10),
+    $pageIndex: signal(0),
+    $isLoading: signal(false),
+    sort: null as unknown as MatSort,
     columnFilter: [],
     columns: [],
     displayedColumns: [],
     dragSortRows: false,
-    sorting: false,
     tableElementRef: null as unknown as ElementRef,
     tableInstanceRef: null as unknown as MatTable<unknown>,
     tableComponentRef: null as unknown as DatagridTableComponent
@@ -43,6 +52,18 @@ export class DatagridTableService {
     private dragDrop: DragDrop
   ) {
 
+   }
+
+//###########################
+
+  setLoading(isLoading: boolean): void {
+  this.state.$isLoading.set(isLoading);
+  }
+
+//###########################
+
+  setDataLength(length: number): void {
+    this.state.$dataLength.set(length);
   }
 
 //###########################
@@ -61,6 +82,43 @@ export class DatagridTableService {
 
   setTableComponentRef(tableComponentRef: DatagridTableComponent): void {
     this.state.tableComponentRef = tableComponentRef;
+  }
+
+//###########################
+
+  setSort(sort: MatSort): void {
+    this.state.sort = sort;
+    this.state.dataSource.sort = this.state.sort;
+  }
+
+//###########################
+
+  setPaginator(paginator: MatPaginator): void {
+    this.state.paginator = paginator;
+  }
+
+//###########################
+
+  setPageSize(pageSize: number): void {
+    this.state.$pageSize.set(pageSize);
+  }
+
+//###########################
+
+  setPageIndex(pageIndex: number): void {
+    this.state.$pageIndex.set(pageIndex);
+  }
+
+//###########################
+
+  connectPaginatorToDataSource(): void {
+    this.state.dataSource.paginator = this.state.paginator;
+  }
+
+//###########################
+
+  disconnectPaginatorFromDataSource(): void {
+    this.state.dataSource.paginator = null as unknown as MatPaginator;
   }
 
 //###########################
