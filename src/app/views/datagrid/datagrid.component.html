@@ -30,7 +30,7 @@
 
     <app-datagridtable-paginator [pageSize]="3"></app-datagridtable-paginator>
 
-    <app-datagridtable-loadingindicator></app-datagridtable-loadingindicator>
+    <app-datagridtable-loadingoverlay></app-datagridtable-loadingoverlay>
 
     @for(displayedColumn of displayedColumns; track displayedColumn; let index = $index) {
       @if(index < displayedColumns.length-1) {
@@ -194,7 +194,7 @@
 
     <app-datagridtable-paginator [pageSize]="100" [connect]="false"></app-datagridtable-paginator>
 
-    <app-datagridtable-loadingindicator></app-datagridtable-loadingindicator>
+    <app-datagridtable-loadingoverlay></app-datagridtable-loadingoverlay>
 
     @for(displayedColumn of displayedColumnsGithub; track displayedColumn; let index = $index) {
       @if(index < displayedColumns.length - 1) {

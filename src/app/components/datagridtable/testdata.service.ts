@@ -57,7 +57,11 @@ init(tableService: DatagridTableService): void {
 //###########################
 
   handleDataChange() {
-
+    this.datagridTableService.stateChange_.subscribe({
+      next: () => {
+        console.log('LOADING DATA');
+      }
+    })
     this.datagridTableService.stateChange_.pipe(
         startWith({}),
         switchMap(() => {
@@ -68,6 +72,9 @@ init(tableService: DatagridTableService): void {
             this.datagridTableService.state.$pageIndex(),
             this.datagridTableService.state.$pageSize()
         ).pipe(
+          catchError((error) => {
+            return of({ items: [], total_count: 0 }); // Return a default value
+          }),
           map((data) => {
             console.log(data)
             return data
@@ -79,7 +86,11 @@ init(tableService: DatagridTableService): void {
         this.datagridTableService.state.dataSource.data = data.items;
         this.datagridTableService.setDataLength(data.total_count);
         this.datagridTableService.setLoading(false);
-      }
+      },
+      error: (error) => {
+        console.error('Error fetching data:', error);
+        this.datagridTableService.setLoading(false);
+      },
     })
 
   }

@@ -6,6 +6,11 @@ import { DatagridTableActionsComponent } from '../actions.component';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as _ from 'lodash';
 
+/**
+ * @title DatagridTableColumntoggleComponent
+ * @description This component is used to toggle the visibility of columns in the datagrid table.
+ * @example <app-datagridtable-columntoggle datagridtable-menu-item [menuitem]="true" [exclude]="['actions', 'position']"></app-datagridtable-columntoggle>
+*/
 @Component({
   selector: 'app-datagridtable-columntoggle',
   standalone: true,

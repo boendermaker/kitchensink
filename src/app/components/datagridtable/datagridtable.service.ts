@@ -15,6 +15,7 @@ export interface IDatagridTableState {
   $pageSize?: WritableSignal<number>;
   $pageIndex?: WritableSignal<number>;
   $isLoading?: WritableSignal<boolean>;
+  $error?: WritableSignal<{hasError: boolean; msg: string}>;
   sort: MatSort;
   columns: string[];
   displayedColumns: string[];
@@ -38,6 +39,7 @@ export class DatagridTableService {
     $pageSize: signal(10),
     $pageIndex: signal(0),
     $isLoading: signal(false),
+    $error: signal({hasError: false, msg: ''}),
     sort: null as unknown as MatSort,
     columnFilter: [],
     columns: [],
@@ -58,6 +60,18 @@ export class DatagridTableService {
 
   setLoading(isLoading: boolean): void {
   this.state.$isLoading.set(isLoading);
+  }
+
+//###########################
+
+  setError(errorMsg: string): void {
+
+  }
+
+//###########################
+
+  setData(data: Array<unknown>): void {
+    this.state.dataSource.data = data;
   }
 
 //###########################

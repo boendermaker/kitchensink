@@ -12,16 +12,21 @@
 
   <div class="datagridtable__content">
 
-    <ng-content select="app-datagridtable-loadingindicator"></ng-content>
+    <ng-content select="app-datagridtable-loadingoverlay"></ng-content>
 
-    <table mat-table [dataSource]="datagridTableService.state.dataSource" cdkDropList cdkDropListData="datagridTableService.state.dataSource.data" (cdkDropListDropped)="rowDropped($event)" matSort #sort="matSort">
+    <div class="datagridtable__content__tablewrapper">
 
-      <ng-content></ng-content>
+      <table mat-table [dataSource]="datagridTableService.state.dataSource" cdkDropList cdkDropListData="datagridTableService.state.dataSource.data" (cdkDropListDropped)="rowDropped($event)" matSort #sort="matSort">
 
-      <tr mat-header-row *matHeaderRowDef="datagridTableService.state.displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: datagridTableService.state.displayedColumns;" cdkDrag [cdkDragdata]="row" [cdkDragDisabled]="!dragSortRows"></tr>
+        <ng-content></ng-content>
 
-    </table>
+        <tr mat-header-row *matHeaderRowDef="datagridTableService.state.displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: datagridTableService.state.displayedColumns;" cdkDrag [cdkDragdata]="row" [cdkDragDisabled]="!dragSortRows"></tr>
+
+      </table>
+
+    </div>
+
   </div>
 
   <div class="datagridtable__footer">

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
-import { DatagridTableService } from '../datagridtable.service';
+import { DatagridTableService } from '../../datagridtable.service';
 
 @Component({
-  selector: 'app-datagridtable-loadingindicator',
+  selector: 'app-datagridtable-messageoverlay',
   imports: [AllAngularMaterialMDCModulesModule],
-  templateUrl: './loadingindicator.component.html',
-  styleUrl: './loadingindicator.component.scss'
+  templateUrl: './messageoverlay.component.html',
+  styleUrl: './messageoverlay.component.scss'
 })
-export class DatagridTableLoadingIndicatorComponent {
+export class DatagridTableMessageOverlayComponent {
 
   constructor(
     public datagridTableService: DatagridTableService

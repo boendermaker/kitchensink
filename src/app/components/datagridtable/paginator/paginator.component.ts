@@ -15,7 +15,7 @@ export class DatagridTablePaginatorComponent implements OnInit, AfterViewInit {
 
   @Input() connect: boolean = true;
   @Input() pageSize: number;
-  @Input() pageSizeOptions: number[] = [10, 25, 100, 500, 1000];
+  @Input() pageSizeOptions: number[] = [10, 25, 50, 100, 500, 1000];
 
   @ViewChild('paginator') paginator: MatPaginator;
 
@@ -35,14 +35,19 @@ export class DatagridTablePaginatorComponent implements OnInit, AfterViewInit {
     this.datagridTableService.setPaginator(this.paginator);
     this.connectToDataSource();
     this.handlePageChange();
+    this.setPageOptions();
+  }
+
+  setPageOptions(): void {
+    this.datagridTableService.setPageIndex(this.paginator.pageIndex);
+    this.datagridTableService.setPageSize(this.paginator.pageSize ?? this.pageSize ?? 50);
+    this.datagridTableService.triggerStateChange();
   }
 
   handlePageChange(): void {
     this.datagridTableService.state.paginator.page.subscribe({
       next: () => {
-        this.datagridTableService.state.$pageIndex.set(this.paginator.pageIndex);
-        this.datagridTableService.state.$pageSize.set(this.paginator.pageSize);
-        this.datagridTableService.triggerStateChange();
+        this.setPageOptions();
       }
     })
   }
