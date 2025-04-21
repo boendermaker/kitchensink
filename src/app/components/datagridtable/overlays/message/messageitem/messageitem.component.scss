@@ -1,0 +1,55 @@
+:host {
+  width: 100%;
+}
+
+.message-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #999;
+  border-radius: 5px;
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__content {
+    display: flex;
+    flex-grow: 1;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+}
+
+
+.info {
+  color: #8cc63e;
+  background: #cff4fc;
+}
+
+.warning {
+  color: #ffcb05;
+  background: #fff3cd
+}
+
+.error {
+  color: #f15941;
+  background: #f8d7da;
+}
+
+.success {
+  color: #41c8f5;
+  background: #d1e7dd;
+}

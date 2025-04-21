@@ -18,11 +18,12 @@ import { DatagridTablePaginatorComponent } from "../../components/datagridtable/
 import { GithubIssue, TestDataService } from '@app/components/datagridtable/testdata.service';
 import { DatagridTableService } from '@app/components/datagridtable/datagridtable.service';
 import { DatagridTableLoadingOverlayComponent } from "../../components/datagridtable/overlays/loading/loadingoverlay.component";
+import { DatagridTableMessageOverlayComponent } from "../../components/datagridtable/overlays/message/messageoverlay.component";
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent, DatagridTableOrderColumnComponent, DatagridTableResizeColumnComponent, DatagridTablePaginatorComponent, DatagridTableLoadingOverlayComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent, DatagridTableOrderColumnComponent, DatagridTableResizeColumnComponent, DatagridTablePaginatorComponent, DatagridTableLoadingOverlayComponent, DatagridTableMessageOverlayComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss',
   providers: [TestDataService],

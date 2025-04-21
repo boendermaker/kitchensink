@@ -187,14 +187,14 @@
     </app-datagridtable-title>
 
     <app-datagridtable-actions>
-      <button mat-icon-button (click)="addData3()"><i class="material-icons-filled">add</i></button>
-      <button mat-icon-button (click)="removeData3()"><i class="material-icons-filled">remove</i></button>
+      <button mat-icon-button (click)="datagridTableServiceGithub.triggerStateChange()"><i class="material-icons-filled">refresh</i></button>
       <button mat-icon-button [matMenuTriggerFor]="menu3"><i class="material-icons-filled">more_vert</i></button>
     </app-datagridtable-actions>
 
     <app-datagridtable-paginator [pageSize]="100" [connect]="false"></app-datagridtable-paginator>
 
     <app-datagridtable-loadingoverlay></app-datagridtable-loadingoverlay>
+    <app-datagridtable-messageoverlay></app-datagridtable-messageoverlay>
 
     @for(displayedColumn of displayedColumnsGithub; track displayedColumn; let index = $index) {
       @if(index < displayedColumns.length - 1) {

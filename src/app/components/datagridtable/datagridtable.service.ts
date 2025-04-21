@@ -6,6 +6,7 @@ import { DatagridTableComponent } from './datagridtable.component';
 import { firstValueFrom, Observable, Subject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { IDatagridTableMessageOverlay, IDatagridTableMessageOverlayMessageItem, TDatagridTableMessageTypes } from './interfaces/overlaymessage.interface';
 
 
 export interface IDatagridTableState {
@@ -15,7 +16,7 @@ export interface IDatagridTableState {
   $pageSize?: WritableSignal<number>;
   $pageIndex?: WritableSignal<number>;
   $isLoading?: WritableSignal<boolean>;
-  $error?: WritableSignal<{hasError: boolean; msg: string}>;
+  $messages?: WritableSignal<IDatagridTableMessageOverlay>;
   sort: MatSort;
   columns: string[];
   displayedColumns: string[];
@@ -39,7 +40,7 @@ export class DatagridTableService {
     $pageSize: signal(10),
     $pageIndex: signal(0),
     $isLoading: signal(false),
-    $error: signal({hasError: false, msg: ''}),
+    $messages: signal({showMessages: false, messages: []}),
     sort: null as unknown as MatSort,
     columnFilter: [],
     columns: [],
@@ -58,14 +59,33 @@ export class DatagridTableService {
 
 //###########################
 
-  setLoading(isLoading: boolean): void {
-  this.state.$isLoading.set(isLoading);
+  clearMessages(): void {
+    this.state.$messages.set({showMessages: false, messages: []});
   }
 
 //###########################
 
-  setError(errorMsg: string): void {
+  addMessage(type: TDatagridTableMessageTypes, content: string): void {
+    this.state.$messages.update((state) => {
+      const messages = state.messages as IDatagridTableMessageOverlayMessageItem[];
+      messages.push({type, content});
+      return {showMessages: true, messages};
+    });
+  }
 
+//###########################
+
+  setShowMessageOverlay(showMessage: boolean): void {
+    this.state.$messages.update((state) => {
+      state.showMessages = showMessage
+      return state;
+    });
+  }
+
+//###########################
+
+  setLoading(isLoading: boolean): void {
+  this.state.$isLoading.set(isLoading);
   }
 
 //###########################
@@ -115,12 +135,14 @@ export class DatagridTableService {
 
   setPageSize(pageSize: number): void {
     this.state.$pageSize.set(pageSize);
+    this.state.paginator.pageSize = pageSize;
   }
 
 //###########################
 
   setPageIndex(pageIndex: number): void {
     this.state.$pageIndex.set(pageIndex);
+    this.state.paginator.pageIndex = pageIndex;
   }
 
 //###########################

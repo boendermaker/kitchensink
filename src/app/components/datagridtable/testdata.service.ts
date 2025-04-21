@@ -1,6 +1,6 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import * as _ from 'lodash';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { SortDirection } from '@angular/material/sort';
 import { catchError, combineLatest, map, merge, Observable, of, startWith, switchMap, tap } from 'rxjs';
 import { DatagridTableService } from './datagridtable.service';
@@ -57,12 +57,9 @@ init(tableService: DatagridTableService): void {
 //###########################
 
   handleDataChange() {
-    this.datagridTableService.stateChange_.subscribe({
-      next: () => {
-        console.log('LOADING DATA');
-      }
-    })
+
     this.datagridTableService.stateChange_.pipe(
+      tap(() => this.datagridTableService.setShowMessageOverlay(false)),
         startWith({}),
         switchMap(() => {
           this.datagridTableService.setLoading(true);
@@ -72,7 +69,18 @@ init(tableService: DatagridTableService): void {
             this.datagridTableService.state.$pageIndex(),
             this.datagridTableService.state.$pageSize()
         ).pipe(
-          catchError((error) => {
+          catchError((errorResponse: HttpErrorResponse) => {
+            console.error('Error fetching data:', errorResponse.error.message);
+            this.datagridTableService.setLoading(false);
+
+            this.datagridTableService.clearMessages();
+            this.datagridTableService.addMessage('error', `Verbindungsfehler: ${errorResponse.error.message}`);
+            setTimeout(() => {
+              this.datagridTableService.addMessage('warning', `Handkäse ist illegal`);
+            }, 5000);
+            this.datagridTableService.setShowMessageOverlay(true);
+
+            this.datagridTableService.setPageIndex(0);
             return of({ items: [], total_count: 0 }); // Return a default value
           }),
           map((data) => {
@@ -88,14 +96,13 @@ init(tableService: DatagridTableService): void {
         this.datagridTableService.setLoading(false);
       },
       error: (error) => {
-        console.error('Error fetching data:', error);
-        this.datagridTableService.setLoading(false);
+
       },
     })
 
   }
 
-//###########################
+//###########################<
 
 
 }

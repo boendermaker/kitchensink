@@ -1,5 +1,9 @@
-@if(datagridTableService.state.$isLoading()) {
+@if(datagridTableService.state.$messages().showMessages) {
   <div class="message-overlay">
-    <mat-spinner></mat-spinner>
+    <div class="message-overlay__wrapper">
+      @for(message of datagridTableService.state.$messages().messages; track message) {
+        <app-datagridtable-messageitem [type]="message?.type" [content]="message?.content"></app-datagridtable-messageitem>
+      }
+    </div>
   </div>
 }
