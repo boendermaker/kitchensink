@@ -19,11 +19,12 @@ import { GithubIssue, TestDataService } from '@app/components/datagridtable/test
 import { DatagridTableService } from '@app/components/datagridtable/datagridtable.service';
 import { DatagridTableLoadingOverlayComponent } from "../../components/datagridtable/overlays/loading/loadingoverlay.component";
 import { DatagridTableMessageOverlayComponent } from "../../components/datagridtable/overlays/message/messageoverlay.component";
+import { SelectioncolumnComponent } from "../../components/datagridtable/selectioncolumn/selectioncolumn.component";
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent, DatagridTableOrderColumnComponent, DatagridTableResizeColumnComponent, DatagridTablePaginatorComponent, DatagridTableLoadingOverlayComponent, DatagridTableMessageOverlayComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent, DatagridTableOrderColumnComponent, DatagridTableResizeColumnComponent, DatagridTablePaginatorComponent, DatagridTableLoadingOverlayComponent, DatagridTableMessageOverlayComponent, SelectioncolumnComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss',
   providers: [TestDataService],
@@ -56,7 +57,7 @@ export class DatagridComponent {
   ];
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
-  displayedColumns2: string[] = ['position', 'name', 'symbol', 'actions'];
+  displayedColumns2: string[] = ['selection', 'position', 'name', 'symbol', 'actions'];
   displayedColumns3: string[] = ['position', 'name', 'symbol', 'actions'];
   displayedColumnsGithub: string[] = ['created_at', 'number', 'state', 'title'];
 

@@ -47,13 +47,16 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   ngOnInit(): void {
+    this.datagridTableService.setTableInstanceRef(this.table);
+    this.datagridTableService.setTableComponentRef(this);
     this.setTableStateProperties();
     this.handleRenderRows();
     this.setTableData();
   }
 
   ngAfterViewInit(): void {
-    this.setRefs();
+    this.datagridTableService.setSort(this.sort);
+    this.datagridTableService.setTableElementRef(this.tableElementRef);
     this.datagridTableService.triggerStateChange();
     this.service.emit(this.datagridTableService);
   }
@@ -89,15 +92,6 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.datagridTableService.state.columns = this.columns;
     this.datagridTableService.state.displayedColumns = _.clone(this.columns);
     this.datagridTableService.state.dragSortRows = this.dragSortRows;
-  }
-
-  //################################################
-
-  setRefs(): void {
-    this.datagridTableService.setSort(this.sort);
-    this.datagridTableService.setTableInstanceRef(this.table);
-    this.datagridTableService.setTableElementRef(this.tableElementRef);
-    this.datagridTableService.setTableComponentRef(this);
   }
 
   //################################################
