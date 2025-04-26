@@ -1,15 +1,20 @@
-import { AfterViewInit, Component, HostBinding, Input, OnDestroy, OnInit, Optional, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ContentChild, HostBinding, Input, OnDestroy, OnInit, Optional, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
 import { MatCellDef, MatColumnDef, MatFooterCellDef, MatHeaderCellDef, MatTable } from '@angular/material/table';
 import { DatagridTableComponent } from "../datagridtable.component";
 import { DatagridTableColumnComponent } from "../column/column.component";
 import { DatagridTableService } from '../datagridtable.service';
 import { CdkColumnDef } from '@angular/cdk/table';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-datagridtable-selectioncolumn',
-  imports: [MatColumnDef, MatCellDef, MatHeaderCellDef],
+  imports: [MatColumnDef, MatCellDef, MatHeaderCellDef, NgTemplateOutlet],
   templateUrl: './selectioncolumn.component.html',
-  styleUrl: './selectioncolumn.component.scss'
+  styleUrls: ['./selectioncolumn.component.scss'],
+  host: {
+    class: 'column-template cdk-visually-hidden',
+    '[attr.ariaHidden]': 'true',
+  },
 })
 export class SelectioncolumnComponent implements AfterViewInit, OnDestroy, OnInit {
 
@@ -27,12 +32,15 @@ export class SelectioncolumnComponent implements AfterViewInit, OnDestroy, OnIni
   @ViewChild(MatHeaderCellDef, {static: true}) headerCellDef!: MatHeaderCellDef;
   @ViewChild(MatFooterCellDef, {static: true}) footerCellDef!: MatFooterCellDef;
 
+  @ContentChild('cell', { static: false })
+  cellTemplate: TemplateRef<unknown> | null = null;
+
   ngOnInit(): void {
     if (this.columnDef) {
       this.columnDef.name = this.columnName;
-      this.datagridTableService.state.tableInstanceRef.addColumnDef(this.columnDef);
       this.columnDef.cell = this.cellDef;
       this.columnDef.headerCell = this.headerCellDef;
+      this.datagridTableService.state.tableInstanceRef.addColumnDef(this.columnDef);
     }
     console.log('COLUMNDEF ', this.columnDef);
   }
