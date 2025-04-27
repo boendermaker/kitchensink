@@ -91,8 +91,8 @@ init(tableService: DatagridTableService): void {
       })
     ).subscribe({
       next: (data: GithubApi) => {
-        this.datagridTableService.state.dataSource.data = data.items;
-        this.datagridTableService.setDataLength(data.total_count);
+        this.datagridTableService.setDataSource(data.items);
+        this.datagridTableService.setTotalRows(data.total_count);
         this.datagridTableService.setLoading(false);
       },
       error: (error) => {

@@ -7,25 +7,9 @@ import { firstValueFrom, Observable, Subject } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { IDatagridTableMessageOverlay, IDatagridTableMessageOverlayMessageItem, TDatagridTableMessageTypes } from './interfaces/overlaymessage.interface';
+import { IDatagridTableState } from './interfaces/state.interface';
+import { SelectionModel } from '@angular/cdk/collections';
 
-
-export interface IDatagridTableState {
-  dataSource: MatTableDataSource<unknown>;
-  paginator: MatPaginator;
-  $dataLength?: WritableSignal<number>;
-  $pageSize?: WritableSignal<number>;
-  $pageIndex?: WritableSignal<number>;
-  $isLoading?: WritableSignal<boolean>;
-  $messages?: WritableSignal<IDatagridTableMessageOverlay>;
-  sort: MatSort;
-  columns: string[];
-  displayedColumns: string[];
-  columnFilter?: Function[]
-  dragSortRows: boolean;
-  tableElementRef: ElementRef;
-  tableInstanceRef: MatTable<unknown>;
-  tableComponentRef: DatagridTableComponent;
-}
 
 @Injectable()
 export class DatagridTableService {
@@ -34,9 +18,10 @@ export class DatagridTableService {
   stateChange_: Observable<void> = this.stateChange$.asObservable();
 
   state: IDatagridTableState = {
-    dataSource: new MatTableDataSource<any>(),
+    dataSource: new MatTableDataSource(),
     paginator: null as unknown as MatPaginator,
-    $dataLength: signal(0),
+    rowSelection: new SelectionModel(true, []),
+    $totalRows: signal(0),
     $pageSize: signal(10),
     $pageIndex: signal(0),
     $isLoading: signal(false),
@@ -85,7 +70,7 @@ export class DatagridTableService {
 //###########################
 
   setLoading(isLoading: boolean): void {
-  this.state.$isLoading.set(isLoading);
+    this.state.$isLoading.set(isLoading);
   }
 
 //###########################
@@ -96,8 +81,8 @@ export class DatagridTableService {
 
 //###########################
 
-  setDataLength(length: number): void {
-    this.state.$dataLength.set(length);
+  setTotalRows(length: number): void {
+    this.state.$totalRows.set(length);
   }
 
 //###########################
@@ -165,6 +150,24 @@ export class DatagridTableService {
     }else if (Array.isArray(dataSource)) {
       this.state.dataSource.data = dataSource;
     }
+  }
+
+//###########################
+
+  setColumns(columns: string[]): void {
+    this.state.columns = columns;
+  }
+
+//###########################
+
+  setDisplayedColumns(displayedColumns: string[]): void {
+    this.state.displayedColumns = displayedColumns;
+  }
+
+//###########################
+
+  setDragSortRows(dragSortRows: boolean): void {
+    this.state.dragSortRows = dragSortRows;
   }
 
 //###########################

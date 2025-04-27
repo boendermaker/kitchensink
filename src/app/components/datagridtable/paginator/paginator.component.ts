@@ -54,7 +54,7 @@ export class DatagridTablePaginatorComponent implements OnInit, AfterViewInit {
 
   connectToDataSource(): void {
     if(this.connect) {
-      this.datagridTableService.setDataLength(this.datagridTableService.state.dataSource.data.length);
+      this.datagridTableService.setTotalRows(this.datagridTableService.state.dataSource.data.length);
       this.datagridTableService.connectPaginatorToDataSource();
     }
   }

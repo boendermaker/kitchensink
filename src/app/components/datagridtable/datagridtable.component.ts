@@ -89,9 +89,9 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   //################################################
 
   setTableStateProperties(): void {
-    this.datagridTableService.state.columns = this.columns;
-    this.datagridTableService.state.displayedColumns = _.clone(this.columns);
-    this.datagridTableService.state.dragSortRows = this.dragSortRows;
+    this.datagridTableService.setColumns(this.columns);
+    this.datagridTableService.setDisplayedColumns(_.clone(this.columns));
+    this.datagridTableService.setDragSortRows(this.dragSortRows);
   }
 
   //################################################

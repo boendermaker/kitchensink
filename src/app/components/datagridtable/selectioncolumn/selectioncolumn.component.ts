@@ -1,24 +1,19 @@
-import { AfterViewInit, Component, ContentChild, HostBinding, Input, OnDestroy, OnInit, Optional, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
-import { MatCellDef, MatColumnDef, MatFooterCellDef, MatHeaderCellDef, MatTable } from '@angular/material/table';
-import { DatagridTableComponent } from "../datagridtable.component";
-import { DatagridTableColumnComponent } from "../column/column.component";
+import { AfterViewInit, Component, ContentChild, HostBinding, Input, OnDestroy, OnInit, Optional, TemplateRef, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { MatCellDef, MatColumnDef, MatFooterCellDef, MatHeaderCellDef, MatTable, MatTableModule } from '@angular/material/table';
 import { DatagridTableService } from '../datagridtable.service';
-import { CdkColumnDef } from '@angular/cdk/table';
-import { NgTemplateOutlet } from '@angular/common';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-datagridtable-selectioncolumn',
-  imports: [MatColumnDef, MatCellDef, MatHeaderCellDef, NgTemplateOutlet],
+  imports: [MatColumnDef, MatCellDef, MatHeaderCellDef, MatTableModule, MatCheckboxModule],
   templateUrl: './selectioncolumn.component.html',
   styleUrls: ['./selectioncolumn.component.scss'],
-  host: {
-    class: 'column-template cdk-visually-hidden',
-    '[attr.ariaHidden]': 'true',
-  },
 })
-export class SelectioncolumnComponent implements AfterViewInit, OnDestroy, OnInit {
+export class SelectioncolumnComponent implements OnDestroy, OnInit {
 
   @Input() columnName: string = 'selection';
+  selection: SelectionModel<unknown> = this.datagridTableService.state.rowSelection;
 
   constructor(
     private datagridTableService: DatagridTableService,
@@ -32,9 +27,6 @@ export class SelectioncolumnComponent implements AfterViewInit, OnDestroy, OnIni
   @ViewChild(MatHeaderCellDef, {static: true}) headerCellDef!: MatHeaderCellDef;
   @ViewChild(MatFooterCellDef, {static: true}) footerCellDef!: MatFooterCellDef;
 
-  @ContentChild('cell', { static: false })
-  cellTemplate: TemplateRef<unknown> | null = null;
-
   ngOnInit(): void {
     if (this.columnDef) {
       this.columnDef.name = this.columnName;
@@ -42,15 +34,24 @@ export class SelectioncolumnComponent implements AfterViewInit, OnDestroy, OnIni
       this.columnDef.headerCell = this.headerCellDef;
       this.datagridTableService.state.tableInstanceRef.addColumnDef(this.columnDef);
     }
-    console.log('COLUMNDEF ', this.columnDef);
-  }
-
-  ngAfterViewInit(): void {
-    this.datagridTableService.refresh();
   }
 
   ngOnDestroy(): void {
     this.datagridTableService.state.tableInstanceRef.removeColumnDef(this.columnDef);
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.datagridTableService.state.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+    this.selection.select(...this.datagridTableService.state.dataSource.data);
   }
 
 }

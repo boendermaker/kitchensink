@@ -1,5 +1,5 @@
 <mat-paginator
-  [length]="this.datagridTableService.state.$dataLength()"
+  [length]="this.datagridTableService.state.$totalRows()"
   [pageSizeOptions]="pageSizeOptions"
   [pageSize]="pageSize"
   #paginator></mat-paginator>
