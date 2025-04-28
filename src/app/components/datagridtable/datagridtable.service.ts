@@ -1,5 +1,5 @@
 import { DragDrop, DragRef, DragRefConfig, DropListOrientation, DropListRef, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ComponentRef, effect, ElementRef, Injectable, QueryList, signal, WritableSignal } from '@angular/core';
+import { ComponentRef, DestroyRef, effect, ElementRef, inject, Injectable, QueryList, signal, WritableSignal } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import * as _ from 'lodash';
 import { DatagridTableComponent } from './datagridtable.component';
@@ -14,8 +14,12 @@ import { SelectionModel } from '@angular/cdk/collections';
 @Injectable()
 export class DatagridTableService {
 
+  destroyRef: DestroyRef = inject(DestroyRef);
+
   private stateChange$: Subject<void> = new Subject();
   stateChange_: Observable<void> = this.stateChange$.asObservable();
+  private pageChange$: Subject<void> = new Subject();
+  pageChange_: Observable<void> = this.pageChange$.asObservable();
 
   state: IDatagridTableState = {
     dataSource: new MatTableDataSource(),
@@ -39,8 +43,7 @@ export class DatagridTableService {
   constructor(
     private dragDrop: DragDrop
   ) {
-
-   }
+  }
 
 //###########################
 
@@ -181,19 +184,32 @@ export class DatagridTableService {
   orderColumn(columnName: string, direction: 'left' | 'right'): void {
     const columnIndex = this.getColumnIndex(columnName);
     moveItemInArray(this.state.displayedColumns, columnIndex, direction === 'left' ? columnIndex - 1 : columnIndex + 1);
-    this.triggerStateChange();
   }
 
 //###########################
 
-  refresh(): void {
+  renderRows(): void {
     this.state.tableInstanceRef.renderRows();
+  }
+
+//###########################
+
+  updateChangeSubscription(): void {
+    this.state.dataSource._updateChangeSubscription();
   }
 
 //###########################
 
   triggerStateChange(): void {
     this.stateChange$.next();
+    this.updateChangeSubscription();
+  }
+
+//###########################
+
+  triggerPageChange(): void {
+    this.pageChange$.next();
+    this.updateChangeSubscription();
   }
 
 //###########################
@@ -211,7 +227,7 @@ export class DatagridTableService {
     }
   }
 
-  //###########################
+//###########################
 
   addColumnFilterCallback(filterCallback: Function): void {
     this.state.columnFilter.push(filterCallback);

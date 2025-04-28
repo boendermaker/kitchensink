@@ -31,7 +31,6 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   @Input() dataSource: MatTableDataSource<unknown>;
-  @Input() triggerChange: Observable<void>;
   @Input() columns: string[];
   @Input() dragSortRows: boolean = false;
   @Output() service: EventEmitter<DatagridTableService> = new EventEmitter<DatagridTableService>();
@@ -40,8 +39,6 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   constructor(
     public datagridTableService: DatagridTableService,
-    private el: ElementRef,
-    private cdr: ChangeDetectorRef
   ) {
 
   }
@@ -50,7 +47,6 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.datagridTableService.setTableInstanceRef(this.table);
     this.datagridTableService.setTableComponentRef(this);
     this.setTableStateProperties();
-    this.handleRenderRows();
     this.setTableData();
   }
 
@@ -69,19 +65,6 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   //################################################
 
-  handleExternalStateChange(): void {
-    if(this.triggerChange) {
-      this.triggerChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-        next: () => {
-          this.datagridTableService.triggerStateChange();
-          this.datagridTableService.refresh();
-        }
-      })
-    }
-  }
-
-  //################################################
-
   setTableData(): void {
     this.datagridTableService.setDataSource(this.dataSource);
   }
@@ -92,18 +75,6 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.datagridTableService.setColumns(this.columns);
     this.datagridTableService.setDisplayedColumns(_.clone(this.columns));
     this.datagridTableService.setDragSortRows(this.dragSortRows);
-  }
-
-  //################################################
-
-  handleRenderRows(): void {
-    if(this.triggerChange) {
-      this.triggerChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-        next: () => {
-          this.datagridTableService.refresh();
-        }
-      })
-    }
   }
 
   //################################################

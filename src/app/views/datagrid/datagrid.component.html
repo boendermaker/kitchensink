@@ -2,6 +2,7 @@
   <app-datagridtable
     [dataSource]="dataSource"
     [columns]="displayedColumns"
+    (service)="datagridTableService1 = $event"
     matSort
     #sort="matSort">
 
@@ -150,12 +151,12 @@
 <div style="height: 300px;">
   <app-datagridtable
     [dataSource]="tableData3"
-    [triggerChange]="dataChanged.asObservable()"
     [columns]="displayedColumns3"
+    (service)="datagridTableService3 = $event"
     [dragSortRows]="false">
 
-    <app-datagridtable-title title="Dolor sit">
-      Lorem Ipsum<span suffix>Danach</span><span suffix>Noch ein danach</span>
+    <app-datagridtable-title title="Dolor sit Lorem Ipsum Array">
+      <span suffix>Danach</span><span suffix>Noch ein danach</span>
     </app-datagridtable-title>
 
     <app-datagridtable-actions>
@@ -163,6 +164,8 @@
       <button mat-icon-button (click)="removeData3()"><i class="material-icons-filled">remove</i></button>
       <button mat-icon-button [matMenuTriggerFor]="menu3"><i class="material-icons-filled">more_vert</i></button>
     </app-datagridtable-actions>
+
+    <app-datagridtable-paginator [pageSize]="3"></app-datagridtable-paginator>
 
     @for(displayedColumn of displayedColumns; track displayedColumn; let index = $index) {
       @if(index < displayedColumns.length - 1) {
@@ -200,7 +203,6 @@
   <app-datagridtable
     [dataSource]="dataSourceGithub"
     [columns]="displayedColumnsGithub"
-    [triggerChange]="dataChanged.asObservable()"
     [dragSortRows]="false"
     (service)="this.datagridTableServiceGithub = $event"
     matSort>

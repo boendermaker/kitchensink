@@ -48,6 +48,12 @@ export class DatagridComponent {
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
     {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
     {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+    {position: 4, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+    {position: 5, name: 'Helium', weight: 4.0026, symbol: 'He'},
+    {position: 6, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+    {position: 7, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+    {position: 8, name: 'Helium', weight: 4.0026, symbol: 'He'},
+    {position: 9, name: 'Lithium', weight: 6.941, symbol: 'Li'},
   ];
 
   tableData3: any[] = [
@@ -67,8 +73,9 @@ export class DatagridComponent {
   dataSourceConnection: BehaviorSubject<unknown> = this.dataSource.connect();
   dataSource2Connection: BehaviorSubject<unknown> = this.dataSource2.connect();
 
-  dataChanged: Subject<void> = new Subject<void>();
   datagridTableServiceGithub: DatagridTableService;
+  datagridTableService1: DatagridTableService;
+  datagridTableService3: DatagridTableService;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -87,11 +94,13 @@ export class DatagridComponent {
   addData(): void {
     this.tableData.push({position: Math.round(Math.random()*100), name: 'Blubb', weight: Math.random()*1000, symbol: 'XX'});
     this.dataSourceConnection.next(this.tableData);
+    this.datagridTableService1.triggerStateChange();
   }
 
   removeData(): void {
     this.tableData.pop();
     this.dataSourceConnection.next(this.tableData);
+    this.datagridTableService1.triggerStateChange();
   }
 
   addData2(): void {
@@ -106,12 +115,12 @@ export class DatagridComponent {
 
   addData3(): void {
     this.tableData3.push({position: Math.round(Math.random()*100), name: 'Blah', symbol: Math.random()*500});
-    this.dataChanged.next();
+    this.datagridTableService3.triggerStateChange();
   }
 
   removeData3(): void {
     this.tableData3.shift();
-    this.dataChanged.next();
+    this.datagridTableService3.triggerStateChange();
   }
 
   dropColumn(e): void {
