@@ -13,6 +13,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 export class SelectioncolumnComponent implements OnDestroy, OnInit {
 
   @Input() columnName: string = 'selection';
+  @Input() multiple: boolean = true;
   selection: SelectionModel<unknown> = this.datagridTableService.state.rowSelection;
 
   constructor(
@@ -33,11 +34,18 @@ export class SelectioncolumnComponent implements OnDestroy, OnInit {
       this.columnDef.cell = this.cellDef;
       this.columnDef.headerCell = this.headerCellDef;
       this.datagridTableService.state.tableInstanceRef.addColumnDef(this.columnDef);
+      this.setSelectionOptions();
     }
   }
 
   ngOnDestroy(): void {
     this.datagridTableService.state.tableInstanceRef.removeColumnDef(this.columnDef);
+  }
+
+  setSelectionOptions(): void {
+    console.log('setSelection');
+    this.datagridTableService.state.rowSelection = new SelectionModel(this.multiple, []);
+    this.selection = this.datagridTableService.state.rowSelection;
   }
 
   isAllSelected() {

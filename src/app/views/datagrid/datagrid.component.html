@@ -29,9 +29,8 @@
       </mat-menu>
     </app-datagridtable-actions>
 
-    <app-datagridtable-paginator [pageSize]="3"></app-datagridtable-paginator>
-
     <app-datagridtable-loadingoverlay></app-datagridtable-loadingoverlay>
+    <app-datagridtable-paginator [pageSize]="3"></app-datagridtable-paginator>
 
     @for(displayedColumn of displayedColumns; track displayedColumn; let index = $index) {
       @if(index < displayedColumns.length-1) {
