@@ -16,6 +16,7 @@ export interface IDatagridTableState {
   $pageIndex?: WritableSignal<number>;
   $isLoading?: WritableSignal<boolean>;
   $messages?: WritableSignal<IDatagridTableMessageOverlay>;
+  $uniqueId: WritableSignal<string>;
   sort: MatSort;
   columns: string[];
   displayedColumns: string[];

@@ -1,12 +1,20 @@
 <div class="datagridtable">
 
   <div class="datagridtable__header">
-    <div class="datagridtable__header__title">
-      <ng-content select="app-datagridtable-title"></ng-content>
+    
+    <div class="datagridtable__header__left">
+      <div class="datagridtable_header__left__title">
+        <ng-content select="app-datagridtable-title"></ng-content>
+      </div>
+      <div class="datagridtable_header__left__selectionactions">
+        <ng-content select="app-datagridtable-selectionactions"></ng-content>
+      </div>
     </div>
-    <div class="datagridtable__header__actions">
+
+    <div class="datagridtable__header__right">
       <ng-content select="app-datagridtable-actions"></ng-content>
     </div>
+
   </div>
 
 

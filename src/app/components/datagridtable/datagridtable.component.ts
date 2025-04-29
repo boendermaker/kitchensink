@@ -1,5 +1,5 @@
 import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, DestroyRef, ElementRef, EventEmitter, inject, Input, Output, QueryList, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, APP_ID, ChangeDetectorRef, Component, ContentChild, ContentChildren, DestroyRef, ElementRef, EventEmitter, Inject, inject, Input, Output, QueryList, ViewChild } from '@angular/core';
 import { MatTableModule, MatTable, MatColumnDef, MatRowDef, MatHeaderRowDef, MatTableDataSource } from '@angular/material/table';
 import { DatagridTableService } from './datagridtable.service';
 import { DatagridTableActionsComponent } from './actions/actions.component';
@@ -31,6 +31,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   @ViewChild(MatTable, {read: ElementRef}) tableElementRef: ElementRef;
   @ViewChild(MatSort) sort!: MatSort;
 
+  @Input() uniqueId: string = undefined;
   @Input() dataSource: MatTableDataSource<unknown>;
   @Input() columns: string[];
   @Input() dragSortRows: boolean = false;
@@ -40,13 +41,14 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   constructor(
     public datagridTableService: DatagridTableService,
-    private el: ElementRef,
-    private cdr: ChangeDetectorRef
+    private elementRef: ElementRef,
+    private cdr: ChangeDetectorRef,
   ) {
 
   }
 
   ngOnInit(): void {
+    this.setHostID();
     this.datagridTableService.setTableInstanceRef(this.table);
     this.datagridTableService.setTableComponentRef(this);
     this.setTableStateProperties();
@@ -58,12 +60,21 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.datagridTableService.setTableElementRef(this.tableElementRef);
     this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
     this.service.emit(this.datagridTableService);
+
   }
 
   ngAfterContentInit() {
     this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
     this.rowDefs.forEach(rowDef => this.table.addRowDef(rowDef));
     this.headerRowDefs.forEach(headerRowDef => this.table.addHeaderRowDef(headerRowDef));
+  }
+
+  //################################################
+
+  setHostID(): void {
+    if(this.uniqueId) {
+      this.datagridTableService.state.$uniqueId.set(this.uniqueId);
+    }
   }
 
   //################################################

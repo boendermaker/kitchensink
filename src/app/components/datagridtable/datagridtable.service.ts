@@ -26,6 +26,7 @@ export class DatagridTableService {
     paginator: null as unknown as MatPaginator,
     sort: null as unknown as MatSort,
     rowSelection: new SelectionModel(true, []),
+    $uniqueId: signal(''),
     $selectedRows: signal([]),
     $totalRows: signal(0),
     $pageSize: signal(10),
@@ -42,7 +43,7 @@ export class DatagridTableService {
   }
 
   constructor(
-    private dragDrop: DragDrop
+    private elementRef: ElementRef,
   ) {
     this.handleStateChange();
   }
@@ -53,6 +54,7 @@ export class DatagridTableService {
     this.stateChange_.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (event: EDatagridTableStateChangeEvents) => {
         console.log('EVENT: ', event);
+        
         const stateEvents = {
           [EDatagridTableStateChangeEvents.CHANGE_SELECTION_ROW]: () => {
             console.log('SELECTION ', this.state.$selectedRows())

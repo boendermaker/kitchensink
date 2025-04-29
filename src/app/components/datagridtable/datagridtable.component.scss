@@ -17,11 +17,16 @@
       flex-direction: row;
       align-items: center;
 
-      &__title {
-          flex-grow: 1;
+      &__left {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
       }
 
-      &__actions {
+      &__right {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
       }
     }
 

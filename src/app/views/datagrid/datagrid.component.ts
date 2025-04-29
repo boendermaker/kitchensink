@@ -21,11 +21,12 @@ import { DatagridTableService } from '@app/components/datagridtable/datagridtabl
 import { DatagridTableLoadingOverlayComponent } from "../../components/datagridtable/overlays/loading/loadingoverlay.component";
 import { DatagridTableMessageOverlayComponent } from "../../components/datagridtable/overlays/message/messageoverlay.component";
 import { SelectioncolumnComponent } from "../../components/datagridtable/selectioncolumn/selectioncolumn.component";
+import { SelectionsComponent } from "../../components/datagridtable/selectionactions/selectionactions.component";
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent, DatagridTableOrderColumnComponent, DatagridTableResizeColumnComponent, DatagridTablePaginatorComponent, DatagridTableLoadingOverlayComponent, DatagridTableMessageOverlayComponent, SelectioncolumnComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent, DatagridTableOrderColumnComponent, DatagridTableResizeColumnComponent, DatagridTablePaginatorComponent, DatagridTableLoadingOverlayComponent, DatagridTableMessageOverlayComponent, SelectioncolumnComponent, SelectionsComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss',
   providers: [TestDataService],
