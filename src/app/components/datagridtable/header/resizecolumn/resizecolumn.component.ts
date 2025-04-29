@@ -48,6 +48,8 @@ export class DatagridTableResizeColumnComponent implements AfterContentInit {
             map(({ clientX }) => {
               const finalWidth = width + clientX - right;
               tableHeaderElement.closest('th')!.style.width = `${finalWidth}px`;
+              tableHeaderElement.closest('th')!.style.minWidth = `${finalWidth}px`;
+
               return finalWidth;
             }),
             distinctUntilChanged(),

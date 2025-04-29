@@ -1,8 +1,10 @@
-import { AfterViewInit, Component, ContentChild, HostBinding, Input, OnDestroy, OnInit, Optional, TemplateRef, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ContentChild, DestroyRef, HostBinding, inject, Input, OnDestroy, OnInit, Optional, TemplateRef, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { MatCellDef, MatColumnDef, MatFooterCellDef, MatHeaderCellDef, MatTable, MatTableModule } from '@angular/material/table';
 import { DatagridTableService } from '../datagridtable.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
+import { EDatagridTableStateChangeEvents } from '../interfaces/statechangetypes.enum';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-datagridtable-selectioncolumn',
@@ -11,6 +13,8 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./selectioncolumn.component.scss'],
 })
 export class SelectioncolumnComponent implements OnDestroy, OnInit {
+
+  destroyRef: DestroyRef = inject(DestroyRef);
 
   @Input() columnName: string = 'selection';
   @Input() multiple: boolean = true;
@@ -35,6 +39,7 @@ export class SelectioncolumnComponent implements OnDestroy, OnInit {
       this.columnDef.headerCell = this.headerCellDef;
       this.datagridTableService.state.tableInstanceRef.addColumnDef(this.columnDef);
       this.setSelectionOptions();
+      this.handleSelectionChange();
     }
   }
 
@@ -42,8 +47,16 @@ export class SelectioncolumnComponent implements OnDestroy, OnInit {
     this.datagridTableService.state.tableInstanceRef.removeColumnDef(this.columnDef);
   }
 
+  handleSelectionChange(): void {
+    this.datagridTableService.state.rowSelection.changed.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: (selection) => {
+        this.datagridTableService.state.$selectedRows.set(this.selection.selected);
+        this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_SELECTION_ROW);
+      }
+    })
+  }
+
   setSelectionOptions(): void {
-    console.log('setSelection');
     this.datagridTableService.state.rowSelection = new SelectionModel(this.multiple, []);
     this.selection = this.datagridTableService.state.rowSelection;
   }

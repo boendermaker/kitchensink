@@ -24,13 +24,14 @@ export class DatagridTableService {
   state: IDatagridTableState = {
     dataSource: new MatTableDataSource(),
     paginator: null as unknown as MatPaginator,
+    sort: null as unknown as MatSort,
     rowSelection: new SelectionModel(true, []),
+    $selectedRows: signal([]),
     $totalRows: signal(0),
     $pageSize: signal(10),
     $pageIndex: signal(0),
     $isLoading: signal(false),
     $messages: signal({showMessages: false, messages: []}),
-    sort: null as unknown as MatSort,
     columnFilter: [],
     columns: [],
     displayedColumns: [],
@@ -53,6 +54,10 @@ export class DatagridTableService {
       next: (event: EDatagridTableStateChangeEvents) => {
         console.log('EVENT: ', event);
         const stateEvents = {
+          [EDatagridTableStateChangeEvents.CHANGE_SELECTION_ROW]: () => {
+            console.log('SELECTION ', this.state.$selectedRows())
+          },
+
           [EDatagridTableStateChangeEvents.CHANGE_DATA]: () => {
             this.state.dataSource._updateChangeSubscription();
           },
