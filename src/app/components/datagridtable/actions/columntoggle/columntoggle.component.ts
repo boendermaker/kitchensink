@@ -4,6 +4,7 @@ import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmater
 import { DatagridTableService } from '../../datagridtable.service';
 import { DatagridTableActionsComponent } from '../actions.component';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { EDatagridTableStateChangeEvents } from '../../interfaces/statechangetypes.enum';
 import * as _ from 'lodash';
 
 /**
@@ -46,6 +47,7 @@ export class DatagridTableColumntoggleComponent implements OnInit {
     this.$hideableColumns.set(this.datagridTableService.state.columns.filter((column: string) => !this.exclude?.includes(column)));
   }
 
+  //###########################
 
   addToggleColumnControls() {
     this.datagridTableService.state.columns.forEach((column: string) => {
@@ -59,7 +61,7 @@ export class DatagridTableColumntoggleComponent implements OnInit {
 
   updateDisplayedColumns(value: unknown) {
     this.datagridTableService.state.displayedColumns = Object.keys(value).filter((key: string) => value[key]);
-    this.datagridTableService.state.tableInstanceRef.renderRows();
+    this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_COLUMN_VISIBILITY);
   }
 
   //###########################
@@ -67,7 +69,6 @@ export class DatagridTableColumntoggleComponent implements OnInit {
   formGroupChanged(): void {
     this.formGroup.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: unknown) => {
       this.updateDisplayedColumns(value);
-      this.datagridTableService.triggerStateChange();
     });
   }
 

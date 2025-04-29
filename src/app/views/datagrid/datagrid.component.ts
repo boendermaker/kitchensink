@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ViewChild, ViewChildren } from '@angular/core';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { EDatagridTableStateChangeEvents } from '@app/components/datagridtable/interfaces/statechangetypes.enum';
 import { DatagridTableHeaderComponent } from '@app/components/datagridtable/header/header.component';
 import { DatagridTableCellComponent } from '@app/components/datagridtable/cell/cell.component';
 import { DatagridTableColumnComponent } from '@app/components/datagridtable/column/column.component';
@@ -69,6 +70,9 @@ export class DatagridComponent {
 
   dataChanged: Subject<void> = new Subject<void>();
   datagridTableServiceGithub: DatagridTableService;
+  datagridTableService1: DatagridTableService;
+  datagridTableService3: DatagridTableService;
+  EDatagridTableStateChangeEvents = EDatagridTableStateChangeEvents;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -87,11 +91,13 @@ export class DatagridComponent {
   addData(): void {
     this.tableData.push({position: Math.round(Math.random()*100), name: 'Blubb', weight: Math.random()*1000, symbol: 'XX'});
     this.dataSourceConnection.next(this.tableData);
+    this.datagridTableService1.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
   }
 
   removeData(): void {
     this.tableData.pop();
     this.dataSourceConnection.next(this.tableData);
+    this.datagridTableService1.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
   }
 
   addData2(): void {
@@ -106,12 +112,12 @@ export class DatagridComponent {
 
   addData3(): void {
     this.tableData3.push({position: Math.round(Math.random()*100), name: 'Blah', symbol: Math.random()*500});
-    this.dataChanged.next();
+    this.datagridTableService3.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
   }
 
   removeData3(): void {
     this.tableData3.shift();
-    this.dataChanged.next();
+    this.datagridTableService3.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
   }
 
   dropColumn(e): void {

@@ -1,5 +1,5 @@
 import { DragDrop, DragRef, DragRefConfig, DropListOrientation, DropListRef, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ComponentRef, effect, ElementRef, Injectable, QueryList, signal, WritableSignal } from '@angular/core';
+import { ComponentRef, DestroyRef, effect, ElementRef, inject, Injectable, QueryList, signal, WritableSignal } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import * as _ from 'lodash';
 import { DatagridTableComponent } from './datagridtable.component';
@@ -9,13 +9,17 @@ import { MatSort } from '@angular/material/sort';
 import { IDatagridTableMessageOverlay, IDatagridTableMessageOverlayMessageItem, TDatagridTableMessageTypes } from './interfaces/overlaymessage.interface';
 import { IDatagridTableState } from './interfaces/state.interface';
 import { SelectionModel } from '@angular/cdk/collections';
+import { EDatagridTableStateChangeEvents } from './interfaces/statechangetypes.enum';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Injectable()
 export class DatagridTableService {
 
-  private stateChange$: Subject<void> = new Subject();
-  stateChange_: Observable<void> = this.stateChange$.asObservable();
+  destroyRef: DestroyRef = inject(DestroyRef);
+
+  private stateChange$: Subject<EDatagridTableStateChangeEvents> = new Subject();
+  stateChange_: Observable<EDatagridTableStateChangeEvents> = this.stateChange$.asObservable();
 
   state: IDatagridTableState = {
     dataSource: new MatTableDataSource(),
@@ -39,8 +43,31 @@ export class DatagridTableService {
   constructor(
     private dragDrop: DragDrop
   ) {
+    this.handleStateChange();
+  }
 
-   }
+//###########################
+
+   handleStateChange(): void {
+    this.stateChange_.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: (event: EDatagridTableStateChangeEvents) => {
+        console.log('EVENT: ', event);
+        const stateEvents = {
+          [EDatagridTableStateChangeEvents.CHANGE_DATA]: () => {
+            this.state.dataSource._updateChangeSubscription();
+          },
+          
+          [EDatagridTableStateChangeEvents.CHANGE_COLUMN_ORDER]: () => {
+            this.state.tableInstanceRef.renderRows();
+          },        
+        }
+
+        if (stateEvents[event]) {
+          stateEvents[event].bind(this)();
+        }
+      }
+    })
+  }
 
 //###########################
 
@@ -181,7 +208,7 @@ export class DatagridTableService {
   orderColumn(columnName: string, direction: 'left' | 'right'): void {
     const columnIndex = this.getColumnIndex(columnName);
     moveItemInArray(this.state.displayedColumns, columnIndex, direction === 'left' ? columnIndex - 1 : columnIndex + 1);
-    this.triggerStateChange();
+    this.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_COLUMN_ORDER);
   }
 
 //###########################
@@ -192,8 +219,8 @@ export class DatagridTableService {
 
 //###########################
 
-  triggerStateChange(): void {
-    this.stateChange$.next();
+  triggerStateChange(stateChangeEvent: EDatagridTableStateChangeEvents): void {
+    this.stateChange$.next(EDatagridTableStateChangeEvents[stateChangeEvent]);
   }
 
 //###########################

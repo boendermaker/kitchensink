@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AllAngularMaterialMDCModulesModule } from '../../shared/modules/allmaterial/allmaterial.module';
 import { MatSort } from '@angular/material/sort';
+import { EDatagridTableStateChangeEvents } from './interfaces/statechangetypes.enum';
 
 
 @Component({
@@ -31,7 +32,6 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   @Input() dataSource: MatTableDataSource<unknown>;
-  @Input() triggerChange: Observable<void>;
   @Input() columns: string[];
   @Input() dragSortRows: boolean = false;
   @Output() service: EventEmitter<DatagridTableService> = new EventEmitter<DatagridTableService>();
@@ -50,14 +50,13 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.datagridTableService.setTableInstanceRef(this.table);
     this.datagridTableService.setTableComponentRef(this);
     this.setTableStateProperties();
-    this.handleRenderRows();
     this.setTableData();
   }
 
   ngAfterViewInit(): void {
     this.datagridTableService.setSort(this.sort);
     this.datagridTableService.setTableElementRef(this.tableElementRef);
-    this.datagridTableService.triggerStateChange();
+    this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
     this.service.emit(this.datagridTableService);
   }
 
@@ -65,19 +64,6 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
     this.rowDefs.forEach(rowDef => this.table.addRowDef(rowDef));
     this.headerRowDefs.forEach(headerRowDef => this.table.addHeaderRowDef(headerRowDef));
-  }
-
-  //################################################
-
-  handleExternalStateChange(): void {
-    if(this.triggerChange) {
-      this.triggerChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-        next: () => {
-          this.datagridTableService.triggerStateChange();
-          this.datagridTableService.refresh();
-        }
-      })
-    }
   }
 
   //################################################
@@ -92,18 +78,6 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.datagridTableService.setColumns(this.columns);
     this.datagridTableService.setDisplayedColumns(_.clone(this.columns));
     this.datagridTableService.setDragSortRows(this.dragSortRows);
-  }
-
-  //################################################
-
-  handleRenderRows(): void {
-    if(this.triggerChange) {
-      this.triggerChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-        next: () => {
-          this.datagridTableService.refresh();
-        }
-      })
-    }
   }
 
   //################################################

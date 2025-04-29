@@ -1,9 +1,11 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, input, OnInit, Optional, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, DestroyRef, inject, Input, input, OnInit, Optional, ViewChild } from '@angular/core';
 import { Options } from 'blockly';
 import { DatagridTableComponent } from '../datagridtable.component';
 import { DatagridTableService } from '../datagridtable.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EDatagridTableStateChangeEvents } from '../interfaces/statechangetypes.enum';
 
 @Component({
   selector: 'app-datagridtable-paginator',
@@ -12,6 +14,8 @@ import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmater
   styleUrl: './paginator.component.scss'
 })
 export class DatagridTablePaginatorComponent implements OnInit, AfterViewInit {
+
+  destroyRef: DestroyRef = inject(DestroyRef);
 
   @Input() connect: boolean = true;
   @Input() pageSize: number;
@@ -41,11 +45,11 @@ export class DatagridTablePaginatorComponent implements OnInit, AfterViewInit {
   setPageOptions(): void {
     this.datagridTableService.setPageIndex(this.paginator.pageIndex);
     this.datagridTableService.setPageSize(this.paginator.pageSize ?? this.pageSize ?? 50);
-    this.datagridTableService.triggerStateChange();
+    this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_PAGE);
   }
 
   handlePageChange(): void {
-    this.datagridTableService.state.paginator.page.subscribe({
+    this.datagridTableService.state.paginator.page.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => {
         this.setPageOptions();
       }
