@@ -1,0 +1,14 @@
+@if(datagridTableService.state.$selectedRows().length > 0) {
+    <div class="selection-actions">
+        <div>
+            <button mat-stroked-button (click)="deselectAllRows()" class="selection-actions__defaultbutton">
+                <mat-icon>cancel</mat-icon>
+                <span>{{datagridTableService.state.$selectedRows().length}}&nbsp;&nbsp;</span>
+                <span>Ausgewählt</span>
+            </button>
+        </div>
+        <div>
+            <ng-content></ng-content>
+        </div>
+    </div>
+}
