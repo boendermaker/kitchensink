@@ -15,12 +15,22 @@
     &__header {
       display: flex;
       flex-direction: row;
-      align-items: center;
+      margin-bottom: 16px;
 
       &__left {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
+
+        &__title {
+          display: flex;
+        }
+
+        &__selectionactions {
+          display: flex;
+          height: 38px;
+          gap: 8px;
+        }
       }
 
       &__right {

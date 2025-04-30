@@ -15,6 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class SelectioncolumnComponent implements OnDestroy, OnInit {
 
   destroyRef: DestroyRef = inject(DestroyRef);
+  lastSelectedSegmentRow: number = 1;
 
   @Input() columnName: string = 'selection';
   @Input() multiple: boolean = true;
@@ -47,6 +48,8 @@ export class SelectioncolumnComponent implements OnDestroy, OnInit {
     this.datagridTableService.state.tableInstanceRef.removeColumnDef(this.columnDef);
   }
 
+//###########################
+
   handleSelectionChange(): void {
     this.datagridTableService.state.rowSelection.changed.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (selection) => {
@@ -56,16 +59,22 @@ export class SelectioncolumnComponent implements OnDestroy, OnInit {
     })
   }
 
+//###########################
+
   setSelectionOptions(): void {
     this.datagridTableService.state.rowSelection = new SelectionModel(this.multiple, []);
     this.selection = this.datagridTableService.state.rowSelection;
   }
+
+//###########################
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.datagridTableService.state.dataSource.data.length;
     return numSelected === numRows;
   }
+
+//###########################
 
   toggleAllRows() {
     if (this.isAllSelected()) {
@@ -74,6 +83,17 @@ export class SelectioncolumnComponent implements OnDestroy, OnInit {
     }
     this.selection.select(...this.datagridTableService.state.dataSource.data);
   }
+
+//###########################
+
+  ShiftKeyDown(event) {
+    console.log(event)
+    if (event.shiftKey) {
+      console.log(this.selection.selected);
+    }
+   }
+
+//###########################
 
 }
 

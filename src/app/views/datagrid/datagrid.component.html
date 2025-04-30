@@ -3,8 +3,8 @@
     [dataSource]="dataSource"
     [columns]="displayedColumns"
     (service)="datagridTableService1 = $event"
-    matSort
-    #sort="matSort">
+    matSort matSortActive="position" matSortDirection="desc" matSortDisableClear
+    >
 
     <app-datagridtable-title title="Lorem Ipsum">
       <span prefix>Davor</span><span suffix>Danach</span>
@@ -76,7 +76,7 @@
 <br>
 <br>
 
-<div style="height: 300px;">
+<div style="height: 500px;">
   <app-datagridtable
     [dataSource]="dataSource2"
     [columns]="displayedColumns2"
@@ -86,14 +86,13 @@
       Lorem Ipsum<span suffix>Danach</span><span suffix>Noch ein danach</span>
     </app-datagridtable-title>
 
-    <app-datagridtable-selectionactions></app-datagridtable-selectionactions>
-
     <app-datagridtable-actions>
       <button mat-icon-button (click)="addData2()"><i class="material-icons-filled">add</i></button>
       <button mat-icon-button (click)="removeData2()"><i class="material-icons-filled">remove</i></button>
       <button mat-icon-button [matMenuTriggerFor]="menu2"><i class="material-icons-filled">more_vert</i></button>
     </app-datagridtable-actions>
 
+    <app-datagridtable-selectionactions></app-datagridtable-selectionactions>
     <app-datagridtable-selectioncolumn columnName="selection"></app-datagridtable-selectioncolumn>
 
     <app-datagridtablecolumn matColumnDef="position">
@@ -149,7 +148,7 @@
   <br/>
   <br/>
 
-<div style="height: 300px;">
+<div style="height: 500px;">
   <app-datagridtable
     [dataSource]="tableData3"
     [columns]="displayedColumns3"
@@ -203,8 +202,7 @@
     [dataSource]="dataSourceGithub"
     [columns]="displayedColumnsGithub"
     [dragSortRows]="false"
-    (service)="this.datagridTableServiceGithub = $event"
-    matSort>
+    (service)="this.datagridTableServiceGithub = $event">
 
     <app-datagridtable-title title="Dolor sit">
       Lorem Ipsum<span suffix>Danach</span><span suffix>Noch ein danach</span>
@@ -225,7 +223,7 @@
         <app-datagridtablecolumn [matColumnDef]="displayedColumn">
           <th mat-header-cell *matHeaderCellDef>
             <app-datagridtable-header>
-              <app-datagridtable-headercontent mat-sort-header>{{displayedColumn}}</app-datagridtable-headercontent>
+              <app-datagridtable-headercontent>{{displayedColumn}}</app-datagridtable-headercontent>
               <app-datagridtable-columnfilter-string columnfilter></app-datagridtable-columnfilter-string>
             </app-datagridtable-header>
           </th>

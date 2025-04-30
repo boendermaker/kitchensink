@@ -1,0 +1,13 @@
+.selection-actions {
+    display: flex;
+    gap: 8px;
+
+    &__defaultbutton {
+        display: flex;
+        span: {
+            display: flex;
+            gap: 8px;
+        }
+    }
+
+}

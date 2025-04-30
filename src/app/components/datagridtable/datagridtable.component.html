@@ -3,10 +3,10 @@
   <div class="datagridtable__header">
     
     <div class="datagridtable__header__left">
-      <div class="datagridtable_header__left__title">
+      <div class="datagridtable__header__left__title">
         <ng-content select="app-datagridtable-title"></ng-content>
       </div>
-      <div class="datagridtable_header__left__selectionactions">
+      <div class="datagridtable__header__left__selectionactions">
         <ng-content select="app-datagridtable-selectionactions"></ng-content>
       </div>
     </div>
@@ -25,7 +25,7 @@
 
     <div class="datagridtable__content__tablewrapper">
 
-      <table mat-table [dataSource]="datagridTableService.state.dataSource" cdkDropList cdkDropListData="datagridTableService.state.dataSource.data" (cdkDropListDropped)="rowDropped($event)" matSort #sort="matSort">
+      <table mat-table [dataSource]="datagridTableService.state.dataSource" cdkDropList cdkDropListData="datagridTableService.state.dataSource.data" (cdkDropListDropped)="rowDropped($event)" matSort #sort="matSort" (matSortChange)="sortChange($event)">
 
         <ng-content></ng-content>
 

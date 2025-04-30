@@ -10,6 +10,8 @@ import { DatagridTableService } from '../datagridtable.service';
 })
 export class SelectionsComponent {
 
+  lastSelectedSegmentRow: number = 1;
+
   constructor(
     public datagridTableService: DatagridTableService
   ) {
@@ -22,7 +24,9 @@ export class SelectionsComponent {
 
   //###########################
 
-
+  deselectAllRows(): void {
+    this.datagridTableService.state.rowSelection.clear();
+  }
   
   //###########################
 

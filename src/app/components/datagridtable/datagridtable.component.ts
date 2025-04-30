@@ -1,5 +1,5 @@
 import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { AfterContentInit, AfterViewInit, APP_ID, ChangeDetectorRef, Component, ContentChild, ContentChildren, DestroyRef, ElementRef, EventEmitter, Inject, inject, Input, Output, QueryList, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, APP_ID, ChangeDetectorRef, Component, ContentChild, ContentChildren, DestroyRef, ElementRef, EventEmitter, Inject, inject, Input, Optional, Output, QueryList, ViewChild } from '@angular/core';
 import { MatTableModule, MatTable, MatColumnDef, MatRowDef, MatHeaderRowDef, MatTableDataSource } from '@angular/material/table';
 import { DatagridTableService } from './datagridtable.service';
 import { DatagridTableActionsComponent } from './actions/actions.component';
@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AllAngularMaterialMDCModulesModule } from '../../shared/modules/allmaterial/allmaterial.module';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { EDatagridTableStateChangeEvents } from './interfaces/statechangetypes.enum';
 
 
@@ -22,9 +22,11 @@ import { EDatagridTableStateChangeEvents } from './interfaces/statechangetypes.e
 
 export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
+  parentSort: MatSort = inject(MatSort, {optional: true});
+
   @ContentChild(DatagridTableActionsComponent, {static: true}) datagridTableActions: DatagridTableActionsComponent;
   @ContentChildren(MatHeaderRowDef) headerRowDefs: QueryList<MatHeaderRowDef>;
-  @ContentChildren(MatRowDef) rowDefs: QueryList<MatRowDef<any>>;
+  @ContentChildren(MatRowDef) rowDefs: QueryList<MatRowDef<unknown>>;
   @ContentChildren(MatColumnDef) columnDefs: QueryList<MatColumnDef>;
 
   @ViewChild(MatTable, {static: true}) table: MatTable<unknown>;
@@ -56,17 +58,29 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   ngAfterViewInit(): void {
+    this.setParentSort();
     this.datagridTableService.setSort(this.sort);
     this.datagridTableService.setTableElementRef(this.tableElementRef);
     this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
     this.service.emit(this.datagridTableService);
-
   }
 
   ngAfterContentInit() {
     this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
     this.rowDefs.forEach(rowDef => this.table.addRowDef(rowDef));
     this.headerRowDefs.forEach(headerRowDef => this.table.addHeaderRowDef(headerRowDef));
+  }
+
+  //################################################
+
+  sortChange(event: MatSort): void {
+    console.log('SORT CHANGE', event);
+  }
+
+  setParentSort(): void {
+    if(this.parentSort) {
+      this.sort = this.parentSort;
+    }
   }
 
   //################################################
