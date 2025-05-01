@@ -111,11 +111,11 @@
       <th mat-header-cell *matHeaderCellDef>
         <app-datagridtable-header>
           <app-datagridtable-headercontent>Name</app-datagridtable-headercontent>
-          <app-datagridtable-columnfilter-string columnfilter></app-datagridtable-columnfilter-string>
+          <app-datagridtable-columnfilter-string columnfilter [customFilterRef]="customStringFilter"></app-datagridtable-columnfilter-string>
         </app-datagridtable-header>
       </th>
       <td mat-cell *matCellDef="let element">
-        <app-datagridtable-cell>{{element['name']}}</app-datagridtable-cell>
+        <app-datagridtable-cell>{{element['name'].value}}</app-datagridtable-cell>
       </td>
     </app-datagridtablecolumn>
 

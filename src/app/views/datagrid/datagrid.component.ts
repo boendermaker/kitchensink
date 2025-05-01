@@ -21,6 +21,7 @@ import { DatagridTableLoadingOverlayComponent } from "../../components/datagridt
 import { DatagridTableMessageOverlayComponent } from "../../components/datagridtable/overlays/message/messageoverlay.component";
 import { SelectioncolumnComponent } from "../../components/datagridtable/selectioncolumn/selectioncolumn.component";
 import { EDatagridTableStateChangeEvents } from '@app/components/datagridtable/interfaces/statechangetypes.enum';
+import { DatagridTableCustomColumnStringFilter } from '@app/components/datagridtable/header/columnfilter/stringfilter/customstringfilter.class';
 
 @Component({
   selector: 'app-datagrid',
@@ -46,15 +47,16 @@ export class DatagridComponent {
   ];
 
   tableData2: any[] = [
-    {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-    {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-    {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-    {position: 4, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-    {position: 5, name: 'Helium', weight: 4.0026, symbol: 'He'},
-    {position: 6, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-    {position: 7, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-    {position: 8, name: 'Helium', weight: 4.0026, symbol: 'He'},
-    {position: 9, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+    {position: 1, name: {value: 'Hydrogen'}, weight: 1.0079, symbol: 'H'},
+    {position: 2, name: {value: 'Helium'}, weight: 4.0026, symbol: 'He'},
+    {position: 3, name: {value: 'Lithium'}, weight: 6.941, symbol: 'Li'},
+    {position: 4, name: {value: 'Beryllium'}, weight: 9.0122, symbol: 'Be'},
+    {position: 5, name: {value: 'Boron'}, weight: 10.811, symbol: 'B'},
+    {position: 6, name: {value: 'Carbon'}, weight: 12.0107, symbol: 'C'},
+    {position: 7, name: {value: 'Nitrogen'}, weight: 14.0067, symbol: 'N'},
+    {position: 8, name: {value: 'Oxygen'}, weight: 15.9994, symbol: 'O'},
+    {position: 9, name: {value: 'Fluorine'}, weight: 18.9984, symbol: 'F'},
+    {position: 10, name: {value: 'Neon'}, weight: 20.1797, symbol: 'Ne'},
   ];
 
   tableData3: any[] = [
@@ -78,6 +80,8 @@ export class DatagridComponent {
   datagridTableService1: DatagridTableService;
   datagridTableService3: DatagridTableService;
 
+  customStringFilter: DatagridTableCustomColumnStringFilter = new DatagridTableCustomColumnStringFilter();
+
   EDatagridTableStateChangeEvents = EDatagridTableStateChangeEvents;
 
   constructor(
@@ -87,7 +91,6 @@ export class DatagridComponent {
   }
 
   ngOnInit(): void {
-
   }
 
   ngAfterViewInit(): void {
