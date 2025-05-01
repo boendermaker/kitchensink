@@ -5,6 +5,7 @@ import { DatagridTableService } from '../datagridtable.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EDatagridTableStateChangeEvents } from '../interfaces/statechangetypes.enum';
 
 @Component({
   selector: 'app-datagridtable-paginator',
@@ -51,7 +52,7 @@ export class DatagridTablePaginatorComponent implements OnInit, AfterViewInit {
   updatePaginatorState(): void {
     this.datagridTableService.setPageIndex(this.paginator.pageIndex);
     this.datagridTableService.setPageSize(this.paginator.pageSize ?? this.pageSize ?? 50);
-    this.datagridTableService.triggerStateChange();
+    this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_PAGE);
   }
 
   connectToDataSource(): void {

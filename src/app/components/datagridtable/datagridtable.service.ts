@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { IDatagridTableMessageOverlay, IDatagridTableMessageOverlayMessageItem, TDatagridTableMessageTypes } from './interfaces/overlaymessage.interface';
 import { IDatagridTableState } from './interfaces/state.interface';
 import { SelectionModel } from '@angular/cdk/collections';
+import { EDatagridTableStateChangeEvents } from './interfaces/statechangetypes.enum';
 
 
 @Injectable()
@@ -16,8 +17,8 @@ export class DatagridTableService {
 
   destroyRef: DestroyRef = inject(DestroyRef);
 
-  private stateChange$: Subject<void> = new Subject();
-  stateChange_: Observable<void> = this.stateChange$.asObservable();
+  private stateChange$: Subject<EDatagridTableStateChangeEvents> = new Subject();
+  stateChange_: Observable<EDatagridTableStateChangeEvents> = this.stateChange$.asObservable();
   private pageChange$: Subject<void> = new Subject();
   pageChange_: Observable<void> = this.pageChange$.asObservable();
 
@@ -43,6 +44,24 @@ export class DatagridTableService {
   constructor(
     private dragDrop: DragDrop
   ) {
+  }
+
+//###########################
+
+  handleStateChange(event: EDatagridTableStateChangeEvents): void {
+
+    const events = {
+
+      [EDatagridTableStateChangeEvents.CHANGE_DATA]: () => {
+        this.updateChangeSubscription();
+      },
+
+      [EDatagridTableStateChangeEvents.CHANGE_PAGE]: () => {
+        this.triggerPageChange();
+      },
+
+    }
+
   }
 
 //###########################
@@ -200,15 +219,14 @@ export class DatagridTableService {
 
 //###########################
 
-  triggerStateChange(): void {
-    this.stateChange$.next();
+  triggerStateChange(event: EDatagridTableStateChangeEvents): void {
+    this.stateChange$.next(event);
     this.updateChangeSubscription();
   }
 
 //###########################
 
   triggerPageChange(): void {
-    this.pageChange$.next();
     this.updateChangeSubscription();
   }
 

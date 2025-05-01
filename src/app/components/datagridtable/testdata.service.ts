@@ -2,8 +2,9 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
 import * as _ from 'lodash';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { SortDirection } from '@angular/material/sort';
-import { catchError, combineLatest, map, merge, Observable, of, startWith, switchMap, tap } from 'rxjs';
+import { catchError, combineLatest, filter, map, merge, Observable, of, startWith, switchMap, tap } from 'rxjs';
 import { DatagridTableService } from './datagridtable.service';
+import { EDatagridTableStateChangeEvents } from './interfaces/statechangetypes.enum';
 
 
 export interface GithubApi {
@@ -60,6 +61,7 @@ init(tableService: DatagridTableService): void {
 
     this.datagridTableService.stateChange_.pipe(
       tap(() => this.datagridTableService.setShowMessageOverlay(false)),
+        filter((event) => event === EDatagridTableStateChangeEvents.CHANGE_PAGE),
         startWith({}),
         switchMap(() => {
           this.datagridTableService.setLoading(true);

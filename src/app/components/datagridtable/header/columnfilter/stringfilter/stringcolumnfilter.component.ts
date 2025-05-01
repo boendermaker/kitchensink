@@ -6,6 +6,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from '@app/directives/clickoutsidedirective/clickoutside.directive';
 import { IDatagridTableColumnFilterComponent } from '@app/components/datagridtable/interfaces/columnfilter.interface';
 import { DatagridTableColumnComponent } from '@app/components/datagridtable/column/column.component';
+import { IDatagridTableCustomColumnFilter } from '@app/components/datagridtable/interfaces/customfilter.inteface';
 
 @Component({
   selector: 'app-datagridtable-columnfilter-string',
@@ -19,6 +20,8 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
 
   @ViewChild('detail') detailElement: ElementRef<HTMLDetailsElement> | undefined;
   @ViewChild('content') columnFilterElement: ElementRef<HTMLDetailsElement> | undefined;
+
+  @Input() filterClass: IDatagridTableCustomColumnFilter = null;
 
   columnName: string = '';
   filterControl: FormControl<string> = new FormControl<string>('');

@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AllAngularMaterialMDCModulesModule } from '../../shared/modules/allmaterial/allmaterial.module';
 import { MatSort } from '@angular/material/sort';
+import { EDatagridTableStateChangeEvents } from './interfaces/statechangetypes.enum';
 
 
 @Component({
@@ -53,7 +54,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   ngAfterViewInit(): void {
     this.datagridTableService.setSort(this.sort);
     this.datagridTableService.setTableElementRef(this.tableElementRef);
-    this.datagridTableService.triggerStateChange();
+    this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
     this.service.emit(this.datagridTableService);
   }
 

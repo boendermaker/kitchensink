@@ -3,6 +3,7 @@ import { DatagridTableColumnComponent } from '../../column/column.component';
 import { DatagridTableService } from '../../datagridtable.service';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { NgStyle } from '@angular/common';
+import { EDatagridTableStateChangeEvents } from '../../interfaces/statechangetypes.enum';
 
 @Component({
   selector: 'app-datagridtable-ordercolumn',
@@ -36,6 +37,7 @@ export class DatagridTableOrderColumnComponent implements OnInit {
 
   orderColumn(direction: 'left' | 'right'): void {
     this.datagridTableService.orderColumn(this.columnName, direction)
+    this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_COLUMN_ORDER);
   }
 
   //###########################

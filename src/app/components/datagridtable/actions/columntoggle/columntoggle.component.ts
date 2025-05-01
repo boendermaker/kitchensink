@@ -5,6 +5,7 @@ import { DatagridTableService } from '../../datagridtable.service';
 import { DatagridTableActionsComponent } from '../actions.component';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as _ from 'lodash';
+import { EDatagridTableStateChangeEvents } from '../../interfaces/statechangetypes.enum';
 
 /**
  * @title DatagridTableColumntoggleComponent
@@ -67,7 +68,7 @@ export class DatagridTableColumntoggleComponent implements OnInit {
   formGroupChanged(): void {
     this.formGroup.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: unknown) => {
       this.updateDisplayedColumns(value);
-      this.datagridTableService.triggerStateChange();
+      this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_COLUMN_VISIBILITY);
     });
   }
 

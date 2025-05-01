@@ -212,7 +212,7 @@
     </app-datagridtable-title>
 
     <app-datagridtable-actions>
-      <button mat-icon-button (click)="datagridTableServiceGithub.triggerStateChange()"><i class="material-icons-filled">refresh</i></button>
+      <button mat-icon-button (click)="datagridTableServiceGithub.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_PAGE)"><i class="material-icons-filled">refresh</i></button>
       <button mat-icon-button [matMenuTriggerFor]="menu3"><i class="material-icons-filled">more_vert</i></button>
     </app-datagridtable-actions>
 

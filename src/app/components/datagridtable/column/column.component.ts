@@ -3,8 +3,9 @@ import { DatagridTableHeaderComponent } from '../header/header.component';
 import { DatagridTableCellComponent } from '../cell/cell.component';
 import { MatColumnDef } from '@angular/material/table';
 import { DatagridTableService } from '../datagridtable.service';
-import { combineLatest, firstValueFrom, forkJoin } from 'rxjs';
+import { combineLatest, filter, firstValueFrom, forkJoin } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EDatagridTableStateChangeEvents } from '../interfaces/statechangetypes.enum';
 
 @Component({
   selector: 'app-datagridtablecolumn',
@@ -29,10 +30,24 @@ export class DatagridTableColumnComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     this.handleStateChange();
+    this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_COLUMN_ORDER);
   }
 
   ngAfterContentInit() {
     this.getColumnComponents();
+  }
+
+  //###########################
+
+  private handleStateChange() {
+    this.datagridTableService.stateChange_.pipe(
+      filter((event) => event === EDatagridTableStateChangeEvents.CHANGE_COLUMN_ORDER),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: (state) => {
+        this.$columnIndex.set(this.datagridTableService.getColumnIndex(this.getColumnName()));
+      },
+    })
   }
 
   //###########################
@@ -45,16 +60,6 @@ export class DatagridTableColumnComponent implements OnInit, AfterContentInit {
 
   getColumnName(): string {
     return this.matColumnDef.toString();
-  }
-
-  //###########################
-
-  private handleStateChange() {
-    this.datagridTableService.stateChange_.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: (state) => {
-        this.$columnIndex.set(this.datagridTableService.getColumnIndex(this.getColumnName()));
-      },
-    })
   }
 
   //###########################
