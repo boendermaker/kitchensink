@@ -22,11 +22,12 @@ import { DatagridTableMessageOverlayComponent } from "../../components/datagridt
 import { SelectioncolumnComponent } from "../../components/datagridtable/selectioncolumn/selectioncolumn.component";
 import { EDatagridTableStateChangeEvents } from '@app/components/datagridtable/interfaces/statechangetypes.enum';
 import { DatagridTableCustomColumnStringFilter } from '@app/components/datagridtable/header/columnfilter/stringfilter/customstringfilter.class';
+import { DatagridTableSelectionsComponent } from "../../components/datagridtable/actions/selectionactions/selectionactions.component";
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent, DatagridTableOrderColumnComponent, DatagridTableResizeColumnComponent, DatagridTablePaginatorComponent, DatagridTableLoadingOverlayComponent, DatagridTableMessageOverlayComponent, SelectioncolumnComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent, DatagridTableOrderColumnComponent, DatagridTableResizeColumnComponent, DatagridTablePaginatorComponent, DatagridTableLoadingOverlayComponent, DatagridTableMessageOverlayComponent, SelectioncolumnComponent, DatagridTableSelectionsComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss',
   providers: [TestDataService],
