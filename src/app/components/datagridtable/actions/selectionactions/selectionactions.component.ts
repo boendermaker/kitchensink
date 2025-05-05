@@ -22,7 +22,7 @@ export class DatagridTableSelectionsComponent {
   }
 
   ngOnInit(): void {
-
+    this.handleSelectionChange();
   }
 
   //###########################

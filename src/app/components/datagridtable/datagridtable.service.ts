@@ -10,6 +10,7 @@ import { IDatagridTableMessageOverlay, IDatagridTableMessageOverlayMessageItem, 
 import { IDatagridTableState } from './interfaces/state.interface';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EDatagridTableStateChangeEvents } from './interfaces/statechangetypes.enum';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Injectable()
@@ -43,29 +44,41 @@ export class DatagridTableService {
   constructor(
     private dragDrop: DragDrop
   ) {
+    this.handleStateChange();
   }
 
 //###########################
 
-  handleStateChange(event: EDatagridTableStateChangeEvents): void {
+handleStateChange(): void {
+  this.stateChange_.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    next: (event: EDatagridTableStateChangeEvents) => {
+      console.log('EVENT: ', event);
+      
+      const stateEvents = {
+        [EDatagridTableStateChangeEvents.CHANGE_SORT]: () => {
+          console.log('SORT ', this.state.sort)
+        },
 
-    const events = {
+        [EDatagridTableStateChangeEvents.CHANGE_SELECTION_ROW]: () => {
+          this.setSelectedRows();
+          console.log('SELECTION ', this.state.$selectedRows())
+        },
 
-      [EDatagridTableStateChangeEvents.CHANGE_DATA]: () => {
-        this.updateChangeSubscription();
-      },
+        [EDatagridTableStateChangeEvents.CHANGE_DATA]: () => {
+          this.state.dataSource._updateChangeSubscription();
+        },
+        
+        [EDatagridTableStateChangeEvents.CHANGE_COLUMN_ORDER]: () => {
+          this.state.tableInstanceRef.renderRows();
+        },        
+      }
 
-      [EDatagridTableStateChangeEvents.CHANGE_PAGE]: () => {
-        this.triggerPageChange();
-      },
-
-      [EDatagridTableStateChangeEvents.CHANGE_SELECTION_ROW]: () => {
-        this.state.$selectedRows.set(this.state.rowSelection.selected);
-      },
-
+      if (stateEvents[event]) {
+        stateEvents[event].bind(this)();
+      }
     }
-
-  }
+  })
+}
 
 //###########################
 
