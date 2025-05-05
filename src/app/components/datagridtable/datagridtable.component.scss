@@ -1,75 +1,90 @@
 .datagridtable {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-    border-spacing: 0;
-    border: 1px solid #ddd;
-    font-size: 14px;
-    font-family: Arial, sans-serif;
-    background: white;
-    padding: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  background: white;
+  padding: 16px;
 
-    &__header {
+  &__header {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 16px;
+
+    &__left {
       display: flex;
-      flex-direction: row;
-      align-items: center;
+      flex-direction: column;
+      flex-grow: 1;
 
       &__title {
-          flex-grow: 1;
+        display: flex;
       }
 
-      &__actions {
+      &__selectionactions {
+        display: flex;
+        height: 38px;
+        gap: 8px;
       }
     }
 
-    &__content {
+    &__right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    border:1px solid red;
+    overflow: hidden;
+
+    &__tablewrapper {
       position: relative;
       display: flex;
-      flex-grow: 1;
-      border:1px solid red;
-      overflow: hidden;
+      width: 100%;
+      overflow-y: scroll;
+      overflow-x: auto;
 
-      &__tablewrapper {
-        position: relative;
-        display: flex;
-        width: 100%;
-        overflow-y: scroll;
-        overflow-x: auto;
+      table {
+        height: 0;
 
-        table {
-          height: 0;
+        &>th {
+          width: 0;
+        }
 
-          &>th {
-            width: 0;
-          }
-
-          &>td {
-            width: 0;
-          }
-
+        &>td {
+          width: 0;
         }
 
       }
 
     }
 
-    &__footer {
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+
+    &__paginator {
       display: flex;
+      justify-content: flex-end;
       align-items: center;
-
-      &__paginator {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-      }
-
     }
+
+  }
 
 }
 
 ::ng-deep .mat-mdc-header-cell {
-    overflow: initial !important;
+  overflow: initial !important;
 }

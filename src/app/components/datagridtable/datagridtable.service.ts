@@ -19,13 +19,12 @@ export class DatagridTableService {
 
   private stateChange$: Subject<EDatagridTableStateChangeEvents> = new Subject();
   stateChange_: Observable<EDatagridTableStateChangeEvents> = this.stateChange$.asObservable();
-  private pageChange$: Subject<void> = new Subject();
-  pageChange_: Observable<void> = this.pageChange$.asObservable();
 
   state: IDatagridTableState = {
     dataSource: new MatTableDataSource(),
     paginator: null as unknown as MatPaginator,
     rowSelection: new SelectionModel(true, []),
+    $selectedRows: signal([]),
     $totalRows: signal(0),
     $pageSize: signal(10),
     $pageIndex: signal(0),
@@ -60,6 +59,10 @@ export class DatagridTableService {
         this.triggerPageChange();
       },
 
+      [EDatagridTableStateChangeEvents.CHANGE_SELECTION_ROW]: () => {
+        this.state.$selectedRows.set(this.state.rowSelection.selected);
+      },
+
     }
 
   }
@@ -87,6 +90,12 @@ export class DatagridTableService {
       state.showMessages = showMessage
       return state;
     });
+  }
+
+//###########################
+
+  setSelectedRows(): void {
+    this.state.$selectedRows.set(this.state.rowSelection.selected);
   }
 
 //###########################

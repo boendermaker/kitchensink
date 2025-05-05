@@ -10,6 +10,7 @@ export interface IDatagridTableState {
   dataSource: MatTableDataSource<unknown>;
   paginator: MatPaginator;
   rowSelection: SelectionModel<unknown>;
+  $selectedRows?: WritableSignal<unknown[]>;
   $totalRows?: WritableSignal<number>;
   $pageSize?: WritableSignal<number>;
   $pageIndex?: WritableSignal<number>;
