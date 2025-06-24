@@ -1,5 +1,5 @@
 import { CdkDrag, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, DestroyRef, ElementRef, EventEmitter, inject, Input, Output, QueryList, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChild, ContentChildren, DestroyRef, ElementRef, EventEmitter, inject, Input, Output, QueryList, Renderer2, ViewChild } from '@angular/core';
 import { MatTableModule, MatTable, MatColumnDef, MatRowDef, MatHeaderRowDef, MatTableDataSource } from '@angular/material/table';
 import { DatagridTableService } from './datagridtable.service';
 import { DatagridTableActionsComponent } from './actions/actions.component';
@@ -31,6 +31,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   @ViewChild(MatTable, {read: ElementRef}) tableElementRef: ElementRef;
   @ViewChild(MatSort) sort!: MatSort;
 
+  @Input() tableId: string;
   @Input() dataSource: MatTableDataSource<unknown>;
   @Input() columns: string[];
   @Input() dragSortRows: boolean = false;
@@ -40,6 +41,8 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   constructor(
     public datagridTableService: DatagridTableService,
+    public elementRef: ElementRef,
+    public renderer: Renderer2,
   ) {
 
   }
@@ -52,10 +55,11 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   ngAfterViewInit(): void {
-    this.datagridTableService.setSort(this.sort);
     this.datagridTableService.setTableElementRef(this.tableElementRef);
-    this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
+    this.datagridTableService.setSort(this.sort);
+    this.datagridTableService.setInitialTableHeaderWidths();
     this.service.emit(this.datagridTableService);
+    this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
   }
 
   ngAfterContentInit() {

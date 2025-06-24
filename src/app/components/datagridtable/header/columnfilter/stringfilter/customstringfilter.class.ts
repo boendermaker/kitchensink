@@ -12,6 +12,15 @@ export class DatagridTableCustomColumnStringFilter implements IDatagridTableColu
 
   }
 
+  dbFilterCallback(): any {
+    return {
+      [this.columnName]: {
+        $regex: (<DatagridTableStringfilterComponent>this.filterComponentRef).filterControl.value,
+        $options: 'i' // case insensitive
+      }
+    };
+  }
+
   filterCallBack(dataRow: unknown): boolean {
     console.log('custom', this)
     const columnValue: string = dataRow?.[this.columnName].value.toString().toLowerCase();

@@ -21,6 +21,7 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
 
   @ViewChild('detail') detailElement: ElementRef<HTMLDetailsElement> | undefined;
   @ViewChild('content') columnFilterElement: ElementRef<HTMLDetailsElement> | undefined;
+  @Input() propPath: string[] = [];
   @Input() customFilterRef: IDatagridTableColumnFilter = null;
 
   filterRef: IDatagridTableColumnFilter;

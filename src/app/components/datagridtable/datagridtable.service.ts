@@ -284,5 +284,22 @@ handleStateChange(): void {
 
 //###########################
 
+  setInitialTableHeaderWidths(): void {
+    const tableHeaderElement = this.state.tableElementRef.nativeElement.querySelector('thead');
+    
+    if (tableHeaderElement) {
+      const thElements = tableHeaderElement.querySelectorAll('th');
+      thElements.forEach((th, index) => {
+        if (index < thElements.length - 1) {
+          th.style.width = '50px';
+        }
+      });
+    }
+
+  }
+
+//###########################
+
+
 
 }

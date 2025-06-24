@@ -2,6 +2,7 @@ import { AfterContentInit, Component, ElementRef, Inject, Input, Optional } from
 import { DatagridTableHeaderComponent } from '../header.component';
 import { distinctUntilChanged, fromEvent, map, switchMap, takeUntil, tap } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
+import { DatagridTableService } from '../../datagridtable.service';
 
 @Component({
   selector: 'app-datagridtable-resizecolumn',
@@ -16,6 +17,7 @@ export class DatagridTableResizeColumnComponent implements AfterContentInit {
 
   constructor(
     private elementRef: ElementRef,
+    private datagridTableService: DatagridTableService,
     @Inject(DOCUMENT) private documentRef: Document,
     @Optional() private datagridTableHeaderComponentRef: DatagridTableHeaderComponent
   ) {
@@ -31,24 +33,28 @@ export class DatagridTableResizeColumnComponent implements AfterContentInit {
 
   handleColumnResize(): void {
 
-    const tableHeaderElement = this.datagridTableHeaderComponentRef.getElementRef().nativeElement;
+    const tableHeaderElement: HTMLElement = this.datagridTableHeaderComponentRef.getElementRef().nativeElement;
     const tableHeaderHandleElement = tableHeaderElement.querySelector('#resizecolumnhandle');
 
     if(tableHeaderHandleElement) {
 
+      //tableHeaderElement.parentElement.style.width = '0';
+
       fromEvent<MouseEvent>(tableHeaderHandleElement, 'mousedown').pipe(
         tap((e) => e.preventDefault()),
-        switchMap(() => {
-
+        switchMap(() => {         
           const { width, right } = tableHeaderElement
             .closest('th')!
             .getBoundingClientRect();
 
           return fromEvent<MouseEvent>(this.documentRef, 'mousemove').pipe(
-            map(({ clientX }) => {
-              const finalWidth = width + clientX - right;
-              tableHeaderElement.closest('th')!.style.width = `${finalWidth}px`;
-              return finalWidth;
+            map(({ clientX }) => {                          
+              if( tableHeaderElement?.closest('th') ) {
+                const finalWidth = width + clientX - right;
+                tableHeaderElement.parentElement.closest('th')!.style.width = `${finalWidth}px`;
+                tableHeaderElement.parentElement.closest('th')!.style.minWidth = `${finalWidth}px`;
+                return finalWidth;
+              }
             }),
             distinctUntilChanged(),
             takeUntil(

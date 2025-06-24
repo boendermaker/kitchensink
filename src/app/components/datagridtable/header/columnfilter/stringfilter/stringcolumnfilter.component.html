@@ -9,10 +9,8 @@
           </mat-form-field>
         </div>
         <div class="columnfilter__footer">
-          <br>
-          <br>
-          <button mat-button class="columnfilter__footer__button" (click)="updateFilter()">Anwenden</button>
-          <button mat-button class="columnfilter__footer__button" (click)="resetFilter()">Zurücksetzen</button>
+          <button mat-stroked-button class="columnfilter__footer__button" (click)="resetFilter()">Zurücksetzen</button>
+          <button mat-flat-button color="primary" class="columnfilter__footer__button" (click)="updateFilter()">Anwenden</button>
         </div>
     </div>
 </details>
