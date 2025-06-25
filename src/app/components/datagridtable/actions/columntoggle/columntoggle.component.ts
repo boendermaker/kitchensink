@@ -68,7 +68,7 @@ export class DatagridTableColumntoggleComponent implements OnInit {
   formGroupChanged(): void {
     this.formGroup.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value: unknown) => {
       this.updateDisplayedColumns(value);
-      this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_COLUMN_VISIBILITY);
+      this.datagridTableService.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_COLUMN_VISIBILITY);
     });
   }
 

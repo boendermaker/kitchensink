@@ -33,7 +33,7 @@ export class DatagridTableSelectionsComponent {
     .rowSelection
     .changed
     .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe((selection) => this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_SELECTION_ROW));
+    .subscribe((selection) => this.datagridTableService.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_SELECTION_ROW));
   }
 
   //###########################

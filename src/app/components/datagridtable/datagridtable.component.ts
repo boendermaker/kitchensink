@@ -4,8 +4,6 @@ import { MatTableModule, MatTable, MatColumnDef, MatRowDef, MatHeaderRowDef, Mat
 import { DatagridTableService } from './datagridtable.service';
 import { DatagridTableActionsComponent } from './actions/actions.component';
 import * as _ from 'lodash';
-import { Observable } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AllAngularMaterialMDCModulesModule } from '../../shared/modules/allmaterial/allmaterial.module';
 import { MatSort } from '@angular/material/sort';
 import { EDatagridTableStateChangeEvents } from './interfaces/statechangetypes.enum';
@@ -32,6 +30,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   @Input() tableId: string;
+  @Input() mode: 'backend';
   @Input() dataSource: MatTableDataSource<unknown>;
   @Input() columns: string[];
   @Input() dragSortRows: boolean = false;
@@ -48,6 +47,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   ngOnInit(): void {
+    this.datagridTableService.setMode(this.mode);
     this.datagridTableService.setTableInstanceRef(this.table);
     this.datagridTableService.setTableComponentRef(this);
     this.setTableStateProperties();
@@ -59,7 +59,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
     this.datagridTableService.setInitialTableHeaderWidths();
     this.datagridTableService.setSort(this.sort);
     this.service.emit(this.datagridTableService);
-    this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
+    this.datagridTableService.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_DATA);
   }
 
   ngAfterContentInit() {

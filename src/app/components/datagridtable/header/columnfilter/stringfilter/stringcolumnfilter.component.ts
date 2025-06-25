@@ -24,9 +24,8 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
   @Input() propPath: string[] = [];
   @Input() customFilterRef: IDatagridTableColumnFilter = null;
 
-  filterRef: IDatagridTableColumnFilter;
   columnName: string = '';
-
+  filterRef: IDatagridTableColumnFilter;
   filterControl: FormControl<string> = new FormControl<string>('');
 
   constructor(
@@ -63,7 +62,6 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
       this.filterRef.filterComponentRef = this;
       this.filterRef.columnName = this.columnName;
     }
-
   }
 
 //###########################

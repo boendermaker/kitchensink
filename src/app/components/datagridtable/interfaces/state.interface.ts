@@ -7,6 +7,7 @@ import { DatagridTableComponent } from "../datagridtable.component";
 import { SelectionModel } from "@angular/cdk/collections";
 
 export interface IDatagridTableState {
+  mode: 'backend';
   dataSource: MatTableDataSource<unknown>;
   paginator: MatPaginator;
   rowSelection: SelectionModel<unknown>;

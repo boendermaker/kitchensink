@@ -22,6 +22,7 @@ export class DatagridTableService {
   stateChange_: Observable<EDatagridTableStateChangeEvents> = this.stateChange$.asObservable();
 
   state: IDatagridTableState = {
+    mode: undefined,
     dataSource: new MatTableDataSource(),
     paginator: null as unknown as MatPaginator,
     rowSelection: new SelectionModel(true, []),
@@ -105,6 +106,18 @@ handleStateChange(): void {
       state.showMessages = showMessage
       return state;
     });
+  }
+
+//###########################
+
+  isBackendMode(): boolean {
+    return this.state.mode === 'backend';
+  }
+
+//###########################
+
+  setMode(mode: 'backend' | undefined): void {
+    this.state.mode = mode;
   }
 
 //###########################
@@ -243,7 +256,7 @@ handleStateChange(): void {
 
 //###########################
 
-  triggerStateChange(event: EDatagridTableStateChangeEvents): void {
+  triggerEvent(event: EDatagridTableStateChangeEvents): void {
     this.stateChange$.next(event);
     this.updateChangeSubscription();
   }

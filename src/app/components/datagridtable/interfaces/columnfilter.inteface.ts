@@ -4,6 +4,6 @@ import { IDatagridTableColumnFilterComponent } from "./columnfiltercomponent.int
 export interface IDatagridTableColumnFilter {
   dbFilterCallback: (dataRow: unknown) => boolean;
   filterCallBack: (dataRow: unknown) => boolean;
-  filterComponentRef: IDatagridTableColumnFilterComponent;
+  filterComponentRef: unknown;
   columnName: string;
 }

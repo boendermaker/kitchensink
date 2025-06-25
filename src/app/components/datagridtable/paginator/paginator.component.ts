@@ -52,7 +52,7 @@ export class DatagridTablePaginatorComponent implements OnInit, AfterViewInit {
   updatePaginatorState(): void {
     this.datagridTableService.setPageIndex(this.paginator.pageIndex);
     this.datagridTableService.setPageSize(this.paginator.pageSize ?? this.pageSize ?? 50);
-    this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_PAGE);
+    this.datagridTableService.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_PAGE);
   }
 
   connectToDataSource(): void {

@@ -37,7 +37,7 @@ export class DatagridTableOrderColumnComponent implements OnInit {
 
   orderColumn(direction: 'left' | 'right'): void {
     this.datagridTableService.orderColumn(this.columnName, direction)
-    this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_COLUMN_ORDER);
+    this.datagridTableService.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_COLUMN_ORDER);
   }
 
   //###########################

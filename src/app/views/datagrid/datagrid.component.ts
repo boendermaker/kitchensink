@@ -101,13 +101,13 @@ export class DatagridComponent {
   addData(): void {
     this.tableData.push({position: Math.round(Math.random()*100), name: 'Blubb', weight: Math.random()*1000, symbol: 'XX'});
     this.dataSourceConnection.next(this.tableData);
-    this.datagridTableService1.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
+    this.datagridTableService1.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_DATA);
   }
 
   removeData(): void {
     this.tableData.pop();
     this.dataSourceConnection.next(this.tableData);
-    this.datagridTableService1.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
+    this.datagridTableService1.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_DATA);
   }
 
   addData2(): void {
@@ -122,12 +122,12 @@ export class DatagridComponent {
 
   addData3(): void {
     this.tableData3.push({position: Math.round(Math.random()*100), name: 'Blah', symbol: Math.random()*500});
-    this.datagridTableService3.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
+    this.datagridTableService3.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_DATA);
   }
 
   removeData3(): void {
     this.tableData3.shift();
-    this.datagridTableService3.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
+    this.datagridTableService3.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_DATA);
   }
 
   dropColumn(e): void {

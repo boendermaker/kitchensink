@@ -30,7 +30,7 @@ export class DatagridTableColumnComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     this.handleStateChange();
-    this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_COLUMN_ORDER);
+    this.datagridTableService.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_COLUMN_ORDER);
   }
 
   ngAfterContentInit() {
