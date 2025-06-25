@@ -56,8 +56,8 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   ngAfterViewInit(): void {
     this.datagridTableService.setTableElementRef(this.tableElementRef);
-    this.datagridTableService.setSort(this.sort);
     this.datagridTableService.setInitialTableHeaderWidths();
+    this.datagridTableService.setSort(this.sort);
     this.service.emit(this.datagridTableService);
     this.datagridTableService.triggerStateChange(EDatagridTableStateChangeEvents.CHANGE_DATA);
   }
@@ -91,5 +91,10 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   //################################################
+
+
+
+  //################################################
+
 
 }

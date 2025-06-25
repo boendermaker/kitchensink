@@ -1,31 +1,50 @@
-import { IDatagridTableColumnFilterComponent } from "@app/components/datagridtable/interfaces/columnfiltercomponent.interface";
 import { IDatagridTableColumnFilter } from "@app/components/datagridtable/interfaces/columnfilter.inteface";
 import { DatagridTableStringfilterComponent } from "./stringcolumnfilter.component";
-import { DatagridTableColumnComponent } from "@app/components/datagridtable/column/column.component";
+import _ from 'lodash';
 
 export class DatagridTableCustomColumnStringFilter implements IDatagridTableColumnFilter {
-
-  filterComponentRef: IDatagridTableColumnFilterComponent = null;
+  
+  filterComponentRef: DatagridTableStringfilterComponent = null;
   columnName: string = null;
 
-  constructor() {
+  //############################
 
-  }
+  dbFilterCallback(dataRow: unknown): any {
+    const regexFilter = {$regex: `.*(?i)${this.filterComponentRef.filterControl?.value}.*`};
+    const filterBuildArray = [];
 
-  dbFilterCallback(): any {
-    return {
-      [this.columnName]: {
-        $regex: (<DatagridTableStringfilterComponent>this.filterComponentRef).filterControl.value,
-        $options: 'i' // case insensitive
-      }
+    if(this.filterComponentRef.propPath.length > 0) {
+      this.filterComponentRef.propPath.forEach((propPathDestination: string) => {
+          filterBuildArray.push({[`${propPathDestination}`]: regexFilter});
+      });
+    }
+
+    const filter = {
+      $or: filterBuildArray,
     };
+
+    return this.filterComponentRef.filterControl?.value ? filter : null;
   }
+  
+  //############################
 
   filterCallBack(dataRow: unknown): boolean {
-    console.log('custom', this)
-    const columnValue: string = dataRow?.[this.columnName].value.toString().toLowerCase();
-    const filterValue: string = (<DatagridTableStringfilterComponent>this.filterComponentRef).filterControl.value.toString().toLowerCase();
-    return columnValue.includes(filterValue);
+    const results: boolean[] = [];
+    const filterValue: string = this.filterComponentRef?.filterControl?.value.toString().toLowerCase();
+
+    if(this.filterComponentRef.propPath.length > 0) {
+      this.filterComponentRef.propPath.forEach((propPathDestination: string) => {
+        if(dataRow && _.has(dataRow, propPathDestination)) {
+          const propValue: string = _.get(dataRow, propPathDestination).toString().toLowerCase();
+          results.push(propValue.includes(filterValue));
+        }
+      });
+    }
+
+    return results.every((result: boolean) => result === true);
   }
+
+  //############################
+
 
 }

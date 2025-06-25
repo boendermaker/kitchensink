@@ -43,6 +43,7 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
   ngAfterViewInit(): void {
     //this.positionFilter();
     this.addFilterCallback();
+    this.addDbFilterCallback();
   }
 
   ngOnDestroy(): void {
@@ -98,17 +99,17 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
 
 //###########################
 
+  addDbFilterCallback(): void {
+    this.datagridTableService.addColumnDbFilterCallback(this.filterRef.dbFilterCallback.bind(this.filterRef));
+  }
+
+//###########################
+
   addFilterCallback(): void {
     this.datagridTableService.addColumnFilterCallback(this.filterRef.filterCallBack.bind(this.filterRef));
   }
 
 //###########################
-
-/*  filterCallback(dataRow: unknown): boolean {
-    const columnValue: string = dataRow?.[this.columnName].toString().toLowerCase();
-    const filterValue: string = this.filterControl.value.toString().toLowerCase();
-    return columnValue.includes(filterValue);
-  }*/
 
 //###########################
 

@@ -1,50 +1,49 @@
-import { IDatagridTableColumnFilterComponent } from "@app/components/datagridtable/interfaces/columnfiltercomponent.interface";
-import { IDatagridTableColumnFilter } from "@app/components/datagridtable/interfaces/columnfilter.inteface";
-import { DatagridTableStringfilterComponent } from "./stringcolumnfilter.component";
-import { DatagridTableService } from "@app/components/datagridtable/datagridtable.service";
+import { IDatagridTableColumnFilter } from '@app/components/datagridtable/interfaces/columnfilter.inteface';
+import { DatagridTableStringfilterComponent } from './stringcolumnfilter.component';
+import * as _ from 'lodash';
 
 export class DatagridTableColumnDefaultFilter implements IDatagridTableColumnFilter {
 
   filterComponentRef: DatagridTableStringfilterComponent = null;
   columnName: string = null;
 
-  dbFilterCallback(dataRow: unknown): any {
-    return {
-      [this.columnName]: {
-        $regex: (<DatagridTableStringfilterComponent>this.filterComponentRef).filterControl.value,
-        $options: 'i' // case insensitive
-      }
-    };
-  }
-  
+  //############################
 
-  filterCallBack(dataRow: unknown): boolean {
-    let results: boolean[] = [];
+  dbFilterCallback(dataRow: unknown): any {
+    const regexFilter = {$regex: `.*(?i)${this.filterComponentRef.filterControl?.value}.*`};
+    const filterBuildArray = [];
 
     if(this.filterComponentRef.propPath.length > 0) {
-      
       this.filterComponentRef.propPath.forEach((propPathDestination: string) => {
-
-        if(dataRow && dataRow?.[this.columnName]?.hasOwnProperty(propPathDestination)) {
-          const propValue: string = dataRow?.[this.columnName]?.[propPathDestination].toString().toLowerCase();
-          const filterValue: string = this.filterComponentRef?.filterControl?.value.toString().toLowerCase();
-          results.push(propValue.includes(filterValue));
-        }else{
-          results.push(true);
-        }
-
-        return results.every((result: boolean) => result === true);
-
+          filterBuildArray.push({[`${propPathDestination}`]: regexFilter});
       });
-
-    }else {
-
-      const columnValue: string = dataRow?.[this.columnName].toString().toLowerCase();
-      const filterValue: string = this.filterComponentRef?.filterControl?.value.toString().toLowerCase();
-      return columnValue.includes(filterValue);
-
     }
 
+    const filter = {
+      $or: filterBuildArray,
+    };
+
+    return this.filterComponentRef.filterControl?.value ? filter : null;
   }
+  
+  //############################
+
+  filterCallBack(dataRow: unknown): boolean {
+    const results: boolean[] = [];
+    const filterValue: string = this.filterComponentRef?.filterControl?.value.toString().toLowerCase();
+
+    if(this.filterComponentRef.propPath.length > 0) {
+      this.filterComponentRef.propPath.forEach((propPathDestination: string) => {
+        if(dataRow && _.has(dataRow, propPathDestination)) {
+          const propValue: string = _.get(dataRow, propPathDestination).toString().toLowerCase();
+          results.push(propValue.includes(filterValue));
+        }
+      });
+    }
+
+    return results.every((result: boolean) => result === true);
+  }
+
+  //############################
 
 }

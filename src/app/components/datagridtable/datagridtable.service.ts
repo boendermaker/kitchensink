@@ -1,5 +1,5 @@
 import { DragDrop, DragRef, DragRefConfig, DropListOrientation, DropListRef, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ComponentRef, DestroyRef, effect, ElementRef, inject, Injectable, QueryList, signal, WritableSignal } from '@angular/core';
+import { ComponentRef, DestroyRef, effect, ElementRef, inject, Injectable, QueryList, Renderer2, signal, WritableSignal } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import * as _ from 'lodash';
 import { DatagridTableComponent } from './datagridtable.component';
@@ -32,6 +32,7 @@ export class DatagridTableService {
     $isLoading: signal(false),
     $messages: signal({showMessages: false, messages: []}),
     sort: null as unknown as MatSort,
+    columnDbFilter: [],
     columnFilter: [],
     columns: [],
     displayedColumns: [],
@@ -42,7 +43,8 @@ export class DatagridTableService {
   }
 
   constructor(
-    private dragDrop: DragDrop
+    private dragDrop: DragDrop,
+    private renderer: Renderer2
   ) {
     this.handleStateChange();
   }
@@ -265,6 +267,12 @@ handleStateChange(): void {
     if (index !== -1) {
       this.state.columnFilter.splice(index, 1);
     }
+  }
+
+//###########################
+
+  addColumnDbFilterCallback(dbFilterCallback: Function): void {
+    this.state.columnDbFilter.push(dbFilterCallback);
   }
 
 //###########################

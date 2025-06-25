@@ -19,7 +19,8 @@ export interface IDatagridTableState {
   sort: MatSort;
   columns: string[];
   displayedColumns: string[];
-  columnFilter?: Function[]
+  columnDbFilter?: Function[];
+  columnFilter?: Function[];
   dragSortRows: boolean;
   tableElementRef: ElementRef;
   tableInstanceRef: MatTable<unknown>;
