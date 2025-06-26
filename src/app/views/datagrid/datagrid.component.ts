@@ -21,7 +21,6 @@ import { DatagridTableLoadingOverlayComponent } from "../../components/datagridt
 import { DatagridTableMessageOverlayComponent } from "../../components/datagridtable/overlays/message/messageoverlay.component";
 import { SelectioncolumnComponent } from "../../components/datagridtable/selectioncolumn/selectioncolumn.component";
 import { EDatagridTableStateChangeEvents } from '@app/components/datagridtable/interfaces/statechangetypes.enum';
-import { DatagridTableCustomColumnStringFilter } from '@app/components/datagridtable/header/columnfilter/stringfilter/customstringfilter.class';
 import { DatagridTableSelectionsComponent } from "../../components/datagridtable/actions/selectionactions/selectionactions.component";
 
 @Component({
@@ -81,8 +80,6 @@ export class DatagridComponent {
   datagridTableService1: DatagridTableService;
   datagridTableService3: DatagridTableService;
 
-  customStringFilter: DatagridTableCustomColumnStringFilter = new DatagridTableCustomColumnStringFilter();
-
   EDatagridTableStateChangeEvents = EDatagridTableStateChangeEvents;
 
   constructor(
@@ -96,6 +93,7 @@ export class DatagridComponent {
 
   ngAfterViewInit(): void {
     this.testDataService.init(this.datagridTableServiceGithub);
+    console.log('COLUMNFILTER ', this.datagridTableService1.state)
   }
 
   addData(): void {

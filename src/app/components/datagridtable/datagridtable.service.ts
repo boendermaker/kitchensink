@@ -11,6 +11,7 @@ import { IDatagridTableState } from './interfaces/state.interface';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EDatagridTableStateChangeEvents } from './interfaces/statechangetypes.enum';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { IDatagridTableColumnFilter } from './interfaces/columnfilter.inteface';
 
 
 @Injectable()
@@ -22,7 +23,6 @@ export class DatagridTableService {
   stateChange_: Observable<EDatagridTableStateChangeEvents> = this.stateChange$.asObservable();
 
   state: IDatagridTableState = {
-    mode: undefined,
     dataSource: new MatTableDataSource(),
     paginator: null as unknown as MatPaginator,
     rowSelection: new SelectionModel(true, []),
@@ -33,8 +33,7 @@ export class DatagridTableService {
     $isLoading: signal(false),
     $messages: signal({showMessages: false, messages: []}),
     sort: null as unknown as MatSort,
-    columnDbFilter: [],
-    columnFilter: [],
+    columnFilter: new Map<string, IDatagridTableColumnFilter<unknown>>(),
     columns: [],
     displayedColumns: [],
     dragSortRows: false,
@@ -106,18 +105,6 @@ handleStateChange(): void {
       state.showMessages = showMessage
       return state;
     });
-  }
-
-//###########################
-
-  isBackendMode(): boolean {
-    return this.state.mode === 'backend';
-  }
-
-//###########################
-
-  setMode(mode: 'backend' | undefined): void {
-    this.state.mode = mode;
   }
 
 //###########################
@@ -269,39 +256,42 @@ handleStateChange(): void {
 
 //###########################
 
-  resetAllColumnFilterCallback(): void {
-    this.state.columnFilter = [];
+  getFilter<T>(columnName: string): T | null {
+    return <T>this.state.columnFilter.get(columnName);
   }
 
 //###########################
 
-  removeColumnFilterCallback(filterCallback: Function): void {
-    const index = this.state.columnFilter.indexOf(filterCallback);
-    if (index !== -1) {
-      this.state.columnFilter.splice(index, 1);
+  addFilter<T>(columnName: string, filterObj: T): void {
+    this.state.columnFilter.set(columnName, <T>filterObj);
+  }
+
+//###########################
+
+  updateFilter<T>(columnName: string, filterObj: T): void {
+    if (this.state.columnFilter.has(columnName)) {
+      this.state.columnFilter.set(columnName, <T>filterObj);
+    } else {
+      this.addFilter(columnName, <T>filterObj);
     }
   }
 
 //###########################
 
-  addColumnDbFilterCallback(dbFilterCallback: Function): void {
-    this.state.columnDbFilter.push(dbFilterCallback);
-  }
-
-//###########################
-
-  addColumnFilterCallback(filterCallback: Function): void {
-    this.state.columnFilter.push(filterCallback);
-  }
-
-//###########################
-
-  filterDataSource(): void {
-    this.state.dataSource.filterPredicate = (dataRow: any, filter: string): boolean => {
-      return this.state.columnFilter.every((filterCallback: Function) => filterCallback(dataRow));
+  removeFilter(columnName: string): void {
+    if (this.state.columnFilter[columnName]) {
+      delete this.state.columnFilter[columnName];
     }
-    this.state.dataSource.filter = ' ';
-  };
+  }
+
+//###########################
+
+/*  filterDataSource(): void {
+      this.state.dataSource.filterPredicate = (dataRow: any, filter: string): boolean => {
+        return this.state.columnFilter.every((filterCallback: Function) => filterCallback(dataRow));
+      }
+      this.state.dataSource.filter = ' ';
+  };*/
 
 //###########################
 

@@ -231,7 +231,7 @@
           <th mat-header-cell *matHeaderCellDef>
             <app-datagridtable-header>
               <app-datagridtable-headercontent mat-sort-header>{{displayedColumn}}</app-datagridtable-headercontent>
-              <app-datagridtable-columnfilter-string columnfilter></app-datagridtable-columnfilter-string>
+              <app-datagridtable-columnfilter-string columnfilter [propPath]="[displayedColumn]"></app-datagridtable-columnfilter-string>
             </app-datagridtable-header>
           </th>
           <td mat-cell *matCellDef="let element">

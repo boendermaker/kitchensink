@@ -6,8 +6,8 @@ import { MatSort } from "@angular/material/sort.d-CHu7FXsP";
 import { DatagridTableComponent } from "../datagridtable.component";
 import { SelectionModel } from "@angular/cdk/collections";
 
+
 export interface IDatagridTableState {
-  mode: 'backend';
   dataSource: MatTableDataSource<unknown>;
   paginator: MatPaginator;
   rowSelection: SelectionModel<unknown>;
@@ -20,8 +20,7 @@ export interface IDatagridTableState {
   sort: MatSort;
   columns: string[];
   displayedColumns: string[];
-  columnDbFilter?: Function[];
-  columnFilter?: Function[];
+  columnFilter?: Map<string, unknown>;
   dragSortRows: boolean;
   tableElementRef: ElementRef;
   tableInstanceRef: MatTable<unknown>;

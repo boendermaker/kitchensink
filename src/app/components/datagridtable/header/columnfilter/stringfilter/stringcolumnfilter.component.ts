@@ -7,7 +7,9 @@ import { ClickOutsideDirective } from '@app/directives/clickoutsidedirective/cli
 import { IDatagridTableColumnFilterComponent } from '@app/components/datagridtable/interfaces/columnfiltercomponent.interface';
 import { DatagridTableColumnComponent } from '@app/components/datagridtable/column/column.component';
 import { IDatagridTableColumnFilter } from '@app/components/datagridtable/interfaces/columnfilter.inteface';
-import { DatagridTableColumnDefaultFilter } from './defaultfilter.class';
+import { EDatagridTableStateChangeEvents } from '@app/components/datagridtable/interfaces/statechangetypes.enum';
+import { DatagridTableStringfilterModel } from './stringfilter.model';
+import { DatagridTableColumnFilterValueModel } from '../filtervalue.model';
 
 @Component({
   selector: 'app-datagridtable-columnfilter-string',
@@ -19,13 +21,11 @@ import { DatagridTableColumnDefaultFilter } from './defaultfilter.class';
 })
 export class DatagridTableStringfilterComponent implements IDatagridTableColumnFilterComponent, OnInit, OnDestroy, AfterViewInit {
 
-  @ViewChild('detail') detailElement: ElementRef<HTMLDetailsElement> | undefined;
-  @ViewChild('content') columnFilterElement: ElementRef<HTMLDetailsElement> | undefined;
+  @ViewChild('detail', {static: true}) detailElement: ElementRef<HTMLDetailsElement> | undefined;
+  @ViewChild('content', {static: true}) columnFilterElement: ElementRef<HTMLDetailsElement> | undefined;
   @Input() propPath: string[] = [];
-  @Input() customFilterRef: IDatagridTableColumnFilter = null;
 
   columnName: string = '';
-  filterRef: IDatagridTableColumnFilter;
   filterControl: FormControl<string> = new FormControl<string>('');
 
   constructor(
@@ -35,39 +35,58 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
   }
 
   ngOnInit() {
-    this.getColumnName();
-    this.initFilter();
+    this.columnName = this.datagridTableColumnComponentRef.getColumnName();
   }
 
   ngAfterViewInit(): void {
-    //this.positionFilter();
-    this.addFilterCallback();
-    this.addDbFilterCallback();
+    this.init();
   }
 
   ngOnDestroy(): void {
-    this.resetAllFilterCallback();
+    console.log(
+      'DESTROYED'
+    )
   }
+
 
 //###########################
 
-  initFilter(): void {
-    if(this.customFilterRef) {
-      console.log( 'Custom filter ref', this.customFilterRef);
-      this.filterRef = this.customFilterRef;
-      this.filterRef.filterComponentRef = this;
-      this.filterRef.columnName = this.columnName;
+  init(): void {
+    const filterObj: DatagridTableStringfilterModel = this.datagridTableService.getFilter<DatagridTableStringfilterModel>(this.columnName);
+
+    if (filterObj) {
+      this.filterControl.patchValue(<string>filterObj.filterValues[0].value);
     }else {
-      this.filterRef = new DatagridTableColumnDefaultFilter();
-      this.filterRef.filterComponentRef = this;
-      this.filterRef.columnName = this.columnName;
+      this.addFilter();
     }
+
   }
 
 //###########################
 
-  getColumnName(): void {
-    this.columnName = this.datagridTableColumnComponentRef.getColumnName();
+  addFilter(): void {
+    const filterValues: DatagridTableColumnFilterValueModel[] = [new DatagridTableColumnFilterValueModel(this.filterControl.value)];
+    const filterObj: DatagridTableStringfilterModel = new DatagridTableStringfilterModel(this.columnName, this.propPath, filterValues);
+
+    this.datagridTableService.addFilter<DatagridTableStringfilterModel>(this.columnName, filterObj);
+  }
+
+//###########################
+
+  updateFilter(): void {
+    const filterValues: DatagridTableColumnFilterValueModel[] = [new DatagridTableColumnFilterValueModel(this.filterControl.value)];
+    const filterObj: DatagridTableStringfilterModel = new DatagridTableStringfilterModel(this.columnName, this.propPath, filterValues);
+
+    this.datagridTableService.updateFilter(this.columnName, filterObj);
+
+    this.datagridTableService.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_COLUMN_FILTER_UPDATE);
+  }
+
+//###########################
+
+  resetFilter(): void {
+    this.datagridTableService.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_COLUMN_FILTER_RESET);
+    this.filterControl.setValue('');
   }
 
 //###########################
@@ -78,34 +97,7 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
 
 //###########################
 
-  updateFilter(): void {
-    this.datagridTableService.filterDataSource();
-  }
-
 //###########################
-
-  resetFilter(): void {
-    this.filterControl.setValue('');
-    this.updateFilter();
-  }
-
-//###########################
-
-  resetAllFilterCallback(): void {
-    this.datagridTableService.resetAllColumnFilterCallback();
-  }
-
-//###########################
-
-  addDbFilterCallback(): void {
-    this.datagridTableService.addColumnDbFilterCallback(this.filterRef.dbFilterCallback.bind(this.filterRef));
-  }
-
-//###########################
-
-  addFilterCallback(): void {
-    this.datagridTableService.addColumnFilterCallback(this.filterRef.filterCallBack.bind(this.filterRef));
-  }
 
 //###########################
 
