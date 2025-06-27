@@ -41,7 +41,7 @@
             <app-datagridtable-header>
               <app-datagridtable-headercontent mat-sort-header>{{displayedColumn}}</app-datagridtable-headercontent>
               <app-datagridtable-ordercolumn></app-datagridtable-ordercolumn>
-              <app-datagridtable-columnfilter-string columnfilter [propPath]="[displayedColumn]"></app-datagridtable-columnfilter-string>
+              <app-datagridtable-columnfilter-string columnfilter [propPath]="[displayedColumn, displayedColumn+'.translations.de-DE', displayedColumn+'.translations.en-GB']"></app-datagridtable-columnfilter-string>
               <app-datagridtable-resizecolumn></app-datagridtable-resizecolumn>
             </app-datagridtable-header>
           </th>

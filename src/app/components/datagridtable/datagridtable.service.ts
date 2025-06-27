@@ -12,6 +12,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { EDatagridTableStateChangeEvents } from './interfaces/statechangetypes.enum';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { IDatagridTableColumnFilter } from './interfaces/columnfilter.inteface';
+import { DatagridTableBaseColumnFilterModel } from './header/columnfilter/basecolumnfilter.model';
+import { Data } from '@angular/router';
 
 
 @Injectable()
@@ -33,7 +35,7 @@ export class DatagridTableService {
     $isLoading: signal(false),
     $messages: signal({showMessages: false, messages: []}),
     sort: null as unknown as MatSort,
-    columnFilter: new Map<string, IDatagridTableColumnFilter<unknown>>(),
+    columnFilter: new Map<string, DatagridTableBaseColumnFilterModel>(),
     columns: [],
     displayedColumns: [],
     dragSortRows: false,
@@ -256,42 +258,49 @@ handleStateChange(): void {
 
 //###########################
 
-  getFilter<T>(columnName: string): T | null {
-    return <T>this.state.columnFilter.get(columnName);
+  getFilter(columnName: string): DatagridTableBaseColumnFilterModel | null {
+    return <DatagridTableBaseColumnFilterModel>this.state.columnFilter.get(columnName);
   }
 
 //###########################
 
-  addFilter<T>(columnName: string, filterObj: T): void {
-    this.state.columnFilter.set(columnName, <T>filterObj);
+  addFilter(columnName: string, filterObj: DatagridTableBaseColumnFilterModel): void {
+    this.state.columnFilter.set(columnName, <DatagridTableBaseColumnFilterModel>filterObj);
   }
 
 //###########################
 
-  updateFilter<T>(columnName: string, filterObj: T): void {
+  updateFilter<T>(columnName: string, filterObj: DatagridTableBaseColumnFilterModel): void {
     if (this.state.columnFilter.has(columnName)) {
-      this.state.columnFilter.set(columnName, <T>filterObj);
+      this.state.columnFilter.set(columnName, <DatagridTableBaseColumnFilterModel>filterObj);
     } else {
-      this.addFilter(columnName, <T>filterObj);
+      this.addFilter(columnName, <DatagridTableBaseColumnFilterModel>filterObj);
     }
+  }
+
+//###########################
+
+  resetFilter(columnName: string): void {
+    (<DatagridTableBaseColumnFilterModel>this.state.columnFilter.get(columnName))?.resetFilter();
   }
 
 //###########################
 
   removeFilter(columnName: string): void {
     if (this.state.columnFilter[columnName]) {
-      delete this.state.columnFilter[columnName];
+      this.state.columnFilter.delete(columnName);
     }
   }
 
 //###########################
 
-/*  filterDataSource(): void {
+  filterDataSource(): void {
       this.state.dataSource.filterPredicate = (dataRow: any, filter: string): boolean => {
-        return this.state.columnFilter.every((filterCallback: Function) => filterCallback(dataRow));
+        const filters = Array.from(this.state.columnFilter.values());
+        return filters.every((filterObject: DatagridTableBaseColumnFilterModel) => filterObject.filterLocal(dataRow));
       }
       this.state.dataSource.filter = ' ';
-  };*/
+  };
 
 //###########################
 

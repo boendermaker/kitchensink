@@ -1,14 +1,42 @@
+import { DatagridTableBaseColumnFilterModel } from "../basecolumnfilter.model";
 import { DatagridTableColumnFilterValueModel } from "../filtervalue.model";
 
-export class DatagridTableStringfilterModel {
-    columnName: string = undefined
-    propPath: string[] = [];
-    filterValues: DatagridTableColumnFilterValueModel[] = [];
+export class DatagridTableStringfilterModel extends DatagridTableBaseColumnFilterModel {
 
-    constructor(columnName: string, propPath: string[], filterValues: DatagridTableColumnFilterValueModel[]) {
-        this.columnName = columnName;
-        this.propPath = propPath;
-        this.filterValues = filterValues;
+    constructor(
+        columnName: string, 
+        propPath: string[], 
+        filterValues: DatagridTableColumnFilterValueModel[]
+    ) {
+        super(columnName, propPath, filterValues);
+    }
+
+    filterLocal(dataRow: unknown): boolean {
+        if(this.filterValues[0].value) {
+            const regex = new RegExp(`.*${this.filterValues[0].value}.*`, 'i');
+            return this.propPath.some((propPathDestination) => {
+                const value = dataRow[propPathDestination];
+                return typeof value === 'string' && regex.test(value);
+            });
+        }
+        return true; // If no filter value, return true to not filter out any rows
+    }
+
+    getMongoDbFilterObj() {
+        if(this.filterValues[0].value) {
+            const regexFilter = {$regex: `.*(?i)${this.filterValues[0].value}.*`};
+            const filterBuildArray = [];
+            
+            this.propPath.forEach((propPathDestination) => {
+                filterBuildArray.push({[`${propPathDestination}`]: regexFilter});
+            });
+
+            const filter = {
+                $or: filterBuildArray,
+            };
+
+            return filter;
+        }
     }
 
 }

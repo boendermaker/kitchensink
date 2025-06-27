@@ -10,6 +10,7 @@ import { IDatagridTableColumnFilter } from '@app/components/datagridtable/interf
 import { EDatagridTableStateChangeEvents } from '@app/components/datagridtable/interfaces/statechangetypes.enum';
 import { DatagridTableStringfilterModel } from './stringfilter.model';
 import { DatagridTableColumnFilterValueModel } from '../filtervalue.model';
+import { DatagridTableBaseColumnFilterModel } from '../basecolumnfilter.model';
 
 @Component({
   selector: 'app-datagridtable-columnfilter-string',
@@ -52,7 +53,7 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
 //###########################
 
   init(): void {
-    const filterObj: DatagridTableStringfilterModel = this.datagridTableService.getFilter<DatagridTableStringfilterModel>(this.columnName);
+    const filterObj: DatagridTableBaseColumnFilterModel = this.datagridTableService.getFilter(this.columnName);
 
     if (filterObj) {
       this.filterControl.patchValue(<string>filterObj.filterValues[0].value);
@@ -68,7 +69,7 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
     const filterValues: DatagridTableColumnFilterValueModel[] = [new DatagridTableColumnFilterValueModel(this.filterControl.value)];
     const filterObj: DatagridTableStringfilterModel = new DatagridTableStringfilterModel(this.columnName, this.propPath, filterValues);
 
-    this.datagridTableService.addFilter<DatagridTableStringfilterModel>(this.columnName, filterObj);
+    this.datagridTableService.addFilter(this.columnName, filterObj);
   }
 
 //###########################
@@ -87,6 +88,7 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
   resetFilter(): void {
     this.datagridTableService.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_COLUMN_FILTER_RESET);
     this.filterControl.setValue('');
+    this.datagridTableService.resetFilter(this.columnName);
   }
 
 //###########################
@@ -95,7 +97,14 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
     this.detailElement?.nativeElement.toggleAttribute('open', false);
   }
 
+
 //###########################
+
+  tester(): void {
+    console.log('TESTER', 
+      this.datagridTableService.getFilter(this.columnName).getMongoDbFilterObj()
+    );
+  }
 
 //###########################
 
