@@ -58,9 +58,18 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
     if (filterObj) {
       this.filterControl.patchValue(<string>filterObj.filterValues[0].value);
     }else {
-      this.addFilter();
+      this.setFilter();
     }
 
+  }
+
+//###########################
+
+  setFilter(): void {
+    const filterValues: DatagridTableColumnFilterValueModel[] = [new DatagridTableColumnFilterValueModel(this.filterControl.value)];
+    const filterObj: DatagridTableStringfilterModel = new DatagridTableStringfilterModel(this.columnName, this.propPath, filterValues);
+
+    this.datagridTableService.setFilter(this.columnName, filterObj);    
   }
 
 //###########################
@@ -69,7 +78,7 @@ export class DatagridTableStringfilterComponent implements IDatagridTableColumnF
     const filterValues: DatagridTableColumnFilterValueModel[] = [new DatagridTableColumnFilterValueModel(this.filterControl.value)];
     const filterObj: DatagridTableStringfilterModel = new DatagridTableStringfilterModel(this.columnName, this.propPath, filterValues);
 
-    this.datagridTableService.addFilter(this.columnName, filterObj);
+    this.datagridTableService.setFilter(this.columnName, filterObj);
   }
 
 //###########################

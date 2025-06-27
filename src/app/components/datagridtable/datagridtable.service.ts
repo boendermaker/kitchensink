@@ -295,10 +295,11 @@ handleStateChange(): void {
 //###########################
 
   resetFilter(columnName: string): void {
-    console.log('RESET');
-
     (<DatagridTableBaseColumnFilterModel>this.state.columnFilter.get(columnName))?.resetFilter();
-    this.filterDataSource();
+
+    if(!this.state.backend) {
+      this.filterDataSource();
+    }
   }
 
 //###########################
