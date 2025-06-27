@@ -11,16 +11,20 @@ export class DatagridTableStringfilterModel extends DatagridTableBaseColumnFilte
         super(columnName, propPath, filterValues);
     }
 
+    //###########################
+
     filterLocal(dataRow: unknown): boolean {
-        if(this.filterValues[0].value) {
+        if(this.filterValues[0]?.value) {
             const regex = new RegExp(`.*${this.filterValues[0].value}.*`, 'i');
             return this.propPath.some((propPathDestination) => {
                 const value = dataRow[propPathDestination];
                 return typeof value === 'string' && regex.test(value);
             });
         }
-        return true; // If no filter value, return true to not filter out any rows
+        return true;
     }
+
+    //###########################
 
     getMongoDbFilterObj() {
         if(this.filterValues[0].value) {

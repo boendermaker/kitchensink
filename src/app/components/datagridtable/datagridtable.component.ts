@@ -30,6 +30,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   @Input() tableId: string;
+  @Input() backend: boolean = false;
   @Input() dataSource: MatTableDataSource<unknown>;
   @Input() columns: string[];
   @Input() dragSortRows: boolean = false;
@@ -46,6 +47,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   ngOnInit(): void {
+    this.datagridTableService.setBackend(this.backend);
     this.datagridTableService.setTableInstanceRef(this.table);
     this.datagridTableService.setTableComponentRef(this);
     this.setTableStateProperties();
@@ -89,8 +91,6 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   }
 
   //################################################
-
-
 
   //################################################
 

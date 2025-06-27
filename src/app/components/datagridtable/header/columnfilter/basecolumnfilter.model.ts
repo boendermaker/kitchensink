@@ -12,10 +12,9 @@ export abstract class DatagridTableBaseColumnFilterModel {
     }
 
     resetFilter(): void {
-        this.filterValues = [new DatagridTableColumnFilterValueModel('')];
+        this.filterValues = [];
     };
-    
-
+   
     abstract filterLocal(dataRow: unknown): boolean;
     abstract getMongoDbFilterObj(): object;
 }

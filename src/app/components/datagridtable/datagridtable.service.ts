@@ -25,6 +25,7 @@ export class DatagridTableService {
   stateChange_: Observable<EDatagridTableStateChangeEvents> = this.stateChange$.asObservable();
 
   state: IDatagridTableState = {
+    backend: false,
     dataSource: new MatTableDataSource(),
     paginator: null as unknown as MatPaginator,
     rowSelection: new SelectionModel(true, []),
@@ -264,24 +265,40 @@ handleStateChange(): void {
 
 //###########################
 
+  setFilter(columnName: string, filterObj: DatagridTableBaseColumnFilterModel): void {
+    this.state.columnFilter.set(columnName, <DatagridTableBaseColumnFilterModel>filterObj);
+    if(!this.state.backend) {
+      this.filterDataSource();
+    }
+  }
+
+//###########################
+
   addFilter(columnName: string, filterObj: DatagridTableBaseColumnFilterModel): void {
     this.state.columnFilter.set(columnName, <DatagridTableBaseColumnFilterModel>filterObj);
   }
 
 //###########################
 
-  updateFilter<T>(columnName: string, filterObj: DatagridTableBaseColumnFilterModel): void {
+  updateFilter(columnName: string, filterObj: DatagridTableBaseColumnFilterModel): void {
     if (this.state.columnFilter.has(columnName)) {
       this.state.columnFilter.set(columnName, <DatagridTableBaseColumnFilterModel>filterObj);
     } else {
       this.addFilter(columnName, <DatagridTableBaseColumnFilterModel>filterObj);
+    }
+
+    if(!this.state.backend) {
+      this.filterDataSource();
     }
   }
 
 //###########################
 
   resetFilter(columnName: string): void {
+    console.log('RESET');
+
     (<DatagridTableBaseColumnFilterModel>this.state.columnFilter.get(columnName))?.resetFilter();
+    this.filterDataSource();
   }
 
 //###########################
@@ -301,6 +318,12 @@ handleStateChange(): void {
       }
       this.state.dataSource.filter = ' ';
   };
+
+//###########################
+
+  setBackend(backend: boolean): void {
+    this.state.backend = backend;
+  }
 
 //###########################
 
