@@ -45,7 +45,6 @@ export class DatagridTableBasefilterComponent {
     //###########################
 
     init(): void {
-
     }
 
     //###########################

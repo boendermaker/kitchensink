@@ -32,7 +32,7 @@ export class DatagridTableStringfilterComponent extends DatagridTableBasefilterC
 
   init(): void {
     const filterObj = this.datagridTableService.getFilter(this.columnName);
-
+    
     if (Array.isArray(filterObj?.filterValues) && filterObj?.filterValues?.length > 0) {
       this.filterControl.patchValue(<string>filterObj.filterValues[0]?.value);
     }else {
@@ -44,6 +44,7 @@ export class DatagridTableStringfilterComponent extends DatagridTableBasefilterC
 //###########################
 
   filterChange(): void {
+    const filterObj = this.datagridTableService.getFilter(this.columnName);
     const filterValue = this.filterControl.value;
     if (filterValue) {
       this.updateFilter([new DatagridTableColumnFilterValueModel(filterValue)]);
