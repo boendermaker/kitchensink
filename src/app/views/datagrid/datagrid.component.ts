@@ -22,6 +22,7 @@ import { DatagridTableMessageOverlayComponent } from "../../components/datagridt
 import { SelectioncolumnComponent } from "../../components/datagridtable/selectioncolumn/selectioncolumn.component";
 import { EDatagridTableStateChangeEvents } from '@app/components/datagridtable/interfaces/statechangetypes.enum';
 import { DatagridTableSelectionsComponent } from "../../components/datagridtable/actions/selectionactions/selectionactions.component";
+import { DatagridTableStringfilterCustomModel } from '@app/components/datagridtable/header/columnfilter/stringfilter/stringfilter-custom.model';
 
 @Component({
   selector: 'app-datagrid',
@@ -81,6 +82,8 @@ export class DatagridComponent {
   datagridTableService3: DatagridTableService;
 
   EDatagridTableStateChangeEvents = EDatagridTableStateChangeEvents;
+
+  customColumnFilterModels: DatagridTableStringfilterCustomModel[] = this.displayedColumns.map((columnName) => new DatagridTableStringfilterCustomModel());
 
   constructor(
     private cdr: ChangeDetectorRef,

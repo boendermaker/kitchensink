@@ -4,13 +4,10 @@ import { DatagridTableService } from '../../../datagridtable.service';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from '@app/directives/clickoutsidedirective/clickoutside.directive';
-import { IDatagridTableColumnFilterComponent } from '@app/components/datagridtable/interfaces/columnfiltercomponent.interface';
 import { DatagridTableColumnComponent } from '@app/components/datagridtable/column/column.component';
-import { IDatagridTableColumnFilter } from '@app/components/datagridtable/interfaces/columnfilter.inteface';
 import { EDatagridTableStateChangeEvents } from '@app/components/datagridtable/interfaces/statechangetypes.enum';
-import { DatagridTableStringfilterModel } from './stringfilter.model';
 import { DatagridTableColumnFilterValueModel } from '../filtervalue.model';
-import { DatagridTableBaseColumnFilterModel } from '../basecolumnfilter.model';
+import { DatagridTableBasefilterComponent } from '../basefilter.component';
 
 @Component({
   selector: 'app-datagridtable-columnfilter-string',
@@ -20,92 +17,45 @@ import { DatagridTableBaseColumnFilterModel } from '../basecolumnfilter.model';
   styleUrl: './stringcolumnfilter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DatagridTableStringfilterComponent implements IDatagridTableColumnFilterComponent, OnInit, OnDestroy, AfterViewInit {
+export class DatagridTableStringfilterComponent extends DatagridTableBasefilterComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @ViewChild('detail', {static: true}) detailElement: ElementRef<HTMLDetailsElement> | undefined;
-  @ViewChild('content', {static: true}) columnFilterElement: ElementRef<HTMLDetailsElement> | undefined;
-  @Input() propPath: string[] = [];
-
-  columnName: string = '';
   filterControl: FormControl<string> = new FormControl<string>('');
 
   constructor(
-    private datagridTableService: DatagridTableService,
-    @Optional() public datagridTableColumnComponentRef: DatagridTableColumnComponent,
+    protected datagridTableService: DatagridTableService,
+    @Optional() public datagridTableColumnComponentRef: DatagridTableColumnComponent
   ) {
+    super(datagridTableService, datagridTableColumnComponentRef);
   }
-
-  ngOnInit() {
-    this.columnName = this.datagridTableColumnComponentRef.getColumnName();
-  }
-
-  ngAfterViewInit(): void {
-    this.init();
-  }
-
-  ngOnDestroy(): void {
-    console.log(
-      'DESTROYED'
-    )
-  }
-
 
 //###########################
 
   init(): void {
-    const filterObj: DatagridTableBaseColumnFilterModel = this.datagridTableService.getFilter(this.columnName);
+    const filterObj = this.datagridTableService.getFilter(this.columnName);
 
-    if (filterObj) {
-      this.filterControl.patchValue(<string>filterObj.filterValues[0].value);
+    if (Array.isArray(filterObj?.filterValues) && filterObj?.filterValues?.length > 0) {
+      this.filterControl.patchValue(<string>filterObj.filterValues[0]?.value);
     }else {
-      this.setFilter();
+      this.updateFilter([new DatagridTableColumnFilterValueModel('')]);
     }
 
   }
 
 //###########################
 
-  setFilter(): void {
-    const filterValues: DatagridTableColumnFilterValueModel[] = [new DatagridTableColumnFilterValueModel(this.filterControl.value)];
-    const filterObj: DatagridTableStringfilterModel = new DatagridTableStringfilterModel(this.columnName, this.propPath, filterValues);
-
-    this.datagridTableService.setFilter(this.columnName, filterObj);    
+  filterChange(): void {
+    const filterValue = this.filterControl.value;
+    if (filterValue) {
+      this.updateFilter([new DatagridTableColumnFilterValueModel(filterValue)]);
+    }
   }
 
 //###########################
 
-  addFilter(): void {
-    const filterValues: DatagridTableColumnFilterValueModel[] = [new DatagridTableColumnFilterValueModel(this.filterControl.value)];
-    const filterObj: DatagridTableStringfilterModel = new DatagridTableStringfilterModel(this.columnName, this.propPath, filterValues);
-
-    this.datagridTableService.setFilter(this.columnName, filterObj);
+  resetChange(): void {
+    this.filterControl.patchValue('');
+    this.resetFilter();
   }
-
-//###########################
-
-  updateFilter(): void {
-    const filterValues: DatagridTableColumnFilterValueModel[] = [new DatagridTableColumnFilterValueModel(this.filterControl.value)];
-    const filterObj: DatagridTableStringfilterModel = new DatagridTableStringfilterModel(this.columnName, this.propPath, filterValues);
-
-    this.datagridTableService.updateFilter(this.columnName, filterObj);
-
-    this.datagridTableService.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_COLUMN_FILTER_UPDATE);
-  }
-
-//###########################
-
-  resetFilter(): void {
-    this.datagridTableService.triggerEvent(EDatagridTableStateChangeEvents.CHANGE_COLUMN_FILTER_RESET);
-    this.filterControl.setValue('');
-    this.datagridTableService.resetFilter(this.columnName);
-  }
-
-//###########################
-
-  closeFilter(): void {
-    this.detailElement?.nativeElement.toggleAttribute('open', false);
-  }
-
 
 //###########################
 

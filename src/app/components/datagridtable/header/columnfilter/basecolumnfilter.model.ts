@@ -5,7 +5,10 @@ export abstract class DatagridTableBaseColumnFilterModel {
     propPath: string[] = [];
     filterValues: DatagridTableColumnFilterValueModel[] = [];
 
-    constructor(columnName: string, propPath: string[], filterValues?: DatagridTableColumnFilterValueModel[]) {
+    constructor() {
+    }
+
+    setFilterProperties(columnName: string, propPath: string[], filterValues: DatagridTableColumnFilterValueModel[]): void {
         this.columnName = columnName;
         this.propPath = propPath;
         this.filterValues = filterValues;

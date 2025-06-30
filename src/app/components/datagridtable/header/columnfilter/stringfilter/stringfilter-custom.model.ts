@@ -1,6 +1,10 @@
 import { DatagridTableBaseColumnFilterModel } from "../basecolumnfilter.model";
 
-export class DatagridTableStringfilterModel extends DatagridTableBaseColumnFilterModel {
+export class DatagridTableStringfilterCustomModel extends DatagridTableBaseColumnFilterModel {
+
+    constructor() {
+        super();
+    }
 
     //###########################
 
@@ -18,13 +22,15 @@ export class DatagridTableStringfilterModel extends DatagridTableBaseColumnFilte
     //###########################
 
     getMongoDbFilterObj() {
-        if(this.filterValues[0].value) {
+        if(this.filterValues[0]?.value) {
             const regexFilter = {$regex: `.*(?i)${this.filterValues[0].value}.*`};
             const filterBuildArray = [];
             
             this.propPath.forEach((propPathDestination) => {
                 filterBuildArray.push({[`${propPathDestination}`]: regexFilter});
             });
+
+            filterBuildArray.push({$and: 'CUSTOM_FILTER'});
 
             const filter = {
                 $or: filterBuildArray,
