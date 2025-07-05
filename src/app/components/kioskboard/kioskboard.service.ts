@@ -14,14 +14,14 @@ export class KioskboardService {
     public dialog: Dialog
   ) { }
 
-  openKioskboardDialog(formControl: AbstractControl<any, any>, elementRef: ElementRef): void {
+  openKioskboardDialog(formControl: AbstractControl<any, any>, target: HTMLElement): void {
 
     this.dialog.closeAll();
 
     this.dialog.open<any>(KioskboardComponent, {
       width: '320px',
       hasBackdrop: false,
-      positionStrategy: this.overlay.position().flexibleConnectedTo(elementRef).withPositions(<ConnectedPosition[]>[{
+      positionStrategy: this.overlay.position().flexibleConnectedTo(target).withPositions(<ConnectedPosition[]>[{
         originX: 'start',
         originY: 'bottom',
         overlayX: 'start',
