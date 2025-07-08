@@ -25,7 +25,15 @@
 
     <div class="datagridtable__content__tablewrapper">
 
-      <table mat-table [dataSource]="datagridTableService.state.dataSource" cdkDropList cdkDropListData="datagridTableService.state.dataSource.data" (cdkDropListDropped)="rowDropped($event)" matSort #sort="matSort">
+      <table
+        mat-table
+        multiTemplateDataRows
+        [dataSource]="datagridTableService.state.dataSource"
+        cdkDropList
+        cdkDropListData="datagridTableService.state.dataSource.data"
+        (cdkDropListDropped)="rowDropped($event)"
+        matSort
+        #sort="matSort">
 
         <ng-content></ng-content>
 

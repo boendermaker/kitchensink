@@ -24,11 +24,13 @@ import { EDatagridTableStateChangeEvents } from '@app/components/datagridtable/i
 import { DatagridTableSelectionsComponent } from "../../components/datagridtable/actions/selectionactions/selectionactions.component";
 import { DatagridTableStringfilterCustomModel } from '@app/components/datagridtable/header/columnfilter/stringfilter/stringfilter-custom.model';
 import { DatagridTableHeadercontentComponent } from "../../components/datagridtable/header/headercontent/headercontent.component";
+import { DatagridTabelRowdetailComponent } from "@app/components/datagridtable/rowdetail/rowdetail.component";
+import { RowsummaryComponent } from "@app/components/datagridtable/rowdetail/rowsummary/rowsummary.component";
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent, DatagridTableOrderColumnComponent, DatagridTableResizeColumnComponent, DatagridTablePaginatorComponent, DatagridTableLoadingOverlayComponent, DatagridTableMessageOverlayComponent, SelectioncolumnComponent, DatagridTableSelectionsComponent, DatagridTableHeadercontentComponent],
+  imports: [AllAngularMaterialMDCModulesModule, DatagridTableComponent, MatTableModule, MatSortModule, DatagridTableCellComponent, DatagridTableHeaderComponent, DatagridTableColumnComponent, DatagridTableActionsComponent, DatagridTableRowactionsComponent, DatagridTableTitleComponent, DatagridTableStringfilterComponent, DatagridTableColumntoggleComponent, DatagridTableOrderColumnComponent, DatagridTableResizeColumnComponent, DatagridTablePaginatorComponent, DatagridTableLoadingOverlayComponent, DatagridTableMessageOverlayComponent, SelectioncolumnComponent, DatagridTableSelectionsComponent, DatagridTableHeadercontentComponent, DatagridTabelRowdetailComponent, RowsummaryComponent],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss',
   providers: [TestDataService],

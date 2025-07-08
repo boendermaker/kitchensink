@@ -143,8 +143,18 @@
       </td>
     </app-datagridtablecolumn>
 
+    <app-datagridtable-rowdetail columnName="rowdetail">
+      <ng-template let-element="element">
+        <div>
+          <p><strong>Position:</strong> {{element?.position}}</p>
+        </div>
+      </ng-template>
+    </app-datagridtable-rowdetail>
+
+    <tr mat-row *matRowDef="let row; columns: ['rowdetail'];"></tr>
 
   </app-datagridtable>
+
 <div>
 
   <br/>
