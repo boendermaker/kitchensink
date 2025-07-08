@@ -1,7 +1,7 @@
 <div class="datagridtable">
 
   <div class="datagridtable__header">
-    
+
     <div class="datagridtable__header__left">
       <div class="datagridtable__header__left__title">
         <ng-content select="app-datagridtable-title"></ng-content>
@@ -30,7 +30,7 @@
         <ng-content></ng-content>
 
         <tr mat-header-row *matHeaderRowDef="datagridTableService.state.displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: datagridTableService.state.displayedColumns;" cdkDrag [cdkDragdata]="row" [cdkDragDisabled]="!dragSortRows"></tr>
+        <tr mat-row *matRowDef="let row; columns: datagridTableService.state.displayedColumns;" cdkDrag [cdkDragData]="row" [cdkDragDisabled]="!dragSortRows"></tr>
 
       </table>
 
