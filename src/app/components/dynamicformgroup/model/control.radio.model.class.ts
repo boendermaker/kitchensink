@@ -1,5 +1,4 @@
-import { AbstractControl } from "@angular/forms";
-import { IFormGroupBuilderControl, IFormGroupBuilderControlCheckbox, IFormGroupBuilderControlSelect, IFormGroupBuilderControlText } from "../formgroupbuilder.interface";
+import { AbstractControl, FormControl } from "@angular/forms";
 import { ControlBaseModel } from "./control.base.model.class";
 
 type TRadioOptions = { label: string; value: any; }[];
@@ -12,7 +11,7 @@ export class ControlRadioModel extends ControlBaseModel {
 
     constructor(
         name: string, 
-        instance: AbstractControl<any|any>, 
+        instance: FormControl, 
         value: TRadioOptions,
         attributes: TRadioAttributes,
         order?: number

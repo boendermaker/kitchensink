@@ -2,7 +2,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { FormGroup, FormControl, FormArray, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, FormBuilder, AbstractControl, Form } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -17,16 +17,19 @@ export class Form2Component {
   fruits: any[] = [];
   separatorKeysCodes: number[] = [ENTER, COMMA];
   code: string = '';
-  form: FormGroup;
-  controls = {
+  form = this.fb.group({
+    chipInputTest1: this.fb.control(''),
+    chipInputTest2: this.fb.control(''),
+    chipFruitArrayControl: this.fb.array([]),
+  })
+
+  /*  controls = {
     chipInputTest1: new FormControl(''),
     chipInputTest2: new FormControl(''),
     chipFruitArrayControl: new FormArray(this.fruits) 
-  }
+  }*/
   
   constructor(private fb: FormBuilder) {
-   
-    this.setupForm();
 
     this.code = JSON.stringify(this.form.getRawValue(), null, 4);
 
@@ -35,10 +38,6 @@ export class Form2Component {
         this.code = JSON.stringify(state, null, 4);
       }
     })
-  }
-
-  setupForm(): void {
-    this.form = new FormGroup(this.controls);
   }
 
   add(event: MatChipInputEvent): void {

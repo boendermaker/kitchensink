@@ -1,5 +1,4 @@
-import { AbstractControl } from "@angular/forms";
-import { IFormGroupBuilderControl, IFormGroupBuilderControlCheckbox, IFormGroupBuilderControlSelect, IFormGroupBuilderControlText } from "../formgroupbuilder.interface";
+import { AbstractControl, FormControl } from "@angular/forms";
 import { ControlBaseModel } from "./control.base.model.class";
 
 type TSelectOptions = { label: string; value: string|number;}[];
@@ -12,7 +11,7 @@ export class ControlSelectModel extends ControlBaseModel {
     
     constructor(
         name: string, 
-        instance: AbstractControl<any|any>, 
+        instance: FormControl, 
         options: TSelectOptions,
         attributes?: TSelectAttributes,
         order?: number

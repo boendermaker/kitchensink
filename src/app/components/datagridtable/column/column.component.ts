@@ -18,7 +18,7 @@ export class DatagridTableColumnComponent implements OnInit, AfterContentInit {
 
   @ContentChildren(DatagridTableHeaderComponent, {descendants: true}) headerElements: QueryList<DatagridTableHeaderComponent>;
   @ContentChildren(DatagridTableCellComponent, {descendants: true}) cellElements: QueryList<DatagridTableCellComponent>;
-  @Input() matColumnDef: MatColumnDef;
+  @Input() matColumnDef: string;
 
   private destroyRef: DestroyRef = inject(DestroyRef);
   private $columnIndex: WritableSignal<number> = signal(-1);
@@ -59,7 +59,7 @@ export class DatagridTableColumnComponent implements OnInit, AfterContentInit {
   //###########################
 
   getColumnName(): string {
-    return this.matColumnDef.toString();
+    return this.matColumnDef;
   }
 
   //###########################

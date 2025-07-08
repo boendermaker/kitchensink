@@ -7,6 +7,7 @@ import {
   PortalModule,
   CdkPortal,
   ComponentType,
+  CdkPortalOutletAttachedRef,
 } from '@angular/cdk/portal';
 import { DashboardService } from '../dashboard-service/dashboard.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -76,7 +77,7 @@ export class WidgetContainerComponent implements OnInit, AfterViewInit {
 
 //##################################################################
 
-  onComponentRendering(ref: ComponentRef<any>): void {
+  onComponentRendering(ref: CdkPortalOutletAttachedRef): void {
     ref = ref as ComponentRef<any>;
     ref.instance['widgetId'] = this.widget.id;
   }

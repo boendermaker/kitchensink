@@ -13,7 +13,7 @@ export class DragdroptabsComponent implements OnInit {
 
   @ViewChild('tabGroup', { static: false }) childTabGroup!: MatTabGroup;
 
-  private childMenuIds$: BehaviorSubject<string[]> = new BehaviorSubject([]);
+  childMenuIds$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   CHILD_ID_NAME = 'menu-name';
   tabs = new Array(15).fill(0).map((_, index) => ({Name: { Value: `Tab ${index}` } }));
 

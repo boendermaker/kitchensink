@@ -1,7 +1,7 @@
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl, FormControl } from "@angular/forms";
 import { ControlBaseModel } from "./control.base.model.class";
 
-type TCheckboxOptions = {value: string|number};
+type TCheckboxOptions = {value: string};
 type TCheckboxAttributes = {label: string, selected: boolean};
 
 export class ControlCheckboxModel extends ControlBaseModel {
@@ -11,7 +11,7 @@ export class ControlCheckboxModel extends ControlBaseModel {
 
     constructor(
         name: string, 
-        instance: AbstractControl<any|any>, 
+        instance: FormControl, 
         options: TCheckboxOptions, 
         attributes?: TCheckboxAttributes,
         order?: number

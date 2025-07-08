@@ -1,4 +1,4 @@
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl, FormControl } from "@angular/forms";
 
 type TControlOptions = {[key: string]: any};
 type TControlAttributes = {[key: string]: any};
@@ -7,14 +7,14 @@ export class ControlBaseModel {
     
     name: string;
     type: 'text'|'password'|'select'|'checkbox'|'radio';
-    instance?: AbstractControl<any|any>;
+    instance?: FormControl;
     options: TControlOptions;
     attributes?: TControlAttributes;
     order?: number;
 
     constructor(
         name: string, 
-        instance: AbstractControl<any|any>, 
+        instance: FormControl, 
         options: TControlOptions,
         attributes?: TControlAttributes,
         order?: number

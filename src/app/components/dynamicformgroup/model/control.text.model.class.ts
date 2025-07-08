@@ -1,4 +1,4 @@
-import { AbstractControl } from "@angular/forms";
+import { AbstractControl, FormArray, FormControl } from "@angular/forms";
 import { ControlBaseModel } from "./control.base.model.class";
 
 type TTextOptions = { value: string|number};
@@ -11,7 +11,7 @@ export class ControlTextModel extends ControlBaseModel {
 
     constructor(
         name: string, 
-        instance: AbstractControl<any|any>, 
+        instance: FormControl<any|any>, 
         options: TTextOptions,
         attributes: TTextAttributes,
         order?: number

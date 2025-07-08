@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ComponentRef, In
 import { IDashboard, IDashboardWidget } from './dashboard.interface';
 import { DashboardService } from './dashboard-service/dashboard.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { CdkPortal, ComponentPortal, ComponentType, PortalModule } from '@angular/cdk/portal';
+import { CdkPortal, CdkPortalOutletAttachedRef, ComponentPortal, ComponentType, PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { GridsterModule } from '../gridster2/gridster.module';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
@@ -68,7 +68,7 @@ export class DashboardComponent implements OnInit {
 
   //##################################################################
 
-  onComponentRendering(ref: ComponentRef<any>, widget: IDashboardWidget): void {
+  onComponentRendering(ref: CdkPortalOutletAttachedRef, widget: IDashboardWidget): void {
     ref = ref as ComponentRef<any>;
     ref.instance['widgetId'] = widget.id;
   }

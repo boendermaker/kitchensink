@@ -39,7 +39,7 @@
         <app-datagridtablecolumn [matColumnDef]="displayedColumn">
           <th mat-header-cell *matHeaderCellDef>
             <app-datagridtable-header>
-              <app-datagridtable-headercontent mat-sort-header>{{displayedColumn}}</app-datagridtable-headercontent>
+              <app-datagridtable-headercontent>{{displayedColumn}}</app-datagridtable-headercontent>
               <app-datagridtable-ordercolumn></app-datagridtable-ordercolumn>
               <app-datagridtable-columnfilter-string columnfilter [customFilterModel]="customColumnFilterModels[index]" [propPath]="[displayedColumn, displayedColumn+'.Translations.de-DE', displayedColumn+'.Translations.en-GB']"></app-datagridtable-columnfilter-string>
               <app-datagridtable-resizecolumn></app-datagridtable-resizecolumn>

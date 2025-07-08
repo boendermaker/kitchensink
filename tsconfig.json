@@ -32,12 +32,6 @@
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "noPropertyAccessFromIndexSignature": false,
-    "strictInjectionParameters": false,
-    "strictInputAccessModifiers": false,
-    "strictTemplates": false,
-    "skipTemplateCodegen": true,
-    "strictMetadataEmit": false
+    "strictTemplates": true,
   }
 }

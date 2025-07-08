@@ -1,11 +1,11 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlContainer, Form, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { IFormGroupBuilder, IFormGroupBuilderControl } from './formgroupbuilder.interface';
 import { TextComponent } from "./formcontrols/text/text.component";
 import { SelectComponent } from "./formcontrols/select/select.component";
 import { RadioComponent } from "./formcontrols/radio/radio.component";
 import { CheckboxComponent } from "./formcontrols/checkbox/checkbox.component";
+import { TFormGroupBuilderControl } from './formgroupbuilder.interface';
 
 @Component({
     selector: 'app-formgroupbuilder',
@@ -18,7 +18,7 @@ export class FormgroupbuilderComponent implements OnInit {
 
   controlContainer = inject(ControlContainer);
 
-  @Input() controls: IFormGroupBuilderControl[];
+  @Input() controls: TFormGroupBuilderControl[];
   parentFormGroup: FormGroup = new FormGroup({});
 
   constructor() {

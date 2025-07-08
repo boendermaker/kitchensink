@@ -23,7 +23,7 @@ export class KioskboardComponent {
 
   }
 
-  setValue(value: string): void {
+  setValue(value: number|string): void {
     let newValue = '';
     let currentValue = this.data.formControl.value;
     

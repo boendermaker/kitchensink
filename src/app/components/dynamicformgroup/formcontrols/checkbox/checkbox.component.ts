@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IFormGroupBuilderControlCheckbox } from '../../formgroupbuilder.interface';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ControlCheckboxModel } from '../../model/control.checkbox.model.class';
 
 @Component({
   selector: 'app-checkboxcontrol',
@@ -13,7 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class CheckboxComponent implements OnInit {
 
-  @Input() control: IFormGroupBuilderControlCheckbox;
+  @Input() control: ControlCheckboxModel;
 
   constructor() {
     

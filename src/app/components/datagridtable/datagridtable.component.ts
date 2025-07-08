@@ -31,7 +31,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   @Input() tableId: string;
   @Input() backend: boolean = false;
-  @Input() dataSource: MatTableDataSource<unknown>;
+  @Input() dataSource: MatTableDataSource<unknown> | Array<unknown>;
   @Input() columns: string[];
   @Input() dragSortRows: boolean = false;
   @Output() service: EventEmitter<DatagridTableService> = new EventEmitter<DatagridTableService>();
@@ -87,7 +87,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   rowDropped(e): void {
     const data = this.datagridTableService.state.dataSource.data;
     moveItemInArray(data, e.previousIndex, e.currentIndex);
-    this.dataSource.connect().next(data);
+    this.datagridTableService.setData(data);
   }
 
   //################################################
