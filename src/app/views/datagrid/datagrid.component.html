@@ -230,7 +230,7 @@
         <app-datagridtablecolumn [matColumnDef]="displayedColumn">
           <th mat-header-cell *matHeaderCellDef>
             <app-datagridtable-header>
-              <app-datagridtable-headercontent mat-sort-header>{{displayedColumn}}</app-datagridtable-headercontent>
+              <app-datagridtable-headercontent>{{displayedColumn}}</app-datagridtable-headercontent>
               <app-datagridtable-columnfilter-string columnfilter [propPath]="[displayedColumn]"></app-datagridtable-columnfilter-string>
             </app-datagridtable-header>
           </th>
