@@ -71,6 +71,15 @@
         </app-datagridtablecolumn>
       }
     }
+
+    <app-datagridtable-rowdetail>
+      <ng-template let-element="element">
+        <div>
+          <p><strong>Position:</strong> {{element?.position}}</p>
+        </div>
+      </ng-template>
+    </app-datagridtable-rowdetail>
+
   </app-datagridtable>
 </div>
 
@@ -80,6 +89,7 @@
 
 <div style="height: 500px;">
   <app-datagridtable
+    [expandable]="true"
     [dataSource]="dataSource2"
     [columns]="displayedColumns2"
     [dragSortRows]="false">
@@ -142,16 +152,6 @@
         </app-datagridtable-rowactions>
       </td>
     </app-datagridtablecolumn>
-
-    <app-datagridtable-rowdetail columnName="rowdetail">
-      <ng-template let-element="element">
-        <div>
-          <p><strong>Position:</strong> {{element?.position}}</p>
-        </div>
-      </ng-template>
-    </app-datagridtable-rowdetail>
-
-    <tr mat-row *matRowDef="let row; columns: ['rowdetail'];"></tr>
 
   </app-datagridtable>
 

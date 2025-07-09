@@ -7,6 +7,7 @@ import * as _ from 'lodash';
 import { AllAngularMaterialMDCModulesModule } from '../../shared/modules/allmaterial/allmaterial.module';
 import { MatSort } from '@angular/material/sort';
 import { EDatagridTableStateChangeEvents } from './interfaces/statechangetypes.enum';
+import { DatagridTabelRowdetailComponent } from './rowdetail/rowdetail.component';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
   @ContentChildren(MatHeaderRowDef) headerRowDefs: QueryList<MatHeaderRowDef>;
   @ContentChildren(MatRowDef) rowDefs: QueryList<MatRowDef<any>>;
   @ContentChildren(MatColumnDef) columnDefs: QueryList<MatColumnDef>;
+  @ContentChild(DatagridTabelRowdetailComponent, {static: true}) rowDetailComponent: DatagridTabelRowdetailComponent;
 
   @ViewChild(MatTable, {static: true}) table: MatTable<unknown>;
   @ViewChild(MatTable, {read: ElementRef}) tableElementRef: ElementRef;
@@ -31,6 +33,7 @@ export class DatagridTableComponent implements AfterViewInit, AfterContentInit {
 
   @Input() tableId: string;
   @Input() backend: boolean = false;
+  @Input() expandable: boolean = false;
   @Input() dataSource: MatTableDataSource<unknown> | Array<unknown>;
   @Input() columns: string[];
   @Input() dragSortRows: boolean = false;
