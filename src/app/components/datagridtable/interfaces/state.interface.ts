@@ -22,6 +22,7 @@ export interface IDatagridTableState {
   columns: string[];
   displayedColumns: string[];
   columnFilter?: Map<string, unknown>;
+  expandedRow: any;
   dragSortRows: boolean;
   tableElementRef: ElementRef;
   tableInstanceRef: MatTable<unknown>;

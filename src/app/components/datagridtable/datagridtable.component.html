@@ -40,7 +40,7 @@
         <tr mat-header-row *matHeaderRowDef="datagridTableService.state.displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: datagridTableService.state.displayedColumns;" cdkDrag [cdkDragData]="row" [cdkDragDisabled]="!dragSortRows"></tr>
         @if(rowDetailComponent) {
-          <tr mat-row *matRowDef="let row; columns: ['rowdetail'];"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['rowdetail'];" class="row" [class.row-expanded]="datagridTableService.rowIsExpanded(row)"></tr>
         }
 
       </table>

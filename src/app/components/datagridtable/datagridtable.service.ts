@@ -39,6 +39,7 @@ export class DatagridTableService {
     columnFilter: new Map<string, DatagridTableBaseColumnFilterModel>(),
     columns: [],
     displayedColumns: [],
+    expandedRow: null,
     dragSortRows: false,
     tableElementRef: null as unknown as ElementRef,
     tableInstanceRef: null as unknown as MatTable<unknown>,
@@ -108,6 +109,18 @@ handleStateChange(): void {
       state.showMessages = showMessage
       return state;
     });
+  }
+
+//###########################
+
+  toggleExpandedRow(row: any): void {
+    this.state.expandedRow = this.rowIsExpanded(row) ? null : row;
+  }
+
+//###########################
+
+  rowIsExpanded(row: any): boolean {
+    return this.state.expandedRow === row;
   }
 
 //###########################

@@ -29,7 +29,7 @@ export class DatagridTabelRowdetailComponent {
   //_summaries: QueryList<DatagridTableRowsummaryComponent> = new QueryList<DatagridTableRowsummaryComponent>();
 
   constructor(
-    private datagridTableService: DatagridTableService,
+    public datagridTableService: DatagridTableService,
   ) {}
 
   @HostBinding('attr.ariaHidden') ariaHidden!: true;
@@ -44,13 +44,11 @@ export class DatagridTabelRowdetailComponent {
       this.columnDef.name = 'rowdetail';
       this.columnDef.cell = this.cellDef;
       this.datagridTableService.state.tableInstanceRef.addColumnDef(this.columnDef);
-      //this.datagridTableService.state.tableInstanceRef.addRowDef(this.rowDef);
     }
   }
 
   ngOnDestroy(): void {
     this.datagridTableService.state.tableInstanceRef.removeColumnDef(this.columnDef);
-    //this.datagridTableService.state.tableInstanceRef.removeRowDef(this.rowDef);
   }
 
 }
