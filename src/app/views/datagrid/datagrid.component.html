@@ -56,7 +56,7 @@
             <app-datagridtable-rowactions [showMenuItems]="true">
               <button mat-icon-button title="Löschen" (click)="tester($event)"><mat-icon>add</mat-icon></button>
               <button mat-icon-button title="Hinzufügen" (click)="tester($event)"><mat-icon>delete</mat-icon></button>
-              <app-datagridtable-rowexpandaction [element]="element"></app-datagridtable-rowexpandaction>
+              <app-datagridtable-rowexpandaction [row]="element"></app-datagridtable-rowexpandaction>
               <button mat-menu-item title="Test" (click)="tester($event)">
                   <span class="b-d-flex b-align-items-center" style="gap: 8px;"><mat-icon>delete</mat-icon>Lorem ipsum</span>
               </button>
@@ -194,14 +194,11 @@
           </td>
         </app-datagridtablecolumn>
       }@else {
-        <app-datagridtablecolumn matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td datagridtablecell mat-cell *matCellDef="let element">
-            <app-datagridtable-rowactions>
-              <button mat-icon-button><i class="material-icons-filled">delete</i></button>
-            </app-datagridtable-rowactions>
-          </td>
-        </app-datagridtablecolumn>
+        <app-datagridtable-rowactionstmpl matColumDef="actions">
+          <ng-template let-element="element">
+            <button mat-icon-button><i class="material-icons-filled">delete</i></button>
+          </ng-template>
+        </app-datagridtable-rowactionstmpl>
       }
     }
 

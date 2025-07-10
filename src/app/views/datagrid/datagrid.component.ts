@@ -5,56 +5,58 @@ import { DatagridTableHeaderComponent } from '@app/components/datagridtable/head
 import { DatagridTableCellComponent } from '@app/components/datagridtable/cell/cell.component';
 import { DatagridTableColumnComponent } from '@app/components/datagridtable/column/column.component';
 import { DatagridTableComponent } from '@app/components/datagridtable/datagridtable.component';
-import { DatagridTableActionsComponent } from "../../components/datagridtable/actions/actions.component";
-import { DatagridTableRowactionsComponent } from "../../components/datagridtable/rowactions/rowactions.component";
-import { DatagridTableTitleComponent } from "../../components/datagridtable/title/title.component";
+import { DatagridTableActionsComponent } from '../../components/datagridtable/actions/actions.component';
+import { DatagridTableRowactionsComponent } from '../../components/datagridtable/rowactions/rowactions.component';
+import { DatagridTableTitleComponent } from '../../components/datagridtable/title/title.component';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { DatagridTableStringfilterComponent } from '@app/components/datagridtable/header/columnfilter/stringfilter/stringcolumnfilter.component';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { DatagridTableColumntoggleComponent } from "../../components/datagridtable/actions/columntoggle/columntoggle.component";
-import { DatagridTableOrderColumnComponent } from "@app/components/datagridtable/header/ordercolumn/ordercolumn.component";
-import { DatagridTableResizeColumnComponent } from "@app/components/datagridtable/header/resizecolumn/resizecolumn.component";
-import { DatagridTablePaginatorComponent } from "../../components/datagridtable/paginator/paginator.component";
+import { DatagridTableColumntoggleComponent } from '../../components/datagridtable/actions/columntoggle/columntoggle.component';
+import { DatagridTableOrderColumnComponent } from '@app/components/datagridtable/header/ordercolumn/ordercolumn.component';
+import { DatagridTableResizeColumnComponent } from '@app/components/datagridtable/header/resizecolumn/resizecolumn.component';
+import { DatagridTablePaginatorComponent } from '../../components/datagridtable/paginator/paginator.component';
 import { GithubIssue, TestDataService } from '@app/components/datagridtable/testdata.service';
 import { DatagridTableService } from '@app/components/datagridtable/datagridtable.service';
-import { DatagridTableLoadingOverlayComponent } from "../../components/datagridtable/overlays/loading/loadingoverlay.component";
-import { DatagridTableMessageOverlayComponent } from "../../components/datagridtable/overlays/message/messageoverlay.component";
-import { SelectioncolumnComponent } from "../../components/datagridtable/selectioncolumn/selectioncolumn.component";
+import { DatagridTableLoadingOverlayComponent } from '../../components/datagridtable/overlays/loading/loadingoverlay.component';
+import { DatagridTableMessageOverlayComponent } from '../../components/datagridtable/overlays/message/messageoverlay.component';
+import { SelectioncolumnComponent } from '../../components/datagridtable/selectioncolumn/selectioncolumn.component';
 import { EDatagridTableStateChangeEvents } from '@app/components/datagridtable/interfaces/statechangetypes.enum';
-import { DatagridTableSelectionsComponent } from "../../components/datagridtable/actions/selectionactions/selectionactions.component";
+import { DatagridTableSelectionsComponent } from '../../components/datagridtable/actions/selectionactions/selectionactions.component';
 import { DatagridTableStringfilterCustomModel } from '@app/components/datagridtable/header/columnfilter/stringfilter/stringfilter-custom.model';
-import { DatagridTableHeadercontentComponent } from "../../components/datagridtable/header/headercontent/headercontent.component";
-import { DatagridTabelRowdetailComponent } from "@app/components/datagridtable/rowdetail/rowdetail.component";
+import { DatagridTableHeadercontentComponent } from '../../components/datagridtable/header/headercontent/headercontent.component';
+import { DatagridTabelRowDetailComponent } from '@app/components/datagridtable/rowdetail/rowdetail.component';
 import { DatagridTableRowExpandActionComponent } from '@app/components/datagridtable/rowdetail/rowexpandaction/rowexpandaction.component';
+import { DatagridTableRowactionsTmplComponent } from '../../components/datagridtable/rowactions/rowactionstmpl/rowactionstmpl.component';
 
 @Component({
   selector: 'app-datagrid',
   standalone: true,
   imports: [
-    AllAngularMaterialMDCModulesModule, 
-    DatagridTableComponent, 
-    MatTableModule, 
+    AllAngularMaterialMDCModulesModule,
+    DatagridTableComponent,
+    MatTableModule,
     MatSortModule,
-    DatagridTableCellComponent, 
-    DatagridTableHeaderComponent, 
-    DatagridTableColumnComponent, 
-    DatagridTableRowactionsComponent, 
-    DatagridTableTitleComponent, 
-    DatagridTableStringfilterComponent, 
-    DatagridTableColumntoggleComponent, 
-    DatagridTableOrderColumnComponent, 
-    DatagridTableResizeColumnComponent, 
-    DatagridTablePaginatorComponent, 
-    DatagridTableLoadingOverlayComponent, 
-    DatagridTableMessageOverlayComponent, 
-    SelectioncolumnComponent, 
-    DatagridTableSelectionsComponent, 
-    DatagridTableHeadercontentComponent, 
-    DatagridTableRowactionsComponent, 
-    DatagridTabelRowdetailComponent, 
-    DatagridTableRowExpandActionComponent, 
-    DatagridTableActionsComponent
-  ],
+    DatagridTableCellComponent,
+    DatagridTableHeaderComponent,
+    DatagridTableColumnComponent,
+    DatagridTableRowactionsComponent,
+    DatagridTableTitleComponent,
+    DatagridTableStringfilterComponent,
+    DatagridTableColumntoggleComponent,
+    DatagridTableOrderColumnComponent,
+    DatagridTableResizeColumnComponent,
+    DatagridTablePaginatorComponent,
+    DatagridTableLoadingOverlayComponent,
+    DatagridTableMessageOverlayComponent,
+    SelectioncolumnComponent,
+    DatagridTableSelectionsComponent,
+    DatagridTableHeadercontentComponent,
+    DatagridTableRowactionsComponent,
+    DatagridTableRowExpandActionComponent,
+    DatagridTableActionsComponent,
+    DatagridTabelRowDetailComponent,
+    DatagridTableRowactionsTmplComponent
+],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss',
   providers: [TestDataService],

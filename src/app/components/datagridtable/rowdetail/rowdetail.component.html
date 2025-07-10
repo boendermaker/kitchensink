@@ -1,7 +1,7 @@
-<app-datagridtable-column matColumnDef="rowdetail">
+<app-datagridtablecolumn matColumnDef="rowdetail">
   <td mat-cell *matCellDef="let element">
     @if(templateRef) {
       <ng-content *ngTemplateOutlet="templateRef; context: {element: element}"></ng-content>
     }
   </td>
-</app-datagridtable-column>
+</app-datagridtablecolumn>

@@ -3,6 +3,11 @@ import { Data } from '@angular/router';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { DatagridTableService } from '../../datagridtable.service';
 
+/**
+ * Component to handle row expand actions in a datagrid table.
+ * This component allows users to expand or collapse rows in the datagrid.
+ * Input: `row` - The data of *matCellDef of row to be expanded or collapsed.
+ */
 @Component({
   selector: 'app-datagridtable-rowexpandaction',
   imports: [AllAngularMaterialMDCModulesModule],
@@ -11,7 +16,7 @@ import { DatagridTableService } from '../../datagridtable.service';
 })
 export class DatagridTableRowExpandActionComponent {
 
-  @Input() element: any;
+  @Input() row: any;
 
   constructor(
     public datagridTableService: DatagridTableService
@@ -19,7 +24,7 @@ export class DatagridTableRowExpandActionComponent {
   }
 
   toggleRowExpand(): void {
-    this.datagridTableService.toggleExpandedRow(this.element);
+    this.datagridTableService.toggleExpandedRow(this.row);
   }
 
 }

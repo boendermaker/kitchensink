@@ -12,7 +12,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class SelectioncolumnComponent implements OnDestroy, OnInit {
 
-  @Input() columnName: string = 'selection';
+  @Input() matColumnDef: string = 'selection';
   selection: SelectionModel<unknown> = this.datagridTableService.state.rowSelection;
 
   constructor(
@@ -29,7 +29,7 @@ export class SelectioncolumnComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     if (this.columnDef) {
-      this.columnDef.name = this.columnName;
+      this.columnDef.name = this.matColumnDef;
       this.columnDef.cell = this.cellDef;
       this.columnDef.headerCell = this.headerCellDef;
       this.datagridTableService.state.tableInstanceRef.addColumnDef(this.columnDef);

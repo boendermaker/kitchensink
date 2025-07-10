@@ -1,0 +1,13 @@
+.rowactions-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+}
+
+.rowaction-menuitem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}

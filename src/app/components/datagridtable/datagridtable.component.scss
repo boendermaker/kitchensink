@@ -91,7 +91,7 @@
   overflow: initial !important;
 }
 
-.row {
+.datagrid-expand-row {
   overflow: hidden;
   display: grid;
   grid-template-rows: 0fr;
@@ -100,7 +100,7 @@
   transition: grid-template-rows 225ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.row-expanded {
+.datagrid-expand-row-expanded {
   grid-template-rows: 1fr !important;
   height: unset;
 }

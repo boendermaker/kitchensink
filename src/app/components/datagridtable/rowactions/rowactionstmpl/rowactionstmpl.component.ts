@@ -1,32 +1,32 @@
-import { Component, ContentChild, ContentChildren, HostBinding, Input, OnDestroy, OnInit, QueryList, TemplateRef, ViewChild } from '@angular/core';
-import { DatagridTableService } from '../datagridtable.service';
-import { MatCellDef, MatColumnDef, MatRowDef } from '@angular/material/table';
+import { Component, ContentChild, ContentChildren, ElementRef, HostBinding, Input, OnInit, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
+import { MatCellDef, MatColumnDef, MatRowDef } from '@angular/material/table';
 import { NgTemplateOutlet } from '@angular/common';
-import { DatagridTableColumnComponent } from '../column/column.component';
+import { DatagridTableService } from '../../datagridtable.service';
 
 /**
- * Component for displaying row details in a datagrid table.
- * This component is used to show additional information for a row when it is expanded.
- * <app-datagridtable-rowdetail>
- *  <ng-template let-element="element">
- *    <div>
- *      <p><strong>Position:</strong> {{element?.position}}</p>
- *    </div>
- *  </ng-template>
- * </app-datagridtable-rowdetail>
+ * Component for defining row actions in a datagrid table.
+ * This component allows you to define custom actions that can be performed on each row of the datagrid.
+ * <pre>
+ *     <app-datagridtable-rowactionstmpl matColumDef="actions">
+ *         <ng-template let-element="element">
+ *             <button mat-icon-button><i class="material-icons-filled">delete</i></button>
+ *         </ng-template>
+ *     </app-datagridtable-rowactionstmpl>
+ * </pre>
  */
 @Component({
-  selector: 'app-datagridtable-rowdetail',
-  imports: [AllAngularMaterialMDCModulesModule, NgTemplateOutlet, DatagridTableColumnComponent],
-  templateUrl: './rowdetail.component.html',
-  styleUrl: './rowdetail.component.scss'
+  selector: 'app-datagridtable-rowactionstmpl',
+  standalone: true,
+  imports: [AllAngularMaterialMDCModulesModule, NgTemplateOutlet],
+  templateUrl: './rowactionstmpl.component.html',
+  styleUrl: './rowactionstmpl.component.scss'
 })
-export class DatagridTabelRowDetailComponent implements OnInit, OnDestroy {
+export class DatagridTableRowactionsTmplComponent {
 
   @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
+  @Input() matColumnDef: string = 'actions';
   //@ContentChildren(DatagridTableRowsummaryComponent, {descendants: true}) allSummaries: QueryList<DatagridTableRowsummaryComponent>;
-  //@Input() columnName: string = 'rowdetail';
   //_summaries: QueryList<DatagridTableRowsummaryComponent> = new QueryList<DatagridTableRowsummaryComponent>();
 
   constructor(
@@ -42,7 +42,7 @@ export class DatagridTabelRowDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.columnDef) {
-      this.columnDef.name = 'rowdetail';
+      this.columnDef.name = this.matColumnDef;
       this.columnDef.cell = this.cellDef;
       this.datagridTableService.state.tableInstanceRef.addColumnDef(this.columnDef);
     }

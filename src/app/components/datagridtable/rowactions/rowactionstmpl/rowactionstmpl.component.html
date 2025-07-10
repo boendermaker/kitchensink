@@ -1,0 +1,11 @@
+<app-datagridtable-column matColumnDef>
+  <th mat-header-cell *matHeaderCellDef>
+  </th>
+  <td mat-cell *matCellDef="let element">
+    <div class="rowactions-container">
+        @if(templateRef) {
+            <ng-content *ngTemplateOutlet="templateRef; context: {element: element}"></ng-content>
+        }
+    </div>
+  </td>
+</app-datagridtable-column>
