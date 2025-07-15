@@ -1,9 +1,9 @@
 <div style="height: 500px; width: 100%;">
   <app-datagridtable
+    #datagridtable1
     id="datagridtable1"
     [dataSource]="dataSource"
     [columns]="displayedColumns"
-    (service)="datagridTableService1 = $event"
     matSort
     #sort="matSort">
 
@@ -89,7 +89,7 @@
 
 <div style="height: 500px;">
   <app-datagridtable
-    [expandable]="true"
+    #datagridtable2
     [dataSource]="dataSource2"
     [columns]="displayedColumns2"
     [dragSortRows]="false">
@@ -163,9 +163,9 @@
 
 <div style="height: 500px;">
   <app-datagridtable
+    #datagridtable3
     [dataSource]="tableData3"
     [columns]="displayedColumns3"
-    (service)="datagridTableService3 = $event"
     [dragSortRows]="false">
 
     <app-datagridtable-title title="Dolor sit Lorem Ipsum Array">
@@ -211,11 +211,11 @@
 
 <div style="height: 800px;">
   <app-datagridtable
+    #datagridtable4
     mode="backend"
     [dataSource]="dataSourceGithub"
     [columns]="displayedColumnsGithub"
     [dragSortRows]="false"
-    (service)="this.datagridTableServiceGithub = $event"
     matSort>
 
     <app-datagridtable-title title="Dolor sit">

@@ -63,6 +63,11 @@ import { DatagridTableRowactionsTmplComponent } from '../../components/datagridt
 })
 export class DatagridComponent {
 
+  @ViewChild('datagridtable1', { static: true }) datagridTable1: DatagridTableComponent;
+  @ViewChild('datagridtable2', { static: true }) datagridTable2: DatagridTableComponent;
+  @ViewChild('datagridtable3', { static: true }) datagridTable3: DatagridTableComponent;
+  @ViewChild('datagridtable4', { static: true }) datagridTable4: DatagridTableComponent;
+
   tableData: any[] = [
     {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
     {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
@@ -121,11 +126,14 @@ export class DatagridComponent {
   }
 
   ngOnInit(): void {
+    this.datagridTableService1 = this.datagridTable1.datagridTableService;
+    this.datagridTableService3 = this.datagridTable3.datagridTableService;
+    this.datagridTableServiceGithub = this.datagridTable4.datagridTableService;
   }
 
   ngAfterViewInit(): void {
     this.testDataService.init(this.datagridTableServiceGithub);
-    console.log('COLUMNFILTER ', this.datagridTableService1.state)
+    console.log('COLUMNFILTER ', this.datagridTableService1.state);
   }
 
   addData(): void {
