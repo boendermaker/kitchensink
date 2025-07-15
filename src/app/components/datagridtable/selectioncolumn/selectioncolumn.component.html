@@ -2,15 +2,15 @@
   <th mat-header-cell *matHeaderCellDef>
     <mat-checkbox
     (change)="$event ? toggleAllRows() : null"
-    [checked]="selection.hasValue() && isAllSelected()"
-    [indeterminate]="selection.hasValue() && !isAllSelected()">
+    [checked]="selectionModel.hasValue() && isAllSelected()"
+    [indeterminate]="selectionModel.hasValue() && !isAllSelected()">
     </mat-checkbox>
   </th>
   <td mat-cell *matCellDef="let element">
     <mat-checkbox
     (click)="$event.stopPropagation()"
-    (change)="$event ? selection.toggle(element) : null"
-    [checked]="selection.isSelected(element)">
+    (change)="$event ? selectionModel.toggle(element) : null"
+    [checked]="selectionModel.isSelected(element)">
     </mat-checkbox>
   </td>
 </app-datagridtable-column>

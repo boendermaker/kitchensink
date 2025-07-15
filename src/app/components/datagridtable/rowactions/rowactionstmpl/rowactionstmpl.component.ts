@@ -1,4 +1,4 @@
-import { Component, ContentChild, ContentChildren, ElementRef, HostBinding, Input, OnInit, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ContentChild, ContentChildren, ElementRef, HostBinding, Input, OnDestroy, OnInit, QueryList, Renderer2, TemplateRef, ViewChild, ViewChildren } from '@angular/core';
 import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
 import { MatCellDef, MatColumnDef, MatRowDef } from '@angular/material/table';
 import { NgTemplateOutlet } from '@angular/common';
@@ -22,10 +22,10 @@ import { DatagridTableService } from '../../datagridtable.service';
   templateUrl: './rowactionstmpl.component.html',
   styleUrl: './rowactionstmpl.component.scss'
 })
-export class DatagridTableRowactionsTmplComponent {
+export class DatagridTableRowactionsTmplComponent implements OnInit, OnDestroy {
 
   @ContentChild(TemplateRef) templateRef: TemplateRef<any>;
-  @Input() matColumnDef: string = 'actions';
+  @Input() columnName: string = 'actions';
   //@ContentChildren(DatagridTableRowsummaryComponent, {descendants: true}) allSummaries: QueryList<DatagridTableRowsummaryComponent>;
   //_summaries: QueryList<DatagridTableRowsummaryComponent> = new QueryList<DatagridTableRowsummaryComponent>();
 
@@ -42,7 +42,7 @@ export class DatagridTableRowactionsTmplComponent {
 
   ngOnInit(): void {
     if (this.columnDef) {
-      this.columnDef.name = this.matColumnDef;
+      this.columnDef.name = this.columnName;
       this.columnDef.cell = this.cellDef;
       this.datagridTableService.state.tableInstanceRef.addColumnDef(this.columnDef);
     }
