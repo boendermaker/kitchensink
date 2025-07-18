@@ -105,7 +105,7 @@
     </app-datagridtable-actions>
 
     <app-datagridtable-selectionactions></app-datagridtable-selectionactions>
-    <app-datagridtable-selectioncolumn matColumnDef="selection"></app-datagridtable-selectioncolumn>
+    <app-datagridtable-selectioncolumn columnName="selection"></app-datagridtable-selectioncolumn>
 
     <app-datagridtablecolumn matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef>
@@ -193,7 +193,7 @@
           </td>
         </app-datagridtablecolumn>
       }@else {
-        <app-datagridtable-rowactionstmpl matColumDef="actions">
+        <app-datagridtable-rowactionstmpl columnName="actions">
           <ng-template let-element="element">
             <button mat-icon-button><i class="material-icons-filled">delete</i></button>
           </ng-template>
