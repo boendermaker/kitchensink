@@ -1,25 +1,27 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, OnInit, Optional, Renderer2, ViewChild } from '@angular/core';
-import * as _ from 'lodash';
-import { DatagridTableService } from '../../../datagridtable.service';
-import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
+/* eslint-disable prettier/prettier */
+import { ChangeDetectionStrategy, Component, Optional} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ClickOutsideDirective } from '@app/directives/clickoutsidedirective/clickoutside.directive';
+import { AllAngularMaterialMDCModulesModule } from '@app/shared/modules/allmaterial/allmaterial.module';
+import { DatagridTableBaseColumnFilterComponent } from '../basefilter.component';
+import { DatagridTableBaseColumnFilterModel } from '../basecolumnfilter.model';
+import { DatagridTableService } from '@app/components/datagridtable/datagridtable.service';
 import { DatagridTableColumnComponent } from '@app/components/datagridtable/column/column.component';
-import { EDatagridTableStateChangeEvents } from '@app/components/datagridtable/interfaces/statechangetypes.enum';
+import { DatagridTableStringColumnFilterModel } from './stringfilter.model';
 import { DatagridTableColumnFilterValueModel } from '../filtervalue.model';
-import { DatagridTableBasefilterComponent } from '../basefilter.component';
+
 
 @Component({
   selector: 'app-datagridtable-columnfilter-string',
   standalone: true,
-  imports: [AllAngularMaterialMDCModulesModule, ReactiveFormsModule, ClickOutsideDirective],
+  imports: [AllAngularMaterialMDCModulesModule, ReactiveFormsModule],
   templateUrl: './stringcolumnfilter.component.html',
   styleUrl: './stringcolumnfilter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DatagridTableStringfilterComponent extends DatagridTableBasefilterComponent implements OnInit, OnDestroy, AfterViewInit {
+export class DatagridTableStringfilterComponent extends DatagridTableBaseColumnFilterComponent {
 
   filterControl: FormControl<string> = new FormControl<string>('');
+  filterObj: DatagridTableBaseColumnFilterModel;
 
   constructor(
     protected datagridTableService: DatagridTableService,
@@ -31,20 +33,26 @@ export class DatagridTableStringfilterComponent extends DatagridTableBasefilterC
 //###########################
 
   init(): void {
-    const filterObj = this.datagridTableService.getFilter(this.columnName);
-    
-    if (Array.isArray(filterObj?.filterValues) && filterObj?.filterValues?.length > 0) {
-      this.filterControl.patchValue(<string>filterObj.filterValues[0]?.value);
+    const existingFilterObj: DatagridTableBaseColumnFilterModel = this.datagridTableService.getFilter(this.columnName);
+
+    if(existingFilterObj) {
+      this.filterObj = existingFilterObj;
+    }else if(this.customFilterModel) {
+      this.filterObj = this.customFilterModel;
+    }else {
+      this.filterObj = new DatagridTableStringColumnFilterModel();
+    }
+
+    if (Array.isArray(this.filterObj?.filterValues) && this.filterObj?.filterValues?.length > 0) {
+      this.filterControl.patchValue(<string>this.filterObj.filterValues[0]?.value);
     }else {
       this.updateFilter([new DatagridTableColumnFilterValueModel('')]);
     }
-
   }
 
 //###########################
 
   filterChange(): void {
-    const filterObj = this.datagridTableService.getFilter(this.columnName);
     const filterValue = this.filterControl.value;
     if (filterValue) {
       this.updateFilter([new DatagridTableColumnFilterValueModel(filterValue)]);
@@ -59,12 +67,6 @@ export class DatagridTableStringfilterComponent extends DatagridTableBasefilterC
   }
 
 //###########################
-
-  tester(): void {
-    console.log('TESTER', 
-      this.datagridTableService.getFilter(this.columnName).getMongoDbFilterObj()
-    );
-  }
 
 //###########################
 

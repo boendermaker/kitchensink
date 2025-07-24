@@ -1,19 +1,18 @@
-import { ElementRef, Input, Optional, ViewChild } from "@angular/core";
-import { DatagridTableBaseColumnFilterModel } from "./basecolumnfilter.model";
-import { FormControl } from "@angular/forms";
-import { DatagridTableService } from "../../datagridtable.service";
-import { DatagridTableColumnComponent } from "../../column/column.component";
+/* eslint-disable prettier/prettier */
+import { ElementRef, Input, Optional, ViewChild } from '@angular/core';
+import { DatagridTableBaseColumnFilterModel } from './basecolumnfilter.model';
+import { DatagridTableService } from '../../datagridtable.service';
+import { DatagridTableColumnComponent } from '../../column/column.component';
 
-import { Component } from "@angular/core";
-import { DatagridTableColumnFilterValueModel } from "./filtervalue.model";
-import { DatagridTableStringfilterModel } from "./stringfilter/stringfilter.model";
-import { EDatagridTableStateChangeEvents } from "../../interfaces/statechangetypes.enum";
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { DatagridTableColumnFilterValueModel } from './filtervalue.model';
+import { EDatagridTableStateChangeEvents } from '../../interfaces/statechangetypes.enum';
 
 @Component({
     selector: 'app-datagrid-table-basefilter',
     template: ''
 })
-export class DatagridTableBasefilterComponent {
+export class DatagridTableBaseColumnFilterComponent implements OnInit, AfterViewInit, OnDestroy {
 
     @ViewChild('detail', {static: true}) detailElement: ElementRef<HTMLDetailsElement> | undefined;
     @ViewChild('content', {static: true}) columnFilterElement: ElementRef<HTMLDetailsElement> | undefined;
@@ -21,10 +20,11 @@ export class DatagridTableBasefilterComponent {
     @Input() propPath: string[] = [];
 
     columnName: string = '';
+    filterObj: DatagridTableBaseColumnFilterModel;
 
     constructor(
-    protected datagridTableService: DatagridTableService,
-    @Optional() public datagridTableColumnComponentRef: DatagridTableColumnComponent,
+      protected datagridTableService: DatagridTableService,
+      @Optional() public datagridTableColumnComponentRef: DatagridTableColumnComponent,
     ) {
     }
 
@@ -45,23 +45,18 @@ export class DatagridTableBasefilterComponent {
     //###########################
 
     init(): void {
+      if(this.customFilterModel) {
+          this.filterObj = this.customFilterModel;
+      }
     }
 
     //###########################
 
     updateFilter(filterValues: DatagridTableColumnFilterValueModel[]): void {
-        let filterObj: DatagridTableBaseColumnFilterModel;
-
-        if(this.customFilterModel) {
-            filterObj = this.customFilterModel;
-        }else {
-            filterObj = new DatagridTableStringfilterModel();
-        }
-
-        filterObj.setFilterProperties(this.columnName, this.propPath, filterValues);
-        this.datagridTableService.setFilter(this.columnName, filterObj);
+        this.filterObj.setFilterProperties(this.columnName, this.propPath, filterValues);
+        this.datagridTableService.setFilter(this.columnName, this.filterObj);
     }
-    
+
     //###########################
 
     resetFilter(): void {
