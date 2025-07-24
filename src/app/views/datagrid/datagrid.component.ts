@@ -27,6 +27,8 @@ import { DatagridTableHeadercontentComponent } from '../../components/datagridta
 import { DatagridTabelRowDetailComponent } from '@app/components/datagridtable/rowdetail/rowdetail.component';
 import { DatagridTableRowExpandActionComponent } from '@app/components/datagridtable/rowdetail/rowexpandaction/rowexpandaction.component';
 import { DatagridTableRowactionsTmplComponent } from '../../components/datagridtable/rowactions/rowactionstmpl/rowactionstmpl.component';
+import { DatagridTableDatefilterComponent } from "@app/components/datagridtable/header/columnfilter/datefilter/datecolumnfilter.component";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-datagrid',
@@ -36,6 +38,7 @@ import { DatagridTableRowactionsTmplComponent } from '../../components/datagridt
     DatagridTableComponent,
     MatTableModule,
     MatSortModule,
+    DatePipe,
     DatagridTableCellComponent,
     DatagridTableHeaderComponent,
     DatagridTableColumnComponent,
@@ -55,7 +58,8 @@ import { DatagridTableRowactionsTmplComponent } from '../../components/datagridt
     DatagridTableRowExpandActionComponent,
     DatagridTableActionsComponent,
     DatagridTabelRowDetailComponent,
-    DatagridTableRowactionsTmplComponent
+    DatagridTableRowactionsTmplComponent,
+    DatagridTableDatefilterComponent
 ],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss',

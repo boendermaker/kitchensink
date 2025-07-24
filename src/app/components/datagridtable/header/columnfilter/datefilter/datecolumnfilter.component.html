@@ -1,0 +1,49 @@
+<details #detail>
+    <summary></summary>
+    <div class="columnfilter" #content>
+        <div class="columnfilter__header">
+          <div>Filter: {{columnName}}</div>
+          <div>
+            <button (click)="closeFilter()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="columnfilter__content">
+
+          <form [formGroup]="formGroup">
+
+            <div>
+              <mat-form-field>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matStartDate formControlName="fromDate" placeholder="Startdatum">
+                  <input matEndDate formControlName="toDate" placeholder="Enddatum">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field class="columnfilter__content__input">
+                <mat-label>Startzeit</mat-label>
+                <input matInput type="time" formControlName="fromTime" placeholder="Startzeit" />
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field class="columnfilter__content__input">
+                <mat-label>Endzeit</mat-label>
+                <input matInput type="time" formControlName="toTime" placeholder="Endzeit" />
+              </mat-form-field>
+            </div>
+
+          </form>
+
+        </div>
+        <div class="columnfilter__footer">
+          <button mat-stroked-button class="columnfilter__footer__button" (click)="resetChange()">Zurücksetzen</button>
+          <button mat-flat-button color="primary" class="columnfilter__footer__button" (click)="filterChange(); closeFilter();">Anwenden</button>
+        </div>
+    </div>
+</details>

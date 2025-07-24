@@ -237,11 +237,19 @@
           <th mat-header-cell *matHeaderCellDef>
             <app-datagridtable-header>
               <app-datagridtable-headercontent>{{displayedColumn}}</app-datagridtable-headercontent>
-              <app-datagridtable-columnfilter-string columnfilter [propPath]="[displayedColumn]"></app-datagridtable-columnfilter-string>
+              @if(displayedColumn === 'created_at') {
+                <app-datagridtable-columnfilter-date columnfilter [propPath]="[displayedColumn]"></app-datagridtable-columnfilter-date>
+              }@else {
+                <app-datagridtable-columnfilter-string columnfilter [propPath]="[displayedColumn]"></app-datagridtable-columnfilter-string>
+              }
             </app-datagridtable-header>
           </th>
           <td mat-cell *matCellDef="let element">
-            <app-datagridtable-cell>{{element[displayedColumn]}}</app-datagridtable-cell>
+            @if(displayedColumn === 'created_at') {
+              <app-datagridtable-cell>{{element[displayedColumn] | date : 'dd.MM.yy HH:mm'}}</app-datagridtable-cell>
+            }@else {
+              <app-datagridtable-cell>{{element[displayedColumn]}}</app-datagridtable-cell>
+            }
           </td>
         </app-datagridtablecolumn>
       }@else {
